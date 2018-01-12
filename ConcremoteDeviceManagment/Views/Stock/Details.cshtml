@@ -12,15 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Price_id)
+            @Html.DisplayName("Prijs ID")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Price_id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.bas_art_nr)
+            @Html.DisplayName("BAS artikelnummer")
         </dt>
 
         <dd>
@@ -28,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.stock_amount)
+            @Html.DisplayName("Huidige voorraad")
         </dt>
 
         <dd>
@@ -36,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.min_stock)
+            @Html.DisplayName("Minimale voorraad")
         </dt>
 
         <dd>
@@ -44,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.max_stock)
+           @Html.DisplayName("Maximale voorraad")
         </dt>
 
         <dd>
@@ -52,16 +51,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayName("Beschrijving")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.description)
         </dd>
+        <dt>
+            @Html.DisplayName("Stukprijs")
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model=> model.price)*@
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=Model.id})';return false;" class="btn btn-primary">Edit</button> |
+    <button onclick="location.href='@Url.Action("Index", "Stock")';return false; " class="btn btn-primary">Back to list</button>
 </p>
