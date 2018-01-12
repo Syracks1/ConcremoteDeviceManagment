@@ -13,20 +13,20 @@ namespace ConcremoteDeviceManagment.Controllers
     public class StockController : Controller
     {
         private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
-
+        //private PriceManager dbo = new PriceManager();
         // GET: Stock
         public ActionResult Index(string StockCMI, string searchString)
         {
 
-            var CMIList = new List<string>();
-            var StockQuery = from d in db.Stock
-                             orderby d.bas_art_nr
-                             select d.bas_art_nr;
-            CMIList.AddRange(StockQuery);
-
+            //var CMIList = new List<string>();
+            //var PriceList = new List<int>();
+            //var StockQuery = from d in db.Stock
+            //                 orderby d.bas_art_nr
+            //                 select d.bas_art_nr;
+            //CMIList.AddRange(StockQuery);
             var Stock = from i in db.Stock
                         select i;
-
+            
             if(!string.IsNullOrEmpty(searchString))
             {
                 Stock = Stock.Where(s => s.description.Contains(searchString));
