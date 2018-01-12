@@ -1,0 +1,67 @@
+﻿@model ConcremoteDeviceManagment.Models.Stock
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bas_art_nr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bas_art_nr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.min_stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.min_stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.max_stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.max_stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
