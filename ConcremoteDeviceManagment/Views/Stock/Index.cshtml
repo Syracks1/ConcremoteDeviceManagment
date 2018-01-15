@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Inventory</h2>
 @using (Html.BeginForm("Index", "Stock", FormMethod.Get))
 {
 <p>
@@ -35,10 +35,8 @@
         </th>
         <th></th>
     </tr>
-
 @foreach (var item in Model) {
     <tr>
-        
         <td>
             <i>@Html.DisplayFor(modelItem => item.bas_art_nr)</i>
         </td>        
@@ -52,7 +50,7 @@
            @Convert.ToDecimal(item.max_stock).ToString("#,##")
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.Pr)*@
+            @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button> |

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ConcremoteDeviceManagment.Models;
+using System.Xml.Linq;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -23,16 +24,22 @@ namespace ConcremoteDeviceManagment.Controllers
             //                 orderby d.bas_art_nr
             //                 select d.bas_art_nr;
             //CMIList.AddRange(StockQuery);
+    //        ViewBag.Device_type_id = new SelectList(db.DeviceType, &quot;DeviceType & quot;,&quot;XName & quot;)
             var Stock = from i in db.Stock
                         select i;
-            //var Pricelist = db.pricelist.Include(d => d.Price_id);
-            //foreach(var item in Pricelist)
-            //{
-            //    item.price = (from p in db.pricelist
-            //                     where p.Price_id == item.price
-            //                     select p).First();
-            //}
-            if(!string.IsNullOrEmpty(searchString))
+            //var Pricelist = from i in db.pricelist
+            //                select i;
+            var Pricelist = db.pricelist.Include(d => d.Price_id);
+            foreach (var item in Stock)
+            {
+                //item.price = (from p in db.pricelist
+                //              where p.Price_id == item.price                              
+                //              select p).First();
+                //item.Price_id = (from p in db.Stock == db.pricelist.Include(d.Price_id)
+                //                 where p.Price_id == item.Price_id
+                //                 select p).First();
+            }
+            if (!string.IsNullOrEmpty(searchString))
             {
                 Stock = Stock.Where(s => s.description.Contains(searchString));
             }
@@ -63,7 +70,6 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
-
         // POST: Stock/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
