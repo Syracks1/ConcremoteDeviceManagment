@@ -17,7 +17,6 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Stock
         public ActionResult Index(string StockCMI, string searchString)
         {
-
             //var CMIList = new List<string>();
             //var PriceList = new List<int>();
             //var StockQuery = from d in db.Stock
@@ -26,7 +25,13 @@ namespace ConcremoteDeviceManagment.Controllers
             //CMIList.AddRange(StockQuery);
             var Stock = from i in db.Stock
                         select i;
-            
+            //var Pricelist = db.pricelist.Include(d => d.Price_id);
+            //foreach(var item in Pricelist)
+            //{
+            //    item.price = (from p in db.pricelist
+            //                     where p.Price_id == item.price
+            //                     select p).First();
+            //}
             if(!string.IsNullOrEmpty(searchString))
             {
                 Stock = Stock.Where(s => s.description.Contains(searchString));
