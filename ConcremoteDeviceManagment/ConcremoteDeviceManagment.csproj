@@ -187,6 +187,7 @@
     <Compile Include="Controllers\DeviceConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -194,6 +195,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Views\Navigation\NavbarItem.cs" />
     <Compile Include="Models\pricelist.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,6 +284,7 @@
     <Content Include="Views\DeviceConfig\Details.cshtml" />
     <Content Include="Views\DeviceConfig\Edit.cshtml" />
     <Content Include="Views\DeviceConfig\Index.cshtml" />
+    <Content Include="Views\Navigation\_TopNav.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

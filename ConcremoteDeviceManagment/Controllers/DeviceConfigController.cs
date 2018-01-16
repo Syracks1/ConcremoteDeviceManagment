@@ -33,30 +33,26 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
-
         // GET: DeviceConfig2/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: DeviceConfig2/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
+        public ActionResult Create([Bind(Include = "device_type_id,Price_id,amount")] DeviceConfig deviceconfig)
         {
             if (ModelState.IsValid)
             {
-                db.DeviceConfig.Add(deviceConfig);
+                db.DeviceConfig.Add(deviceconfig);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(deviceConfig);
+            return View(deviceconfig);
         }
-
         // GET: DeviceConfig2/Edit/5
         public ActionResult Edit(int? id)
         {

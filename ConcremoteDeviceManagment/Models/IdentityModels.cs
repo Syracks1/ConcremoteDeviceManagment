@@ -29,5 +29,7 @@ namespace ConcremoteDeviceManagment.Models
         {
             return new ApplicationDbContext();
         }
+
+       // public System.Data.Entity.DbSet<ConcremoteDeviceManagment.DeviceType> DeviceTypes { get; set; }
     }
 }

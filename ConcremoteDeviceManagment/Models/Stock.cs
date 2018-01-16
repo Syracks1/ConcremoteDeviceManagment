@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -55,6 +56,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int device_type_id { get; set; }
         public string name { get; set; }
+        public string SelectedName { get; set; }
     }
     [Table("ConcremoteDevice")]
     public class ConcremoteDevice
@@ -71,9 +73,9 @@ namespace ConcremoteDeviceManagment.Models
     public class ConcremoteDeviceManagment : DbContext
         {
             public DbSet<Stock> Stock { get; set; }
-            [ForeignKey("id")]
+     //       [ForeignKey("id")]
             public DbSet<Pricelist> pricelist { get; set; }
-            [ForeignKey("device_type_id")]
+    //        [ForeignKey("device_type_id")]
             public DbSet<DeviceConfig> DeviceConfig { get; set; }
             public DbSet<DeviceType> DeviceType { get; set; }  
             public DbSet<ConcremoteDevice> ConcremoteDevice { get; set; }     
