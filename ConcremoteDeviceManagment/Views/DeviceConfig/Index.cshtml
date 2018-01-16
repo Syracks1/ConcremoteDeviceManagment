@@ -13,10 +13,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Price_id)
+            @Html.DisplayName("Device Type")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayName("Prijs ID")
+        </th>
+        <th>
+            @Html.DisplayName("Aantal")
         </th>
         <th></th>
     </tr>
@@ -24,15 +27,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.device_type_id)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Price_id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.amount)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.device_type_id }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.device_type_id }) |
             @Html.ActionLink("Details", "Details", new { id=item.device_type_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.device_type_id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.device_type_id })*@
+            <button onclick="location.href='@Url.Action("Edit", "DeviceConfig", new { id=item.device_type_id})';return false;" class="btn btn-primary">Edit</button> |
+            <button onclick="location.href='@Url.Action("Details", "DeviceConfig", new {id=item.device_type_id})';return false;" class="btn btn-info">Details</button> |
+            <button onclick="location.href='@Url.Action("Delete", "DeviceConfig", new {id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 }

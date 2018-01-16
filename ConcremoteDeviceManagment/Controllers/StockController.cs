@@ -19,26 +19,17 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Index(string StockCMI, string searchString)
         {
             //var CMIList = new List<string>();
-            //var PriceList = new List<int>();
             //var StockQuery = from d in db.Stock
             //                 orderby d.bas_art_nr
             //                 select d.bas_art_nr;
-            //CMIList.AddRange(StockQuery);
-    //        ViewBag.Device_type_id = new SelectList(db.DeviceType, &quot;DeviceType & quot;,&quot;XName & quot;)
+            //CMIList.AddRange(StockQuery);   
             var Stock = from i in db.Stock
                         select i;
             //var Pricelist = from i in db.pricelist
             //                select i;
             var Pricelist = db.pricelist.Include(d => d.Price_id);
-            foreach (var item in Stock)
-            {
-                //item.price = (from p in db.pricelist
-                //              where p.Price_id == item.price                              
-                //              select p).First();
-                //item.Price_id = (from p in db.Stock == db.pricelist.Include(d.Price_id)
-                //                 where p.Price_id == item.Price_id
-                //                 select p).First();
-            }
+            foreach (var item in Stock)                         
+          
             if (!string.IsNullOrEmpty(searchString))
             {
                 Stock = Stock.Where(s => s.description.Contains(searchString));
@@ -49,7 +40,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(Stock);
         }
-
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
         {
@@ -64,7 +54,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-
         // GET: Stock/Create
         public ActionResult Create()
         {
@@ -83,10 +72,8 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(stock);
         }
-
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -101,7 +88,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-
         // POST: Stock/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -117,7 +103,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -132,7 +117,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-
         // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -143,7 +127,6 @@ namespace ConcremoteDeviceManagment.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

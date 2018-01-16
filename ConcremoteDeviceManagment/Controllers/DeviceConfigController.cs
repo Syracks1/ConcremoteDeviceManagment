@@ -13,109 +13,103 @@ namespace ConcremoteDeviceManagment.Controllers
     public class DeviceConfigController : Controller
     {
         private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
-
-       // GET: DeviceConfig
+        // GET: DeviceConfig2
         public ActionResult Index()
         {
-            var Query = from d in db.DeviceConfig
-                        orderby d.device_type_id
-                        select d.device_type_id;
-
             return View(db.DeviceConfig.ToList());
         }
 
-        // GET: DeviceConfig/Details/5
-        //public ActionResult Details(int? device_type_id)
-        //{
-        //    if (device_type_id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Stock stock = db.DeviceConfig.Find(device_type_id);
-        //    if (stock == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(stock);
-        //}
+        // GET: DeviceConfig2/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            if (deviceConfig == null)
+            {
+                return HttpNotFound();
+            }
+            return View(deviceConfig);
+        }
 
-        // GET: DeviceConfig/Create
+        // GET: DeviceConfig2/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        //POST: DeviceConfig/Create
-        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: DeviceConfig2/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
+        public ActionResult Create([Bind(Include = "device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
         {
             if (ModelState.IsValid)
             {
-                db.Stock.Add(stock);
+                db.DeviceConfig.Add(deviceConfig);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(stock);
+            return View(deviceConfig);
         }
 
-        // GET: DeviceConfig/Edit/5
+        // GET: DeviceConfig2/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            if (deviceConfig == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return View(deviceConfig);
         }
-        //}
 
-            // POST: DeviceConfig/Edit/5
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: DeviceConfig2/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
+        public ActionResult Edit([Bind(Include = "device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stock).State = EntityState.Modified;
+                db.Entry(deviceConfig).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(stock);
+            return View(deviceConfig);
         }
 
-        // GET: DeviceConfig/Delete/5
+        // GET: DeviceConfig2/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            if (deviceConfig == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return View(deviceConfig);
         }
 
-        // POST: DeviceConfig/Delete/5
+        // POST: DeviceConfig2/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stock stock = db.Stock.Find(id);
-            db.Stock.Remove(stock);
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            db.DeviceConfig.Remove(deviceConfig);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
