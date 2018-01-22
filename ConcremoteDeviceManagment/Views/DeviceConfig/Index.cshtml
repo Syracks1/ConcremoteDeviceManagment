@@ -1,17 +1,25 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Create Device</h2>
-
+@using (Html.BeginForm("Index", "DeviceConfig", FormMethod.Get))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+}
+<table class="table table-hover">
     <tr>
+        <th>
+            @Html.DisplayName("ID_DEBUG")
+            <br />
+            <small>Delete with deployment</small>
+        </th>
         <th>
             @Html.DisplayName("Device Type")
         </th>
@@ -23,26 +31,29 @@
         </th>
         <th></th>
     </tr>
-
 @foreach (var item in Model) {
     <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Device_config_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.device_type_id)
+    </td>
         <td>
-            @Html.DisplayFor(modelItem => item.device_type_id)
+            @Html.DisplayFor(modelItem => item.Pricelist.price)
         </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.amount)
+    </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.device_type_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.device_type_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.device_type_id })*@
-            <button onclick="location.href='@Url.Action("Edit", "DeviceConfig", new { id=item.device_type_id})';return false;" class="btn btn-primary">Edit</button> |
-            <button onclick="location.href='@Url.Action("Details", "DeviceConfig", new {id=item.device_type_id})';return false;" class="btn btn-info">Details</button> |
-            <button onclick="location.href='@Url.Action("Delete", "DeviceConfig", new {id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>
+            <button onclick="location.href='@Url.Action("Edit", "DeviceConfig", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", "DeviceConfig", new {id=item.Device_config_id})';return false;" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", "DeviceConfig", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 }
 </table>
+@*<div class="form-group">
+    Select Device: @Html.DropDownListFor
+</div>*@
+

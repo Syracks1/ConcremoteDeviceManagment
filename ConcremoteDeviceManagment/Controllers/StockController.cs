@@ -16,25 +16,25 @@ namespace ConcremoteDeviceManagment.Controllers
         private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
         //private PriceManager dbo = new PriceManager();
         // GET: Stock
+        List<Stock> stock = new List<Stock>();
+        List<Pricelist> StockInfo = new List<Pricelist>();
         public ActionResult Index(string StockCMI, string searchString)
         {
-            //var CMIList = new List<string>();
-            //var StockQuery = from d in db.Stock
-            //                 orderby d.bas_art_nr
-            //                 select d.bas_art_nr;
-            //CMIList.AddRange(StockQuery);   
-            var Stock = from i in db.Stock
-                        select i;
-            //var Pricelist = from i in db.pricelist
-            //                select i;
-            var Pricelist = db.pricelist.Include(d => d.Price_id);
-            foreach (var item in Stock)                         
-          
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                Stock = Stock.Where(s => s.description.Contains(searchString));
-            }
-            if(!string.IsNullOrEmpty(StockCMI))
+            //var Stock = from i in db.Stock
+            //            select i;
+
+            // var Pricelist = db.pricelist.Include(d => d.Price_id);
+            var Stock = from d in db.Stock
+                      //  from p in db.pricelist
+                        //where d.Price_id == p.Price_id
+                        select d;
+            foreach (var item in Stock)
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    Stock = Stock.Where(s => s.description.Contains(searchString));
+                }
+            if (!string.IsNullOrEmpty(StockCMI))
             {
                 Stock = Stock.Where(x => x.bas_art_nr.Contains(StockCMI));
             }

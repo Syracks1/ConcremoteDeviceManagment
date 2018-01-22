@@ -7,135 +7,114 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ConcremoteDeviceManagment.Models;
-using System.Data.SqlClient;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    public class DeviceConfigController : Controller
+    public class DeviceController : Controller
     {
         private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
-   //     private object i;
 
-        // GET: DeviceConfig2
+        // GET: Device
         public ActionResult Index()
-        {     
-            var DeviceList = new List<int>();
-            var DeviceQuery = from d in db.DeviceConfig
-                              orderby d.Device_config_id
-                              select d.Device_config_id;
-            DeviceList.AddRange(DeviceQuery);
-            var DeviceConfig = from i in db.DeviceConfig
-                               select i;           
-            return View(DeviceConfig);
-        }
-        public ActionResult CSDOKA()
         {
-            var PartList = new List<string>();
-            //var PartQuery = from d in db.Stock
-            //                where d.bas_art_nr == "CMI0101"
-            //                orderby d.bas_art_nr
-            //                select d.bas_art_nr;
-        //    PartList.AddRange(PartQuery);
-            var DeviceConfig2 = from d in db.Stock
-                              // join b in  
-                               select d;
-            return View(DeviceConfig2);
+            return View(db.pricelist.ToList());
         }
-        //public ActionResult Cable_Sensor_Doka()
-        //{
-        //    return View();
-        //}
 
-        // GET: DeviceConfig2/Details/5
+        // GET: Device/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            if (deviceConfig == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(deviceConfig);
+            return View(pricelist);
         }
-        // GET: DeviceConfig2/Create
+
+        // GET: Device/Create
         public ActionResult Create()
         {
             return View();
         }
-        // POST: DeviceConfig2/Create
+
+        // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
+        public ActionResult Create([Bind(Include = "Price_id,id_cat,id_subcat,price,art_lev_nr")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
-                db.DeviceConfig.Add(deviceConfig);
+                db.pricelist.Add(pricelist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(deviceConfig);
+
+            return View(pricelist);
         }
-        // GET: DeviceConfig2/Edit/5
+
+        // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            if (deviceConfig == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(deviceConfig);
+            return View(pricelist);
         }
 
-        // POST: DeviceConfig2/Edit/5
+        // POST: Device/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Device_config_id,device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
+        public ActionResult Edit([Bind(Include = "Price_id,id_cat,id_subcat,price,art_lev_nr")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(deviceConfig).State = EntityState.Modified;
+                db.Entry(pricelist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(deviceConfig);
+            return View(pricelist);
         }
 
-        // GET: DeviceConfig2/Delete/5
+        // GET: Device/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            if (deviceConfig == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(deviceConfig);
+            return View(pricelist);
         }
 
-        // POST: DeviceConfig2/Delete/5
+        // POST: Device/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            db.DeviceConfig.Remove(deviceConfig);
+            Pricelist pricelist = db.pricelist.Find(id);
+            db.pricelist.Remove(pricelist);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

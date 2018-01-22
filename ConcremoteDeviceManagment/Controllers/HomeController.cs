@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,16 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
     {
+        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+
+        List<Stock> Stock = new List<Stock>();
+        List<Pricelist> StockInfo = new List<Pricelist>();
         public ActionResult Index()
         {
-            return View();
+            var StockVM = from d in db.DeviceConfig
+                          select d;
+                         
+            return View(StockVM);
         }
         
         public ActionResult About()

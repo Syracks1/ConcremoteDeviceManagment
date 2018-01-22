@@ -15,6 +15,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int id { get; set; }      
         [Required(ErrorMessage = "Voer een Prijs ID in")]
+       // [ForeignKey("Price_id")]
         public int Price_id { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
@@ -27,6 +28,7 @@ namespace ConcremoteDeviceManagment.Models
         public int max_stock { get; set; }
         [StringLength(255, MinimumLength = 1)]
         public string description { get; set; }
+        public virtual Pricelist Pricelist1 { get; set; }
 
     }
     [Table("pricelist")]
@@ -37,27 +39,33 @@ namespace ConcremoteDeviceManagment.Models
         public int Price_id { get; set; }
         public string id_cat { get; set; }
         public string id_subcat { get; set; }
-        public float price { get; set; }
+        public decimal price { get; set; }
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
+        
     }
     [Table("DeviceConfig")]
     public class DeviceConfig
     {
-        [Key]      
+        [Key]    
+        public int Device_config_id { get; set; }  
         public int device_type_id { get; set; }
         [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int Price_id { get; set; }
         [Required(ErrorMessage = "Voer een hoeveelheid in")]
         public decimal amount { get; set; }
+        public int assembly_order { get; set; }
+        public virtual Pricelist Pricelist { get; set; }
+        public virtual DeviceType DeviceType { get; set; }
     }
     public class DeviceType
     {
         [Key]
         public int device_type_id { get; set; }
+        [Display(Name = "DeviceType")]
         public string name { get; set; }
-        public string SelectedName { get; set; }
-    }
+    //    public IEnumerable<SelectListItem> name { get; set; }
+      }
     [Table("ConcremoteDevice")]
     public class ConcremoteDevice
     {
@@ -69,13 +77,30 @@ namespace ConcremoteDeviceManagment.Models
         public int oldsystem_concremote { get; set; }
         public bool Allowvalidation { get; set;}
         public int device_type_id { get; set; }
+        public virtual DeviceType DeviceType { get; set; }
+    }
+    [Table("Devicestatus")]
+    public class Devicestatus
+    {
+        [Key]
+        public int Device_status_id { get; set; }
+        public string employee_1 { get; set; }
+        public string employee_2 { get; set; }
+        public virtual Device_statusypes Device_statustypes { get; set; }
+    }
+    [Table("Device_statustypes")]
+    public class Device_statusypes
+    {
+        [Key]
+        public int id { get; set; }
+        public string description { get; set; }
     }
     public class ConcremoteDeviceManagment : DbContext
         {
             public DbSet<Stock> Stock { get; set; }
-     //       [ForeignKey("id")]
+       //    [ForeignKey("id")]
             public DbSet<Pricelist> pricelist { get; set; }
-    //        [ForeignKey("device_type_id")]
+            [ForeignKey("device_type_id")]
             public DbSet<DeviceConfig> DeviceConfig { get; set; }
             public DbSet<DeviceType> DeviceType { get; set; }  
             public DbSet<ConcremoteDevice> ConcremoteDevice { get; set; }     
