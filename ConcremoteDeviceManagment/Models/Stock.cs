@@ -15,7 +15,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int id { get; set; }      
         [Required(ErrorMessage = "Voer een Prijs ID in")]
-       // [ForeignKey("Price_id")]
+     //   [ForeignKey("Price_id")]
         public int Price_id { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
@@ -58,6 +58,7 @@ namespace ConcremoteDeviceManagment.Models
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
     }
+    [Table("DeviceType")]
     public class DeviceType
     {
         [Key]
@@ -98,7 +99,7 @@ namespace ConcremoteDeviceManagment.Models
     public class ConcremoteDeviceManagment : DbContext
         {
             public DbSet<Stock> Stock { get; set; }
-       //    [ForeignKey("id")]
+           [ForeignKey("id")]
             public DbSet<Pricelist> pricelist { get; set; }
             [ForeignKey("device_type_id")]
             public DbSet<DeviceConfig> DeviceConfig { get; set; }

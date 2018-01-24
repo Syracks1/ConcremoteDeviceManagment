@@ -9,49 +9,13 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr><th>
-            @Html.DisplayNameFor(model => model.Device_config_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.device_type_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pricelist.Price_id)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.amount)
-        </th>
-        <th>
-        @Html.DisplayNameFor(model => model.assembly_order)
-    </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm())
+{
+    <p> 
+        Select device : @Html.DropDownList("SelectedDevice", (List<SelectListItem>)ViewBag.SelectedDevice, " --Device--")
+    </p>
+    @*@Html.Action("PartialView", "Home")*@
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Device_config_id)
-            </td>
-           <td>
-                @Html.DisplayFor(modelItem => item.device_type_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pricelist.Price_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.assembly_order)
-            </td>
-            @*<td>
-               tml.ActionLink("Edit", "Edit", new { id = item.Price_id }) |
-               Html.ActionLink("Details", "Details", new { id = item.Price_id }) |
-               Html.ActionLink("Delete", "Delete", new { id = item.Price_id })
-            </td>*@
-        </tr>
-    }
-    </table>
+}
+
+@*@Html.ActionLink("Refresh",)*@

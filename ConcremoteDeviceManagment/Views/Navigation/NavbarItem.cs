@@ -18,7 +18,7 @@ namespace ConcremoteDeviceManagment.Models
     }
     public class Navbar
     {
-        public IEnumerable<NavbarItem> NavbarTop()
+        public IEnumerable<NavbarItem>  NavbarTop()
         {
             var topNav = new List<NavbarItem>();
             topNav.Add(new NavbarItem() { Id = 1, action = "Index", nameOption = "Stock", controller = "Stock", isParent = false, parentId = -1 });

@@ -35,16 +35,16 @@ namespace ConcremoteDeviceManagment.Controllers
             //                where d.bas_art_nr == "CMI0101"
             //                orderby d.bas_art_nr
             //                select d.bas_art_nr;
-        //    PartList.AddRange(PartQuery);
+            //PartList.AddRange(PartQuery);
             var DeviceConfig2 = from d in db.Stock
                               // join b in  
                                select d;
             return View(DeviceConfig2);
         }
-        //public ActionResult Cable_Sensor_Doka()
-        //{
-        //    return View();
-        //}
+        public ActionResult Cable_Sensor_Doka()
+        {
+            return View();
+        }
 
         // GET: DeviceConfig2/Details/5
         public ActionResult Details(int? id)

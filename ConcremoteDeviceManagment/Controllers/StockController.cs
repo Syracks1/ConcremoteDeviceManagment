@@ -14,20 +14,25 @@ namespace ConcremoteDeviceManagment.Controllers
     public class StockController : Controller
     {
         private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
-        //private PriceManager dbo = new PriceManager();
         // GET: Stock
-        List<Stock> stock = new List<Stock>();
-        List<Pricelist> StockInfo = new List<Pricelist>();
         public ActionResult Index(string StockCMI, string searchString)
         {
             //var Stock = from i in db.Stock
             //            select i;
 
-            // var Pricelist = db.pricelist.Include(d => d.Price_id);
+             var Pricelist = db.pricelist.Include(d => d.Price_id);
+         //   var Stock = db.Stock.Include(c => c.Pr)
             var Stock = from d in db.Stock
                       //  from p in db.pricelist
                         //where d.Price_id == p.Price_id
                         select d;
+            //foreach(Stock d in Stock)
+            //{
+            //    foreach(Pricelist in d.Pricelist1)
+            //    {
+            //        Pricelist.Add()
+            //    }
+            //}
             foreach (var item in Stock)
 
                 if (!string.IsNullOrEmpty(searchString))
