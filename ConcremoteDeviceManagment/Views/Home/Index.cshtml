@@ -14,8 +14,21 @@
     <p> 
         Select device : @Html.DropDownList("SelectedDevice", (List<SelectListItem>)ViewBag.SelectedDevice, " --Device--")
     </p>
-    @*@Html.Action("PartialView", "Home")*@
+    @Html.Action("GetDevice", "Home")
 
 }
-
-@*@Html.ActionLink("Refresh",)*@
+<script type="text/javascript">
+$("#SelectedDevice").change( function (event) {
+      var userId = $(this).val();
+        $.ajax({
+            url: "@Url.Action("PartialView", "Home")",
+            data: { id : userId },
+            type: "Get",
+            dataType: "html",
+            success: function (data) {
+            //Whatever result you have got from your controller with html partial view replace with a specific html.
+            $("#PartialView").html( data ); // HTML DOM replace
+            }
+            });
+            });
+</script>

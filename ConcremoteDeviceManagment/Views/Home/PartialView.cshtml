@@ -9,48 +9,51 @@
             @Html.DisplayNameFor(model => model.DeviceType.device_type_id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DeviceType.name)
+            @Html.DisplayName("Device naam")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Pricelist.price)
+            @Html.DisplayName("Prijs")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayName("Aantal")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.assembly_order)
+            @Html.DisplayName("Bouw Volgorde")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price_id)
+            @Html.DisplayName("Prijs ID")
         </th>
         <th></th>
     </tr>
 
-@*@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceType.device_type_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceType.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.assembly_order)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price_id)
-        </td>
-    </tr>
-}*@
+@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.device_type_id)
 
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.DeviceType.name)
+            </td>
+            <td>
+              @*@Html.DisplayFor(modelItem => item.Pricelist.price)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assembly_order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price_id)
+                
+            </td>
+        </tr>
+    }
 </table>
-    @*<script>
+    <script>
     $("#SelectedDevice").change( function (event) {
           var device_type_id = $(this).val();
             $.ajax({
@@ -64,4 +67,4 @@
                 }
                 });
                 });
-    </script>*@
+    </script>
