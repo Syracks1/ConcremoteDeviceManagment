@@ -13,7 +13,7 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class DeviceConfigController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private Models.BasDbContext db = new Models.BasDbContext();
    //     private object i;
 
         // GET: DeviceConfig2

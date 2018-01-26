@@ -50,6 +50,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]    
         public int Device_config_id { get; set; }  
         public int device_type_id { get; set; }
+     //   public string bas_art_nr { get; set; }
         [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int Price_id { get; set; }
         [Required(ErrorMessage = "Voer een hoeveelheid in")]
@@ -57,6 +58,7 @@ namespace ConcremoteDeviceManagment.Models
         public int assembly_order { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
+      //  public virtual Stock Stock { get; set; }
     }
     [Table("DeviceType")]
     public class DeviceType
@@ -96,7 +98,7 @@ namespace ConcremoteDeviceManagment.Models
         public int id { get; set; }
         public string description { get; set; }
     }
-    public class ConcremoteDeviceManagment : DbContext
+    public class BasDbContext : DbContext
         {
             public DbSet<Stock> Stock { get; set; }
            [ForeignKey("id")]

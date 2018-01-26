@@ -6,7 +6,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DeviceType.device_type_id)
+            @Html.DisplayName("BAS artikelnummer")
         </th>
         <th>
             @Html.DisplayName("Device naam")
@@ -30,14 +30,14 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.device_type_id)
+                @Html.DisplayFor(modelItem => item.Device_config_id)
 
             </td>
             <td>
                @Html.DisplayFor(modelItem => item.DeviceType.name)
             </td>
             <td>
-              @*@Html.DisplayFor(modelItem => item.Pricelist.price)*@
+              @Html.DisplayFor(modelItem => item.Pricelist.price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.amount)

@@ -12,7 +12,7 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class DeviceController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private Models.BasDbContext db = new Models.BasDbContext();
 
         // GET: Device
         public ActionResult Index()

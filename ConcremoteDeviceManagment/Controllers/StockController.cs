@@ -13,13 +13,13 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class StockController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private Models.BasDbContext db = new Models.BasDbContext();
         // GET: Stock
         public ActionResult Index(string StockCMI, string searchString)
         {
             //var Stock = from i in db.Stock
             //            select i;
-
+          
              var Pricelist = db.pricelist.Include(d => d.Price_id);
          //   var Stock = db.Stock.Include(c => c.Pr)
             var Stock = from d in db.Stock

@@ -10,7 +10,7 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private Models.BasDbContext db = new Models.BasDbContext();
 
         //List<Stock> Stock = new List<Stock>();
         // List<Pricelist> StockInfo = new List<Pricelist>();
