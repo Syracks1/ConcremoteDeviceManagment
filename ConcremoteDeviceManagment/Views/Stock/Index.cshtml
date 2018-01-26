@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Stock>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Pricelist>
 
 @{
     ViewBag.Title = "Index";
@@ -22,46 +22,31 @@
             @Html.DisplayName("BAS artikelnummer")
         </th>
         <th>
-            @Html.DisplayName("Huidige voorraad")
-        </th>
-        <th>
-            @Html.DisplayName("Minimale voorraad")
-        </th>
-        <th>
-            @Html.DisplayName("Maximale voorraad")
+            @Html.DisplayName("Artikel Prijs")
         </th>
         <th>
             @Html.DisplayName("Beschrijving artikel")
         </th>
-        @*<th>
-            @Html.DisplayName("Artikel Prijs")
-        </th>*@
         <th></th>
     </tr>
 @foreach (var item in Model) {
     <tr>
         <td>
             <i>@Html.DisplayFor(modelItem => item.bas_art_nr)</i>
-        </td>        
+        </td>              
         <td>
-            @Convert.ToDecimal(item.stock_amount).ToString("#,##")
+            € @Html.DisplayFor(modelItem => item.price)
         </td>
         <td>
-            @Convert.ToDecimal(item.min_stock).ToString("#,##")
+            @Html.DisplayFor(modelItem => item.description  )
+        </td>   
+        <td>
+
         </td>
         <td>
-           @Convert.ToDecimal(item.max_stock).ToString("#,##")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Pricelist.price)
-        </td>*@
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Details", "Stock", new {id=item.id})';return false;" class="btn btn-info">Details</button>
-            <button onclick="location.href='@Url.Action("Delete", "Stock", new {id=item.id})';return false;" class="btn btn-danger">Delete</button>
+            <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 }

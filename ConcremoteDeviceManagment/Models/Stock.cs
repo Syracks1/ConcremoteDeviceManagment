@@ -15,20 +15,15 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int id { get; set; }      
         [Required(ErrorMessage = "Voer een Prijs ID in")]
-     //   [ForeignKey("Price_id")]
         public int Price_id { get; set; }
-        [StringLength(60, MinimumLength = 3)]
-        [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
-        public string bas_art_nr { get; set; }
-        [Required(ErrorMessage ="Voer een aantal in")]
-        public int stock_amount { get; set; }
-        [Required(ErrorMessage = "Voer een aantal in")]
-        public int min_stock { get; set; }
-        [Required(ErrorMessage = "Voer een aantal in")]
-        public int max_stock { get; set; }
-        [StringLength(255, MinimumLength = 1)]
-        public string description { get; set; }
-        public virtual Pricelist Pricelist1 { get; set; }
+  //      [StringLength(60, MinimumLength = 3)]      
+     //   [Required(ErrorMessage ="Voer een aantal in")]
+      //  public int stock_amount { get; set; }
+     //  [Required(ErrorMessage = "Voer een aantal in")]
+    //    public int min_stock { get; set; }
+    //    [Required(ErrorMessage = "Voer een aantal in")]
+    //    public int max_stock { get; set; }
+       // public virtual Pricelist Pricelist1 { get; set; }
 
     }
     [Table("pricelist")]
@@ -42,7 +37,11 @@ namespace ConcremoteDeviceManagment.Models
         public decimal price { get; set; }
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
-        
+        [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
+        public string bas_art_nr { get; set; }
+        [StringLength(255, MinimumLength = 1)]
+        public string description { get; set; }
+
     }
     [Table("DeviceConfig")]
     public class DeviceConfig
@@ -50,7 +49,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]    
         public int Device_config_id { get; set; }  
         public int device_type_id { get; set; }
-     //   public string bas_art_nr { get; set; }
+      //  public string id { get; set; }
         [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int Price_id { get; set; }
         [Required(ErrorMessage = "Voer een hoeveelheid in")]
@@ -58,7 +57,7 @@ namespace ConcremoteDeviceManagment.Models
         public int assembly_order { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-      //  public virtual Stock Stock { get; set; }
+     //   public virtual Stock Stock1 { get; set; }
     }
     [Table("DeviceType")]
     public class DeviceType
@@ -100,8 +99,9 @@ namespace ConcremoteDeviceManagment.Models
     }
     public class BasDbContext : DbContext
         {
+            [ForeignKey("Price_id")]
             public DbSet<Stock> Stock { get; set; }
-           [ForeignKey("id")]
+          // [ForeignKey("id")]
             public DbSet<Pricelist> pricelist { get; set; }
             [ForeignKey("device_type_id")]
             public DbSet<DeviceConfig> DeviceConfig { get; set; }

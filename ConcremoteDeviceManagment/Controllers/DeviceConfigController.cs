@@ -36,7 +36,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //                orderby d.bas_art_nr
             //                select d.bas_art_nr;
             //PartList.AddRange(PartQuery);
-            var DeviceConfig2 = from d in db.Stock
+            var DeviceConfig2 = from d in db.pricelist
                               // join b in  
                                select d;
             return View(DeviceConfig2);

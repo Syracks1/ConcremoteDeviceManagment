@@ -6,10 +6,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("BAS artikelnummer")
+            @Html.DisplayName("Device naam")            
         </th>
         <th>
-            @Html.DisplayName("Device naam")
+            @Html.DisplayName("BAS artikelnummer")
         </th>
         <th>
             @Html.DisplayName("Prijs")
@@ -30,25 +30,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Device_config_id)
-
+                <i>@Html.DisplayFor(modelItem => item.DeviceType.name) </i>                           
             </td>
             <td>
-               @Html.DisplayFor(modelItem => item.DeviceType.name)
+                @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
             </td>
             <td>
-              @Html.DisplayFor(modelItem => item.Pricelist.price)
+             € @Html.DisplayFor(modelItem => item.Pricelist.price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.amount)
-
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.assembly_order)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price_id)
-                
+               @Html.DisplayFor(modelItem => item.Price_id)  
             </td>
         </tr>
     }

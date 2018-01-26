@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.Stock
+﻿@model ConcremoteDeviceManagment.Models.Pricelist
 
 @{
     ViewBag.Title = "Create";
@@ -32,29 +32,30 @@
         </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.Label("Huidige voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.stock_amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.
+                , new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.stock_amount, "", new { @class = "text-danger" })
-            </div>
+            </div>*@
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
            @Html.Label("Minimale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.min_stock, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.min_stock, "", new { @class = "text-danger" })
         </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.Label("Maximale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.max_stock, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.max_stock, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -69,7 +70,7 @@
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>
+    @*</div>*@
 }
 
 <div>
