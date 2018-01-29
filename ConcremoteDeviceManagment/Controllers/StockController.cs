@@ -71,16 +71,16 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.pricelist.Add(pric);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(stock);
-        //}
+        public ActionResult Create([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description")] Pricelist pricelist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.pricelist.Add(pricelist);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(pricelist);
+        }
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -100,33 +100,33 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(stock).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(stock);
-        //}
+        public ActionResult Edit([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description")] Pricelist pricelist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(pricelist).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(pricelist);
+        }
         // GET: Stock/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Stock stock = db.pricelist.Find(id);
-        //    if (stock == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(stock);
-        //}
-        // POST: Stock/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pricelist);
+        }
+       // POST: Stock/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Pricelist pricelist = db.pricelist.Find(id);

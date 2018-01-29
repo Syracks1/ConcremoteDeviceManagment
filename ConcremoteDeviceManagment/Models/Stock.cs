@@ -34,7 +34,9 @@ namespace ConcremoteDeviceManagment.Models
         public int Price_id { get; set; }
         public string id_cat { get; set; }
         public string id_subcat { get; set; }
-        public decimal price { get; set; }
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString  = "{0:C2}")]
+        public Decimal price { get; set; }
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
         [Required(ErrorMessage = "Voer een BAS artikelnummer in")]

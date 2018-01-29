@@ -2,34 +2,37 @@
 
 @{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@using (Html.BeginForm())
-{
-    <p> 
-        Select device : @Html.DropDownList("SelectedDevice", (List<SelectListItem>)ViewBag.SelectedDevice, " --Device--")
-    </p>
-    @Html.Action("GetDevice", "Home")
-
-}
 <script type="text/javascript">
 $("#SelectedDevice").change( function (event) {
       var userId = $(this).val();
         $.ajax({
-            url: "@Url.Action("PartialView", "Home")",
-            data: { id : userId },
+            url: "@Url.Action("GetDevice", "Home")",
+            data: { id: device_type_id },
             type: "Get",
             dataType: "html",
             success: function (data) {
             //Whatever result you have got from your controller with html partial view replace with a specific html.
-            $("#PartialView").html( data ); // HTML DOM replace
+            $("#GetDevice").html( data ); // HTML DOM replace
             }
             });
             });
 </script>
+<p>
+   @* @Html.ActionLink("Create New", "Create")*@
+</p>
+@using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+{
+  // Layout = "~/Views/Shared/_Layout.cshtml";
+<p>
+    Select device : @Html.DropDownList("SelectedDevice", (List<SelectListItem>)ViewBag.SelectedDevice, " --Device--")
+    <input type="submit" value="Submit" />
+</p>
+//@Html.Partial("GetDevice", "Home")
+}
+<div id="GridDiv">
+  @*  @Html.Partial("~/Views/Home/GetDevice.cshtml")*@
+</div>

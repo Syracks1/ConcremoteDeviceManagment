@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
+@{
+
+//Layout = "~/Views/Home/Index.cshtml";
+}
 
 <p>
-  @*  @Html.ActionLink("Create New", "Create")*@
+    @*  @Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Device naam")            
+            @Html.DisplayName("Device naam")
         </th>
         <th>
             @Html.DisplayName("BAS artikelnummer")
@@ -15,28 +19,31 @@
             @Html.DisplayName("Prijs")
         </th>
         <th>
+            @Html.DisplayName("Beschrijving")
+        </th>
+        <th>
             @Html.DisplayName("Aantal")
         </th>
         <th>
             @Html.DisplayName("Bouw Volgorde")
         </th>
-        <th>
-            @Html.DisplayName("Prijs ID")
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model)
+    @foreach (var item in Model)
     {
         <tr>
             <td>
-                <i>@Html.DisplayFor(modelItem => item.DeviceType.name) </i>                           
+                <i>@Html.DisplayFor(modelItem => item.DeviceType.name) </i>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
             </td>
             <td>
-             € @Html.DisplayFor(modelItem => item.Pricelist.price)
+                @Html.DisplayFor(modelItem => item.Pricelist.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pricelist.description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.amount)
@@ -44,17 +51,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.assembly_order)
             </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Price_id)  
-            </td>
         </tr>
     }
 </table>
-    <script>
+<script>
     $("#SelectedDevice").change( function (event) {
           var device_type_id = $(this).val();
             $.ajax({
-                url: "@Url.Action("PartialView", "Home")",
+                url: "@Url.Action("GetDevice", "Home")",
                 data: { id : device_type_id },
                 type: "Get",
                 dataType: "html",
@@ -64,4 +68,4 @@
                 }
                 });
                 });
-    </script>
+</script>

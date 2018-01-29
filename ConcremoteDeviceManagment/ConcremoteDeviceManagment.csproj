@@ -334,7 +334,7 @@
     <Content Include="Views\Device\Details.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
-    <Content Include="Views\Home\PartialView.cshtml" />
+    <Content Include="Views\Home\GetDevice.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
