@@ -13,16 +13,16 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class StockController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private Models.BasDbContext db = new Models.BasDbContext();
         // GET: Stock
         public ActionResult Index(string StockCMI, string searchString)
         {
             //var Stock = from i in db.Stock
             //            select i;
-
-             var Pricelist = db.pricelist.Include(d => d.Price_id);
+          
+           //  var Pricelist = db.pricelist.Include(d => d.Price_id);
          //   var Stock = db.Stock.Include(c => c.Pr)
-            var Stock = from d in db.Stock
+            var Pricelist = from d in db.pricelist
                       //  from p in db.pricelist
                         //where d.Price_id == p.Price_id
                         select d;
@@ -33,17 +33,19 @@ namespace ConcremoteDeviceManagment.Controllers
             //        Pricelist.Add()
             //    }
             //}
-            foreach (var item in Stock)
-
+            foreach (var item in Pricelist)
+            {
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    Stock = Stock.Where(s => s.description.Contains(searchString));
+                    Pricelist = Pricelist.Where(s => s.description.Contains(searchString));
                 }
+            }
+
             if (!string.IsNullOrEmpty(StockCMI))
             {
-                Stock = Stock.Where(x => x.bas_art_nr.Contains(StockCMI));
+                Pricelist = Pricelist.Where(x => x.bas_art_nr.Contains(StockCMI));
             }
-            return View(Stock);
+            return View(Pricelist);
         }
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
@@ -52,12 +54,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return View(pricelist);
         }
         // GET: Stock/Create
         public ActionResult Create()
@@ -69,15 +71,15 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
+        public ActionResult Create([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
-                db.Stock.Add(stock);
+                db.pricelist.Add(pricelist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(stock);
+            return View(pricelist);
         }
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
@@ -86,27 +88,27 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return View(pricelist);
         }
         // POST: Stock/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Price_id,bas_art_nr,stock_amount,min_stock,max_stock,description")] Stock stock)
+        public ActionResult Edit([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stock).State = EntityState.Modified;
+                db.Entry(pricelist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(stock);
+            return View(pricelist);
         }
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
@@ -115,20 +117,20 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
+            Pricelist pricelist = db.pricelist.Find(id);
+            if (pricelist == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return View(pricelist);
         }
-        // POST: Stock/Delete/5
+       // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stock stock = db.Stock.Find(id);
-            db.Stock.Remove(stock);
+            Pricelist pricelist = db.pricelist.Find(id);
+            db.pricelist.Remove(pricelist);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

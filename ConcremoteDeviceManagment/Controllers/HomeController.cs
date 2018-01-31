@@ -10,22 +10,42 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
     {
-        private Models.ConcremoteDeviceManagment db = new Models.ConcremoteDeviceManagment();
+        private BasDbContext db = new BasDbContext();
 
-        //List<Stock> Stock = new List<Stock>();
-        // List<Pricelist> StockInfo = new List<Pricelist>();
-        public ActionResult Index(int? SelectedDevice)
-        {      
-            List<SelectListItem> query = db.DeviceType.OrderBy(c => c.name).Select(c => new SelectListItem { Text = c.name, Value = c.name}).ToList();
-            ViewBag.SelectedDevice = query;
+        public ActionResult Index()
+        {
+            var SelectedDevices = new SelectList(db.DeviceConfig.Select(r => r.DeviceType.name).Distinct().ToList());
+
+            ViewBag.SelectedDevice = SelectedDevices;
+
             return View();
         }
-        public PartialViewResult GetDevice(string device_type_id)
+        [HttpGet]
+        public PartialViewResult GetDevice(string Device)
         {
-            var model = from d in db.DeviceConfig
-                         select d;
-           // var model = db.DeviceConfig.Find(device_type_id);
-            return PartialView("PartialView", model);
+           
+           return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
+        }
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_arder,device_type")] DeviceConfig DeviceConfig)
+        {
+            if (ModelState.IsValid)
+            {
+                db.DeviceConfig.Add(DeviceConfig);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(DeviceConfig);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

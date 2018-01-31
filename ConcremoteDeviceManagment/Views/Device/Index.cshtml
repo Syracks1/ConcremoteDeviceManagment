@@ -13,13 +13,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_cat)
+            @Html.DisplayNameFor(model => model.CategoryId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.id_subcat)
+            @Html.DisplayNameFor(model => model.SubCategoryId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.art_lev_nr)
@@ -30,13 +30,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id_cat)
+            @Html.DisplayFor(modelItem => item.CategoryId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.id_subcat)
+            @Html.DisplayFor(modelItem => item.SubCategoryId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.price)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.art_lev_nr)
