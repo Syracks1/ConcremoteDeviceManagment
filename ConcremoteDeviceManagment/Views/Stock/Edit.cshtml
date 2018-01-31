@@ -37,12 +37,12 @@
         <div class="form-group">
             @Html.Label("Prijs", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
     </div>
 
-    <div class="form-group hidden">
+    @*<div class="form-group hidden">
             @Html.Label("Minimale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.id_cat, new { htmlAttributes = new { @class = "form-control" } })
@@ -56,7 +56,7 @@
                 @Html.EditorFor(model => model.id_subcat, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.id_subcat, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
     <div class="form-group">
         @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })

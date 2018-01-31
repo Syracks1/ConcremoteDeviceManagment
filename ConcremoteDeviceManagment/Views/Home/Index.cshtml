@@ -2,37 +2,54 @@
 
 @{
     ViewBag.Title = "Home Page";
-   // Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>Index</h2>
-<script type="text/javascript">
-$("#SelectedDevice").change( function (event) {
-      var userId = $(this).val();
-        $.ajax({
-            url: "@Url.Action("GetDevice", "Home")",
-            data: { id: device_type_id },
-            type: "Get",
-            dataType: "html",
-            success: function (data) {
-            //Whatever result you have got from your controller with html partial view replace with a specific html.
-            $("#GetDevice").html( data ); // HTML DOM replace
-            }
-            });
-            });
-</script>
 <p>
-   @* @Html.ActionLink("Create New", "Create")*@
 </p>
 @using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
 {
-  // Layout = "~/Views/Shared/_Layout.cshtml";
-<p>
-    Select device : @Html.DropDownList("SelectedDevice", (List<SelectListItem>)ViewBag.SelectedDevice, " --Device--")
-    <input type="submit" value="Submit" />
-</p>
-//@Html.Partial("GetDevice", "Home")
+    <fieldset>
+        <legend>Device Configs</legend>
+        <div>
+            @Html.DropDownList("SelectedDevice", "Select a device")
+            <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
+        </div>
+        <br />
+        <div id="target">
+
+        </div>
+        <div id="log">
+
+        </div>
+    </fieldset>
+
 }
-<div id="GridDiv">
-  @*  @Html.Partial("~/Views/Home/GetDevice.cshtml")*@
-</div>
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $("#SelectedDevice").change(function (e) {
+            parseInt; var DeviceType = { "Device": $(this).val() };
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("GetDevice")',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html',
+                data: { "Device": $(this).val() },
+
+                success: function (result) {
+
+                    $("#target").html(result);
+                },
+                error: function (ex) {
+                    alert("Please fix this, it's driving me crazy")
+                }
+            });
+
+        });
+
+    });
+    </script>
+}

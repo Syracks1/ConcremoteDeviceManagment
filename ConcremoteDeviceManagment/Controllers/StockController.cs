@@ -45,7 +45,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 Pricelist = Pricelist.Where(x => x.bas_art_nr.Contains(StockCMI));
             }
-            return View((object)Pricelist);
+            return View(Pricelist);
         }
         // GET: Stock/Details/5
         public ActionResult Details(int? id)

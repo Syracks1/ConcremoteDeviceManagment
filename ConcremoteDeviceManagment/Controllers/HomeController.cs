@@ -12,30 +12,40 @@ namespace ConcremoteDeviceManagment.Controllers
     {
         private BasDbContext db = new BasDbContext();
 
-        public BasDbContext Db { get => db; set => db = value; }
-
-        //List<Stock> Stock = new List<Stock>();
-        // List<Pricelist> StockInfo = new List<Pricelist>();
-        public ActionResult Index(int? SelectedDevice)
+        public ActionResult Index()
         {
-            Populate();
+            var SelectedDevices = new SelectList(db.DeviceConfig.Select(r => r.DeviceType.name).Distinct().ToList());
+
+            ViewBag.SelectedDevice = SelectedDevices;
+
             return View();
         }
-        public PartialViewResult GetDevice(string device_type_id)
+        [HttpGet]
+        public PartialViewResult GetDevice(string Device)
         {
-
-            var model = from d in db.DeviceConfig
-                            //where d.device_type_id == b.device_type_id
-                        select d;
-            //     var model = db.DeviceConfig.Find(device_type_id);
-            //      string SelectedDevice = db.DeviceConfig = device_type_id(;)
-            return PartialView("GetDevice", model);
-            
+           
+           return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
         }
-        private void Populate()
+        public ActionResult Create()
         {
-            List<SelectListItem> query = db.DeviceType.OrderBy(x => x.device_type_id).Select(c => new SelectListItem { Text = c.name, Value = c.name }).ToList();
-            ViewBag.SelectedDevice = query;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_arder,device_type")] DeviceConfig DeviceConfig)
+        {
+            if (ModelState.IsValid)
+            {
+                db.DeviceConfig.Add(DeviceConfig);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(DeviceConfig);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
