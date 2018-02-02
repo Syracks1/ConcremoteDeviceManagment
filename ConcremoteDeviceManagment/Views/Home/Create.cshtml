@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.device_type_id, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.device_type_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("SelectedDevice", "Select a device")
                 @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.assembly_order, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.assembly_order,"Bouw Volgorde", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.assembly_order, "", new { @class = "text-danger" })
@@ -63,6 +63,7 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
+
+    </div>

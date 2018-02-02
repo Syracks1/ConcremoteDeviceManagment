@@ -6,7 +6,7 @@
 <table class="table">
     <tr>
         @*<th>
-            @Html.DisplayName("Device naam")
+         @Html.DisplayName("Device naam")
         </th>*@
         <th>
             @Html.DisplayName("BAS artikelnummer")
@@ -25,33 +25,51 @@
         </th>
         <th></th>
     </tr>
-      @foreach (var item in Model){
-    <tr>
-
-        @*<td>
-            <i>@Html.DisplayFor(modelItem => item.DeviceType.name) </i>
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.assembly_order)
-        </td>
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "Home", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
-           @* <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>*@
-            <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+        @*<tr>
+            <td>
+                @Html.HiddenFor(modelItem => item.amount)
+                @Html.EditorFor(modelItem => item.amount)
+              @*  @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(odelItem => item.amount)
+            @*    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(odelItem => item.amount)
+                @Html.ValidationMessageFor(model => modelItem => item.amount, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.amount)
+            </td>
+        </tr>*@
+        <tr>
+            @*<td>
+                <i>@Html.DisplayFor(modelItem => item.DeviceType.name)</i>
+            </td>*@
+            <td class="dropdown">
+                @Html.DropDownList("SelectedDevice", "Select a CMI")
+               @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr,"", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Home", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
+                @* <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>*@
+                <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
     }
-
 </table>
