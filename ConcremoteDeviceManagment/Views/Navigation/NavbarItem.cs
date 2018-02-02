@@ -26,7 +26,7 @@ namespace ConcremoteDeviceManagment.Models
             //End drop down Menu
             // drop down Menu
             topNav.Add(new NavbarItem() { Id = 3, action = "", nameOption = "Create Device", controller = "", isParent = true, parentId = -1 });
-            topNav.Add(new NavbarItem() { Id = 4, action = "CSDOKA", nameOption = "583041000 Cable Sensor Doka", controller = "DeviceConfig", isParent = false, parentId = 3 });
+            topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "583041000 Cable Sensor Doka", controller = "DeviceConfig", isParent = false, parentId = 3 });
             topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "583041000 Cable Sensor B|A|S", controller = "DeviceConfig", isParent = false, parentId = 3 });
             topNav.Add(new NavbarItem() { Id = 6, action = "Index", nameOption = "583040000 Floor Sensor Doka", controller = "DeviceConfig", isParent = false, parentId = 3 });
             topNav.Add(new NavbarItem() { Id = 6, action = "Index", nameOption = "583040000 Floor Sensor B|A|S", controller = "DeviceConfig", isParent = false, parentId = 3 });

@@ -13,7 +13,7 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class StockController : Controller
     {
-        private Models.BasDbContext db = new Models.BasDbContext();
+        private BasDbContext db = new BasDbContext();
         // GET: Stock
         public ActionResult Index(string StockCMI, string searchString)
         {

@@ -18,48 +18,38 @@ namespace ConcremoteDeviceManagment.Controllers
 
         // GET: DeviceConfig2
         public ActionResult Index()
-        {     
-            var DeviceList = new List<int>();
-            var DeviceQuery = from d in db.DeviceConfig
-                              orderby d.Device_config_id
-                              select d.Device_config_id;
-            DeviceList.AddRange(DeviceQuery);
-            var DeviceConfig = from i in db.DeviceConfig
-                               select i;           
-            return View(DeviceConfig);
-        }
-        public ActionResult CSDOKA()
         {
-            var PartList = new List<string>();
-            //var PartQuery = from d in db.Stock
-            //                where d.bas_art_nr == "CMI0101"
-            //                orderby d.bas_art_nr
-            //                select d.bas_art_nr;
-            //PartList.AddRange(PartQuery);
-            var DeviceConfig2 = from d in db.pricelist
-                              // join b in  
-                               select d;
-            return View(DeviceConfig2);
-        }
-        public ActionResult Cable_Sensor_Doka()
-        {
+            var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
+            //from d in db.DeviceType
+            //join c in db.DeviceConfig.Distinct()
+            //on d.device_type_id equals c.device_type_id
+            //select d.name);
+            ViewBag.SelectedDevice = SelectedDevices;
+
             return View();
+        }
+        public PartialViewResult CreateDevice(string Device)
+        {
+          //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+
+           // ViewBag.SelectedDevice = EditDevice;
+            return PartialView("CreateDevice", db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
         }
 
         // GET: DeviceConfig2/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            if (deviceConfig == null)
-            {
-                return HttpNotFound();
-            }
-            return View(deviceConfig);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+        //    if (deviceConfig == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(deviceConfig);
+        //}
         // GET: DeviceConfig2/Create
         public ActionResult Create()
         {

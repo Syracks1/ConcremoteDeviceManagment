@@ -18,12 +18,12 @@ namespace ConcremoteDeviceManagment.Models
         public int Price_id { get; set; }
   //      [StringLength(60, MinimumLength = 3)]      
      //   [Required(ErrorMessage ="Voer een aantal in")]
-      //  public int stock_amount { get; set; }
+       public int stock_amount { get; set; }
      //  [Required(ErrorMessage = "Voer een aantal in")]
-    //    public int min_stock { get; set; }
+        public int min_stock { get; set; }
     //    [Required(ErrorMessage = "Voer een aantal in")]
-    //    public int max_stock { get; set; }
-       // public virtual Pricelist Pricelist1 { get; set; }
+        public int max_stock { get; set; }
+        public virtual Pricelist Pricelist { get; set; }
 
     }
     [Table("pricelist")]
@@ -57,7 +57,7 @@ namespace ConcremoteDeviceManagment.Models
         public string VAT_DE_Id { get; set; }
         public string Remark { get; set; }
         public bool? Print { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public bool? Duration { get; set; }
         public bool? Procurement { get; set; }
         public string ProcurementType { get; set; }
@@ -69,6 +69,7 @@ namespace ConcremoteDeviceManagment.Models
         public decimal? ProcurementRebate { get; set; }
         public decimal? Weight { get; set; }
         public string OldSystem_Prijslijst_ItemId { get; set; }
+        //public virtual Stock Stock { get; set; }
     }
     [Table("DeviceConfig")]
     public class DeviceConfig

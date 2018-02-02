@@ -28,7 +28,7 @@
             @Html.DisplayName("Beschrijving artikel")
         </th>
         <th>
-            @Html.DisplayName("Hoeveelheid")
+            @Html.DisplayName("Active")
         </th>
         <th></th>
     </tr>
@@ -44,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.description  )
         </td>   
         <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
+            @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>

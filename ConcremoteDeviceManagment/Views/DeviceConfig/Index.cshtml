@@ -2,58 +2,53 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Create Device";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Create Device</h2>
-@using (Html.BeginForm("Index", "DeviceConfig", FormMethod.Get))
-{
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+{*@
+    <fieldset>
+        <legend>Device Create</legend>
+        <div>
+            @Html.DropDownList("SelectedDevice", "Select a device")
+            <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
+        </div>
+        <br />
+        <div id="target">
+
+        </div>
+        <div id="log">
+
+        </div>
+    </fieldset>
+
+
+@*}*@
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#SelectedDevice").change(function (e) {
+                var DeviceType = { "Device": $(this).val() };
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("CreateDevice")',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html',
+                data: { "Device": $(this).val() },
+                success: function (result) {
+
+                    $("#target").html(result);
+                },
+                error: function (ex) {
+                    alert("Something is wrong");
+                }
+            });
+
+        });
+
+    });
+    </script>
 }
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayName("ID_DEBUG")
-            <br />
-            <small>Delete with deployment</small>
-        </th>
-        <th>
-            @Html.DisplayName("Device Type")
-        </th>
-        <th>
-            @Html.DisplayName("Prijs ID")
-        </th>
-        <th>
-            @Html.DisplayName("Aantal")
-        </th>
-        <th></th>
-    </tr>
-@foreach (var item in Model) {
-    <tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Device_config_id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.device_type_id)
-    </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.Price)
-        </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.amount)
-    </td>
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "DeviceConfig", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Details", "DeviceConfig", new {id=item.Device_config_id})';return false;" class="btn btn-info">Details</button>
-            <button onclick="location.href='@Url.Action("Delete", "DeviceConfig", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
-}
-</table>
-@*<div class="form-group">
-    Select Device: @Html.DropDownListFor
-</div>*@
 

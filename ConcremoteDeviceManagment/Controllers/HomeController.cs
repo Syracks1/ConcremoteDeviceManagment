@@ -15,7 +15,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Index()
         {
-            var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.device_type_id).Distinct().ToList());
+            var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
             //from d in db.DeviceType
             //join c in db.DeviceConfig.Distinct()
             //on d.device_type_id equals c.device_type_id
@@ -26,12 +26,12 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetDevice(int device_type_id)
+        public PartialViewResult GetDevice(string Device)
         {
             var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             ViewBag.SelectedDevice = EditDevice;
-            return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.device_type_id == device_type_id).OrderBy(c => c.assembly_order));
+            return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
         }
         public ActionResult Create()
         {

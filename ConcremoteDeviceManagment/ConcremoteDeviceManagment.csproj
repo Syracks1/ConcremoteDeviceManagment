@@ -363,6 +363,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\CreatePartial.cshtml" />
+    <Content Include="Views\DeviceConfig\CreateDevice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
