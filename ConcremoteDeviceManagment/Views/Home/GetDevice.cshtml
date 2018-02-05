@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
 <p>
-      @*@Html.ActionLink("Create New", "Create")*@
+    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-         @Html.DisplayName("Device naam")
-        </th>*@
         <th>
             @Html.DisplayName("BAS artikelnummer")
         </th>
@@ -28,12 +25,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                <i>@Html.DisplayFor(modelItem => item.DeviceType.name)</i>
-            </td>*@
             <td class="dropdown">
                 @Html.DropDownList("SelectedDevice", "Select a CMI")
-               @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr,"", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })

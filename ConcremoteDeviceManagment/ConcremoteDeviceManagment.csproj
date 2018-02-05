@@ -344,7 +344,6 @@
     <Content Include="Views\DeviceConfig\Edit.cshtml" />
     <Content Include="Views\DeviceConfig\Index.cshtml" />
     <Content Include="Views\Navigation\_TopNav.cshtml" />
-    <Content Include="Views\DeviceConfig\CSDOKA.cshtml" />
     <Content Include="Views\Device\Create.cshtml" />
     <Content Include="Views\Device\Delete.cshtml" />
     <Content Include="Views\Device\Details.cshtml" />

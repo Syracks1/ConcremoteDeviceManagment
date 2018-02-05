@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.DeviceConfig
+﻿@model ConcremoteDeviceManagment.Models.Pricelist
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,27 +19,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Huidige voorraad")
+            @Html.DisplayName("Prijs ID")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.stock_amount)
+            @Html.DisplayFor(model => model.Price_id)
         </dd>
 
         <dt>
-            @Html.DisplayName("Minimale voorraad")
+           @* @Html.DisplayName("Minimale voorraad")*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.min_stock)
+            @*@Html.DisplayFor(model => model.min_stock)*@
         </dd>
 
         <dt>
-           @Html.DisplayName("Maximale voorraad")
+           @*@Html.DisplayName("Maximale voorraad")*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.max_stock)
+     @*       @Html.DisplayFor(model => model.max_stock)*@
         </dd>
 
         <dt>
@@ -47,23 +47,23 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.description)
+           @Html.DisplayFor(model => model.description)
         </dd>
         <dt>
             @Html.DisplayName("Stuk Prijs")
         </dt>
         <dd>
-            @Html.DisplayFor(model=> model.Pricelist1.price)
+            @Html.DisplayFor(model=> model.Price)
         </dd>
         <dt>
             @Html.DisplayName("Artikelnummer Leverancier")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pricelist1.art_lev_nr)
+           @Html.DisplayFor(model => model.art_lev_nr)
         </dd>
     </dl>
 </div>
 <p>
-    <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=Model.id})';return false;" class="btn btn-primary">Edit</button> |
+    <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=Model.Price_id})';return false;" class="btn btn-primary">Edit</button> |
     <button onclick="location.href='@Url.Action("Index", "Stock")';return false; " class="btn btn-primary">Back to list</button>
 </p>
