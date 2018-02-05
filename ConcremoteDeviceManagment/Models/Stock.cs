@@ -88,7 +88,7 @@ namespace ConcremoteDeviceManagment.Models
         public virtual DeviceType DeviceType { get; set; }
       //  public virtual Stock Stock { get; set; }
     }
-    [Table("DeviceType")]
+   [Table("DeviceType")]
     public class DeviceType
     {
         [Key]
