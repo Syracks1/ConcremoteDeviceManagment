@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Pricelist>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Stock>
 
 @{
     ViewBag.Title = "Index";
@@ -28,6 +28,15 @@
             @Html.DisplayName("Beschrijving artikel")
         </th>
         <th>
+            @Html.DisplayName("Huidige voorraad")
+        </th>
+        <th>
+            @Html.DisplayName("Minimale voorraad")
+        </th>
+        <th>
+            @*@Html.DisplayName("Maximale voorraad")*@
+        </th>
+        <th>
             @Html.DisplayName("Active")
         </th>
         <th></th>
@@ -35,16 +44,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <i>@Html.DisplayFor(modelItem => item.bas_art_nr)</i>
-        </td>              
-        <td>
-             @Html.DisplayFor(modelItem => item.Price)
+            <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)</i>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.description  )
-        </td>   
+            @Html.DisplayFor(modelItem => item.Pricelist.Price)
+        </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Active)
+            @Html.DisplayFor(modelItem => item.Pricelist.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.min_stock)
+        </td>
+        <td>
+        @*    @Html.DisplayFor(modelItem => item.max_stock)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pricelist.Active)
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>

@@ -19,12 +19,12 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //var Stock = from i in db.Stock
             //            select i;
-          
-           //  var Pricelist = db.pricelist.Include(d => d.Price_id);
-         //   var Stock = db.Stock.Include(c => c.Pr)
-            var Pricelist = from d in db.pricelist
-                      //  from p in db.pricelist
-                        //where d.Price_id == p.Price_id
+
+            //  var Pricelist = db.pricelist.Include(d => d.Price_id);
+            //   var Stock = db.Stock.Include(c => c.Pr)
+            var stock = from d in db.Stock
+                        //    from b in db.pricelist
+                            where d.Pricelist.Active == true
                         select d;
             //foreach(Stock d in Stock)
             //{
@@ -33,19 +33,19 @@ namespace ConcremoteDeviceManagment.Controllers
             //        Pricelist.Add()
             //    }
             //}
-            foreach (var item in Pricelist)
+            foreach (var item in stock)
             {
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    Pricelist = Pricelist.Where(s => s.description.Contains(searchString));
+                    stock = stock.Where(s => s.Pricelist.description.Contains(searchString));
                 }
             }
 
             if (!string.IsNullOrEmpty(StockCMI))
             {
-                Pricelist = Pricelist.Where(x => x.bas_art_nr.Contains(StockCMI));
+                stock = stock.Where(x => x.Pricelist.bas_art_nr.Contains(StockCMI));
             }
-            return View(Pricelist);
+            return View(stock);
         }
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
@@ -54,7 +54,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pricelist pricelist = db.pricelist.Find(id);
+            Stock pricelist = db.Stock.Find(id);
             if (pricelist == null)
             {
                 return HttpNotFound();

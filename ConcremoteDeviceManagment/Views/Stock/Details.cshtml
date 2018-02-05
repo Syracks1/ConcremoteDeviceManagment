@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.Pricelist
+﻿@model ConcremoteDeviceManagment.Models.Stock
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.bas_art_nr)
+            @Html.DisplayFor(model => model.Pricelist.bas_art_nr)
         </dd>
 
         <dt>
@@ -27,19 +27,19 @@
         </dd>
 
         <dt>
-           @* @Html.DisplayName("Minimale voorraad")*@
+            @Html.DisplayName("Minimale voorraad")
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.min_stock)*@
+            @Html.DisplayFor(model => model.min_stock)
         </dd>
 
         <dt>
-           @*@Html.DisplayName("Maximale voorraad")*@
+           @Html.DisplayName("Maximale voorraad")
         </dt>
 
         <dd>
-     @*       @Html.DisplayFor(model => model.max_stock)*@
+            @Html.DisplayFor(model => model.max_stock)
         </dd>
 
         <dt>
@@ -47,19 +47,19 @@
         </dt>
 
         <dd>
-           @Html.DisplayFor(model => model.description)
+           @Html.DisplayFor(model => model.Pricelist.description)
         </dd>
         <dt>
             @Html.DisplayName("Stuk Prijs")
         </dt>
         <dd>
-            @Html.DisplayFor(model=> model.Price)
+            @Html.DisplayFor(model=> model.Pricelist.Price)
         </dd>
         <dt>
             @Html.DisplayName("Artikelnummer Leverancier")
         </dt>
         <dd>
-           @Html.DisplayFor(model => model.art_lev_nr)
+           @Html.DisplayFor(model => model.Pricelist.art_lev_nr)
         </dd>
     </dl>
 </div>
