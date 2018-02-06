@@ -25,8 +25,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //on d.device_type_id equals c.device_type_id
             //select d.name);
             ViewBag.SelectedDevice = SelectedDevices;
-
-            return View();
+               return View();
         }
         public PartialViewResult CreateDevice(string Device)
         {

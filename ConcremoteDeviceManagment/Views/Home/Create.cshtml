@@ -25,9 +25,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price_id, "Prijs ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price_id, "BAS Artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Price_id , new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownList("EditDevice", "Select a device")*@
+                @Html.EditorFor(model => model.Price_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
             </div>
         </div>

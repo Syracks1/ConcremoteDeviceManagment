@@ -1,0 +1,67 @@
+﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ConcremoteDevice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceType.device_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceType.device_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.device_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.device_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imei)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imei)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.oldsystem_concremote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.oldsystem_concremote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Allowvalidation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allowvalidation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

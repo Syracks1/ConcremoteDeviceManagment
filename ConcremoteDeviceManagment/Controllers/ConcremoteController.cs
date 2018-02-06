@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using ConcremoteDeviceManagment.Models;
+
+namespace ConcremoteDeviceManagment.Controllers
+{
+    public class ConcremoteController : Controller
+    {
+        private BasDbContext db = new BasDbContext();
+
+        // GET: Concremote
+        public ActionResult Index()
+        {
+            var concremoteDevice = db.ConcremoteDevice.Include(c => c.DeviceType);
+            return View(concremoteDevice.ToList());
+        }
+
+        // GET: Concremote/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+            if (concremoteDevice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(concremoteDevice);
+        }
+
+        // GET: Concremote/Create
+        public ActionResult Create()
+        {
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type");
+            return View();
+        }
+
+        // POST: Concremote/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id,device_id,imei,active,oldsystem_concremote,Allowvalidation,device_type_id")] ConcremoteDevice concremoteDevice)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ConcremoteDevice.Add(concremoteDevice);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            return View(concremoteDevice);
+        }
+
+        // GET: Concremote/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+            if (concremoteDevice == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            return View(concremoteDevice);
+        }
+
+        // POST: Concremote/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,device_id,imei,active,oldsystem_concremote,Allowvalidation,device_type_id")] ConcremoteDevice concremoteDevice)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(concremoteDevice).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            return View(concremoteDevice);
+        }
+
+        // GET: Concremote/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+            if (concremoteDevice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(concremoteDevice);
+        }
+
+        // POST: Concremote/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+            db.ConcremoteDevice.Remove(concremoteDevice);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

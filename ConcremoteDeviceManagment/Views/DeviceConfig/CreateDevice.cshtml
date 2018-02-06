@@ -32,9 +32,9 @@
                     <i>@Html.DisplayFor(modelItem => item.DeviceType.name)</i>
                 </td>*@
             @*<td class="dropdown">
-                @Html.DropDownList("SelectedDevice", "Select a CMI")
-                @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
-            </td>*@
+                    @Html.DropDownList("SelectedDevice", "Select a CMI")
+                    @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
+                </td>*@
             <td>
                 <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
             </td>
@@ -52,10 +52,10 @@
             </td>
             <td>
                 @*<button onclick="location.href='@Url.Action("Edit", "Home", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
-                <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>
-                <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>*@
+                    <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>
+                    <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>*@
             </td>
         </tr>
     }
 </table>
-
+<button onclick="location.href='@Url.Action("Create", "Device")';return false;" class="btn btn-primary">Create Device</button>

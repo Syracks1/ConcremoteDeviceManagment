@@ -27,7 +27,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
-            ViewBag.SelectedDevice = EditDevice;
+            ViewBag.EditDevice = EditDevice;
             return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
         }
         public ActionResult Create()
@@ -40,6 +40,9 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
         {
+            var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+
+            ViewBag.EditDevice = EditDevice;
             try
             {
                 if (ModelState.IsValid)

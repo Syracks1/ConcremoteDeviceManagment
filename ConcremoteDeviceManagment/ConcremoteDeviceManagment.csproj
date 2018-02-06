@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ConcremoteController.cs" />
     <Compile Include="Controllers\DeviceConfigController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -350,6 +351,11 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\CreatePartial.cshtml" />
     <Content Include="Views\DeviceConfig\CreateDevice.cshtml" />
+    <Content Include="Views\Concremote\Create.cshtml" />
+    <Content Include="Views\Concremote\Delete.cshtml" />
+    <Content Include="Views\Concremote\Details.cshtml" />
+    <Content Include="Views\Concremote\Edit.cshtml" />
+    <Content Include="Views\Concremote\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

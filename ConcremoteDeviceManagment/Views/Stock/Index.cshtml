@@ -66,6 +66,9 @@
             @Html.DisplayFor(modelItem => item.Pricelist.Active)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Price_id)
+        </td>
+        <td>
             <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
             <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
             <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>

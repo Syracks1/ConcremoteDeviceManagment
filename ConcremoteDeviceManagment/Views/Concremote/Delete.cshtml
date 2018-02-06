@@ -1,0 +1,73 @@
+﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ConcremoteDevice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceType.device_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceType.device_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.device_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.device_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imei)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imei)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.oldsystem_concremote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.oldsystem_concremote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Allowvalidation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allowvalidation)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
