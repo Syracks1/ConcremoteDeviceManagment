@@ -18,7 +18,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.device_type_id, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("SelectedDevice", "Select a device")
+            @*    @Html.DropDownList("SelectedDevice", "Select a device")*@
+                @Html.EditorFor(model => model.device_type_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
             </div>
         </div>

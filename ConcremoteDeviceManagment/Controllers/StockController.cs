@@ -49,12 +49,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stock pricelist = db.Stock.Find(id);
-            if (pricelist == null)
+            Stock stock = db.Stock.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return View(stock);
         }
         // GET: Stock/Create
         public ActionResult Create()
@@ -66,15 +66,15 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description,active")] Pricelist pricelist)
+        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock)
         {
             if (ModelState.IsValid)
             {
-                db.pricelist.Add(pricelist);
+                db.Stock.Add(stock);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pricelist);
+            return View(stock);
         }
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
@@ -83,19 +83,19 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pricelist pricelist = db.pricelist.Find(id);
-            if (pricelist == null)
+            Stock stock = db.Stock.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return View(stock);
         }
         // POST: Stock/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,id_cat,id_subcat,price,bas_art_nr,art_lev_nr,description,active")] Pricelist pricelist)
+        public ActionResult Edit([Bind(Include = "Price_id,description,art_lev_nr,stock_amount,min_stock,max_stock,Active")] Stock stock, Pricelist pricelist )
         {
             if (ModelState.IsValid)
             {

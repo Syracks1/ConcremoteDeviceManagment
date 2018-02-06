@@ -1,6 +1,7 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -27,7 +28,7 @@ namespace ConcremoteDeviceManagment.Controllers
             var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             ViewBag.SelectedDevice = EditDevice;
-            return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
+            return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
         }
         public ActionResult Create()
         {
@@ -55,7 +56,17 @@ namespace ConcremoteDeviceManagment.Controllers
             PopulateDeviceDropDownList(DeviceConfig.device_type_id);
             return View(DeviceConfig);
         }
-
+        public ActionResult Edit([Bind(Include = "Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(DeviceConfig).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        
+            return View(DeviceConfig);
+        }
         // GET: DeviceConfig/Delete/5
         public ActionResult Delete(int? id)
         {

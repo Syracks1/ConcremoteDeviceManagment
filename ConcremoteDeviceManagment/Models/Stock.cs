@@ -69,7 +69,7 @@ namespace ConcremoteDeviceManagment.Models
         public decimal? ProcurementRebate { get; set; }
         public decimal? Weight { get; set; }
         public string OldSystem_Prijslijst_ItemId { get; set; }
-      //  public virtual Stock Stock { get; set; }
+     //   public virtual Stock Stock { get; set; }
     }
     [Table("DeviceConfig")]
     public class DeviceConfig

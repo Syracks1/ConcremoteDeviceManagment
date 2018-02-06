@@ -10,14 +10,15 @@
 {
 <p>
     <b>CMI: </b>@Html.TextBox("StockCMI")
-    <input type="submit" value="Zoek CMI" class="btn"/>
+    <input type="submit" value="Zoek CMI" class="btn" />
     <b>Onderdeel:</b> @Html.TextBox("searchString")
     <input type="submit" value="Zoek onderdeel" class="btn" /> |
+    
     <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
 </p>
 }
 <table class="table">
-    <tr>            
+    <tr>
         <th>
             @Html.DisplayName("BAS artikelnummer")
         </th>
@@ -53,10 +54,10 @@
             @Html.DisplayFor(modelItem => item.Pricelist.description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.stock_amount)
+            @Convert.ToDecimal(item.stock_amount).ToString("#,##")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.min_stock)
+            @Convert.ToDecimal(item.min_stock).ToString("#,##")
         </td>
         <td>
         @*    @Html.DisplayFor(modelItem => item.max_stock)*@
@@ -70,6 +71,7 @@
             <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
+
 }
 
 </table>
