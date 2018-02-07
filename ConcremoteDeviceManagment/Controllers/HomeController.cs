@@ -59,7 +59,22 @@ namespace ConcremoteDeviceManagment.Controllers
             PopulateDeviceDropDownList(DeviceConfig.device_type_id);
             return View(DeviceConfig);
         }
-        public ActionResult Edit([Bind(Include = "Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Stock stock = db.Stock.Find(id);
+        //    if (stock == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(stock);
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,device_type")] DeviceConfig DeviceConfig)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +83,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 return RedirectToAction("Index");
             }
         
-            return View(DeviceConfig);
+            return View();
         }
         // GET: DeviceConfig/Delete/5
         public ActionResult Delete(int? id)
