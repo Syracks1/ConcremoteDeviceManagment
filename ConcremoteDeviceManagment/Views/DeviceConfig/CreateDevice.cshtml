@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         @*<th>
@@ -31,13 +31,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                    <i>@Html.DisplayFor(modelItem => item.DeviceType.name)</i>
-                </td>*@
-            @*<td class="dropdown">
-                    @Html.DropDownList("SelectedDevice", "Select a CMI")
-                    @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
-                </td>*@
             <td>
                 <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
             </td>

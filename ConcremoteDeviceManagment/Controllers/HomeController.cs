@@ -18,18 +18,57 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
             ViewBag.SelectedDevice = SelectedDevices;
+
+
                 
             return View();
         }
-
+        public JsonResult EditDevice(string bas_art_nr)
+        {
+            var data = new
+            {
+                Label1 = from d in db.pricelist
+                         select d.bas_art_nr,
+                Label2 = from b in db.pricelist
+                         select b.description
+               };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
+          
             var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             ViewBag.EditDevice = EditDevice;
-            return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(DeviceConfig).State = EntityState.Modified;
+            //    db.SaveChanges();
+            // //   return RedirectToAction("Index");
+                return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult GetDevice([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(DeviceConfig).State = EntityState.Modified;
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            return PartialView("Index");
+        }
+        //private static HttpStatusCode GetBadRequest()
+        //{
+        //    return HttpStatusCode.BadRequest;
+        //}
+
+        //     public ActionResult EditCMI(string CMI)
+
         public ActionResult Create()
         {
             PopulateDeviceDropDownList();
@@ -59,19 +98,19 @@ namespace ConcremoteDeviceManagment.Controllers
             PopulateDeviceDropDownList(DeviceConfig.device_type_id);
             return View(DeviceConfig);
         }
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Stock stock = db.Stock.Find(id);
-        //    if (stock == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(stock);
-        //}
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            if (deviceConfig == null)
+            {
+                return HttpNotFound();
+            }
+            return View(deviceConfig);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,device_type")] DeviceConfig DeviceConfig)

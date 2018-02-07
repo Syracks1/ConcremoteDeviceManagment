@@ -3,61 +3,68 @@
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("BAS artikelnummer")
-        </th>
-        <th>
-            @Html.DisplayName("Prijs")
-        </th>
-        <th>
-            @Html.DisplayName("Beschrijving")
-        </th>
-        <th>
-            @Html.DisplayName("Aantal")
-        </th>
-        <th>
-            @Html.DisplayName("Bouw Volgorde")
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
         <tr>
-            <td class="dropdown">
-             @*   @Html.DropDownListFor(modelItem => item.Pricelist.bas_art_nr, SelectList(Edit)*@
-                 @Html.DropDownList("EditDevice", item.Pricelist.bas_art_nr)
-               @* @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
-            </td>
-            <td id="Price">
-                @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td id="description">
-                @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                <button onclick="location.href='@Url.Action("Edit", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
-                @* <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>*@
-                <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
-            </td>
+            <th>
+                @Html.DisplayName("BAS artikelnummer")
+            </th>
+            <th>
+                @Html.DisplayName("Prijs")
+            </th>
+            <th>
+                @Html.DisplayName("Beschrijving")
+            </th>
+            <th>
+                @Html.DisplayName("Aantal")
+            </th>
+            <th>
+                @Html.DisplayName("Bouw Volgorde")
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
-<script>
-  var url = '@Url.Action("GetDevice", "Home")';
-    $('#EditDevice').change() {
-    $.getJSON(url, { bas_art_nr: $(this).val() }, function(response) {
-        // Note you will need to give your labels an id attribute
-        $('#Price').text(response.item.Pricelist.Price);
-        $('#description').text(response.item.Pricelist.description);
-    })
-  });
-</script>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="dropdown">
+                    @*           @Html.DropDownListFor(modelItem => item.Pricelist.bas_art_nr, SelectList("EditDevice"))*@
+                    @Html.DropDownList("EditDevice", item.Pricelist.bas_art_nr)
+                    @* @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
+                </td>
+                <td id="Label1">
+                    @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td id="Label2">
+                    @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @*  <button onclick="location.href='@Url.Action("Edit", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>*@
+                    @*<button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>*@
+                    <button onclick="location.href='@Url.Action("Delete", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger">Delete</button>
+                </td>
+                <td>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </td>
+            </tr>
+        }
+    </table>
+}
+    <script>
+  var url = '@Url.Action("EditDevice", "Home")';
+    $('#EditDevice').change(); {
+        $.getJSON(url, { bas_art_nr: $(this).val() }, function (response) {
+            // Note you will need to give your labels an id attribute
+            $('#Label1').text(response.Label1);
+            $('#Label2').text(response.Label2);
+        })
+  };
+    </script>
