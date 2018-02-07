@@ -13,12 +13,10 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class DeviceConfigController : Controller
     {
-        private Models.BasDbContext db = new Models.BasDbContext();
-   //     private object i;
-
-        // GET: DeviceConfig2
+        private BasDbContext db = new BasDbContext();
         public ActionResult Index()
         {
+            
             var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
             //from d in db.DeviceType
             //join c in db.DeviceConfig.Distinct()
@@ -29,9 +27,10 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         public PartialViewResult CreateDevice(string Device)
         {
-          //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+           
+            //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
-           // ViewBag.SelectedDevice = EditDevice;
+            // ViewBag.SelectedDevice = EditDevice;
             return PartialView("CreateDevice", db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
         }
 

@@ -26,13 +26,15 @@
     {
         <tr>
             <td class="dropdown">
-                @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
+             @*   @Html.DropDownListFor(modelItem => item.Pricelist.bas_art_nr, SelectList(Edit)*@
+                 @Html.DropDownList("EditDevice", item.Pricelist.bas_art_nr)
+               @* @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(modelItem => item.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
             </td>
-            <td>
+            <td id="Price">
                 @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
             </td>
-            <td>
+            <td id="description">
                 @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
             </td>
             <td>
@@ -49,3 +51,13 @@
         </tr>
     }
 </table>
+<script>
+  var url = '@Url.Action("GetDevice", "Home")';
+    $('#EditDevice').change() {
+    $.getJSON(url, { bas_art_nr: $(this).val() }, function(response) {
+        // Note you will need to give your labels an id attribute
+        $('#Price').text(response.item.Pricelist.Price);
+        $('#description').text(response.item.Pricelist.description);
+    })
+  });
+</script>

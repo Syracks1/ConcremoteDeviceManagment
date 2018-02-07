@@ -25,7 +25,12 @@
         <dd>
             @Html.DisplayFor(model => model.Pricelist.Price_id)
         </dd>
-
+        <dt>
+            @Html.DisplayName("Huidige voorraad")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stock_amount)
+        </dd>
         <dt>
             @Html.DisplayName("Minimale voorraad")
         </dt>

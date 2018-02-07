@@ -28,6 +28,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Allowvalidation)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.device_type_id)
+        </th>
         <th></th>
     </tr>
 
@@ -48,6 +51,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Allowvalidation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.device_type_id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

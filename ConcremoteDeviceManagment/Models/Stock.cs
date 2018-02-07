@@ -103,13 +103,16 @@ namespace ConcremoteDeviceManagment.Models
     {
         [Key]
         public int id { get; set; }
-        public int device_id { get; set; }
+      //  public int device_id { get; set; }
         public string imei { get; set; }
         public bool active { get; set; }
         public int oldsystem_concremote { get; set; }
         public bool Allowvalidation { get; set;}
         public int device_type_id { get; set; }
+   //     public int Device_status_id { get; set; }
         public virtual DeviceType DeviceType { get; set; }
+     //   [ForeignKey("Device_status_id")]
+      //  public virtual Devicestatus Devicestatus { get; set;}
     }
     [Table("Devicestatus")]
     public class Devicestatus
