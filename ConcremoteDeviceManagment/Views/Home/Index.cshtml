@@ -15,14 +15,9 @@
     <fieldset>
         <legend>Device Configs</legend>
         <div>
-            @*@Html.DropDownList("SelectedDevice", Model.Select(item => new SelectListItem
-        {
-            Value = item.DeviceType.device_type_id.ToString(),
-            Text = item.DeviceType.name.ToString(),
-            Selected = "select" == item.device_type_id.ToString()
-        }))*@
-            @Html.DropDownList("SelectedDevice", "Select Device")
-            @*@Html.DropDownList("SelectedDevice", ViewData["SelectedDevice"] as IEnumerable<SelectListItem>, "Select Device")*@
+
+            @Html.DropDownList("SelectedDevice", "select")
+            @*@Html.DropDownList("ProjectBranch", ViewBag.ProjectBranch as SelectList, new { @class = "form-data" })*@
             <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
         </div>
         <br />

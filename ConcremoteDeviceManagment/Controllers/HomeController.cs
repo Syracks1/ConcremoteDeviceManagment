@@ -16,13 +16,9 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Index()
         {
-            //   ViewData["SelectedDevice"] = new SelectList(Pricelist.(), "id", "name");
             var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             //ViewBag.SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             ViewBag.SelectedDevice = SelectedDevices;
-
-
-
 
             return View();
         }
@@ -56,13 +52,13 @@ namespace ConcremoteDeviceManagment.Controllers
             // //   return RedirectToAction("Index");
                 return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
         }
-        public PartialViewResult GetDevice(int? device_type_id)
+        public PartialViewResult GetDevice(int? id)
         {
-            if (device_type_id == null)
+            if (id == null)
             {
                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(device_type_id);
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
             if (deviceConfig == null)
             {
                // return HttpNotFound();
@@ -77,7 +73,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(pricelist).State = EntityState.Modified;
+                    //db.Entry(pricelist.bas_art_nr).State = EntityState.Modified;
                     db.Entry(DeviceConfig).State = EntityState.Modified;
                     db.SaveChanges();
                     //return RedirectToAction("Index");
@@ -105,7 +101,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,SelectedDevice,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
         {
                 var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
@@ -153,20 +149,19 @@ namespace ConcremoteDeviceManagment.Controllers
             return RedirectToAction("Index");
         }
 
-        //private IEnumerable<SelectListItem> GetDevice()
+        //private IEnumerable<SelectListItem> SelectedDevice()
         //{
 
-        //    var SelectedDevice = new DeviceType();
-        //    var Device = DeviceType
-        //                .()
-        //                .Select(x =>
-        //                        new SelectListItem
-        //                        {
-        //                            Value = x.device_type_id.ToString(),
-        //                            Text = x.description
-        //                        });
-
-        //    return new SelectList(Device, "Value", "Text");
+        //    var SelectedDevice = (from p in db.DeviceType
+        //                          where p.name != null
+        //                          orderby p.device_type_id
+        //                          select new
+        //                          {
+        //                              ID = p.device_type_id,
+        //                              Name = p.name
+        //                          }).Distinct().ToList();
+           
+        //    return ViewBag.SelectedDevice = new SelectList(SelectedDevice, "ID", "Name");
         //}
         private void PopulateDeviceDropDownList()
         {

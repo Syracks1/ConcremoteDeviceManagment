@@ -72,6 +72,8 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Medicine Type Added Sucessfully";
+
                 return RedirectToAction("Index");
             }
             return View(stock);
