@@ -7,6 +7,8 @@
 {
     @Html.AntiForgeryToken()
     <table class="table">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <tr>
             <th class="table-row">
                 @Html.DisplayName("BAS artikelnummer")
@@ -27,38 +29,35 @@
         </tr>
         @foreach (var item in Model)
         {
-        <tr>
-            <td class="dropdown-toggle">
-                @Html.DropDownList("EditDevice", item.Pricelist.bas_art_nr)
-            </td>
-            <td class="table-row">
-                @*    <label id="#Price" class="form-control">@Model.courseStartDate</label>*@
-                @*<p id="#Price" class="table-row">@Html.DisplayFor(modelitem => item.Pricelist.Price)</p>*@
-                @*<p id="#Price" class="table-row">@Model.P</p>*@
-                <p id="#Price">@item.Pricelist.Price</p>
-            </td>
-            <td class="table-row">
-                @*<p id="#description">@Html.DisplayFor(modelitem => item.Pricelist.description)</p>*@
-                <p id="#description">@item.Pricelist.description</p>
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                @*  <button onclick="location.href='@Url.Action("Edit", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>*@
-                @*<button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>*@
-                <button onclick="location.href='@Url.Action("Delete", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger">Delete</button>
-            </td>
-            <td></td>
-        </tr>
+            <tr>
+                @Html.HiddenFor(modelItem => item.Device_config_id)
+                <td class="dropdown-toggle">
+                    @*@Html.DropDownList("EditDevice", item.Pricelist.bas_art_nr)*@
+                    @Html.DropDownListFor(modelItem => item.Pricelist.bas_art_nr, ViewBag.EditDevice as SelectList, item.Pricelist.bas_art_nr, new { onchange = "ddListChange()"})
+
+                </td>
+                <td class="table-row">
+                    <p id="#Price">@item.Pricelist.Price</p>
+                </td>
+                <td class="table-row">
+                    <p id="#description">@item.Pricelist.description</p>
+                </td>
+                <td class="table-row">
+                    @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td class="table-row">
+                    @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td class="table-row">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <button onclick="location.href='@Url.Action("Delete", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger">Delete</button>
+                </td>
+                <td></td>
+            </tr>
         }
     </table>
 }
-    <script type="text/javascript">
+<script type="text/javascript">
     $(function(){
         $("#EditDevice").change(function () {
 
@@ -67,7 +66,7 @@
                 type: 'POST',
                 url: '@Url.Action("FillDeviceInfo")', // we are calling json method
                 contentType: 'application/json; charset=utf-8',
-                dataType: 'html',
+                dataType: 'json',
                 data: { "Price, description": $(this).val() },
 
 
@@ -86,4 +85,4 @@
         });
     });
 
-    </script>
+</script>

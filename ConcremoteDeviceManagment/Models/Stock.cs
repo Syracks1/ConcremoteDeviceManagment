@@ -86,7 +86,9 @@ namespace ConcremoteDeviceManagment.Models
         public string device_type { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-      //  public virtual Stock Stock { get; set; }
+        [Display(Name = "SelectedDevice")]
+        public IEnumerable<SelectListItem> SelectedDevice { get; set; }
+        //  public virtual Stock Stock { get; set; }
     }
    [Table("DeviceType")]
     public class DeviceType

@@ -16,16 +16,20 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Index()
         {
-            var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
+            //   ViewData["SelectedDevice"] = new SelectList(Pricelist.(), "id", "name");
+            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
+            //ViewBag.SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             ViewBag.SelectedDevice = SelectedDevices;
 
 
-                
+
+
             return View();
         }
         [HttpGet]
-        public JsonResult FillDeviceInfo(decimal Price, string description)
+        public JsonResult FillDeviceInfo( decimal Price, string description)
         {
+;
             var ret = (from e in db.pricelist
                        join c in db.pricelist on e.Price_id equals c.Price_id
                     //   where e.Price_id == Price && e.Price_id == description
@@ -42,7 +46,6 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-          
             var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             ViewBag.EditDevice = EditDevice;
@@ -53,13 +56,13 @@ namespace ConcremoteDeviceManagment.Controllers
             // //   return RedirectToAction("Index");
                 return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
         }
-        public PartialViewResult GetDevice(int? id)
+        public PartialViewResult GetDevice(int? device_type_id)
         {
-            if (id == null)
+            if (device_type_id == null)
             {
                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(device_type_id);
             if (deviceConfig == null)
             {
                // return HttpNotFound();
@@ -68,12 +71,13 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult GetDevice([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        public PartialViewResult GetDevice([Bind(Include = "Device_config_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig, Pricelist pricelist)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    db.Entry(pricelist).State = EntityState.Modified;
                     db.Entry(DeviceConfig).State = EntityState.Modified;
                     db.SaveChanges();
                     //return RedirectToAction("Index");
@@ -95,15 +99,15 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Create()
         {
-            PopulateDeviceDropDownList();
+   //         PopulateDeviceDropDownList();
             return View();  
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        public ActionResult Create([Bind(Include = "Device_config_id,SelectedDevice,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
         {
-            var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+                var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             ViewBag.EditDevice = EditDevice;
             try
@@ -119,35 +123,9 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again");
             }
-            PopulateDeviceDropDownList(DeviceConfig.device_type_id);
+    //        PopulateDeviceDropDownList(DeviceConfig.device_type_id);
             return View(DeviceConfig);
         }
-        //public ActionResult GetDevice(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-        //    if (deviceConfig == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(deviceConfig);
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,device_type")] DeviceConfig DeviceConfig)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(DeviceConfig).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        
-        //    return View();
-        //}
         // GET: DeviceConfig/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -175,13 +153,33 @@ namespace ConcremoteDeviceManagment.Controllers
             return RedirectToAction("Index");
         }
 
-        private void PopulateDeviceDropDownList(object SelectedDevice = null)
+        //private IEnumerable<SelectListItem> GetDevice()
+        //{
+
+        //    var SelectedDevice = new DeviceType();
+        //    var Device = DeviceType
+        //                .()
+        //                .Select(x =>
+        //                        new SelectListItem
+        //                        {
+        //                            Value = x.device_type_id.ToString(),
+        //                            Text = x.description
+        //                        });
+
+        //    return new SelectList(Device, "Value", "Text");
+        //}
+        private void PopulateDeviceDropDownList()
         {
             var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-
+            //ViewBag.SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             ViewBag.SelectedDevice = SelectedDevices;
+            // ViewData["SelectedDevice"] = SelectedDevices;
+            //if (SelectedDevice == null)
+            //{
+            //    SelectedDevice = HtmlHelper.GetSelectData(db.DeviceType);
+            //    usedViewData = true;
+            //}
         }
-
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
