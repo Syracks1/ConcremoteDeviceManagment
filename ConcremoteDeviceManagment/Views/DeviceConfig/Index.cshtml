@@ -7,13 +7,12 @@
 }
 
 <h2>Create Device</h2>
-@*using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
-{*@
+@using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+{
     <fieldset>
         <legend>Device Create</legend>
         <div>
             @Html.DropDownList("SelectedDevice", "Select a device")
-      @*      <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>*@
         </div>
         <br />
         <div id="target">
@@ -25,7 +24,7 @@
     </fieldset>
 
 
-@*}*@
+}
 @section Scripts {
     <script>
         $(document).ready(function () {

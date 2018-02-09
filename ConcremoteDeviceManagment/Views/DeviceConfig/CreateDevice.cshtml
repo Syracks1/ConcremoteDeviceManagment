@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <table class="table">
     <tr>
         @*<th>
@@ -50,6 +50,7 @@
                 € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
             </td>
             <td>
+
                 @*<button onclick="location.href='@Url.Action("Edit", "Home", new { id=item.Device_config_id})';return false;" class="btn btn-primary">Edit</button>
                     <button onclick="location.href='@Url.Action("GetDevice")';return false;" class="btn btn-info">Details</button>
                     <button onclick="location.href='@Url.Action("Delete", "Home", new {id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>*@

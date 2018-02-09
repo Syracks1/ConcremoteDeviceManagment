@@ -16,8 +16,9 @@
         <legend>Device Configs</legend>
         <div>
 
-            @Html.DropDownList("SelectedDevice", "select")
-            @*@Html.DropDownList("ProjectBranch", ViewBag.ProjectBranch as SelectList, new { @class = "form-data" })*@
+            @*@Html.DropDownList("SelectedDevice", "Select a device")*@
+            @* @Html.DropDownList("SelectedDevice", ViewData.SelectedDevice as SelectList)*@
+            @Html.DropDownList("SelectedDevice", ViewData["SelectedDevice"] as List<SelectListItem>, "---Select Device---")
             <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
         </div>
         <br />
@@ -25,6 +26,7 @@
 
         </div>
         <div id="log">
+            @*<input type="submit" value="Save" class="btn btn-primary" />*@
 
         </div>
     </fieldset>
@@ -44,7 +46,8 @@
                 data: { "Device": $(this).val() },
                 success: function (result) {
 
-                    $("#target").html(result);
+                    $("#target").var(result);
+
                 },
                 error: function (ex) {
                     alert("Something is wrong");

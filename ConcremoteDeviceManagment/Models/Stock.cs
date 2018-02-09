@@ -15,6 +15,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int id { get; set; }      
         [Required(ErrorMessage = "Voer een Prijs ID in")]
+
         public int Price_id { get; set; }
   //      [StringLength(60, MinimumLength = 3)]      
      //   [Required(ErrorMessage ="Voer een aantal in")]
@@ -86,8 +87,8 @@ namespace ConcremoteDeviceManagment.Models
         public string device_type { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-        [Display(Name = "SelectedDevice")]
-        public IEnumerable<SelectListItem> SelectedDevice { get; set; }
+        //[Display(Name = "SelectedDevice")]
+      //  public IEnumerable<SelectListItem> SelectedDevice { get; set; }
         //  public virtual Stock Stock { get; set; }
     }
    [Table("DeviceType")]
