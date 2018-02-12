@@ -112,10 +112,10 @@ namespace ConcremoteDeviceManagment.Models
         public int oldsystem_concremote { get; set; }
         public bool Allowvalidation { get; set;}
         public int device_type_id { get; set; }
-   //     public int Device_status_id { get; set; }
+       public int Device_status_id { get; set; }
         public virtual DeviceType DeviceType { get; set; }
      //   [ForeignKey("Device_status_id")]
-      //  public virtual Devicestatus Devicestatus { get; set;}
+        public virtual Devicestatus Devicestatus { get; set;}
     }
     [Table("Devicestatus")]
     public class Devicestatus
@@ -133,6 +133,23 @@ namespace ConcremoteDeviceManagment.Models
         public int id { get; set; }
         public string description { get; set; }
     }
+    [Table("Device_extra_info")]
+    public class Device_extra
+    {
+        [Key]
+        public int id { get; set; }
+        public int ConcremoteDevice_id { get; set; }
+        public int Price_id { get; set; }
+       // public string SIMnr { get; set; }
+       // public string Bluetooth_id { get; set; }
+       // public string imei { get; set; }
+        public DateTime Datum { get; set; }
+        public bool Active { get; set; }
+        public string Eigenschap_id { get; set; }
+        public virtual Pricelist Pricelist { get; set; }
+        public virtual ConcremoteDevice ConcremoteDevice { get; set; }
+    }
+    
     public class BasDbContext : DbContext
         {
             [ForeignKey("Price_id")]

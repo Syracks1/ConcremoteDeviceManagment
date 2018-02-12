@@ -97,7 +97,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,description,art_lev_nr,stock_amount,min_stock,max_stock,Active")] Stock stock, Pricelist pricelist )
+        public ActionResult Edit([Bind(Include = "Price_id,description,art_lev_nr,stock_amount,min_stock,max_stock")] Stock stock, Pricelist pricelist )
         {
             if (ModelState.IsValid)
             {

@@ -17,19 +17,19 @@
         </th>
         
         <th>
-            @Html.DisplayNameFor(model => model.imei)
+            @Html.DisplayName("IMEI Nummer")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.active)
+            @Html.DisplayName("In Gebruik")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.oldsystem_concremote)
+            @Html.DisplayName("Concremote OldSystem")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Allowvalidation)
+            @Html.DisplayName("Validatie Toegestaan")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.device_type_id)
+            @Html.DisplayName("something")
         </th>
         <th></th>
     </tr>
@@ -56,9 +56,12 @@
             @Html.DisplayFor(modelItem => item.device_type_id)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.DisplayFor(modelItem => item.Devicestatus.Device_statustypes.description)
+        </td>
+        <td>
+            <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", "Concremote", new { id=item.id})';return false;" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", "Concremote", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 }
