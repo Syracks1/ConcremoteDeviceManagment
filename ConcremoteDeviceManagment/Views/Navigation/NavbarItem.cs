@@ -21,10 +21,14 @@ namespace ConcremoteDeviceManagment.Models
         public IEnumerable<NavbarItem>  NavbarTop()
         {
             var topNav = new List<NavbarItem>();
-            topNav.Add(new NavbarItem() { Id = 1, action = "Index", nameOption = "Stock", controller = "Stock", isParent = false, parentId = -1 });
-            topNav.Add(new NavbarItem() { Id = 3, action = "Index", nameOption = "Create Device", controller = "DeviceConfig", isParent = false, parentId = -1 });
-            topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "Change Device Configuration", controller = "Home", isParent = false, parentId = -1 });
-            topNav.Add(new NavbarItem() {Id = 5, action= "Index", nameOption = "Devices", controller="Concremote" ,isParent = false, parentId = -1 });
+            //Onderdelen menu, subklasses : Voorraad en prijslijst
+            topNav.Add(new NavbarItem() { Id = 3, action = "", nameOption = "Onderdelen", controller = "", isParent = true, parentId = -1 });
+            topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "Voorraad", controller = "Stock", isParent = false, parentId = 3 });
+            topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "Prijslijst", controller = "Device", isParent = false, parentId = 3 });
+            topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "Create Device", controller = "DeviceConfig", isParent = false, parentId = -1 });
+            topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "Change Device Configuration", controller = "Home", isParent = false, parentId = -1 });
+            topNav.Add(new NavbarItem() {Id = 6, action= "Index", nameOption = "Devices", controller="Concremote" ,isParent = false, parentId = -1 });
+
             return topNav;
         }
     }

@@ -12,207 +12,45 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
+        <th>
+            @Html.DisplayName("BAS Artikelnummer")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubCategoryId)
+            @Html.DisplayName("Leverancier Artikelnummer")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AdminDescription)
+            @Html.DisplayName("Prijs")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AdminDescriptionShort)
+            @Html.DisplayName("Beschrijving")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Standard)
+            @Html.DisplayName("Actief")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Unit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.art_lev_nr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.bas_art_nr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.PreId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriceProcurement)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sequence)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VAT_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VAT_NL_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VAT_BE_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VAT_DE_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remark)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Print)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Procurement)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProcurementType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhaseCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Supplier_Organization_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityTypeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InStock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProcurementRebate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OldSystem_Prijslijst_ItemId)
-        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubCategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdminDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdminDescriptionShort)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Standard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
+      <td>
+            @Html.DisplayFor(modelItem => item.bas_art_nr)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.art_lev_nr)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.bas_art_nr)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.PreId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceProcurement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sequence)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VAT_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VAT_NL_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VAT_BE_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VAT_DE_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remark)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Print)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Active)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Procurement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProcurementType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhaseCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Supplier_Organization_Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityTypeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InStock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProcurementRebate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Weight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OldSystem_Prijslijst_ItemId)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Price_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Price_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Price_id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Price_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Price_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Price_id })
         </td>
     </tr>
 }

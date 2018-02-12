@@ -46,7 +46,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,id_cat,id_subcat,price,art_lev_nr")] Pricelist pricelist)
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {

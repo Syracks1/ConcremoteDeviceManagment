@@ -97,15 +97,15 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,description,art_lev_nr,stock_amount,min_stock,max_stock")] Stock stock, Pricelist pricelist )
+        public ActionResult Edit([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock )
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pricelist).State = EntityState.Modified;
+                db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pricelist);
+            return View(stock);
         }
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
