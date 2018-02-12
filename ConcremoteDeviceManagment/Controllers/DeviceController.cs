@@ -46,7 +46,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr")] Pricelist pricelist)
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -56,8 +56,8 @@ namespace ConcremoteDeviceManagment.Controllers
             }
 
             return View(pricelist);
-        }
 
+        }
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -78,7 +78,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,id_cat,id_subcat,price,art_lev_nr")] Pricelist pricelist)
+        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {

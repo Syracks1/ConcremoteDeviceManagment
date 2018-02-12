@@ -48,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Price_id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Price_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Price_id })
+            <button onclick="location.href='@Url.Action("Edit", "Device", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", "Device", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", "Device", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 }

@@ -78,18 +78,18 @@ namespace ConcremoteDeviceManagment.Models
         [Key]    
         public int Device_config_id { get; set; }  
         public int device_type_id { get; set; }
-      //  public string id { get; set; }
         [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int Price_id { get; set; }
         [Required(ErrorMessage = "Voer een hoeveelheid in")]
         public decimal amount { get; set; }
         public int assembly_order { get; set; }
         public string device_type { get; set; }
+        public bool Active { get; set; }
+        public string VersieNummer { get; set; }
+        public DateTime Datum { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-        //[Display(Name = "SelectedDevice")]
-      //  public IEnumerable<SelectListItem> SelectedDevice { get; set; }
-        //  public virtual Stock Stock { get; set; }
+
     }
    [Table("DeviceType")]
     public class DeviceType
@@ -106,16 +106,14 @@ namespace ConcremoteDeviceManagment.Models
     {
         [Key]
         public int id { get; set; }
-      //  public int device_id { get; set; }
-        public string imei { get; set; }
+
         public bool active { get; set; }
         public int oldsystem_concremote { get; set; }
         public bool Allowvalidation { get; set;}
-        public int device_type_id { get; set; }
-       public int Device_status_id { get; set; }
+        public int Device_type_id { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-     //   [ForeignKey("Device_status_id")]
-        public virtual Devicestatus Devicestatus { get; set;}
+
+
     }
     [Table("Devicestatus")]
     public class Devicestatus
@@ -124,7 +122,11 @@ namespace ConcremoteDeviceManagment.Models
         public int Device_status_id { get; set; }
         public string employee_1 { get; set; }
         public string employee_2 { get; set; }
+        public DateTime Sign_Date { get; set; }
+        public int ConcremoteDevice_id { get; set; }
+        public int Device_statustypes_id { get; set; }
         public virtual Device_statusypes Device_statustypes { get; set; }
+        public virtual ConcremoteDevice ConcremoteDevice { get; set; }
     }
     [Table("Device_statustypes")]
     public class Device_statusypes
@@ -133,6 +135,16 @@ namespace ConcremoteDeviceManagment.Models
         public int id { get; set; }
         public string description { get; set; }
     }
+    //[Table("Device_Pricelist")]
+    //public class Device_Pricelist
+    //{
+    //    [Key]
+    //    public int id { get; set; }
+    //   public int Device_Config_id { get; set; }
+    //    public int Price_id { get; set; }
+    //    public virtual DeviceConfig DeviceConfig { get; set; }
+    //    public virtual Pricelist Pricelist { get; set; }
+    //}
     [Table("Device_extra_info")]
     public class Device_extra
     {

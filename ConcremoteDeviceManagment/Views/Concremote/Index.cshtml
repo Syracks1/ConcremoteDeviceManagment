@@ -16,9 +16,9 @@
             @Html.DisplayNameFor(model => model.DeviceType.name)
         </th>
         
-        <th>
+        @*<th>
             @Html.DisplayName("IMEI Nummer")
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName("In Gebruik")
         </th>
@@ -40,9 +40,9 @@
             @Html.DisplayFor(modelItem => item.DeviceType.name)
         </td>
         
-        <td>
-            @Html.DisplayFor(modelItem => item.imei)
-        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.)
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.active)
         </td>
@@ -53,10 +53,10 @@
             @Html.DisplayFor(modelItem => item.Allowvalidation)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.device_type_id)
+            @Html.DisplayFor(modelItem => item.Device_type_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Devicestatus.Device_statustypes.description)
+           @* @Html.DisplayFor(modelItem => item..Device_statustypes.description)*@
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>

@@ -57,7 +57,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.Device_type_id);
             return View(concremoteDevice);
         }
 
@@ -73,7 +73,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.Device_type_id);
             return View(concremoteDevice);
         }
 
@@ -90,7 +90,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.device_type_id);
+            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.Device_type_id);
             return View(concremoteDevice);
         }
 

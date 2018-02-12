@@ -18,7 +18,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //  var Pricelist = db.pricelist.Include(d => d.Price_id);
             //   var Stock = db.Stock.Include(c => c.Pr)
             var stock = from d in db.Stock
-                        //    from b in db.pricelist
+                        //    from b in db
                             where d.Pricelist.Active == true
                         select d;
             //foreach(Stock d in Stock)
