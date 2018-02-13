@@ -17,12 +17,12 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een Prijs ID in")]
 
         public int Price_id { get; set; }
-  //      [StringLength(60, MinimumLength = 3)]      
-     //   [Required(ErrorMessage ="Voer een aantal in")]
-       public int stock_amount { get; set; }
-     //  [Required(ErrorMessage = "Voer een aantal in")]
-        public int min_stock { get; set; }
+        //[StringLength(60, MinimumLength = 3)]
+        //[Required(ErrorMessage = "Voer een aantal in")]
+        public int stock_amount { get; set; }
     //    [Required(ErrorMessage = "Voer een aantal in")]
+        public int min_stock { get; set; }
+   //     [Required(ErrorMessage = "Voer een aantal in")]
         public int max_stock { get; set; }
         public virtual Pricelist Pricelist { get; set; }
 
@@ -112,6 +112,7 @@ namespace ConcremoteDeviceManagment.Models
         public bool Allowvalidation { get; set;}
         public int Device_type_id { get; set; }
         public virtual DeviceType DeviceType { get; set; }
+   //     public virtual Device_extra Device_Extra { get; set; }
 
 
     }

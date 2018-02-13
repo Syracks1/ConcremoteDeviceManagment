@@ -17,46 +17,32 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Index()
         {
-            //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-           // ViewBag.SelectedDevice = SelectedDevices;
-            ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
+            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
+            ViewBag.SelectedDevice = SelectedDevices;
+           // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             return View();
         }
-
-           // return View();
-        //public int SaveChanges(bool refreshOnConcurrencyException, RefreshMode refreshMode = RefreshMode.ClientWins) {
-        //    try {
-        //        return SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException ex) {
-        //        foreach (DbEntityEntry entry in ex.Entries) {
-        //            if (refreshMode == RefreshMode.ClientWins)
-        //                entry.OriginalValues.SetValues(entry.GetDatabaseValues());
-        //            else
-        //                entry.Reload();
-        //        }
-        //        return db.SaveChanges();
-        //    }
+    
         //}
-        [HttpGet]
-        public JsonResult FillDeviceInfo( decimal Price, string description)
-        {
-;
-            var ret = (from e in db.pricelist
-                       join c in db.pricelist on e.Price_id equals c.Price_id
-                    //   where e.Price_id == Price && e.Price_id == description
-                       select new Pricelist
-                       {
-                           Price = e.Price,
-                           description = e.description
+        //[HttpGet]
+        //public JsonResult FillDeviceInfo(decimal Price, string description)
+        //{
+        //    ;
+        //    var ret = (from e in db.pricelist
+        //               join c in db.pricelist on e.Price_id equals c.Price_id
+        //               where e.Price_id == Price && e.Price_id == description
+        //               select new Pricelist
+        //               {
+        //                   Price = e.Price,
+        //                   description = e.description
 
-                       }).FirstOrDefault(); 
-            return Json(ret);
-        }
+        //               }).FirstOrDefault();
+        //    return Json(ret);
+        //}
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-        //  //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+        //    var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
         //  //  ViewBag.EditDevice = EditDevice;
         //    //if (ModelState.IsValid)
@@ -81,18 +67,22 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
-        {         
+        public ActionResult Save([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,Active")] DeviceConfig DeviceConfig)
+        {   
+            try
+            {
                 if (ModelState.IsValid)
                 {
-                    // db.Entry(pricelist).State = EntityState.Modified;
                     db.Entry(DeviceConfig).State = EntityState.Modified;
-                    TempData["AlertMessage"] = "Changes saved succesfully";
-
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            return View("Index");
+            }
+            catch (RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again");
+            }
+            return View(DeviceConfig);
         }           
          
         //private static HttpStatusCode GetBadRequest()
