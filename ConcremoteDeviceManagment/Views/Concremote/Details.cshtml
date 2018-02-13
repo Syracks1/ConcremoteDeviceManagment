@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
+﻿@model ConcremoteDeviceManagment.Models.Device_extra
 
 @{
     ViewBag.Title = "Details";
@@ -14,7 +14,7 @@
         <dt>
             @Html.DisplayName("Device Serie Nummer")
         </dt>
-
+        @*@Html.DisplayFor(model => model.id)*@
         <dt>
             @Html.DisplayName("Device Type")
         </dt>
@@ -45,16 +45,14 @@
         <dt>
             @Html.DisplayName("Telefoon")
         </dt>
-
         <dd>
-            @Html.Display("AaSsDd")
+
         </dd>
-
         <dt>
-           Onderdeellijst, met identificatie
+            @Html.DisplayName("Onderdeellijst, met identificatie")
         </dt>
-
         <dd>
+            
         </dd>
 
     </dl>

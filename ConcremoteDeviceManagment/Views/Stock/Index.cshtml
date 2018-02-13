@@ -21,10 +21,7 @@
     <tr>
         <th>
             @Html.DisplayName("BAS artikelnummer")
-        </th>
-        <th>
-            @Html.DisplayName("Artikel Prijs")
-        </th>
+        </th>       
         <th>
             @Html.DisplayName("Beschrijving artikel")
         </th>
@@ -37,18 +34,12 @@
         <th>
             @Html.DisplayName("Maximale voorraad")
         </th>
-        @*<th>
-            @Html.DisplayName("Active")
-        </th>*@
         <th></th>
     </tr>
 @foreach (var item in Model) {
     <tr>
         <td>
             <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)</i>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pricelist.description)
@@ -60,14 +51,8 @@
             @Convert.ToDecimal(item.min_stock).ToString("#,##")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.max_stock)
+            @Convert.ToDecimal(item.max_stock).ToString("#,##")
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Pricelist.Active)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Price_id)
-        </td>*@
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
             <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>

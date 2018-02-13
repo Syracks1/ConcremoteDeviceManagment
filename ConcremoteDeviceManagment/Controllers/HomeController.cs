@@ -22,23 +22,23 @@ namespace ConcremoteDeviceManagment.Controllers
            // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
             return View();
         }
-    
-        //}
-        //[HttpGet]
-        //public JsonResult FillDeviceInfo(decimal Price, string description)
-        //{
-        //    ;
-        //    var ret = (from e in db.pricelist
-        //               join c in db.pricelist on e.Price_id equals c.Price_id
-        //               where e.Price_id == Price && e.Price_id == description
-        //               select new Pricelist
-        //               {
-        //                   Price = e.Price,
-        //                   description = e.description
 
-        //               }).FirstOrDefault();
-        //    return Json(ret);
         //}
+        [HttpGet]
+        public JsonResult FillDeviceInfo(decimal Price, string description)
+        {
+            ;
+            var ret = (from e in db.pricelist
+                       join c in db.pricelist on e.Price_id equals c.Price_id
+                     //  where e.Price_id == Price && e.Price_id == description
+                       select new Pricelist
+                       {
+                           Price = e.Price,
+                           description = e.description
+
+                       }).FirstOrDefault();
+            return Json(ret);
+        }
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {

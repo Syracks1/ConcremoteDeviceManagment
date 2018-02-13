@@ -173,6 +173,7 @@ namespace ConcremoteDeviceManagment.Models
             public DbSet<DeviceConfig> DeviceConfig { get; set; }
             public DbSet<DeviceType> DeviceType { get; set; }  
             public DbSet<ConcremoteDevice> ConcremoteDevice { get; set; }     
+            public DbSet<Device_extra> Device_Extra { get; set; }
         }
     }
 
