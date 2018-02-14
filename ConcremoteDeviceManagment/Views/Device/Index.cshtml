@@ -12,14 +12,15 @@
     <b>CMI: </b>@Html.TextBox("PriceCMI")
     <input type="submit" value="Zoek CMI" class="btn" />
     <b>Leverancier:</b> @Html.TextBox("searchStringPrice")
-    <input type="submit" value="Zoek onderdeel" class="btn" />
+    <input type="submit" value="Zoek Leverancier" class="btn" />
     @Html.ActionLink("Create New", "Create")
 </p>
 }
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("BAS CMI")
+            @*@Html.DisplayName("BAS CMI")*@
+            @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm })
         </th>
         <th>
             @Html.DisplayName("Leverancier Artikelnummer")
@@ -28,8 +29,8 @@
             @Html.DisplayName("Leverancier")
         </th>
         <th>
-            @Html.DisplayName("Prijs")
-            
+            @*@Html.DisplayName("Prijs")*@
+            @Html.ActionLink("Prijs", "Index", new { sortOrder = ViewBag.PriceSortParm })
         </th>
         <th>
             @Html.DisplayName("Beschrijving")

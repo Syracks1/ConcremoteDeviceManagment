@@ -17,25 +17,33 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI, string searchStringPrice)
         {
-
+            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
+            //ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
             var pricelist = from d in db.pricelist
                             select d;
             switch (sortOrder)
             {
-                //case "CMI_desc":
-                //    pricelist = pricelist.OrderByDescending(s => s.bas_art_nr);
-                //    break;
+                case "CMI_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.bas_art_nr);
+                    break;
                 case "Active":
                     pricelist = pricelist.OrderBy(s => s.Active);
                     break;
                 case "Active_desc":
                     pricelist = pricelist.OrderByDescending(s => s.Active);
                     break;
-                //default:
-                //    pricelist = pricelist.OrderBy(s => s.bas_art_nr);
-                //    break;
+                case "Price":
+                    pricelist = pricelist.OrderBy(s => s.Price);
+                    break;
+                case "Price_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    pricelist = pricelist.OrderBy(s => s.bas_art_nr);
+                    break;
             }
             // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
