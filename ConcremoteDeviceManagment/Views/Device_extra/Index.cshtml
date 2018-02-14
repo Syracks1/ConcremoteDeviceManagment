@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Device_extra_info>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pricelist.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConcremoteDevice_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Eigenschap_id)
+        </th>
+        <th></th>
+    </tr>
+
+    @*@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pricelist.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConcremoteDevice_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eigenschap_id)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                </td>
+            </tr>
+        }*@
+
+</table>

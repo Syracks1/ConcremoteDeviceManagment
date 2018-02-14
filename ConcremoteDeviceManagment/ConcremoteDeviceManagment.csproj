@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ConcremoteController.cs" />
     <Compile Include="Controllers\DeviceConfigController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\Device_extraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -359,6 +360,11 @@
     <Content Include="Views\Concremote\Edit.cshtml" />
     <Content Include="Views\Concremote\Index.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
+    <Content Include="Views\Device_extra\Create.cshtml" />
+    <Content Include="Views\Device_extra\Delete.cshtml" />
+    <Content Include="Views\Device_extra\Details.cshtml" />
+    <Content Include="Views\Device_extra\Edit.cshtml" />
+    <Content Include="Views\Device_extra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
