@@ -17,7 +17,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote
         public ActionResult Index()
         {
-            var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
+           // var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
             var concremoteDevice = db.ConcremoteDevice.Include(c => c.DeviceType);
             return View(concremoteDevice.ToList());
         }
@@ -29,12 +29,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device_extra device_Extra = db.Device_Extra.Find(id);
-            if (device_Extra == null)
+            ConcremoteDevice ConcremoteDevice = db.ConcremoteDevice.Find(id);
+            if (ConcremoteDevice == null)
             {
                 return HttpNotFound();
             }
-            return View(device_Extra);
+            return View(ConcremoteDevice);
         }
 
         // GET: Concremote/Create

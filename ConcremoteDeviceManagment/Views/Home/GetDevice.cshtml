@@ -1,108 +1,187 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
+﻿@model List<ConcremoteDeviceManagment.Models.DeviceConfig>
 
 <p>
-    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Create New", "Create")
 </p>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+    <p>
+        @*<table class="table">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<table class="table">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <tr>
-        <th class="table-row">
-            @Html.DisplayName("BAS artikelnummer")
-        </th>
-        <th class="table-row">
-            @Html.DisplayName("Prijs")
-        </th>
-        <th class="table-row">
-            @Html.DisplayName("Beschrijving")
-        </th>
-        <th class="table-row">
-            @Html.DisplayName("Aantal")
-        </th>
-        <th class="table-row">
-            @Html.DisplayName("Bouw Volgorde")
-        </th>
-        <th class="table-row"></th>
-    </tr>
-    @foreach (var item in Model)
-    {
+                <tr>
+                    <th class="table-row">
+                        @Html.DisplayName("BAS artikelnummer")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Prijs")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Beschrijving")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Aantal")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Bouw Volgorde")
+                    </th>
+                    <th class="table-row"></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @Html.HiddenFor(modelItem => item.Device_config_id)
+                        <td class="hidden">
+                            @Html.HiddenFor(modelItem => item.device_type_id)
+                        </td>
+                        <td class="table-row">
+                            @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
+                        </td>
+                        <td class="table-row">
+                            <p id="#Price">@Html.DisplayFor(modelItem => item.Pricelist.Price)</p>
+                        </td>
+                        <td class="table-row">
+                            <p id="#description">@Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } }))</p>
+                        </td>
+                        <td class="table-row">
+                            @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td class="table-row">
+                            @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td class="table-row">
+                            @Html.DisplayFor(modelItem => item.Active, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td class="hidden">
+                              @Html.HiddenFor(modelItem => item.device_type)
+                        </td>
+                        <td class="table-row">
+                            <input type="submit" value="Save" id="Save" class="btn btn-primary" />
+                            <input type="submit" value="Save" id="Save" onclick="location.href='@Url.Action("", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger" />
+                            <button type="submit" id="button1" name="button1" onclick='@Url.Action("Save", "Home", new { id = item.Device_config_id })'>Save</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>*@
+    </p>
+    <div><a href="#" id="addNew">Add New</a></div>
+    <table class="table" id="dataTable">
         <tr>
-            @Html.HiddenFor(modelItem => item.Device_config_id)
-            <td class="hidden">
-                @Html.HiddenFor(modelItem => item.device_type_id)
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
-            </td>
-            <td class="table-row">
-                <p id="#Price">@Html.DisplayFor(modelItem => item.Pricelist.Price)</p>
-            </td>
-            <td class="table-row">
-                <p id="#description">@Html.DisplayFor(modelItem => item.Pricelist.description)</p>
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(modelItem => item.Active, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="hidden">
-              @*  @Html.HiddenFor(modelItem => item.device_type)*@
-            </td>
-            <td class="table-row">
-                <input type="submit" value="Save" id="Save" class="btn btn-default" />
-
-@*                <input type="submit" value="Save" id="Save" onclick="location.href='@Url.Action("", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger" />*@
-                @*<button type="submit" id="button1" name="button1" onclick='@Url.Action("Save", "Home", new { id = item.Device_config_id })'>Save</button>*@
-            </td>
-            <td></td>
+            <th class="table-row">
+                @Html.DisplayName("BAS artikelnummer")
+            </th>
+            <th class="table-row">
+                @Html.DisplayName("Prijs ID")
+            </th>
+            <th class="table-row">
+                @Html.DisplayName("Beschrijving")
+            </th>
+            <th class="table-row">
+                @Html.DisplayName("Aantal")
+            </th>
+            <th class="table-row">
+                @Html.DisplayName("Bouw Volgorde")
+            </th>
+            <th class="table-row"></th>
         </tr>
-    }
-</table>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-        </div>
-    </div>
+        @if (Model != null && Model.Count > 0)
+        {
+            int j = 0;
+            foreach (var i in Model)
+            {
+        <tr>
+            @Html.HiddenFor(a => a[j].Device_config_id)
+            <td class="hidden">
+                @Html.HiddenFor(a => a[j].device_type_id)
+            </td>
+            
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Pricelist.bas_art_nr)
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Active, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Datum, new { htmlAttributes = new { @class = "form-control"} })
+            </td>
+            <td class="hidden">
+                @Html.HiddenFor(a => a[j].device_type)
+            </td>
+
+            <td>
+                @if (j > 0)
+        {
+            <a href="#" class="remove">Remove</a>
+        }
+            </td>
+        </tr>
+                j++;
+            }
+        }
+    </table>
+    <input type="submit" value="Save Bulk Data" />
+
 }
-@section Scripts {
+
+@section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
-}
+    <script language="javascript">
+        $(document).ready(function () {
 
+            //1. Add new row
+            $("#addNew").click(function (e) {
+                e.preventDefault();
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
 
-@*<script type="text/javascript">
-        $(function(){
-            $("#EditDevice").change(function () {
-
-                var Pricelist = { "Price, description": $(this).val() };
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("FillDeviceInfo")', // we are calling json method
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    data: { "Price, description": $(this).val() },
-
-
-                    success: function (ret) {
-                        //$('#Dates').val(ret.courseDates);
-                        $('#Price').html(ret.Pricelist);
-                        $('#description').html(ret.description);
-
-                    },
-                    error: function (ex) {
-                        alert("Something is wrong, go fix it!!");
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                $.each($trNew.find(':input'), function (i, val) {
+                    // Replaced Name
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    $(this).attr('name', newN);
+                    //Replaced value
+                    var type = $(this).attr('type');
+                    if (type.toLowerCase() == "text") {
+                        $(this).attr('value', '');
                     }
+
+                    // If you have another Type then replace with default value
+                    $(this).removeClass("input-validation-error");
+
                 });
+                $trLast.after($trNew);
 
-                return false;
+                // Re-assign Validation
+                var form = $("form")
+                    .removeData("validator")
+                    .removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
             });
-        });
 
-    </script>*@
+            // 2. Remove
+            $(document).on('click', 'a.remove', function (e) {
+                e.preventDefault();
+                $(this).parent().parent().remove();
+            });
+
+        });
+    </script>
+}

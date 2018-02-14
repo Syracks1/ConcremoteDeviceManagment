@@ -21,6 +21,7 @@
             @*@Html.DropDownList("SelectedDevice", ViewData["SelectedDevice"] as List<SelectListItem>, "---Select Device---")*@
             <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
         </div>
+        @*@Html.RenderPartial("GetDevice");*@
         <br />
         <div id="target">
         </div>
