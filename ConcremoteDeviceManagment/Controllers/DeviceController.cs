@@ -15,11 +15,25 @@ namespace ConcremoteDeviceManagment.Controllers
         private Models.BasDbContext db = new Models.BasDbContext();
 
         // GET: Device
-        public ActionResult Index()
+        public ActionResult Index(string PriceCMI, string searchStringPrice)
         {
-            return View(db.pricelist.ToList());
+            var pricelist = from d in db.pricelist
+                            select d;
+           // return View(db.pricelist.ToList());
+            foreach (var item in pricelist)
+            {
+                if (!string.IsNullOrEmpty(searchStringPrice))
+                {
+                    pricelist = pricelist.Where(s => s.Leverancier.Contains(searchStringPrice));
+                }
+            }
+            if(!string.IsNullOrEmpty(PriceCMI))
+            {
+                pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
+            }
+            return View(pricelist);
         }
-
+       
         // GET: Device/Details/5
         public ActionResult Details(int? id)
         {
@@ -46,7 +60,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,description,active")] Pricelist pricelist)
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +92,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,description,active")] Pricelist pricelist)
+        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {

@@ -48,6 +48,7 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
         public string bas_art_nr { get; set; }
         [StringLength(255, MinimumLength = 1)]
+        public string Leverancier { get; set; }
         public string description { get; set; }
         public int? PreId { get; set; }
         public decimal? PriceProcurement { get; set; }

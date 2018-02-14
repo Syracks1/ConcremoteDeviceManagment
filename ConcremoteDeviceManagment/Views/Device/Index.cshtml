@@ -1,15 +1,21 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Pricelist>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Prijslijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
+<h2>Prijslijst</h2>
+@using (Html.BeginForm("Index", "Device", FormMethod.Get))
+{
 <p>
+    <b>CMI: </b>@Html.TextBox("PriceCMI")
+    <input type="submit" value="Zoek CMI" class="btn" />
+    <b>Leverancier:</b> @Html.TextBox("searchStringPrice")
+    <input type="submit" value="Zoek onderdeel" class="btn" />
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -17,6 +23,9 @@
         </th>
         <th>
             @Html.DisplayName("Leverancier Artikelnummer")
+        </th>
+        <th>
+            @Html.DisplayName("Leverancier")
         </th>
         <th>
             @Html.DisplayName("Prijs")
@@ -30,29 +39,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-      <td>
-            @Html.DisplayFor(modelItem => item.bas_art_nr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_lev_nr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "Device", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Details", "Device", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
-            <button onclick="location.href='@Url.Action("Delete", "Device", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bas_art_nr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.art_lev_nr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leverancier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Device", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
+                <button onclick="location.href='@Url.Action("Details", "Device", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
+                <button onclick="location.href='@Url.Action("Delete", "Device", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>
