@@ -19,7 +19,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("BAS Artikelnummer")
+            @Html.DisplayName("BAS CMI")
         </th>
         <th>
             @Html.DisplayName("Leverancier Artikelnummer")
@@ -29,12 +29,13 @@
         </th>
         <th>
             @Html.DisplayName("Prijs")
+            
         </th>
         <th>
             @Html.DisplayName("Beschrijving")
         </th>
         <th>
-            @Html.DisplayName("Actief")
+            @Html.ActionLink("Actief", "Index", new { sortOrder = ViewBag.ActiveSortParm })
         </th>
         <th></th>
     </tr>

@@ -15,11 +15,29 @@ namespace ConcremoteDeviceManagment.Controllers
         private Models.BasDbContext db = new Models.BasDbContext();
 
         // GET: Device
-        public ActionResult Index(string PriceCMI, string searchStringPrice)
+        public ActionResult Index(string sortOrder, string PriceCMI, string searchStringPrice)
         {
+
+            ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
+            ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             var pricelist = from d in db.pricelist
                             select d;
-           // return View(db.pricelist.ToList());
+            switch (sortOrder)
+            {
+                //case "CMI_desc":
+                //    pricelist = pricelist.OrderByDescending(s => s.bas_art_nr);
+                //    break;
+                case "Active":
+                    pricelist = pricelist.OrderBy(s => s.Active);
+                    break;
+                case "Active_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.Active);
+                    break;
+                //default:
+                //    pricelist = pricelist.OrderBy(s => s.bas_art_nr);
+                //    break;
+            }
+            // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
             {
                 if (!string.IsNullOrEmpty(searchStringPrice))

@@ -15,14 +15,13 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         public int id { get; set; }      
         [Required(ErrorMessage = "Voer een Prijs ID in")]
-
         public int Price_id { get; set; }
         //[StringLength(60, MinimumLength = 3)]
-        //[Required(ErrorMessage = "Voer een aantal in")]
+        [Required(ErrorMessage = "Voer een aantal in")]
         public int stock_amount { get; set; }
-    //    [Required(ErrorMessage = "Voer een aantal in")]
+       [Required(ErrorMessage = "Voer een aantal in")]
         public int min_stock { get; set; }
-   //     [Required(ErrorMessage = "Voer een aantal in")]
+        [Required(ErrorMessage = "Voer een aantal in")]
         public int max_stock { get; set; }
         public virtual Pricelist Pricelist { get; set; }
 
