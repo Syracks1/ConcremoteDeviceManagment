@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -10,24 +11,52 @@ namespace ConcremoteDeviceManagment.Controllers
     {
         private BasDbContext db = new BasDbContext();
         // GET: Stock
-        public ActionResult Index(string StockCMI, string searchString)
+        public ActionResult Index(string sortOrder, string StockCMI, string searchString)
         {
-            //var Stock = from i in db.Stock
-            //            select i;
+            ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
+            ViewBag.DescriptionSortParm = sortOrder == "Description" ? "Desc_desc" : "Description";
+            ViewBag.CurrentStockSort = sortOrder == "current" ? "current_desc" : "current";
+            ViewBag.MinStockSort = sortOrder == "min_stock" ? "min_stock_desc" : "min_stock";
+            ViewBag.MaxStockSort = sortOrder == "max_stock" ? "max_stock_desc" : "max_stock";
 
-            //  var Pricelist = db.pricelist.Include(d => d.Price_id);
-            //   var Stock = db.Stock.Include(c => c.Pr)
             var stock = from d in db.Stock
-                        //    from b in db
                             where d.Pricelist.Active == true
                         select d;
-            //foreach(Stock d in Stock)
-            //{
-            //    foreach(Pricelist in d.Pricelist1)
-            //    {
-            //        Pricelist.Add()
-            //    }
-            //}
+            switch(sortOrder)
+            {
+                case "CMI_desc":
+                    stock = stock.OrderByDescending(s => s.Pricelist.bas_art_nr);
+                    break;
+                case "Description":
+                    stock = stock.OrderBy(s => s.Pricelist.description);
+                    break;
+                case "Desc_desc":
+                    stock = stock.OrderByDescending(s => s.Pricelist.description);
+                    break;
+                case "current":
+                    stock = stock.OrderBy(s => s.stock_amount);
+                    break;
+                case "current_desc":
+                    stock = stock.OrderByDescending(s => s.stock_amount);
+                    break;
+                case "min_stock":
+                    stock = stock.OrderBy(s => s.min_stock);
+                    break;
+                case "min_stock_desc":
+                    stock = stock.OrderByDescending(s => s.min_stock);
+                    break;
+                case "max_stock":
+                    stock = stock.OrderBy(s => s.max_stock);
+                    break;
+                case "max_stock_desc":
+                    stock = stock.OrderByDescending(s => s.max_stock);
+                    break;
+                default:
+                    stock = stock.OrderBy(s => s.Pricelist.bas_art_nr);
+                    break;
+
+
+            }
             foreach (var item in stock)
             {
                 if (!string.IsNullOrEmpty(searchString))

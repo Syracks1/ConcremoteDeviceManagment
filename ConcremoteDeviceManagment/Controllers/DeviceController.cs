@@ -22,6 +22,8 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            ViewBag.LevSortParm = sortOrder == "Leverancier" ? "Lev_desc" : "Leverancier";
+            ViewBag.ArtSortParm = sortOrder == "lev_art" ? "lev_art_desc" : "lev_art";
             var pricelist = from d in db.pricelist
                             select d;
             switch (sortOrder)
@@ -40,6 +42,18 @@ namespace ConcremoteDeviceManagment.Controllers
                     break;
                 case "Price_desc":
                     pricelist = pricelist.OrderByDescending(s => s.Price);
+                    break;
+                case "Leverancier":
+                    pricelist = pricelist.OrderBy(s => s.Leverancier);
+                    break;
+                case "Lev_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.Leverancier);
+                    break;
+                case "lev_art":
+                    pricelist = pricelist.OrderBy(s => s.art_lev_nr);
+                    break;
+                case "lev_art_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.art_lev_nr);
                     break;
                 default:
                     pricelist = pricelist.OrderBy(s => s.bas_art_nr);
