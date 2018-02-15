@@ -21,7 +21,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ////var device_Extra_Concremote = db.Device_Extra.Include(b => b.ConcremoteDevice);
             var device_Extra = from d in db.Device_extra_info
                             select d;
-            return View(device_Extra);
+            return View();
         }
 
         // GET: Device_extra/Details/5
@@ -31,12 +31,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device_extra_info device_extra = db.Device_extra_info.Find(id);
-            if (device_extra == null)
-            {
-                return HttpNotFound();
-            }
-            return View(device_extra);
+      //      Device_extra_info device_extra = db.Device_extra_info.Find(id);
+            Device_extra_info device_Extra_Info = db.Device_extra_info.Find(id);
+            //if (device_extra == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(device_Extra_Info);
         }
 
         // GET: Device_extra/Create

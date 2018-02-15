@@ -23,19 +23,19 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         //// GET: Concremote/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Device_extra device_Extra = db.Device_Extra.Find(id);
-        //    if (device_Extra == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(device_Extra);
-        //}
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Device_extra_info device_Extra = db.Device_extra_info.Find(id);
+            if (device_Extra == null)
+            {
+                return HttpNotFound();
+            }
+            return View(device_Extra);
+        }
 
         // GET: Concremote/Create
         public ActionResult Create()
@@ -129,5 +129,31 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //// GET: Concremote/Detail/2
+        //public ActionResult Detail(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+        //    if (concremoteDevice == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(concremoteDevice);
+        //}
+
+        //// POST: Concremote/Detail/2
+        //[HttpPost, ActionName("Detail")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DetailConfirmed(int id)
+        //{
+        //    ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+        //    db.ConcremoteDevice.Remove(concremoteDevice);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
     }
 }
