@@ -3,7 +3,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm())
+@using (Html.BeginForm("GetDevice", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -67,7 +67,9 @@
                 }
             </table>*@
     </p>
-    <div><a href="#" id="addNew">Add New</a></div>
+    <div>
+        <a href="#" id="addNew">Add New</a>
+    </div>
     <table class="table" id="dataTable">
         <tr>
             <th class="table-row">
@@ -99,7 +101,7 @@
             </td>
             
             <td class="table-row">
-                @Html.DisplayFor(a => a[j].Pricelist.bas_art_nr)
+                @Html.EditorFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
             </td>
             <td class="table-row">
                 @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
@@ -134,12 +136,12 @@
             }
         }
     </table>
-    <input type="submit" value="Save Bulk Data" />
+    <input type="submit" value="Save Device Data" />
 
 }
 
 @section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
     <script language="javascript">
         $(document).ready(function () {
 
@@ -151,7 +153,7 @@
                 var $trNew = $trLast.clone();
 
                 var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
-                $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                $trNew.find("tr:last").html('<a href="#" class="remove">Remove</a>');
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
                     var oldN = $(this).attr('name');

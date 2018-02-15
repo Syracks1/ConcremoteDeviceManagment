@@ -88,6 +88,9 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Stock/Create
         public ActionResult Create()
         {
+            var SelectedCMI = new SelectList(db.pricelist.Select(r => r.bas_art_nr).Distinct().ToList());
+            ViewBag.SelectedCMI = SelectedCMI;
+
             return View();
         }
         // POST: Stock/Create
@@ -95,7 +98,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock)
+        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock )
         {
             if (ModelState.IsValid)
             {
@@ -143,20 +146,20 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pricelist pricelist = db.pricelist.Find(id);
-            if (pricelist == null)
+            Stock stock = db.Stock.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return View(stock);
         }
        // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Pricelist pricelist = db.pricelist.Find(id);
-            db.pricelist.Remove(pricelist);
+            Stock stock = db.Stock.Find(id);
+            db.Stock.Remove(stock);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

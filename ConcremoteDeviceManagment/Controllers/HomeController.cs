@@ -45,35 +45,16 @@ namespace ConcremoteDeviceManagment.Controllers
             List<DeviceConfig> ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
             return PartialView("GetDevice", ci);
         }
-        public ActionResult Save(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DeviceConfig DeviceConfig = db.DeviceConfig.Find(id);
-            if (DeviceConfig == null)
-            {
-                return HttpNotFound();
-            }
-            return View(DeviceConfig);
-        }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Save([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,Active")] DeviceConfig DeviceConfig)
-        //{   
-        //    try
+        //public ActionResult Save(int? id)
+        //{
+        //    if (id == null)
         //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            db.Entry(DeviceConfig).State = EntityState.Modified;
-        //            db.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    catch (RetryLimitExceededException)
+        //    DeviceConfig DeviceConfig = db.DeviceConfig.Find(id);
+        //    if (DeviceConfig == null)
         //    {
-        //        ModelState.AddModelError("", "Unable to save changes. Try again");
+        //        return HttpNotFound();
         //    }
         //    return View(DeviceConfig);
         //}
@@ -83,7 +64,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                //using (BasDbContext db = new BasDbContext())
+                // using (BasDbContext db = new BasDbContext())
                 {
                     foreach (var i in ci)
                     {
@@ -92,7 +73,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     db.SaveChanges();
                     ViewBag.Message = "Data successfully saved!";
                     ModelState.Clear();
-                   // ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+                    //ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
                 }
             }
             return View(ci);
