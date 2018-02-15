@@ -64,19 +64,26 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                // using (BasDbContext db = new BasDbContext())
+                using (BasDbContext db = new BasDbContext())
                 {
-                    foreach (var i in ci)
+                    try
                     {
-                        db.DeviceConfig.Add(i);
+                        foreach (var i in ci)
+                        {
+                            db.DeviceConfig.Add(i);
+                        }
+                        db.SaveChanges();
+                        ViewBag.Message = "Data successfully saved!";
+                        ModelState.Clear();
                     }
-                    db.SaveChanges();
-                    ViewBag.Message = "Data successfully saved!";
-                    ModelState.Clear();
-                    //ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+                    catch
+                    {
+                        ModelState.AddModelError("", "Unable to save changes. Try again");
+                    }
+                    //ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.Active == true).OrderBy(c => c.assembly_order));
                 }
             }
-            return View(ci);
+            return View();
         }
         //private static HttpStatusCode GetBadRequest()
         //{
