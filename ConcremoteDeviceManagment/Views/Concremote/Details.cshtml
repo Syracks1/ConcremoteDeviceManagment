@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
+﻿@model ConcremoteDeviceManagment.Models.Device_extra_info
 
 @{
     ViewBag.Title = "Details";
@@ -10,22 +10,21 @@
 <div>
     <h4>ConcremoteDevice</h4>
     <hr />
-    <dl class="table">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayName("Device Serie Nummer")
         </dt>
-        @Html.DisplayFor(model => model.Device_type_id)
+        @*@Html.DisplayFor(model => model.id)*@
         <dt>
             @Html.DisplayName("Device Type")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DeviceType.name)
-
         </dd>
 
         <dt>
             @Html.DisplayName("SIM Nummer")
         </dt>
+
         <dd>
         </dd>
 
@@ -53,7 +52,7 @@
             @Html.DisplayName("Onderdeellijst, met identificatie")
         </dt>
         <dd>
-            @Html.Partial("~/Home/GetDevice")
+            
         </dd>
 
     </dl>

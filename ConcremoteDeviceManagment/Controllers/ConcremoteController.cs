@@ -17,24 +17,24 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote
         public ActionResult Index()
         {
-           // var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
+          //  var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
             var concremoteDevice = db.ConcremoteDevice.Include(c => c.DeviceType);
             return View(concremoteDevice.ToList());
         }
 
-        // GET: Concremote/Details/5
+        //// GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ConcremoteDevice ConcremoteDevice = db.ConcremoteDevice.Find(id);
-            if (ConcremoteDevice == null)
+            Device_extra_info device_Extra = db.Device_extra_info.Find(id);
+            if (device_Extra == null)
             {
                 return HttpNotFound();
             }
-            return View(ConcremoteDevice);
+            return View(device_Extra);
         }
 
         // GET: Concremote/Create
@@ -129,5 +129,31 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //// GET: Concremote/Detail/2
+        //public ActionResult Detail(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+        //    if (concremoteDevice == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(concremoteDevice);
+        //}
+
+        //// POST: Concremote/Detail/2
+        //[HttpPost, ActionName("Detail")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DetailConfirmed(int id)
+        //{
+        //    ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+        //    db.ConcremoteDevice.Remove(concremoteDevice);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
     }
 }

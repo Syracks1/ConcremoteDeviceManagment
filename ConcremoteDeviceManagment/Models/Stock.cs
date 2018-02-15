@@ -147,7 +147,7 @@ namespace ConcremoteDeviceManagment.Models
     //    public virtual Pricelist Pricelist { get; set; }
     //}
     [Table("Device_extra_info")]
-    public class Device_extra
+    public class Device_extra_info
     {
         [Key]
         public int id { get; set; }
@@ -173,7 +173,7 @@ namespace ConcremoteDeviceManagment.Models
             public DbSet<DeviceConfig> DeviceConfig { get; set; }
             public DbSet<DeviceType> DeviceType { get; set; }  
             public DbSet<ConcremoteDevice> ConcremoteDevice { get; set; }     
-            public DbSet<Device_extra> Device_Extra { get; set; }
+            public DbSet<Device_extra_info> Device_extra_info { get; set; }
         }
     }
 
