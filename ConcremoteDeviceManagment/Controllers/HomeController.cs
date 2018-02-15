@@ -42,49 +42,42 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-        //    var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
-
-        //  //  ViewBag.EditDevice = EditDevice;
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    db.Entry(DeviceConfig).State = EntityState.Modified;
-        //    //    db.SaveChanges();
-        //    // //   return RedirectToAction("Index");
-                return PartialView("GetDevice",  db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+            List<DeviceConfig> ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+            return PartialView("GetDevice", ci);
         }
-        public ActionResult Save(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DeviceConfig DeviceConfig = db.DeviceConfig.Find(id);
-            if (DeviceConfig == null)
-            {
-                return HttpNotFound();
-            }
-            return View(DeviceConfig);
-        }
+        //public ActionResult Save(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    DeviceConfig DeviceConfig = db.DeviceConfig.Find(id);
+        //    if (DeviceConfig == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(DeviceConfig);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,Active")] DeviceConfig DeviceConfig)
-        {   
-            try
+        public ActionResult GetDevice(List<DeviceConfig> ci)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                // using (BasDbContext db = new BasDbContext())
                 {
-                    db.Entry(DeviceConfig).State = EntityState.Modified;
+                    foreach (var i in ci)
+                    {
+                        db.DeviceConfig.Add(i);
+                    }
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ViewBag.Message = "Data successfully saved!";
+                    ModelState.Clear();
+                    //ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
                 }
             }
-            catch (RetryLimitExceededException)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again");
-            }
-            return View(DeviceConfig);
-        }           
-         
+            return View(ci);
+        }
         //private static HttpStatusCode GetBadRequest()
         //{
         //    return HttpStatusCode.BadRequest;

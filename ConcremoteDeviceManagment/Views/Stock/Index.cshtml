@@ -20,19 +20,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("BAS artikelnummer")
+            @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm })
         </th>       
         <th>
-            @Html.DisplayName("Beschrijving artikel")
+            @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescriptionSortParm })
         </th>
         <th>
-            @Html.DisplayName("Huidige voorraad")
+            @Html.ActionLink("Huidige voorraad", "Index", new { sortOrder = ViewBag.CurrentStockSort })
         </th>
         <th>
-            @Html.DisplayName("Minimale voorraad")
+            @Html.ActionLink("Minimale voorraad", "Index", new { sortOrder = ViewBag.MinStockSort })
         </th>
         <th>
-            @Html.DisplayName("Maximale voorraad")
+            @Html.ActionLink("Maximale voorraad", "Index", new { sortOrder = ViewBag.MaxStockSort })
         </th>
         <th></th>
     </tr>
@@ -54,9 +54,9 @@
             @Convert.ToDecimal(item.max_stock).ToString("#,##")
         </td>
         <td>
-            <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
-            <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
+            <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
 

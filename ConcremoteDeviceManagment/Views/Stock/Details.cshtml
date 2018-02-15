@@ -19,13 +19,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Prijs ID")
+            @Html.DisplayName("Prijs")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.Price_id)
+            @Html.DisplayFor(model => model.Pricelist.Price)
         </dd>
         <dt>
+            @Html.DisplayName("Voorraad(Huidig/Min/Max)")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stock_amount)|
+            @Html.DisplayFor(model => model.min_stock)|
+            @Html.DisplayFor(model => model.max_stock)
+        </dd>
+        @*<dt>
             @Html.DisplayName("Huidige voorraad")
         </dt>
         <dd>
@@ -34,31 +42,26 @@
         <dt>
             @Html.DisplayName("Minimale voorraad")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.min_stock)
         </dd>
-
         <dt>
            @Html.DisplayName("Maximale voorraad")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.max_stock)
-        </dd>
-
+        </dd>*@
         <dt>
             @Html.DisplayName("Beschrijving")
         </dt>
-
         <dd>
            @Html.DisplayFor(model => model.Pricelist.description)
         </dd>
         <dt>
-            @Html.DisplayName("Stuk Prijs")
+            @Html.DisplayName("Leverancier")
         </dt>
         <dd>
-            @Html.DisplayFor(model=> model.Pricelist.Price)
+            @Html.DisplayFor(model => model.Pricelist.Leverancier)
         </dd>
         <dt>
             @Html.DisplayName("Artikelnummer Leverancier")
@@ -66,6 +69,7 @@
         <dd>
            @Html.DisplayFor(model => model.Pricelist.art_lev_nr)
         </dd>
+        
     </dl>
 </div>
 <p>

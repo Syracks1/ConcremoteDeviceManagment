@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
         </td>
         <td>
-            € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
+            @*€ @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)*@
         </td>
         <td>
 
