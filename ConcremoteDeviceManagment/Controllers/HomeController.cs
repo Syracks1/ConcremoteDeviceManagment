@@ -42,7 +42,7 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-            List<DeviceConfig> ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Pricelist.Active == true).OrderBy(c => c.assembly_order));
+            List<DeviceConfig> ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.VersieNummer));
             return PartialView("GetDevice", ci);
         }
         //public ActionResult Save(int? id)
@@ -62,9 +62,10 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GetDevice(List<DeviceConfig> ci)
         {
+
             if (ModelState.IsValid)
             {
-                using (BasDbContext db = new BasDbContext())
+                using ( db = new BasDbContext())
                 {
                     try
                     {
@@ -100,7 +101,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order")] DeviceConfig DeviceConfig)
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,Datum")] DeviceConfig DeviceConfig)
         {
                 var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 

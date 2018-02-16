@@ -86,6 +86,7 @@ namespace ConcremoteDeviceManagment.Models
         public string device_type { get; set; }
         public bool Active { get; set; }
         public string VersieNummer { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Datum { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public virtual DeviceType DeviceType { get; set; }
@@ -111,8 +112,9 @@ namespace ConcremoteDeviceManagment.Models
         public int oldsystem_concremote { get; set; }
         public bool Allowvalidation { get; set;}
         public int Device_type_id { get; set; }
+ ///       public int Device_extra_info_id { get; set; }
         public virtual DeviceType DeviceType { get; set; }
-   //     public virtual Device_extra Device_Extra { get; set; }
+   //     public virtual Device_extra_info Device_Extra { get; set; }
 
 
     }
@@ -136,16 +138,16 @@ namespace ConcremoteDeviceManagment.Models
         public int id { get; set; }
         public string description { get; set; }
     }
-    //[Table("Device_Pricelist")]
-    //public class Device_Pricelist
-    //{
-    //    [Key]
-    //    public int id { get; set; }
-    //   public int Device_Config_id { get; set; }
-    //    public int Price_id { get; set; }
-    //    public virtual DeviceConfig DeviceConfig { get; set; }
-    //    public virtual Pricelist Pricelist { get; set; }
-    //}
+    [Table("Device_Pricelist")]
+    public class Device_Pricelist
+    {
+        [Key]
+        public int id { get; set; }
+        public int Device_Config_id { get; set; }
+        public int Price_id { get; set; }
+        public virtual DeviceConfig DeviceConfig { get; set; }
+        public virtual Pricelist Pricelist { get; set; }
+    }
     [Table("Device_extra_info")]
     public class Device_extra_info
     {

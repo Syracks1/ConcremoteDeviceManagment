@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.Device_extra_info
+﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
 
 @{
     ViewBag.Title = "Details";
@@ -19,6 +19,7 @@
             @Html.DisplayName("Device Type")
         </dt>
         <dd>
+            @Html.DisplayFor(model => model.DeviceType.name)
         </dd>
 
         <dt>
@@ -52,7 +53,7 @@
             @Html.DisplayName("Onderdeellijst, met identificatie")
         </dt>
         <dd>
-            
+            @Html.DisplayFor(model => model.active)
         </dd>
 
     </dl>

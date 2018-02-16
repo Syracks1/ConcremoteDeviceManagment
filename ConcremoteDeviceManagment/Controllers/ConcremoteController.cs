@@ -29,12 +29,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device_extra_info device_Extra = db.Device_extra_info.Find(id);
-            if (device_Extra == null)
+             ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
+            if (concremoteDevice == null)
             {
                 return HttpNotFound();
             }
-            return View(device_Extra);
+            return View(concremoteDevice);
         }
 
         // GET: Concremote/Create

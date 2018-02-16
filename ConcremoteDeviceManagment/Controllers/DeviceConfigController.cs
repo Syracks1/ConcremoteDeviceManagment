@@ -27,11 +27,14 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         public PartialViewResult CreateDevice(string Device)
         {
-           
+            //var query = (from d in db.DeviceConfig
+            //             where d.DeviceType.name == Device == d.Active == true
+            //             select d).Max().VersieNummer;
             //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
             // ViewBag.SelectedDevice = EditDevice;
-            return PartialView("CreateDevice", db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
+            return PartialView("CreateDevice", db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Active == true).OrderByDescending(c => c.VersieNummer));
+            //db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Active == true).OrderByDescending(c => c.VersieNummer)
         }
 
         // GET: DeviceConfig2/Details/5
@@ -58,7 +61,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount")] DeviceConfig deviceConfig)
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,Datum,Active")] DeviceConfig deviceConfig)
         {
             if (ModelState.IsValid)
             {

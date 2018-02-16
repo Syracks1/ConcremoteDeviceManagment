@@ -7,65 +7,98 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DeviceConfig</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.device_type_id, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+
+<div class="form-horizontal">
+    <h4>DeviceConfig</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.device_type_id, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
             @*    @Html.DropDownList("SelectedDevice", "Select a device")*@
-                @Html.EditorFor(model => model.device_type_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price_id, "BAS Artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("EditDevice", "Select a device")*@
-                @Html.EditorFor(model => model.Price_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.amount, "Aantal", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.assembly_order,"Bouw Volgorde", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.assembly_order, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.device_type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.device_type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.device_type, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            @Html.EditorFor(model => model.device_type_id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price_id, "BAS Artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("EditDevice", "Select a device")*@
+            @Html.EditorFor(model => model.Price_id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.amount, "Aantal", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.assembly_order, "Bouw Volgorde", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.assembly_order, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.device_type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.device_type, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.device_type, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Datum, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(model => model.Datum.GetDateTimeF)*@
+
+            @*@Html.EditorFor(model => model.Datum.ToString("dd/MM/yyyy"), new { @class = "date" })*@
+            @Html.EditorFor(model => model.Datum, new { htmlAttributes = new { @class = "datetimepicker form-control" } })
+            @Html.ValidationMessageFor(model => model.Datum, "", new { @class = "text-danger" })
+            @*@model DateTime*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
-    <div>
-        <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
+<div>
+    <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
 
-    </div>
+</div>
+<script>jQuery('#datetimepicker').datetimepicker();</script>
+@section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/dateTimePicker")
+}
+                @Styles.Render("~/Content/dateTimePicker1")`
+@*// type='text/javascript' will allow to work it in IE7*@
+<script type="text/javascript">
+    /// <reference path="jquery-1.4.4.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+        $('.date').datetimepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
