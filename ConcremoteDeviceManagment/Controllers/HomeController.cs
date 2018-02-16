@@ -80,10 +80,10 @@ namespace ConcremoteDeviceManagment.Controllers
                     {
                         ModelState.AddModelError("", "Unable to save changes. Try again");
                     }
-                    //ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.Active == true).OrderBy(c => c.assembly_order));
+                   // ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.Active == true).OrderBy(c => c.assembly_order));
                 }
             }
-            return View();
+            return View(ci);
         }
         //private static HttpStatusCode GetBadRequest()
         //{

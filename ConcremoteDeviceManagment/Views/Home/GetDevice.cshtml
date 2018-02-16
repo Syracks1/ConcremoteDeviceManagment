@@ -6,67 +6,6 @@
 @using (Html.BeginForm("GetDevice", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-
-    <p>
-        @*<table class="table">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                <tr>
-                    <th class="table-row">
-                        @Html.DisplayName("BAS artikelnummer")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Prijs")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Beschrijving")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Aantal")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Bouw Volgorde")
-                    </th>
-                    <th class="table-row"></th>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        @Html.HiddenFor(modelItem => item.Device_config_id)
-                        <td class="hidden">
-                            @Html.HiddenFor(modelItem => item.device_type_id)
-                        </td>
-                        <td class="table-row">
-                            @Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)
-                        </td>
-                        <td class="table-row">
-                            <p id="#Price">@Html.DisplayFor(modelItem => item.Pricelist.Price)</p>
-                        </td>
-                        <td class="table-row">
-                            <p id="#description">@Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } }))</p>
-                        </td>
-                        <td class="table-row">
-                            @Html.EditorFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>
-                        <td class="table-row">
-                            @Html.EditorFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>
-                        <td class="table-row">
-                            @Html.DisplayFor(modelItem => item.Active, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>
-                        <td class="hidden">
-                              @Html.HiddenFor(modelItem => item.device_type)
-                        </td>
-                        <td class="table-row">
-                            <input type="submit" value="Save" id="Save" class="btn btn-primary" />
-                            <input type="submit" value="Save" id="Save" onclick="location.href='@Url.Action("", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-danger" />
-                            <button type="submit" id="button1" name="button1" onclick='@Url.Action("Save", "Home", new { id = item.Device_config_id })'>Save</button>
-                        </td>
-                        <td></td>
-                    </tr>
-                }
-            </table>*@
-    </p>
     <div>
         <a href="#" id="addNew">Add New</a>
     </div>

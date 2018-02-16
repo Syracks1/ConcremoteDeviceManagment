@@ -17,7 +17,7 @@
     <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
 </p>
 }
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm })
@@ -38,7 +38,7 @@
     </tr>
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td >
             <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)</i>
         </td>
         <td>
