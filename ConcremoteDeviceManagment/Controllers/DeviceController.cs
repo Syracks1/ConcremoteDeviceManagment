@@ -17,13 +17,15 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI, string searchStringPrice)
         {
-            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
-            //ViewBag.SelectedLeverancier = SelectedLeverancier;
+            var SelectedLeverancier = (from r in db.pricelist
+                                       select r.Leverancier).Distinct();
+            ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
             ViewBag.LevSortParm = sortOrder == "Leverancier" ? "Lev_desc" : "Leverancier";
             ViewBag.ArtSortParm = sortOrder == "lev_art" ? "lev_art_desc" : "lev_art";
+            ViewBag.DescrSortParm = sortOrder == "descripton" ? "descripton_desc" : "descripton";
             var pricelist = from d in db.pricelist
                             select d;
             switch (sortOrder)
@@ -55,6 +57,12 @@ namespace ConcremoteDeviceManagment.Controllers
                 case "lev_art_desc":
                     pricelist = pricelist.OrderByDescending(s => s.art_lev_nr);
                     break;
+                case "descripton":
+                    pricelist = pricelist.OrderBy(s => s.description);
+                    break;
+                case "descripton_desc":
+                    pricelist = pricelist.OrderByDescending(s => s.description);
+                    break;
                 default:
                     pricelist = pricelist.OrderBy(s => s.bas_art_nr);
                     break;
@@ -64,12 +72,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 if (!string.IsNullOrEmpty(searchStringPrice))
                 {
-                    pricelist = pricelist.Where(s => s.Leverancier.Contains(searchStringPrice));
+                    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
                 }
-            }
-            if(!string.IsNullOrEmpty(PriceCMI))
-            {
-                pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
+
+                if (!string.IsNullOrEmpty(PriceCMI))
+                {
+                    pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
+                }
             }
             return View(pricelist);
         }

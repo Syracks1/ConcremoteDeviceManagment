@@ -10,8 +10,8 @@
 {
 <p>
     <b>CMI: </b>@Html.TextBox("PriceCMI")
-    <input type="submit" value="Zoek CMI" class="btn" />
-    <b>Leverancier:</b> @Html.TextBox("searchStringPrice")
+    @*<input type="submit" value="Zoek CMI" class="btn" />*@
+    <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Selecteer iets")
     <input type="submit" value="Zoek Leverancier" class="btn" />
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -19,7 +19,6 @@
 <table class="table table-hover">
     <tr>
         <th>
-            @*@Html.DisplayName("BAS CMI")*@
             @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm })
         </th>
         <th>
@@ -29,11 +28,10 @@
             @Html.ActionLink("Leverancier", "Index", new { sortOrder = ViewBag.LevSortParm })
         </th>
         <th>
-            @*@Html.DisplayName("Prijs")*@
             @Html.ActionLink("Prijs", "Index", new { sortOrder = ViewBag.PriceSortParm })
         </th>
         <th>
-            @Html.DisplayName("Beschrijving")
+            @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescrSortParm })
         </th>
         <th>
             @Html.ActionLink("Actief", "Index", new { sortOrder = ViewBag.ActiveSortParm })
