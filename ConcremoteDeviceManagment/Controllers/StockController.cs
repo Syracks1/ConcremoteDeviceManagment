@@ -90,7 +90,6 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var SelectedCMI = new SelectList(db.pricelist.Select(r => r.bas_art_nr).Distinct().ToList());
             ViewBag.SelectedCMI = SelectedCMI;
-
             return View();
         }
         // POST: Stock/Create
@@ -98,8 +97,9 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock )
+        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
+          // stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);

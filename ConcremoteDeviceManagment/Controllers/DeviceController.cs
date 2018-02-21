@@ -15,11 +15,13 @@ namespace ConcremoteDeviceManagment.Controllers
         private Models.BasDbContext db = new Models.BasDbContext();
 
         // GET: Device
-        public ActionResult Index(string sortOrder, string PriceCMI, string searchStringPrice)
+        public ActionResult Index(string sortOrder, string PriceCMI)
         {
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
+            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
             ViewBag.SelectedLeverancier = SelectedLeverancier;
+            //ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
@@ -70,11 +72,14 @@ namespace ConcremoteDeviceManagment.Controllers
             // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
             {
-                if (!string.IsNullOrEmpty(searchStringPrice))
-                {
-                    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
-                }
-
+                //if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
+                //{
+                //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
+                //}
+                //if(!string.IsNullOrEmpty(ViewBag.SelectedLeverancier))
+                //{
+                //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
+                //}
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));

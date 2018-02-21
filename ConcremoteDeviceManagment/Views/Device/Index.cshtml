@@ -11,8 +11,10 @@
 <p>
     <b>CMI: </b>@Html.TextBox("PriceCMI")
     @*<input type="submit" value="Zoek CMI" class="btn" />*@
-    <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Selecteer iets")
-    <input type="submit" value="Zoek Leverancier" class="btn" />
+    @*<b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Selecteer iets")*@
+    <b>Leverancier:</b>@Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier),"Kies Leverancier")
+
+    <input type="submit" value="Zoek" class="btn" />
     @Html.ActionLink("Create New", "Create")
 </p>
 }

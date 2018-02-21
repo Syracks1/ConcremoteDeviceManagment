@@ -16,20 +16,18 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.device_type_id, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.device_type_id, "device_type_id", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*    @Html.DropDownList("SelectedDevice", "Select a device")*@
-            @Html.EditorFor(model => model.device_type_id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
+            @Html.DropDownList("device_type_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DeviceType.name, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Price_id, "BAS Artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Price_id, "BAS artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.DropDownList("EditDevice", "Select a device")*@
-            @Html.EditorFor(model => model.Price_id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
+            @Html.DropDownList("EditDevice", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Pricelist.bas_art_nr, "", new { @class = "text-danger" })
         </div>
     </div>
 

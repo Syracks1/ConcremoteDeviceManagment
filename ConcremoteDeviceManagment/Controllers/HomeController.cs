@@ -95,32 +95,37 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Create()
         {
-   //         PopulateDeviceDropDownList();
+            ViewBag.device_type_id = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
+            //var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
+            ViewBag.EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
             return View();  
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,assembly_order,Datum")] DeviceConfig DeviceConfig)
+        public ActionResult Create([Bind(Include = "id,Device_config_id,device_type_id,Price_id,amount,assembly_order,Datum")] DeviceConfig DeviceConfig)
         {
-                var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
 
-            ViewBag.EditDevice = EditDevice;
+          //  ViewBag.EditDevice = EditDevice;
             try
             {
                 if (ModelState.IsValid)
                 {
                     db.DeviceConfig.Add(DeviceConfig);
-                    TempData["AlertMessage"] = "Changes saved succesfully";
+                   // TempData["AlertMessage"] = "Changes saved succesfully";
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", DeviceConfig.device_type_id);
+                ViewBag.EditDevice = new SelectList(db.pricelist, "Price_id", "bas_art_nr", DeviceConfig.Price_id);
+
             }
-            catch(RetryLimitExceededException)
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again");
             }
-    //        PopulateDeviceDropDownList(DeviceConfig.device_type_id);
+            //        PopulateDeviceDropDownList(DeviceConfig.device_type_id);
+
             return View(DeviceConfig);
         }
         // GET: DeviceConfig/Delete/5
