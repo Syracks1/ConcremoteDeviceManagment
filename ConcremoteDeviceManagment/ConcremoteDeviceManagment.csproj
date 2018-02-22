@@ -441,7 +441,7 @@
           <IISUrl>http://localhost:57358/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://webserver1/cdm</CustomServerUrl>
+          <CustomServerUrl>http://webserver03/cdm</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
           <servers defaultServer="">
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:57358/" workingDir="" />

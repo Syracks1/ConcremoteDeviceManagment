@@ -1,14 +1,16 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Device_statustypes>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Device status soorten";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Device status soorten</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Maak nieuw status", "Create")*@
+    <button onclick="location.href='@Url.Action("Create", "Device_statustypes")';return false;" class="btn btn-primary">Maak nieuwe status</button>
+
 </p>
 <table class="table">
     <tr>
@@ -25,7 +27,6 @@
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Details", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-info">Details</button>
             <button onclick="location.href='@Url.Action("Delete", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>

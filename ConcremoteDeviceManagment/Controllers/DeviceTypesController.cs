@@ -46,7 +46,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name")] DeviceType deviceType)
+        public ActionResult Create([Bind(Include = "device_type_id,name")] DeviceType deviceType)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name")] DeviceType deviceType)
+        public ActionResult Edit([Bind(Include = "device_type_id,name")] DeviceType deviceType)
         {
             if (ModelState.IsValid)
             {
