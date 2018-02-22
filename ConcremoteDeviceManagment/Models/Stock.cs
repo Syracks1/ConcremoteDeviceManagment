@@ -168,7 +168,7 @@ namespace ConcremoteDeviceManagment.Models
         public class DeviceType
         {
         [Key]
-        public int id { get; set; }
+        public int device_type_id { get; set; }
             public string name { get; set; }
         }
         [Table("DeviceConfig")]

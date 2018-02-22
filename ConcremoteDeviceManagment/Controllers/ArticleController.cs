@@ -10,7 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    public class DeviceController : Controller
+    public class ArticleController : Controller
     {
         private Models.BasDbContext db = new Models.BasDbContext();
 

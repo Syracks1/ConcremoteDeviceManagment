@@ -190,8 +190,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConcremoteController.cs" />
     <Compile Include="Controllers\DeviceConfigController.cs" />
-    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\DeviceTypesController.cs" />
     <Compile Include="Controllers\Device_extraController.cs" />
+    <Compile Include="Controllers\Device_statustypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -224,7 +226,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -244,6 +249,11 @@
     <Content Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -294,7 +304,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Device\Index.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -344,9 +354,9 @@
     <Content Include="Views\DeviceConfig\Edit.cshtml" />
     <Content Include="Views\DeviceConfig\Index.cshtml" />
     <Content Include="Views\Navigation\_TopNav.cshtml" />
-    <Content Include="Views\Device\Create.cshtml" />
-    <Content Include="Views\Device\Delete.cshtml" />
-    <Content Include="Views\Device\Details.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Article\Delete.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Home\GetDevice.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -366,13 +376,21 @@
     <Content Include="Views\Concremote\Details.cshtml" />
     <Content Include="Views\Concremote\Edit.cshtml" />
     <Content Include="Views\Concremote\Index.cshtml" />
-    <Content Include="Views\Device\Edit.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\Device_extra\Create.cshtml" />
     <Content Include="Views\Device_extra\Delete.cshtml" />
     <Content Include="Views\Device_extra\Details.cshtml" />
     <Content Include="Views\Device_extra\Edit.cshtml" />
     <Content Include="Views\Device_extra\Index.cshtml" />
     <Content Include="Views\Shared\DateTime.cshtml" />
+    <Content Include="Views\DeviceTypes\Create.cshtml" />
+    <Content Include="Views\DeviceTypes\Delete.cshtml" />
+    <Content Include="Views\DeviceTypes\Edit.cshtml" />
+    <Content Include="Views\DeviceTypes\Index.cshtml" />
+    <Content Include="Views\Device_statustypes\Create.cshtml" />
+    <Content Include="Views\Device_statustypes\Delete.cshtml" />
+    <Content Include="Views\Device_statustypes\Edit.cshtml" />
+    <Content Include="Views\Device_statustypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

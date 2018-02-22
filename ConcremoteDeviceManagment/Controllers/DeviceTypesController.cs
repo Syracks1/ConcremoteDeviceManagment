@@ -10,116 +10,107 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    public class Device_extraController : Controller
+    public class DeviceTypesController : Controller
     {
         private BasDbContext db = new BasDbContext();
 
-        // GET: Device_extra
+        // GET: DeviceTypes
         public ActionResult Index()
         {
-            //var device_Extra = db.Device_extra_info.Include(d => d.Pricelist);
-            ////var device_Extra_Concremote = db.Device_Extra.Include(b => b.ConcremoteDevice);
-            var device_Extra = from d in db.DeviceConfig_ExtraInfo
-                               select d;
-            return View();
+            return View(db.DeviceType.ToList());
         }
 
-        // GET: Device_extra/Details/5
+        // GET: DeviceTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //      Device_extra_info device_extra = db.Device_extra_info.Find(id);
-            DeviceConfig_ExtraInfo device_Extra_Info = db.DeviceConfig_ExtraInfo.Find(id);
-            //if (device_extra == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View(device_Extra_Info);
+            DeviceType deviceType = db.DeviceType.Find(id);
+            if (deviceType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(deviceType);
         }
 
-        // GET: Device_extra/Create
+        // GET: DeviceTypes/Create
         public ActionResult Create()
         {
-            ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId");
             return View();
         }
 
-        // POST: Device_extra/Create
+        // POST: DeviceTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ConcremoteDevice_id,Price_id,Datum,Active,Eigenschap_id")] DeviceConfig_ExtraInfo device_extra)
+        public ActionResult Create([Bind(Include = "id,name")] DeviceType deviceType)
         {
             if (ModelState.IsValid)
             {
-                db.DeviceConfig_ExtraInfo.Add(device_extra);
+                db.DeviceType.Add(deviceType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-        //    ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId", device_extra.Price_id);
-            return View(device_extra);
+            return View(deviceType);
         }
 
-        // GET: Device_extra/Edit/5
+        // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig_ExtraInfo device_extra = db.DeviceConfig_ExtraInfo.Find(id);
-            if (device_extra == null)
+            DeviceType deviceType = db.DeviceType.Find(id);
+            if (deviceType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId", device_extra.id);
-            return View(device_extra);
+            return View(deviceType);
         }
 
-        // POST: Device_extra/Edit/5
+        // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ConcremoteDevice_id,Price_id,Datum,Active,Eigenschap_id")] DeviceConfig_ExtraInfo device_extra)
+        public ActionResult Edit([Bind(Include = "id,name")] DeviceType deviceType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(device_extra).State = EntityState.Modified;
+                db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId", device_extra.id);
-            return View(device_extra);
+            return View(deviceType);
         }
 
-        // GET: Device_extra/Delete/5
+        // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceConfig_ExtraInfo device_extra = db.DeviceConfig_ExtraInfo.Find(id);
-            if (device_extra == null)
+            DeviceType deviceType = db.DeviceType.Find(id);
+            if (deviceType == null)
             {
                 return HttpNotFound();
             }
-            return View(device_extra);
+            return View(deviceType);
         }
 
-        // POST: Device_extra/Delete/5
+        // POST: DeviceTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DeviceConfig_ExtraInfo device_extra = db.DeviceConfig_ExtraInfo.Find(id);
-            db.DeviceConfig_ExtraInfo.Remove(device_extra);
+            DeviceType deviceType = db.DeviceType.Find(id);
+            db.DeviceType.Remove(deviceType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

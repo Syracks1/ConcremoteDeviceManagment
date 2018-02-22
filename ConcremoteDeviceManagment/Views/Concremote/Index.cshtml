@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.ConcremoteDevice>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceStatus>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DeviceType.name)
+            @Html.DisplayNameFor(model => model.DeviceConfig.DeviceType.name)
         </th>
         
         @*<th>
@@ -37,23 +37,23 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceType.name)
+ @*           @Html.DisplayFor(modelItem => item.DeviceType.name)*@
         </td>
         
         @*<td>
             @Html.DisplayFor(modelItem => item.)
         </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.active)
+            @Html.DisplayFor(modelItem => item.ConcremoteDevice.Active)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.oldsystem_concremote)
+   @*         @Html.DisplayFor(modelItem => item.oldsystem_concremote)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Allowvalidation)
+  @*          @Html.DisplayFor(modelItem => item.Allowvalidation)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Device_type_id)
+  @*          @Html.DisplayFor(modelItem => item.Device_type_id)*@
         </td>
         <td>
            @* @Html.DisplayFor(modelItem => item..Device_statustypes.description)*@

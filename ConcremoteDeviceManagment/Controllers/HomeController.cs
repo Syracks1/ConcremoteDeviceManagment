@@ -42,7 +42,7 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-            List<DeviceConfig> ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.DeviceType.name == Device).OrderBy(c => c.assembly_order));
+            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device).OrderBy(c => c.assembly_order));
             return PartialView("GetDevice", ci);
         }
         //public ActionResult Save(int? id)
@@ -116,8 +116,8 @@ namespace ConcremoteDeviceManagment.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", DeviceConfig.device_type_id);
-                ViewBag.EditDevice = new SelectList(db.pricelist, "Price_id", "bas_art_nr", DeviceConfig.Price_id);
+                ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", DeviceConfig.DeviceType_id);
+                //ViewBag.EditDevice = new SelectList(db.pricelist, "Price_id", "bas_art_nr", Device_Pricelist.Price_id);
 
             }
             catch (RetryLimitExceededException)
