@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -24,78 +25,45 @@ namespace ConcremoteDeviceManagment.Controllers
             return View();
         }
 
-        //}
-        [HttpGet]
-        public JsonResult FillDeviceInfo(decimal Price, string description)
-        {
-            ;
-            var ret = (from e in db.pricelist
-                       join c in db.pricelist on e.Price_id equals c.Price_id
-                     //  where e.Price_id == Price && e.Price_id == description
-                       select new Pricelist
-                       {
-                           Price = e.Price,
-                           description = e.description
-
-                       }).FirstOrDefault();
-            return Json(ret);
-        }
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
           //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device).OrderBy(c => c.assembly_order));
             List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
 
-            return PartialView("GetDevice", ci);
+            return PartialView(ci);
         }
-        //public ActionResult Save(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DeviceConfig DeviceConfig = db.DeviceConfig.Find(id);
-        //    if (DeviceConfig == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(DeviceConfig);
-        //}
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetDevice(List<Device_Pricelist> ci)
+        public ActionResult GetDevice()
         {
+            var Device_Pricelist = new List<Device_Pricelist>();
+            for (int i = 0; i < 4; i++)
+            {
+                Device_Pricelist.Add(new Device_Pricelist());
+            }
 
+            //ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+
+            return View(Device_Pricelist);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTry(List<Device_Pricelist> Device_Pricelist)
+        {
             if (ModelState.IsValid)
             {
-                using ( db = new BasDbContext())
+                foreach (var x in Device_Pricelist)
                 {
-                    try
-                    {
-                        foreach (var i in ci)
-                        {
-                            db.Device_Pricelist.Add(i);
-                        }
-                        db.SaveChanges();
-                        ViewBag.Message = "Data successfully saved!";
-                      //  ModelState.Clear();
-                    }
-                    catch
-                    {
-                        ModelState.AddModelError("", "Unable to save changes. Try again");
-                    }
-                    ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+                    db.Device_Pricelist.Add(x);
                 }
+                db.SaveChanges();
+                return RedirectToAction("CreateTry");
             }
-            return View(ci);
+           // ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+            return View(Device_Pricelist);
         }
-        //private static HttpStatusCode GetBadRequest()
-        //{
-        //    return HttpStatusCode.BadRequest;
-        //}
-
-        //     public ActionResult EditCMI(string CMI)
-
         public ActionResult Create()
         {
             ViewBag.device_type_id = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());

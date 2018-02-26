@@ -22,7 +22,7 @@ namespace ConcremoteDeviceManagment.Controllers
            
                  var query = from d in db.DeviceStatus
                                     select d;
-            return View();
+            return View(query);
         }
 
         //// GET: Concremote/Details/5

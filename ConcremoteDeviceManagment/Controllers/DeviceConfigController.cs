@@ -17,7 +17,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Index()
         {
             
-            var SelectedDevices = new SelectList(db.DeviceType.Select(c => c.name).Distinct().ToList());
+            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
             //from d in db.DeviceType
             //join c in db.DeviceConfig.Distinct()
             //on d.device_type_id equals c.device_type_id

@@ -33,7 +33,7 @@
         <tr>
             @Html.HiddenFor(a => a[j].id)
             <td class="hidden">
-  @*              @Html.HiddenFor(a => a[j].DeviceConfig.DeviceType.device_type_id)*@
+                @Html.HiddenFor(a => a[j].DeviceConfig.DeviceType.device_type_id)
             </td>
             
             <td class="table-row">
@@ -69,7 +69,7 @@
             }
         }
     </table>
-    <input type="submit" value="Save Device Data" />
+    <input type="submit" value="Save Device Data" class="btn btn-primary" />
 
 }
 
@@ -85,13 +85,13 @@
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
-                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                var suffix = $trNew.find(':input:first').attr('id').match(/\d+/);
                 $trNew.find("tr:last").html('<a href="#" class="remove">Remove</a>');
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
-                    var oldN = $(this).attr('name');
+                    var oldN = $(this).attr('id');
                     var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
-                    $(this).attr('name', newN);
+                    $(this).attr('id', newN);
                     //Replaced value
                     var type = $(this).attr('type');
                     if (type.toLowerCase() == "text") {
