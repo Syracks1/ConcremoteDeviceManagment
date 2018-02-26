@@ -12,10 +12,10 @@
     <b>CMI: </b>@Html.TextBox("PriceCMI")
     <input type="submit" value="Zoek CMI" class="btn" />
     @*<b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Selecteer iets")*@
-    <b>Leverancier:</b>@Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier),"Kies Leverancier")
+    <b>Leverancier:</b>@Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Kies Leverancier")
 
     <input type="submit" value="Zoek" class="btn" />
-    @Html.ActionLink("Create New", "Create")
+    <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
 </p>
 }
 <table class="table table-hover">

@@ -15,9 +15,6 @@
                 @Html.DisplayName("BAS artikelnummer")
             </th>
             <th class="table-row">
-                @Html.DisplayName("Prijs ID")
-            </th>
-            <th class="table-row">
                 @Html.DisplayName("Beschrijving")
             </th>
             <th class="table-row">
@@ -36,15 +33,12 @@
         <tr>
             @Html.HiddenFor(a => a[j].id)
             <td class="hidden">
-                @Html.HiddenFor(a => a[j].DeviceConfig.DeviceType.device_type_id)
+  @*              @Html.HiddenFor(a => a[j].DeviceConfig.DeviceType.device_type_id)*@
             </td>
             
             <td class="table-row">
                 @Html.EditorFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
             </td>
-            @*<td class="table-row">
-                @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
-            </td>*@
             <td class="table-row">
                 @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
             </td>

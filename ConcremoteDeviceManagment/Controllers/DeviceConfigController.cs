@@ -27,14 +27,11 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         public PartialViewResult CreateDevice(string Device)
         {
-            //var query = (from d in db.DeviceConfig
-            //             where d.DeviceType.name == Device == d.Active == true
-            //             select d).Max().VersieNummer;
-            //  var EditDevice = new SelectList(db.pricelist.Select(c => c.bas_art_nr).Distinct().ToList());
-
-            // ViewBag.SelectedDevice = EditDevice;
-            return PartialView("CreateDevice", db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device == c.DeviceConfig.Active == true).OrderByDescending(c => c.DeviceConfig.VersionNr));
-            //db.DeviceConfig.Where(c => c.DeviceType.name == Device == c.Active == true).OrderByDescending(c => c.VersieNummer)
+            {
+                //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device).OrderBy(c => c.assembly_order));
+                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+                return PartialView("CreateDevice", ci);
+            }
         }
 
         // GET: DeviceConfig2/Details/5

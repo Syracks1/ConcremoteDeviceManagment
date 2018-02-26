@@ -125,7 +125,7 @@ namespace ConcremoteDeviceManagment.Models
         public int id { get; set; }
             public int Device_config_id { get; set; }
             public int Price_id { get; set; }
-            public decimal? amount { get; set; }
+            public decimal amount { get; set; }
             public int? assembly_order { get; set; }
             public virtual DeviceConfig DeviceConfig { get; set; }
             public virtual Pricelist Pricelist { get; set; }
@@ -149,7 +149,52 @@ namespace ConcremoteDeviceManagment.Models
             public virtual DeviceConfig_ExtraInfo DeviceConfig_ExtraInfo { get; set; }
             public virtual DeviceStatus DeviceStatus { get; set; }
     }
-
+    [Table("Pricelist")]
+    public class Pricelist2
+    {
+        [Key]
+        [Required]
+        public int Price_id { get; set; }
+        public string CategoryId { get; set; }
+        public string SubCategoryId { get; set; }
+        public string AdminDescription { get; set; }
+        public string AdminDescriptionShort { get; set; }
+        public string Standard { get; set; }
+        public string Unit { get; set; }
+        public decimal? Quantity { get; set; }
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public Decimal Price { get; set; }
+        [StringLength(255, MinimumLength = 1)]
+        public string art_lev_nr { get; set; }
+        [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
+        public string bas_art_nr { get; set; }
+        [StringLength(255, MinimumLength = 1)]
+        public string Leverancier { get; set; }
+        public string description { get; set; }
+        public int? PreId { get; set; }
+        public decimal? PriceProcurement { get; set; }
+        public string Sequence { get; set; }
+        public string VAT_Id { get; set; }
+        public string VAT_NL_Id { get; set; }
+        public string VAT_BE_Id { get; set; }
+        public string VAT_DE_Id { get; set; }
+        public string Remark { get; set; }
+        public bool? Print { get; set; }
+        public bool Active { get; set; }
+        public bool? Duration { get; set; }
+        public bool? Procurement { get; set; }
+        public string ProcurementType { get; set; }
+        public bool? Sale { get; set; }
+        public string PhaseCode { get; set; }
+        public int? Supplier_Organization_Id { get; set; }
+        public int? ActivityTypeId { get; set; }
+        public bool? InStock { get; set; }
+        public decimal? ProcurementRebate { get; set; }
+        public decimal? Weight { get; set; }
+        public string OldSystem_Prijslijst_ItemId { get; set; }
+        //   public virtual Stock Stock { get; set; }
+    }
 
     public class BasDbContext : DbContext
         {
@@ -165,6 +210,10 @@ namespace ConcremoteDeviceManagment.Models
             public DbSet<DeviceConfig_ExtraInfo> DeviceConfig_ExtraInfo { get; set; }
             public DbSet<DeviceStatus_ExtraInfo> DeviceStatus_ExtraInfo { get; set; }
         }
+    public class PO3DbContext : DbContext
+    {
+        public DbSet<Pricelist2> Pricelist { get; set; }
     }
+}
 
 

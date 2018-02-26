@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.SqlClient;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -44,6 +45,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
           //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device).OrderBy(c => c.assembly_order));
             List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+
             return PartialView("GetDevice", ci);
         }
         //public ActionResult Save(int? id)
@@ -61,7 +63,7 @@ namespace ConcremoteDeviceManagment.Controllers
         //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetDevice(List<DeviceConfig> ci)
+        public ActionResult GetDevice(List<Device_Pricelist> ci)
         {
 
             if (ModelState.IsValid)
@@ -72,17 +74,17 @@ namespace ConcremoteDeviceManagment.Controllers
                     {
                         foreach (var i in ci)
                         {
-                            db.DeviceConfig.Add(i);
+                            db.Device_Pricelist.Add(i);
                         }
                         db.SaveChanges();
                         ViewBag.Message = "Data successfully saved!";
-                        ModelState.Clear();
+                      //  ModelState.Clear();
                     }
                     catch
                     {
                         ModelState.AddModelError("", "Unable to save changes. Try again");
                     }
-                   // ci = new List<DeviceConfig>(db.DeviceConfig.Where(c => c.Active == true).OrderBy(c => c.assembly_order));
+                    ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
                 }
             }
             return View(ci);
