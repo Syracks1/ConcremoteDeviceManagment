@@ -18,7 +18,10 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Index()
         {
           //  var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
-            var DeviceStatus = db.DeviceStatus.Include(c => c.id);
+            //var DeviceStatus = db.ConcremoteDevice.Include(c => c.id);
+           
+                 var query = from d in db.DeviceStatus
+                                    select d;
             return View();
         }
 

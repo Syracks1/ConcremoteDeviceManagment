@@ -106,6 +106,10 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device/Create
         public ActionResult Create()
         {
+            var SelectedLeverancier = (from r in db.pricelist
+                                       select r.Leverancier).Distinct();
+            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
+            ViewBag.SelectedLeverancier = SelectedLeverancier;
             return View();
         }
 
@@ -116,6 +120,10 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
+            var SelectedLeverancier = (from r in db.pricelist
+                                       select r.Leverancier).Distinct();
+            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
+            ViewBag.SelectedLeverancier = SelectedLeverancier;
             if (ModelState.IsValid)
             {
                 db.pricelist.Add(pricelist);

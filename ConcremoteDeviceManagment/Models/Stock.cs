@@ -90,7 +90,7 @@ namespace ConcremoteDeviceManagment.Models
             public DateTime? Date { get; set; }
             public virtual DeviceType DeviceType { get; set; }
         }
-        [Table("ConcoremoteDevice")]
+        [Table("ConcremoteDevice")]
         public class ConcremoteDevice
         {
             [Key]

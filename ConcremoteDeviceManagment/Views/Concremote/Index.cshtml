@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DeviceConfig.DeviceType.name)
+          @*  @Html.DisplayNameFor(model => model.DeviceConfig.DeviceType.name)*@
         </th>
         
         @*<th>
@@ -37,14 +37,14 @@
 @foreach (var item in Model) {
     <tr>
         <td>
- @*           @Html.DisplayFor(modelItem => item.DeviceType.name)*@
+         @*   @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)*@
         </td>
         
-        @*<td>
-            @Html.DisplayFor(modelItem => item.)
-        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.ConcremoteDevice.Active)
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+    @*        @Html.DisplayFor(modelItem => item.Active)*@
         </td>
         <td>
    @*         @Html.DisplayFor(modelItem => item.oldsystem_concremote)*@
