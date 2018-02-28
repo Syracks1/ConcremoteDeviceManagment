@@ -1,11 +1,12 @@
 ﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 @using (Html.BeginForm("GetDevice", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
     <div>
         <a href="#" id="addNew">Add New</a>
     </div>
@@ -25,17 +26,17 @@
             </th>
             <th class="table-row"></th>
         </tr>
-        @if (Model != null && Model.Count > 0)
-        {
-            int j = 0;
-            foreach (var i in Model)
+       @if (Model != null && Model.Count > 0)
             {
+                int j = 0;
+                foreach (var i in Model)
+                {
         <tr>
             @Html.HiddenFor(a => a[j].id)
-            <td class="hidden">
-                @Html.HiddenFor(a => a[j].DeviceConfig.DeviceType.device_type_id)
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
             </td>
-            
+
             <td class="table-row">
                 @Html.EditorFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
             </td>
@@ -52,17 +53,13 @@
                 @Html.DisplayFor(a => a[j].DeviceConfig.Active, new { htmlAttributes = new { @class = "form-control" } })
             </td>
             <td class="table-row">
-                @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
             </td>
-            <td class="hidden">
-                @*@Html.HiddenFor(a => a[j].device_type)*@
-            </td>
-
             <td>
                 @if (j > 0)
         {
             <a href="#" class="remove">Remove</a>
-        }
+}
             </td>
         </tr>
                 j++;
@@ -85,13 +82,13 @@
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
-                var suffix = $trNew.find(':input:first').attr('id').match(/\d+/);
-                $trNew.find("tr:last").html('<a href="#" class="remove">Remove</a>');
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
-                    var oldN = $(this).attr('id');
+                    var oldN = $(this).attr('name');
                     var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
-                    $(this).attr('id', newN);
+                    $(this).attr('name', newN);
                     //Replaced value
                     var type = $(this).attr('type');
                     if (type.toLowerCase() == "text") {
