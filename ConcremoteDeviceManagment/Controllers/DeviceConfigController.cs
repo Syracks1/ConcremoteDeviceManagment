@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+     
     public class DeviceConfigController : Controller
     {
         private BasDbContext db = new BasDbContext();

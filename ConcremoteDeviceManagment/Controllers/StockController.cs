@@ -7,6 +7,8 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+    [HandleError]
+     
     public class StockController : Controller
     {
         private BasDbContext db = new BasDbContext();

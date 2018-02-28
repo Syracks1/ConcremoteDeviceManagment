@@ -2,7 +2,6 @@
 using Owin;
 using System;
 
-[assembly: OwinStartupAttribute(typeof(ConcremoteDeviceManagment.Startup))]
 namespace ConcremoteDeviceManagment
 {
     public partial class Startup

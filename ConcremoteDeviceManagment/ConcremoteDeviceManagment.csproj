@@ -204,7 +204,7 @@
     <Compile Include="Controllers\Device_extraController.cs" />
     <Compile Include="Controllers\Device_statustypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <!-- <Compile Include="Controllers\ManageController.cs" /> -->
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Global.asax.cs">

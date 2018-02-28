@@ -10,6 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+     
     public class Device_statustypesController : Controller
     {
         private BasDbContext db = new BasDbContext();

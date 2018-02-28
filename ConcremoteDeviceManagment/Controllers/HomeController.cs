@@ -14,6 +14,8 @@ using System.Diagnostics;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+   
+   
     public class HomeController : Controller
     {
         private BasDbContext db = new BasDbContext();

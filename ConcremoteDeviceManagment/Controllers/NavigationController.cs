@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+     
     public class NavigationController : Controller
     {
         // GET: Navigation
