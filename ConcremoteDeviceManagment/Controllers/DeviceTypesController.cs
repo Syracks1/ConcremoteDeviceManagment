@@ -10,11 +10,11 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
+    
     public class DeviceTypesController : Controller
     {
         private BasDbContext db = new BasDbContext();
-
+       
         // GET: DeviceTypes
         public ActionResult Index()
         {
@@ -35,7 +35,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-
+        
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
@@ -58,7 +58,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(deviceType);
         }
-
+        
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -78,7 +78,9 @@ namespace ConcremoteDeviceManagment.Models
         {
         [Key]
         public int device_type_id { get; set; }
-            public string name { get; set; }
+        [Required(ErrorMessage = "Voer een Naam in")]
+        [StringLength(255, MinimumLength = 1)]
+        public string name { get; set; }
         }
         [Table("DeviceConfig")]
         public class DeviceConfig
@@ -117,7 +119,9 @@ namespace ConcremoteDeviceManagment.Models
         {
         [Key]
         public int id { get; set; }
-            public string name { get; set; }
+        [Required(ErrorMessage = "Voer een Naam in")]
+        [StringLength(255, MinimumLength = 1)]
+        public string name { get; set; }
         }
         [Table("Device_Pricelist")]
         public class Device_Pricelist

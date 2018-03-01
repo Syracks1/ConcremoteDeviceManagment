@@ -2,29 +2,32 @@
 <html>
 <head>
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    @*<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>*@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <title>@ViewBag.Title - DeviceManagment</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            @Html.Action("TopNav", "Navigation")     @*Navbar rendering*@
-        </div>    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                @Html.Action("TopNav", "Navigation")
+            </div>
+        </div>
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <strong>&copy; @DateTime.Now.ToShortDateString() - CDM</strong>
-    </footer>
-</div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <strong>&copy; @DateTime.Now.Year - CDM</strong>
+        </footer>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("Scripts", required: false)

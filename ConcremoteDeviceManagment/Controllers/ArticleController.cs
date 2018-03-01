@@ -10,7 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
+
     public class ArticleController : Controller
     {
         private Models.BasDbContext db = new Models.BasDbContext();
@@ -103,6 +103,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
+       
 
         // GET: Device/Create
         public ActionResult Create()
@@ -113,7 +114,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.SelectedLeverancier = SelectedLeverancier;
             return View();
         }
-
+        
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -135,6 +136,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(pricelist);
 
         }
+        
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -149,6 +151,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
+
 
         // POST: Device/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

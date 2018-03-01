@@ -25,10 +25,10 @@ namespace ConcremoteDeviceManagment.Models
         {
         }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        //public static BasDbContext Create()
+        //{
+        //    return new ApplicationDbContext();
+        //}
 
         //  public System.Data.Entity.DbSet<ConcremoteDeviceManagment.DeviceType> DeviceType { get; set; }
     }
