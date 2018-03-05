@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IdentityModel.Claims;
 using System.Linq;
 using System.Web;
@@ -18,7 +20,8 @@ namespace ConcremoteDeviceManagment
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-          //  AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Webpage;
+            //  AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Webpage;
+            Database.SetInitializer<PO3DbContext>(null);
         }
     }
 }

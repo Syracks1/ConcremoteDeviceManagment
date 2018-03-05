@@ -87,6 +87,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
+        [Authorize]
         // GET: Stock/Create
         public ActionResult Create()
         {
@@ -112,6 +113,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
+        [Authorize]
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -141,6 +143,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
+        [Authorize]
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
         {

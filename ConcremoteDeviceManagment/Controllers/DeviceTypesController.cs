@@ -35,13 +35,13 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-        
+        [Authorize]
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
             return View();
         }
-
+        [Authorize]
         // POST: DeviceTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,7 +58,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(deviceType);
         }
-        
+        [Authorize]
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,7 +73,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-
+        [Authorize]
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,7 +89,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-
+        [Authorize]
         // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)
         {

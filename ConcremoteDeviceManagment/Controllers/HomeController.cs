@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -25,16 +26,17 @@ namespace ConcremoteDeviceManagment.Controllers
             var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
             ViewBag.SelectedDevice = SelectedDevices;
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-            
-            
+
+
             return View();
         }
 
         [HttpGet]
         public PartialViewResult GetDevice(string Device)
         {
-             List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true));
+           // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true));
 
+            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).GroupBy(c => c.DeviceConfig.Date).FirstOrDefault());
             return PartialView(ci);
         }
         //[HttpPost]
