@@ -201,8 +201,31 @@ namespace ConcremoteDeviceManagment.Models
         public string OldSystem_Prijslijst_ItemId { get; set; }
         //   public virtual Stock Stock { get; set; }
     }
-    
-
+    [Table("AspNetUsers")]
+    public class AspNetUsers
+    {
+        [Key]
+        public string Id { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public string PasswordHash { get; set; }
+    }
+    [Table("AspNetUserRoles")]
+    public class AspNetUserRoles
+    {
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
+    }
+    [Table("AspNetRoles")]
+    public class AspNetRoles
+    {
+        [Key]
+        public string id { get; set; }
+        public string Name { get; set; }
+    }
     public class BasDbContext : DbContext
         {
             //[ForeignKey("Price_id")]
@@ -216,7 +239,11 @@ namespace ConcremoteDeviceManagment.Models
             public DbSet<Device_Pricelist> Device_Pricelist { get; set; }
             public DbSet<DeviceConfig_ExtraInfo> DeviceConfig_ExtraInfo { get; set; }
             public DbSet<DeviceStatus_ExtraInfo> DeviceStatus_ExtraInfo { get; set; }
-        }
+            public DbSet<AspNetUsers> AspNetUsers { get; set; }
+            public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+            public DbSet<AspNetRoles> AspNetRoles { get; set; }
+
+    }
     public class PO3DbContext : DbContext
     {
         public DbSet<Pricelist2> Pricelist { get; set; }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ConcremoteDeviceManagment.Models;
+using System.Security.Cryptography;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -60,7 +61,24 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        public static string HashPassword(string Password)
+        {
+            byte[] salt;
+            byte[] buffer2;
+            if (Password == null)
+            {
+                throw new ArgumentNullException("Password");
+            }
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(Password, 0x10, 0x3e8))
+            {
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            return Convert.ToBase64String(dst);
+        }
         //
         // POST: /Account/Login
         [HttpPost]
@@ -75,7 +93,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -392,7 +410,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Stock");
         }
 
         //
