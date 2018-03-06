@@ -35,7 +35,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(device_statustypes);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Create
         public ActionResult Create()
         {
@@ -58,7 +58,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(device_statustypes);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,7 +89,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(device_statustypes);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Delete/5
         public ActionResult Delete(int? id)
         {

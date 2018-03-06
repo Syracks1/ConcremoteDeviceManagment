@@ -20,8 +20,6 @@ namespace ConcremoteDeviceManagment
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //  AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Webpage;
-            Database.SetInitializer<PO3DbContext>(null);
         }
     }
 }

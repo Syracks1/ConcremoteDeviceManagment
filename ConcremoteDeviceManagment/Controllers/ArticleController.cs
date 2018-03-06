@@ -104,7 +104,8 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(pricelist);
         }
 
-        
+        [Authorize(Roles = "Admin")]
+
         // GET: Device/Create
         public ActionResult Create()
         {
@@ -136,7 +137,8 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(pricelist);
 
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -168,7 +170,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Device/Delete/5
         public ActionResult Delete(int? id)
         {

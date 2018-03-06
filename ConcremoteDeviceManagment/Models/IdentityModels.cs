@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using ConcremoteDeviceManagment.Models;
 namespace ConcremoteDeviceManagment.Models
 {
-    //    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+  // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -18,23 +18,18 @@ namespace ConcremoteDeviceManagment.Models
         }
     }
 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext()
+            : base("BasDbContext", throwIfV1Schema: false)
+        {
+        }
 
-    //public class PO3DbContext : IdentityDbContext<ApplicationUser>
-    //{
-    //    public PO3DbContext()
-    //        : base("Po3DbContext", throwIfV1Schema: false)
-    //    {
-    //    }
-
-
-    //    public static PO3DbContext Create()
-    //    {
-    //        return new PO3DbContext();
-    //    }
-
-        //public System.Data.Entity.DbSet<ConcremoteDeviceManagment.DeviceType> DeviceType { get; set; }
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
     }
-//}
-
+}
 
 

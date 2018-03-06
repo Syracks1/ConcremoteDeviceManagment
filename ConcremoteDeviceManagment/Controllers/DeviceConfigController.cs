@@ -15,6 +15,7 @@ namespace ConcremoteDeviceManagment.Controllers
     public class DeviceConfigController : Controller
     {
         private BasDbContext db = new BasDbContext();
+        [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
             

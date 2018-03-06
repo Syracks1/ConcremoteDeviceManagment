@@ -201,83 +201,7 @@ namespace ConcremoteDeviceManagment.Models
         public string OldSystem_Prijslijst_ItemId { get; set; }
         //   public virtual Stock Stock { get; set; }
     }
-    [Table("Account")]
-    public class Account
-    {
-        [Key]
-        public int Contact_id { get; set; }
-        [Display(Name = "Password")]
-        [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
-        public DateTimeOffset LastLogin { get; set; }
-        public string PasswordForgotToken { get; set;}
-        public DateTimeOffset? PasswordForgotTokenCreatedOn { get; set; }
-        public int AccountType { get; set; }
-        public bool Active { get; set; }
-        public virtual Contact Contact { get; set; }
-    }
-    [Table("Contact")]
-    public class Contact
-    {
-        public int Id { get; set; }
-        public bool Active { get; set; }
-        //[EmailAddress]
-        //[Required(ErrorMessage = "Field can't be empty")]
-        //[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
-        public string Email { get; set; }
-        public int Language_Id { get; set; }
-        public string Initials { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Prefix { get; set; }
-        public string Titles { get; set; }
-        public string Suffix { get; set; }
-        public string Gender { get; set; }
-        public bool Welder { get; set; }
-        public bool Inspector { get; set; }
-        public string Phone { get; set; }
-        public string Fax { get; set; }
-        public string Function { get; set; }
-        public string Website { get; set; }
-        public string Remarks { get; set; }
-        public string Cellphone { get; set; }
-        public string PhonePrivate { get; set; }
-        public string EmailPrivate { get; set; }
-        public string Address { get; set; }
-        public string Zipcode { get; set; }
-        public string City { get; set; }
-        public int County_Id { get; set; }
-        public string Salutation { get; set; }
-        public string SalutationFormally { get; set; }
-        public string SalutationInFormally { get; set; }
-        public int CreatedBy_Contact_Id { get; set; }
-        public string OldSystem_Contactpersoon_PersonID { get; set; }
-        public string OldSystem_Contactpersoon_Email { get; set; }
-        public string OldSystem_Personen_PersonID { get; set; }
-        public string OldSystem_Personen_Actueel { get; set; }
-        public string OldSystem_Personen_roleID { get; set; }
-        public string OldSystem_Useraccounts_useraccountID { get; set; }
-        public string OldSystem_Useraccounts_PersonID_sh { get; set; }
-        public string OldSystem_Useraccounts_PersonID { get; set; }
-        public string OldSystem_Useraccounts_roleID { get; set; }
-        public string OldSystem_Useraccounts_password_changed { get; set; }
-        public string OldSystem_Useraccounts_Online_username { get; set; }
-        public string OldSystem_Useraccounts_online_autorisatie { get; set; }
-        public string OldSystem_Useraccounts_lasserlijst_notify { get; set; }
-        public string OldSystem_Useraccounts_richtproces_notify { get; set; }
-        public string OldSystem_Useraccounts_guestUser_notify { get; set; }
-        public string OldSystem_Useraccounts_dashboard_profile { get; set; }
-        public string OldSystem_Useraccounts_Is_Temp_Client { get; set; }
-        public string OldSystem_Useraccounts_Admindashboard_profile { get; set; }
-        public string OldSystem_Useraccounts_Rightpanel_profile { get; set; }
-        public string Oldsystem_Useraccounts_IsLoggedIn { get; set; }
-        public string OldSystem_Useraccounts_CompanyFilter { get; set; }
-        public string OldSystem_Useraccounts_dokagebruiker { get; set; }
-        public string CultureCode { get; set; }
-        public int CompressiveStrengthUnit { get; set;}
-        public int TemperatureUnit { get; set; }
-        public string Abbreviation { get; set; }
-    }
+    
 
     public class BasDbContext : DbContext
         {
@@ -296,8 +220,7 @@ namespace ConcremoteDeviceManagment.Models
     public class PO3DbContext : DbContext
     {
         public DbSet<Pricelist2> Pricelist { get; set; }
-        public DbSet<Account> Account { get; set; }
-        public DbSet<Contact> Contact { get; set; }
+        
     }
 }
 

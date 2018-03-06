@@ -35,7 +35,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
@@ -58,7 +58,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(deviceType);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,7 +73,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,7 +89,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)
         {
