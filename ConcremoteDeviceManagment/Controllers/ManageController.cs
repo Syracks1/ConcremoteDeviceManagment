@@ -104,15 +104,15 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var Account = from t in db.AspNetUserRoles
                           select t;
-                         
+
             ViewBag.Account = Account;
             //var q = (from t in db.AspNetUserRoles
             //         join sc in db.AspNetUsers on t.UserId equals sc.Id
-                 
+
             //         select new { t., t.Middle, t.LastName, st.StatusName, d.Qualification });
             return View(Account);
         }
-        //
+
         // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {

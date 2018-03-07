@@ -214,7 +214,9 @@ namespace ConcremoteDeviceManagment.Models
     [Table("AspNetUserRoles")]
     public class AspNetUserRoles
     {
+        [Key]
         public string UserId { get; set; }
+        
         public string RoleId { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetRoles AspNetRoles { get; set; }
