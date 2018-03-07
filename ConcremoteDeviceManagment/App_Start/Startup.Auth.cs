@@ -31,6 +31,7 @@ namespace ConcremoteDeviceManagment
             {
                 
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                ExpireTimeSpan = TimeSpan.FromMinutes(30),
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {

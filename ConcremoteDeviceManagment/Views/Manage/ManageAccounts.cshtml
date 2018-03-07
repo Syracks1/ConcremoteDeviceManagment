@@ -1,5 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.AspNetUserRoles>
-
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.AspNetUsers>
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,27 +12,27 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayNameFor(model => model.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetRoles.Name)
+            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.PasswordHash)
-        </th>
+        @*<th>
+           @Html.DisplayNameFor(model => model.AspNetUsers.PasswordHash)
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+            @Html.DisplayFor(modelItem => item.Username)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetRoles.Name)
+            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.PasswordHash)
+            @Html.DisplayFor(modelItem => item.LockoutEnabled)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AspNetUsers.Id }) |

@@ -102,14 +102,14 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageAccounts()
         {
-            var Account = from t in db.AspNetUserRoles
-                          select t;
-
-            ViewBag.Account = Account;
-            //var q = (from t in db.AspNetUserRoles
-            //         join sc in db.AspNetUsers on t.UserId equals sc.Id
-
-            //         select new { t., t.Middle, t.LastName, st.StatusName, d.Qualification });
+            //var Account = (from d in db.AspNetUserRoles
+            //               join st in db.AspNetUsers on d.UserId equals st.Id
+            //               join dt in db.AspNetRoles on d.RoleId equals dt.Id
+            //              where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
+            //               select new { st.Email, dt.Id }).ToList();
+            var Account = from d in db.AspNetUsers
+                          //join st in db.AspNetRoles 
+                            select d;
             return View(Account);
         }
 

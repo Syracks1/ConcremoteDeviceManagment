@@ -210,22 +210,35 @@ namespace ConcremoteDeviceManagment.Models
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
+        public string SecurityStamp { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
+        public bool TwoFactorEnabled { get; set; }
+        public DateTime? LockoutEndDateUtc { get; set; }
+        public bool LockoutEnabled { get; set; }
+        public int AccessFailedCount { get; set; }
+        public string Username { get; set; }
     }
     [Table("AspNetUserRoles")]
     public class AspNetUserRoles
     {
         [Key]
+        [Column(Order = 0)]
         public string UserId { get; set; }
-        
+        [Key]
+        [Column(Order = 1)]
         public string RoleId { get; set; }
+        [Key]
+        [Column(Order = 0)]
         public virtual AspNetUsers AspNetUsers { get; set; }
+       // [Key][Column(Order = 1)]
         public virtual AspNetRoles AspNetRoles { get; set; }
     }
     [Table("AspNetRoles")]
     public class AspNetRoles
     {
         [Key]
-        public string id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
     public class BasDbContext : DbContext
