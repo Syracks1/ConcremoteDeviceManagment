@@ -108,7 +108,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //              where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
             //               select new { st.Email, dt.Id }).ToList();
             var Account = from d in db.AspNetUserRoles
-                          //join st in db.AspNetRoles 
+             //             group d by d.AspNetRoles.Id.Max() into g
                             select d;
             return View(Account);
         }

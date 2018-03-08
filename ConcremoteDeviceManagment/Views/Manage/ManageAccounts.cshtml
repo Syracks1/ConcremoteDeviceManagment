@@ -12,14 +12,14 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Email")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RoleId)
+            @Html.DisplayName("Gebruikerslevel")
         </th>
-        @*<th>
-           @Html.DisplayNameFor(model => model.AspNetUsers.PasswordHash)
-        </th>*@
+       <th>
+           @Html.DisplayName("Email Besvestigd")
+        </th>
         <th></th>
     </tr>
 
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.AspNetRoles.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.LockoutEndDateUtc)
+            @Html.DisplayFor(modelItem => item.AspNetUsers.EmailConfirmed)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AspNetUsers.Id }) |
