@@ -31,7 +31,7 @@ namespace ConcremoteDeviceManagment
             {             
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 CookieName = "Ik_ben_een_kansloze_cookie_die_informatie_opslaat",
-                ExpireTimeSpan = TimeSpan.FromMinutes(2),
+                ExpireTimeSpan = TimeSpan.FromHours(2.5),
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {

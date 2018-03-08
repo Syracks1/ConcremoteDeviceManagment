@@ -13,47 +13,37 @@
 <table class="table">
     <tr>
         <th>
-          @*  @Html.DisplayNameFor(model => model.DeviceConfig.DeviceType.name)*@
+            @Html.DisplayName("Device Naam")
         </th>
-        
-        @*<th>
-            @Html.DisplayName("IMEI Nummer")
-        </th>*@
         <th>
             @Html.DisplayName("In Gebruik")
         </th>
         <th>
-            @Html.DisplayName("Concremote OldSystem")
+            @Html.DisplayName("Config Versie")
         </th>
         <th>
-            @Html.DisplayName("Validatie Toegestaan")
+            @Html.DisplayName("Config Datum")
         </th>
         <th>
-            @Html.DisplayName("something")
+            @Html.DisplayName("Status")
         </th>
         <th></th>
     </tr>
 
-@*@foreach (var item in Model) {
+@foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
         </td>
         
         <td>
-            @Html.DisplayFor(modelItem => item.id)
+            @Html.DisplayFor(modelItem => item.ConcremoteDevice.Active)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceConfig.Active)
+            @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
         </td>
         <td>
-           @Html.DisplayFor(modelItem => item.oldsystem_concremote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Allowvalidation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.device_type_id)
+          @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Device_Statustypes.name)
@@ -64,6 +54,6 @@
             <button onclick="location.href='@Url.Action("Delete", "Concremote", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
-}*@
+}
 
 </table>
