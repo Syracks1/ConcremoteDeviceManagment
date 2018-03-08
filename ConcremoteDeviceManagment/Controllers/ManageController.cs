@@ -107,7 +107,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //               join dt in db.AspNetRoles on d.RoleId equals dt.Id
             //              where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
             //               select new { st.Email, dt.Id }).ToList();
-            var Account = from d in db.AspNetUsers
+            var Account = from d in db.AspNetUserRoles
                           //join st in db.AspNetRoles 
                             select d;
             return View(Account);

@@ -228,10 +228,9 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         [Column(Order = 1)]
         public string RoleId { get; set; }
-        [Key]
-        [Column(Order = 0)]
+        [ForeignKey("UserId")]
         public virtual AspNetUsers AspNetUsers { get; set; }
-       // [Key][Column(Order = 1)]
+        [ForeignKey("RoleId")]
         public virtual AspNetRoles AspNetRoles { get; set; }
     }
     [Table("AspNetRoles")]
