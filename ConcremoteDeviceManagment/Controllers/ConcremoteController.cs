@@ -10,7 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
+
     public class ConcremoteController : Controller
     {
         private BasDbContext db = new BasDbContext();
@@ -18,12 +18,10 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote
         public ActionResult Index()
         {
-          //  var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
-            //var DeviceStatus = db.ConcremoteDevice.Include(c => c.id);
-           
-                 var query = from d in db.DeviceStatus
-                                    select d;
+            var query = from d in db.DeviceStatus
+                        select d;
             return View(query);
+
         }
 
         //// GET: Concremote/Details/5

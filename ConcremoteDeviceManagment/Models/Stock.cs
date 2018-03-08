@@ -101,21 +101,27 @@ namespace ConcremoteDeviceManagment.Models
             public int id { get; set; }
             public bool Active { get; set; }
         }
-        [Table("Devicestatus")]
-        public class DeviceStatus
-        {
+    [Table("Devicestatus")]
+    public class DeviceStatus
+    {
         [Key]
+        [Column(Order = 0)]
         public int id { get; set; }
-            public int ConcremoteDevice_id { get; set; }
-            public int Device_statustypes_id { get; set; }
-            public string Employee_1 { get; set; }
-            public string Employee_2 { get; set; }
-            public DateTime Sign_Date { get; set; }
-            public virtual DeviceConfig DeviceConfig { get; set; }
-            public virtual ConcremoteDevice ConcremoteDevice { get; set; }
-            public virtual Device_statustypes Device_Statustypes { get; set; }
-        }
-        [Table("Device_statustypes")]
+        public int Device_statustypes_id { get; set; }
+        public int ConcremoteDevice_id { get; set; }
+        public int DeviceConfig_id { get; set; }
+        public string Employee_1 { get; set; }
+        public string Employee_2 { get; set; }
+        public DateTime Sign_Date { get; set; }
+        [ForeignKey("DeviceConfig_id")]
+        public virtual DeviceConfig DeviceConfig { get; set; }
+        [ForeignKey("ConcremoteDevice_id")]
+        public virtual ConcremoteDevice ConcremoteDevice { get; set; }
+        [ForeignKey("Device_statustypes_id")]
+        public virtual Device_statustypes Device_Statustypes { get; set; }
+    }
+
+    [Table("Device_statustypes")]
         public class Device_statustypes
         {
         [Key]
