@@ -34,29 +34,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id)
+            @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
         </td>
         
         <td>
-            @Html.DisplayFor(modelItem => item.ConcremoteDevice.Active)
+            @Html.DisplayFor(modelItem => item.id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
+            @Html.DisplayFor(modelItem => item.DeviceConfig.Active)
         </td>
         <td>
-           @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
+           @Html.DisplayFor(modelItem => item.oldsystem_concremote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allowvalidation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.device_type_id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Device_Statustypes.name)
-        </td>
-        <td>
-       @*   @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.device_type_id)*@
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Device_Statustypes.name)*@
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
@@ -64,6 +64,6 @@
             <button onclick="location.href='@Url.Action("Delete", "Concremote", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
         </td>
     </tr>
-}
+}*@
 
 </table>
