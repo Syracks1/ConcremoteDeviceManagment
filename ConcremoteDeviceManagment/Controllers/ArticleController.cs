@@ -10,6 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
+    [RequireHttps]
     [HandleError]
     public class ArticleController : Controller
     {
