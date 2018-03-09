@@ -101,21 +101,27 @@ namespace ConcremoteDeviceManagment.Models
             public int id { get; set; }
             public bool Active { get; set; }
         }
-        [Table("Devicestatus")]
-        public class DeviceStatus
-        {
+    [Table("Devicestatus")]
+    public class DeviceStatus
+    {
         [Key]
+        [Column(Order = 0)]
         public int id { get; set; }
-            public int ConcremoteDevice_id { get; set; }
-            public int Device_statustypes_id { get; set; }
-            public string Employee_1 { get; set; }
-            public string Employee_2 { get; set; }
-            public DateTime Sign_Date { get; set; }
-            public virtual DeviceConfig DeviceConfig { get; set; }
-            public virtual ConcremoteDevice ConcremoteDevice { get; set; }
-            public virtual Device_statustypes Device_Statustypes { get; set; }
-        }
-        [Table("Device_statustypes")]
+        public int Device_statustypes_id { get; set; }
+        public int ConcremoteDevice_id { get; set; }
+        public int DeviceConfig_id { get; set; }
+        public string Employee_1 { get; set; }
+        public string Employee_2 { get; set; }
+        public DateTime Sign_Date { get; set; }
+        [ForeignKey("DeviceConfig_id")]
+        public virtual DeviceConfig DeviceConfig { get; set; }
+        [ForeignKey("ConcremoteDevice_id")]
+        public virtual ConcremoteDevice ConcremoteDevice { get; set; }
+        [ForeignKey("Device_statustypes_id")]
+        public virtual Device_statustypes Device_Statustypes { get; set; }
+    }
+
+    [Table("Device_statustypes")]
         public class Device_statustypes
         {
         [Key]
@@ -152,7 +158,9 @@ namespace ConcremoteDeviceManagment.Models
             public int DeviceStatus_id { get; set; }
             public int DeviceConfig_ExtraInfo_id { get; set; }
             public string name { get; set; }
+            [ForeignKey("DeviceConfig_ExtraInfo_id")]
             public virtual DeviceConfig_ExtraInfo DeviceConfig_ExtraInfo { get; set; }
+            [ForeignKey("DeviceStatus_id")]
             public virtual DeviceStatus DeviceStatus { get; set; }
     }
     [Table("Pricelist")]
@@ -210,22 +218,34 @@ namespace ConcremoteDeviceManagment.Models
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
+        public string SecurityStamp { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
+        public bool TwoFactorEnabled { get; set; }
+        public DateTime? LockoutEndDateUtc { get; set; }
+        public bool LockoutEnabled { get; set; }
+        public int AccessFailedCount { get; set; }
+        public string Username { get; set; }
     }
     [Table("AspNetUserRoles")]
     public class AspNetUserRoles
     {
         [Key]
+        [Column(Order = 0)]
         public string UserId { get; set; }
-        
+        [Key]
+        [Column(Order = 1)]
         public string RoleId { get; set; }
+        [ForeignKey("UserId")]
         public virtual AspNetUsers AspNetUsers { get; set; }
+        [ForeignKey("RoleId")]
         public virtual AspNetRoles AspNetRoles { get; set; }
     }
     [Table("AspNetRoles")]
     public class AspNetRoles
     {
         [Key]
-        public string id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
     public class BasDbContext : DbContext

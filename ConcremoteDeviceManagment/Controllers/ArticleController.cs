@@ -10,7 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-
+    [HandleError]
     public class ArticleController : Controller
     {
         private Models.BasDbContext db = new Models.BasDbContext();

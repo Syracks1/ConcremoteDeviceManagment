@@ -53,10 +53,11 @@ namespace ConcremoteDeviceManagment
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-               // RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
+                
             };
 
             // Configure user lockout defaults

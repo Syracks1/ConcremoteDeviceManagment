@@ -28,9 +28,10 @@ namespace ConcremoteDeviceManagment
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                
+            {             
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                CookieName = "Ik_ben_een_kansloze_cookie_die_informatie_opslaat",
+                ExpireTimeSpan = TimeSpan.FromHours(2.5),
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {

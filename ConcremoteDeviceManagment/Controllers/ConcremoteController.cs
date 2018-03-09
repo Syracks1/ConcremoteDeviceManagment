@@ -10,36 +10,35 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
+
     public class ConcremoteController : Controller
     {
         private BasDbContext db = new BasDbContext();
-
+        [Authorize(Roles = "BAS employee, Assembly, Admin")]
         // GET: Concremote
         public ActionResult Index()
         {
-          //  var extradevice = db.Device_Extra.Include(d => d.ConcremoteDevice);
-            //var DeviceStatus = db.ConcremoteDevice.Include(c => c.id);
-           
-                 var query = from d in db.DeviceStatus
-                                    select d;
+            var query = from d in db.DeviceStatus_ExtraInfo
+                        select d;
             return View(query);
-        }
 
-        //// GET: Concremote/Details/5
+        }
+        [Authorize(Roles = "Assembly, Admin")]
+        // GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
-            if (concremoteDevice == null)
+             DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
+            if (deviceStatus_ExtraInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(concremoteDevice);
+            return View(deviceStatus_ExtraInfo);
         }
+        [Authorize(Roles = "Admin")]
 
         // GET: Concremote/Create
         public ActionResult Create()
@@ -65,6 +64,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
             return View(concremoteDevice);
         }
+        [Authorize(Roles = "Admin")]
 
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
@@ -73,13 +73,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
-            if (concremoteDevice == null)
+            DeviceStatus deviceStatus = db.DeviceStatus.Find(id);
+            if (deviceStatus == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
-            return View(concremoteDevice);
+//ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", deviceStatus.id);
+            return View(deviceStatus);
         }
 
         // POST: Concremote/Edit/5
@@ -87,7 +87,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,device_id,imei,active,oldsystem_concremote,Allowvalidation,device_type_id")] ConcremoteDevice concremoteDevice)
+        public ActionResult Edit([Bind(Include = "id")] ConcremoteDevice concremoteDevice)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
+        //    ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
             return View(concremoteDevice);
         }
 

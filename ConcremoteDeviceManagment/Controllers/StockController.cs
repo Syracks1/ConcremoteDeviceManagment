@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -20,7 +21,6 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.CurrentStockSort = sortOrder == "current" ? "current_desc" : "current";
             ViewBag.MinStockSort = sortOrder == "min_stock" ? "min_stock_desc" : "min_stock";
             ViewBag.MaxStockSort = sortOrder == "max_stock" ? "max_stock_desc" : "max_stock";
-
             var stock = from d in db.Stock
                             where d.Pricelist.Active == true
                         select d;
