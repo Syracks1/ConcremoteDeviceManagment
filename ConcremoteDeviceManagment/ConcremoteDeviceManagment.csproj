@@ -238,6 +238,11 @@
     <!-- <Compile Include="Controllers\ManageController.cs" /> -->
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="DataSetFinal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +285,17 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="DataSetFinal.xsc">
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetFinal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetFinal.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetFinal.xss">
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
