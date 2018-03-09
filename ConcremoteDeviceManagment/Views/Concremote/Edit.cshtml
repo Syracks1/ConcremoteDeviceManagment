@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.DeviceStatus
+﻿@model ConcremoteDeviceManagment.Models.DeviceStatus_ExtraInfo
 
 @{
     ViewBag.Title = "Edit";
@@ -11,70 +11,76 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ConcremoteDevice</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
-       @*<div class="form-group">
-                @Html.LabelFor(model => model.device_id, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.device_id, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.device_id, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-        <div class="form-group">
-                @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Datum, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.imei, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConcremoteDevice.Active, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="col-md-10 checkbox">
-                    @Html.EditorFor(model => model.ConcremoteDevice.Active)
-                        @Html.ValidationMessageFor(model => model.ConcremoteDevice.Active, "", new { @class = "text-danger" })
-                </div>
-            </div>
+<div class="form-horizontal">
+    <h4>ConcremoteDevice</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeviceStatus.DeviceConfig.DeviceType.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DeviceStatus.DeviceConfig.DeviceType.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DeviceStatus.DeviceConfig.DeviceType.name, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.oldsystem_concremote, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.oldsystem_concremote, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.oldsystem_concremote, "", new { @class = "text-danger" })*@
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeviceStatus.Employee_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DeviceStatus.Employee_1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DeviceStatus.Employee_1, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Allowvalidation, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="col-md-10 checkbox">
-                    @*@Html.EditorFor(model => model.Allowvalidation)
-                        @Html.ValidationMessageFor(model => model.Allowvalidation, "", new { @class = "text-danger" })*@
-                </div>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeviceStatus.Sign_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DeviceStatus.Sign_Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DeviceStatus.Sign_Date, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.DeviceType.device_type_id, "device_type_id", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @*@Html.DropDownList("device_type_id", null, htmlAttributes: new { @class = "form-control" })*@
-                @*@Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeviceStatus.ConcremoteDevice.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="col-md-10 checkbox">
+                @Html.EditorFor(model => model.DeviceStatus.ConcremoteDevice.Active)
+                @Html.ValidationMessageFor(model => model.DeviceStatus.ConcremoteDevice.Active, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.oldsystem_concremote, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.oldsystem_concremote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.oldsystem_concremote, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Allowvalidation, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <div class="col-md-10 checkbox">
+                @*@Html.EditorFor(model => model.Allowvalidation)
+                    @Html.ValidationMessageFor(model => model.Allowvalidation, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.DeviceType.device_type_id, "device_type_id", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @*@Html.DropDownList("device_type_id", null, htmlAttributes: new { @class = "form-control" })*@
+            @*@Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

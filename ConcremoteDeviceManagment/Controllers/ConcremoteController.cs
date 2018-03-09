@@ -80,17 +80,17 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceStatus deviceStatus = db.DeviceStatus.Find(id);
-            if (deviceStatus == null)
+            DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
+            if (deviceStatus_ExtraInfo == null)
             {
                 return HttpNotFound();
             }
-//ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", deviceStatus.id);
-            return View(deviceStatus);
+            return View(deviceStatus_ExtraInfo);
         }
 
         // POST: Concremote/Edit/5
