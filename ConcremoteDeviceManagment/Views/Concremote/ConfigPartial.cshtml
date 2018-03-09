@@ -1,0 +1,40 @@
+﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th class="table-row">
+            @Html.DisplayName("BAS artikelnummer")
+        </th>
+        <th class="table-row">
+            @Html.DisplayName("Beschrijving")
+        </th>
+        <th class="table-row">
+            @Html.DisplayName("Aantal")
+        </th>
+        <th class="table-row">
+            @Html.DisplayName("Bouw Volgorde")
+        </th>
+        <th class="table-row"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceConfig.Device_config_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pricelist.CategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.assembly_order)
+        </td>       
+    </tr>
+}
+
+</table>

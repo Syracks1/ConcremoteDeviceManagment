@@ -14,7 +14,7 @@ namespace ConcremoteDeviceManagment.Controllers
     public class ConcremoteController : Controller
     {
         private BasDbContext db = new BasDbContext();
-        [Authorize(Roles = "BAS employee, Assembly, Admin")]
+       //[Authorize(Roles = "BAS employee, Assembly, Admin")]
         // GET: Concremote
         public ActionResult Index()
         {
@@ -23,10 +23,11 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(query);
 
         }
-        [Authorize(Roles = "Assembly, Admin")]
+        //[Authorize(Roles = "Assembly, Admin")]
         // GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +39,16 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceStatus_ExtraInfo);
         }
+        [HttpGet]
+        public PartialViewResult ConfigPartial(string Device)
+        {
+            var query = from d in db.Device_Pricelist
+                        select d;
+            // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == r.DeviceConfig.Device_config_id));
+
+            return PartialView("ConfigPartial", query);
+        }
+
         [Authorize(Roles = "Admin")]
 
         // GET: Concremote/Create

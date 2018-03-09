@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.DeviceStatus_ExtraInfo
+﻿@model  ConcremoteDeviceManagment.Models.DeviceStatus_ExtraInfo
 
 @{
     ViewBag.Title = "Details";
@@ -15,7 +15,7 @@
             @Html.DisplayName("Device Serie Nummer")
         </dt>
         <dd>
-            FS120180220
+            @Html.DisplayFor(model => model.name)
         </dd>
         <dt>
             @Html.DisplayName("Device Type")
@@ -35,14 +35,12 @@
         <dd>
             G356896031635684
         </dd>
-
         <dt>
             @Html.DisplayName("Bluetooth ID")
         </dt>
-
         <dd>
+            1
         </dd>
-
         <dt>
             @Html.DisplayName("Telefoon")
         </dt>
@@ -50,17 +48,66 @@
             0031653102699
         </dd>
         <dt>
-            @Html.DisplayName("Onderdeellijst, met identificatie")
+            @Html.DisplayName("Medewerker 1")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.active)*@
+            @Html.DisplayFor(model => model.DeviceStatus.Employee_1)
+        </dd>
+        <dt>
+            @Html.DisplayName("Medewerker 2")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeviceStatus.Employee_2)
+        </dd>
+        <dt>
+            @Html.DisplayName("SignDate")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeviceStatus.Sign_Date)
         </dd>
         <dt>
             @Html.DisplayName("Status")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.)*@
+            @Html.DisplayFor(model => model.DeviceStatus.Device_Statustypes.name)
         </dd>
+        <dt>
+            @Html.DisplayName("Onderdeellijst")
+        </dt>
+        <dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th class="table-row">
+                        @Html.DisplayName("BAS artikelnummer")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Beschrijving")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Aantal")
+                    </th>
+                    <th class="table-row">
+                        @Html.DisplayName("Bouw Volgorde")
+                    </th>
+                    <th class="table-row"></th>
+                </tr>
+            @*    @foreach (var item in Model)*@
+            
+                <tr>
+                    <td>
+                        CMI100
+                    </td>
+                    <td>
+                       Schroef
+                    </td>
+                    <td>12</td>
+                    <td>1</td>
+                </tr>
+        
+            </table>
+        </dd>
+        
     </dl>
 </div>
 <p>
