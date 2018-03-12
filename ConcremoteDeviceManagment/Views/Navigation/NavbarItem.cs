@@ -42,7 +42,7 @@ namespace ConcremoteDeviceManagment.Models
             topNav.Add(new NavbarItem() { Id = 8, action = "Index", nameOption = "Device Type", controller = "DeviceTypes", isParent = true, parentId = 7 });
             topNav.Add(new NavbarItem() { Id = 9, action = "Index", nameOption = "Status Types", controller = "Device_statustypes", isParent = false, parentId = 7 });
             //Link to webserver03
-            topNav.Add(new NavbarItem() { Id = 10, action = "", nameOption = "Portal", isParent = false, parentId = -1 });         
+            //topNav.Add(new NavbarItem() { Id = 10, action = "http://webserver03/index.php/", nameOption = "Portal", isParent = false, parentId = -1 });         
 
 
             return topNav;

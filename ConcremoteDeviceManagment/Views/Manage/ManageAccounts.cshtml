@@ -20,6 +20,9 @@
        <th>
            @Html.DisplayName("Email Besvestigd")
         </th>
+        <th>
+            @Html.DisplayName("Banned einddatum")
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUsers.EmailConfirmed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.LockoutEndDateUtc)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AspNetUsers.Id }) |
