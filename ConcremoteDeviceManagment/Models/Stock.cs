@@ -98,7 +98,7 @@ namespace ConcremoteDeviceManagment.Models
         public class ConcremoteDevice
         {
             [Key]
-            public int id { get; set; }
+            public string id { get; set; }
             public bool Active { get; set; }
         }
     [Table("Devicestatus")]
@@ -108,7 +108,7 @@ namespace ConcremoteDeviceManagment.Models
         [Column(Order = 0)]
         public int id { get; set; }
         public int Device_statustypes_id { get; set; }
-        public int ConcremoteDevice_id { get; set; }
+        public string ConcremoteDevice_id { get; set; }
         public int DeviceConfig_id { get; set; }
         public string Employee_1 { get; set; }
         public string Employee_2 { get; set; }
