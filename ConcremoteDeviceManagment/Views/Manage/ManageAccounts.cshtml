@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.AspNetUserRoles>
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Accounts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
+<h2>Accounts</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,8 +17,8 @@
         <th>
             @Html.DisplayName("Gebruikerslevel")
         </th>
-       <th>
-           @Html.DisplayName("Email Besvestigd")
+        <th>
+            @Html.DisplayName("Email Besvestigd")
         </th>
         <th>
             @Html.DisplayName("Banned einddatum")
@@ -26,26 +26,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetRoles.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.EmailConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.LockoutEndDateUtc)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AspNetUsers.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetRoles.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.EmailConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.LockoutEndDateUtc)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>
+            </td>
+        </tr>
+    }
 
 </table>
+<button onclick="location.href='@Url.Action("Index", "Manage")';return false; " class="btn btn-primary">Back to list</button>
+

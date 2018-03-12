@@ -12,30 +12,30 @@
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
-            [
             @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
+             {
+        @*@Html.ActionLink("Change your password", "ChangePassword")*@
+                <button onclick="location.href='@Url.Action("ChangePassword", "Manage")';return false;" class="btn btn-primary">Change Password</button>
+             }
             else
             {
-                @Html.ActionLink("Create", "SetPassword")
+                <button onclick="location.href='@Url.Action("SetPassword", "Manage")';return false;" class="btn btn-primary">Create</button>
+
             }
-            ]
         </dd>
-        <dt>External Logins:</dt>
+        @*<dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
+
         </dd>
-        @*
+        
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
 
              See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
 
              Uncomment the following block after you have set up two-factor authentication
-        *@
+        
 
         <dt>Phone Number:</dt>
         <dd>
@@ -54,12 +54,18 @@
             {
                 <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")</text>
             }
+        </dd>*@
+       <dt>
+             
+       </dt>
+        <dd>
+              
         </dd>
-
         <dt>Manage Accounts</dt>
         <dd>
             <p>
-                [@Html.ActionLink("test", "ManageAccounts", "Manage", routeValues: null, htmlAttributes: new { id = "manageLink" })]
+                @*@Html.ActionLink("test", "ManageAccounts", "Manage", routeValues: null, htmlAttributes: new { id = "manageLink" })*@
+                <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
             </p>
             @*@if (Model.TwoFactor)
         {
