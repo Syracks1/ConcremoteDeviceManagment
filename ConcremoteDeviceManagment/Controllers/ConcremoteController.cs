@@ -18,7 +18,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote
         public ActionResult Index()
         {
-            var query = from d in db.DeviceStatus_ExtraInfo
+            var query = from d in db.DeviceStatus
                         select d;
             return View(query);
 

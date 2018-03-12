@@ -347,30 +347,35 @@ namespace ConcremoteDeviceManagment.Controllers
 
             base.Dispose(disposing);
         }
-        public ActionResult Edit(int? UserId)
+        public ActionResult UserEdit(string Id)
         {
-            if (UserId == null)
+
+            var SelectedRoles = (from r in db.AspNetRoles
+                                 select r.Name).Distinct();
+            ViewBag.SelectedRoles = SelectedRoles;
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(UserId);
-            if (aspNetUserRoles == null)
+            AspNetUserRoles aspNetUser = db.AspNetUserRoles.Find(Id);
+            if (aspNetUser == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUserRoles);
+            return View(aspNetUser);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
         {
+
             if (ModelState.IsValid)
             {
-                db.Entry(pricelist).State = EntityState.Modified;
+                db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ManageAccounts");
             }
-            return View(pricelist);
+            return View(aspNetUserRoles);
         }
         #region Helpers
         // Used for XSRF protection when adding external logins

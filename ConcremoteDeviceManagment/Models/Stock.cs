@@ -155,15 +155,15 @@ namespace ConcremoteDeviceManagment.Models
         public class DeviceStatus_ExtraInfo
         {
             public int id { get; set; }
-            public int DeviceStatus_id { get; set; }
+       //     public int DeviceStatus_id { get; set; }
             public int DeviceConfig_ExtraInfo_id { get; set; }
             public string name { get; set; }
             [ForeignKey("DeviceConfig_ExtraInfo_id")]
             public virtual DeviceConfig_ExtraInfo DeviceConfig_ExtraInfo { get; set; }
      //   public virtual ICollection<Enrollment> Enrollments { get; set; }
 
-        [ForeignKey("DeviceStatus_id")]
-            public virtual DeviceStatus DeviceStatus { get; set; }
+        //[ForeignKey("DeviceStatus_id")]
+        //    public virtual DeviceStatus DeviceStatus { get; set; }
     }
     [Table("Pricelist")]
     public class Pricelist2
@@ -235,7 +235,7 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         [Column(Order = 0)]
         public string UserId { get; set; }
-        [Key]
+        
         [Column(Order = 1)]
         public string RoleId { get; set; }
         [ForeignKey("UserId")]

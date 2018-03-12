@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayName("Banned einddatum")
         </th>
+        <th>
+            @Html.DisplayName("Aantal mislukte inlogpogingen")
+        </th>
         <th></th>
     </tr>
 
@@ -42,7 +45,11 @@
                 @Html.DisplayFor(modelItem => item.AspNetUsers.LockoutEndDateUtc)
             </td>
             <td>
-                <button onclick="location.href='@Url.Action("Edit", "Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.AccessFailedCount)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>
+                @*@Html.ActionLink("UserEdit", "UserEdit")*@
             </td>
         </tr>
     }

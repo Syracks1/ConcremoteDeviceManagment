@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceStatus_ExtraInfo>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceStatus>
 
 @{
     ViewBag.Title = "Index";
@@ -33,20 +33,20 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceStatus.DeviceConfig.DeviceType.name)
+            @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
         </td>
         
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceStatus.ConcremoteDevice.Active)
+            @Html.DisplayFor(modelItem => item.ConcremoteDevice.Active)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceStatus.DeviceConfig.VersionNr)
+            @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
         </td>
         <td>
-          @Html.DisplayFor(modelItem => item.DeviceStatus.DeviceConfig.Date)
+          @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DeviceStatus.Device_Statustypes.name)
+            @Html.DisplayFor(modelItem => item.Device_Statustypes.name)
         </td>
         <td>
             <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
