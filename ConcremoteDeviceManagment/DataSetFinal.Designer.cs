@@ -20,9 +20,9 @@ namespace ConcremoteDeviceManagment {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DataSet2")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DataSetFinal")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DataSet2 : global::System.Data.DataSet {
+    public partial class DataSetFinal : global::System.Data.DataSet {
         
         private AspNetRolesDataTable tableAspNetRoles;
         
@@ -74,6 +74,8 @@ namespace ConcremoteDeviceManagment {
         
         private global::System.Data.DataRelation relationfk_Devicestatus_Device_statustypes1;
         
+        private global::System.Data.DataRelation relationfk_Devicestatus_DeviceConfig;
+        
         private global::System.Data.DataRelation relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo;
         
         private global::System.Data.DataRelation relationfk_DeviceStatus_ExtraInfo_DeviceStatus;
@@ -84,7 +86,7 @@ namespace ConcremoteDeviceManagment {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public DataSet2() {
+        public DataSetFinal() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -95,7 +97,7 @@ namespace ConcremoteDeviceManagment {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected DataSet2(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DataSetFinal(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -363,7 +365,7 @@ namespace ConcremoteDeviceManagment {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DataSet2 cln = ((DataSet2)(base.Clone()));
+            DataSetFinal cln = ((DataSetFinal)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -566,6 +568,7 @@ namespace ConcremoteDeviceManagment {
             this.relationfk_DeviceConfig_ExtraInfo_DeviceConfig = this.Relations["fk_DeviceConfig_ExtraInfo_DeviceConfig"];
             this.relationfk_Devicestatus_ConcremoteDevice = this.Relations["fk_Devicestatus_ConcremoteDevice"];
             this.relationfk_Devicestatus_Device_statustypes1 = this.Relations["fk_Devicestatus_Device_statustypes1"];
+            this.relationfk_Devicestatus_DeviceConfig = this.Relations["fk_Devicestatus_DeviceConfig"];
             this.relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo = this.Relations["fk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo"];
             this.relationfk_DeviceStatus_ExtraInfo_DeviceStatus = this.Relations["fk_DeviceStatus_ExtraInfo_DeviceStatus"];
             this.relationfk_Stock_pricelist1 = this.Relations["fk_Stock_pricelist1"];
@@ -574,9 +577,9 @@ namespace ConcremoteDeviceManagment {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DataSet2";
+            this.DataSetName = "DataSetFinal";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DataSet2.xsd";
+            this.Namespace = "http://tempuri.org/DataSetFinal.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableAspNetRoles = new AspNetRolesDataTable();
@@ -649,6 +652,10 @@ namespace ConcremoteDeviceManagment {
                         this.tableDevice_statustypes.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableDevicestatus.Device_statustypes_idColumn}, false);
             this.Relations.Add(this.relationfk_Devicestatus_Device_statustypes1);
+            this.relationfk_Devicestatus_DeviceConfig = new global::System.Data.DataRelation("fk_Devicestatus_DeviceConfig", new global::System.Data.DataColumn[] {
+                        this.tableDeviceConfig.Device_config_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDevicestatus.DeviceConfig_idColumn}, false);
+            this.Relations.Add(this.relationfk_Devicestatus_DeviceConfig);
             this.relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo = new global::System.Data.DataRelation("fk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo", new global::System.Data.DataColumn[] {
                         this.tableDeviceConfig_ExtraInfo.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableDeviceStatus_ExtraInfo.DeviceConfig_ExtraInfo_idColumn}, false);
@@ -764,7 +771,7 @@ namespace ConcremoteDeviceManagment {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DataSet2 ds = new DataSet2();
+            DataSetFinal ds = new DataSetFinal();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -1069,7 +1076,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1380,7 +1387,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1677,7 +1684,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1959,7 +1966,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2383,7 +2390,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2539,10 +2546,10 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ConcremoteDeviceRow AddConcremoteDeviceRow(bool Active) {
+            public ConcremoteDeviceRow AddConcremoteDeviceRow(string id, bool Active) {
                 ConcremoteDeviceRow rowConcremoteDeviceRow = ((ConcremoteDeviceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        id,
                         Active};
                 rowConcremoteDeviceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowConcremoteDeviceRow);
@@ -2551,7 +2558,7 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ConcremoteDeviceRow FindByid(int id) {
+            public ConcremoteDeviceRow FindByid(string id) {
                 return ((ConcremoteDeviceRow)(this.Rows.Find(new object[] {
                             id})));
             }
@@ -2580,18 +2587,15 @@ namespace ConcremoteDeviceManagment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
-                this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
                 this.columnActive = new global::System.Data.DataColumn("Active", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnActive);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
-                this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
                 this.columnid.AllowDBNull = false;
-                this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
+                this.columnid.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2659,7 +2663,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2988,7 +2992,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3265,7 +3269,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3602,7 +3606,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3911,7 +3915,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3983,6 +3987,8 @@ namespace ConcremoteDeviceManagment {
             
             private global::System.Data.DataColumn columnConcremoteDevice_id;
             
+            private global::System.Data.DataColumn columnDeviceConfig_id;
+            
             private global::System.Data.DataColumn columnEmployee_1;
             
             private global::System.Data.DataColumn columnEmployee_2;
@@ -4048,6 +4054,14 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DeviceConfig_idColumn {
+                get {
+                    return this.columnDeviceConfig_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn Employee_1Column {
                 get {
                     return this.columnEmployee_1;
@@ -4107,9 +4121,10 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DevicestatusRow AddDevicestatusRow(Device_statustypesRow parentDevice_statustypesRowByfk_Devicestatus_Device_statustypes1, ConcremoteDeviceRow parentConcremoteDeviceRowByfk_Devicestatus_ConcremoteDevice, string Employee_1, string Employee_2, System.DateTime Sign_Date) {
+            public DevicestatusRow AddDevicestatusRow(Device_statustypesRow parentDevice_statustypesRowByfk_Devicestatus_Device_statustypes1, ConcremoteDeviceRow parentConcremoteDeviceRowByfk_Devicestatus_ConcremoteDevice, DeviceConfigRow parentDeviceConfigRowByfk_Devicestatus_DeviceConfig, string Employee_1, string Employee_2, System.DateTime Sign_Date) {
                 DevicestatusRow rowDevicestatusRow = ((DevicestatusRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        null,
                         null,
                         null,
                         null,
@@ -4121,6 +4136,9 @@ namespace ConcremoteDeviceManagment {
                 }
                 if ((parentConcremoteDeviceRowByfk_Devicestatus_ConcremoteDevice != null)) {
                     columnValuesArray[2] = parentConcremoteDeviceRowByfk_Devicestatus_ConcremoteDevice[0];
+                }
+                if ((parentDeviceConfigRowByfk_Devicestatus_DeviceConfig != null)) {
+                    columnValuesArray[3] = parentDeviceConfigRowByfk_Devicestatus_DeviceConfig[0];
                 }
                 rowDevicestatusRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDevicestatusRow);
@@ -4154,6 +4172,7 @@ namespace ConcremoteDeviceManagment {
                 this.columnid = base.Columns["id"];
                 this.columnDevice_statustypes_id = base.Columns["Device_statustypes_id"];
                 this.columnConcremoteDevice_id = base.Columns["ConcremoteDevice_id"];
+                this.columnDeviceConfig_id = base.Columns["DeviceConfig_id"];
                 this.columnEmployee_1 = base.Columns["Employee_1"];
                 this.columnEmployee_2 = base.Columns["Employee_2"];
                 this.columnSign_Date = base.Columns["Sign_Date"];
@@ -4166,8 +4185,10 @@ namespace ConcremoteDeviceManagment {
                 base.Columns.Add(this.columnid);
                 this.columnDevice_statustypes_id = new global::System.Data.DataColumn("Device_statustypes_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDevice_statustypes_id);
-                this.columnConcremoteDevice_id = new global::System.Data.DataColumn("ConcremoteDevice_id", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnConcremoteDevice_id = new global::System.Data.DataColumn("ConcremoteDevice_id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnConcremoteDevice_id);
+                this.columnDeviceConfig_id = new global::System.Data.DataColumn("DeviceConfig_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeviceConfig_id);
                 this.columnEmployee_1 = new global::System.Data.DataColumn("Employee_1", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEmployee_1);
                 this.columnEmployee_2 = new global::System.Data.DataColumn("Employee_2", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4184,6 +4205,7 @@ namespace ConcremoteDeviceManagment {
                 this.columnid.Unique = true;
                 this.columnDevice_statustypes_id.AllowDBNull = false;
                 this.columnConcremoteDevice_id.AllowDBNull = false;
+                this.columnConcremoteDevice_id.MaxLength = 50;
                 this.columnEmployee_1.MaxLength = 45;
                 this.columnEmployee_2.MaxLength = 45;
             }
@@ -4253,7 +4275,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4569,7 +4591,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4861,7 +4883,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -5639,7 +5661,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -5964,7 +5986,7 @@ namespace ConcremoteDeviceManagment {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet2 ds = new DataSet2();
+                DataSetFinal ds = new DataSetFinal();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -6574,9 +6596,9 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int id {
+            public string id {
                 get {
-                    return ((int)(this[this.tableConcremoteDevice.idColumn]));
+                    return ((string)(this[this.tableConcremoteDevice.idColumn]));
                 }
                 set {
                     this[this.tableConcremoteDevice.idColumn] = value;
@@ -6994,6 +7016,17 @@ namespace ConcremoteDeviceManagment {
                     return ((DeviceConfig_ExtraInfoRow[])(base.GetChildRows(this.Table.ChildRelations["fk_DeviceConfig_ExtraInfo_DeviceConfig"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public DevicestatusRow[] GetDevicestatusRows() {
+                if ((this.Table.ChildRelations["fk_Devicestatus_DeviceConfig"] == null)) {
+                    return new DevicestatusRow[0];
+                }
+                else {
+                    return ((DevicestatusRow[])(base.GetChildRows(this.Table.ChildRelations["fk_Devicestatus_DeviceConfig"])));
+                }
+            }
         }
         
         /// <summary>
@@ -7149,12 +7182,28 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int ConcremoteDevice_id {
+            public string ConcremoteDevice_id {
                 get {
-                    return ((int)(this[this.tableDevicestatus.ConcremoteDevice_idColumn]));
+                    return ((string)(this[this.tableDevicestatus.ConcremoteDevice_idColumn]));
                 }
                 set {
                     this[this.tableDevicestatus.ConcremoteDevice_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int DeviceConfig_id {
+                get {
+                    try {
+                        return ((int)(this[this.tableDevicestatus.DeviceConfig_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeviceConfig_id\' in table \'Devicestatus\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDevicestatus.DeviceConfig_idColumn] = value;
                 }
             }
             
@@ -7226,6 +7275,29 @@ namespace ConcremoteDeviceManagment {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["fk_Devicestatus_Device_statustypes1"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public DeviceConfigRow DeviceConfigRow {
+                get {
+                    return ((DeviceConfigRow)(this.GetParentRow(this.Table.ParentRelations["fk_Devicestatus_DeviceConfig"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["fk_Devicestatus_DeviceConfig"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDeviceConfig_idNull() {
+                return this.IsNull(this.tableDevicestatus.DeviceConfig_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDeviceConfig_idNull() {
+                this[this.tableDevicestatus.DeviceConfig_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8998,7 +9070,7 @@ namespace ConcremoteDeviceManagment {
         }
     }
 }
-namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
+namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
     
     
     /// <summary>
@@ -9167,7 +9239,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.AspNetRolesDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.AspNetRolesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -9180,9 +9252,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.AspNetRolesDataTable GetData() {
+        public virtual DataSetFinal.AspNetRolesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.AspNetRolesDataTable dataTable = new DataSet2.AspNetRolesDataTable();
+            DataSetFinal.AspNetRolesDataTable dataTable = new DataSetFinal.AspNetRolesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -9190,14 +9262,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.AspNetRolesDataTable dataTable) {
+        public virtual int Update(DataSetFinal.AspNetRolesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "AspNetRoles");
         }
         
@@ -9495,7 +9567,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.AspNetUserClaimsDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.AspNetUserClaimsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -9508,9 +9580,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.AspNetUserClaimsDataTable GetData() {
+        public virtual DataSetFinal.AspNetUserClaimsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.AspNetUserClaimsDataTable dataTable = new DataSet2.AspNetUserClaimsDataTable();
+            DataSetFinal.AspNetUserClaimsDataTable dataTable = new DataSetFinal.AspNetUserClaimsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -9518,14 +9590,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.AspNetUserClaimsDataTable dataTable) {
+        public virtual int Update(DataSetFinal.AspNetUserClaimsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "AspNetUserClaims");
         }
         
@@ -9824,7 +9896,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.AspNetUserLoginsDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.AspNetUserLoginsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -9837,9 +9909,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.AspNetUserLoginsDataTable GetData() {
+        public virtual DataSetFinal.AspNetUserLoginsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.AspNetUserLoginsDataTable dataTable = new DataSet2.AspNetUserLoginsDataTable();
+            DataSetFinal.AspNetUserLoginsDataTable dataTable = new DataSetFinal.AspNetUserLoginsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -9847,14 +9919,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.AspNetUserLoginsDataTable dataTable) {
+        public virtual int Update(DataSetFinal.AspNetUserLoginsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "AspNetUserLogins");
         }
         
@@ -10187,7 +10259,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.AspNetUserRolesDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.AspNetUserRolesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -10200,9 +10272,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.AspNetUserRolesDataTable GetData() {
+        public virtual DataSetFinal.AspNetUserRolesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.AspNetUserRolesDataTable dataTable = new DataSet2.AspNetUserRolesDataTable();
+            DataSetFinal.AspNetUserRolesDataTable dataTable = new DataSetFinal.AspNetUserRolesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -10210,14 +10282,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.AspNetUserRolesDataTable dataTable) {
+        public virtual int Update(DataSetFinal.AspNetUserRolesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "AspNetUserRoles");
         }
         
@@ -10553,7 +10625,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.AspNetUsersDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.AspNetUsersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -10566,9 +10638,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.AspNetUsersDataTable GetData() {
+        public virtual DataSetFinal.AspNetUsersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.AspNetUsersDataTable dataTable = new DataSet2.AspNetUsersDataTable();
+            DataSetFinal.AspNetUsersDataTable dataTable = new DataSetFinal.AspNetUsersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -10576,14 +10648,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.AspNetUsersDataTable dataTable) {
+        public virtual int Update(DataSetFinal.AspNetUsersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "AspNetUsers");
         }
         
@@ -10908,19 +10980,21 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ConcremoteDevice] WHERE (([id] = @Original_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ConcremoteDevice] ([Active]) VALUES (@Active)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ConcremoteDevice] ([id], [Active]) VALUES (@id, @Active)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Active", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Active", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ConcremoteDevice] SET [Active] = @Active WHERE (([id] = @Original_i" +
-                "d))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ConcremoteDevice] SET [id] = @id, [Active] = @Active WHERE (([id] =" +
+                " @Original_id))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Active", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Active", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10944,7 +11018,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.ConcremoteDeviceDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.ConcremoteDeviceDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -10957,9 +11031,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.ConcremoteDeviceDataTable GetData() {
+        public virtual DataSetFinal.ConcremoteDeviceDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.ConcremoteDeviceDataTable dataTable = new DataSet2.ConcremoteDeviceDataTable();
+            DataSetFinal.ConcremoteDeviceDataTable dataTable = new DataSetFinal.ConcremoteDeviceDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -10967,14 +11041,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.ConcremoteDeviceDataTable dataTable) {
+        public virtual int Update(DataSetFinal.ConcremoteDeviceDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "ConcremoteDevice");
         }
         
@@ -10997,8 +11071,13 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
+        public virtual int Delete(string Original_id) {
+            if ((Original_id == null)) {
+                throw new global::System.ArgumentNullException("Original_id");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(Original_id));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -11019,12 +11098,18 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<bool> Active) {
-            if ((Active.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((bool)(Active.Value));
+        public virtual int Insert(string id, global::System.Nullable<bool> Active) {
+            if ((id == null)) {
+                throw new global::System.ArgumentNullException("id");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(id));
+            }
+            if ((Active.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((bool)(Active.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -11046,14 +11131,25 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<bool> Active, int Original_id) {
-            if ((Active.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((bool)(Active.Value));
+        public virtual int Update(string id, global::System.Nullable<bool> Active, string Original_id) {
+            if ((id == null)) {
+                throw new global::System.ArgumentNullException("id");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(id));
             }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_id));
+            if ((Active.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((bool)(Active.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((Original_id == null)) {
+                throw new global::System.ArgumentNullException("Original_id");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_id));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -11068,6 +11164,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<bool> Active, string Original_id) {
+            return this.Update(Original_id, Active, Original_id);
         }
     }
     
@@ -11251,7 +11355,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.Device_PricelistDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.Device_PricelistDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -11264,9 +11368,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.Device_PricelistDataTable GetData() {
+        public virtual DataSetFinal.Device_PricelistDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.Device_PricelistDataTable dataTable = new DataSet2.Device_PricelistDataTable();
+            DataSetFinal.Device_PricelistDataTable dataTable = new DataSetFinal.Device_PricelistDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -11274,14 +11378,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.Device_PricelistDataTable dataTable) {
+        public virtual int Update(DataSetFinal.Device_PricelistDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "Device_Pricelist");
         }
         
@@ -11570,7 +11674,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.Device_statustypesDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.Device_statustypesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -11583,9 +11687,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.Device_statustypesDataTable GetData() {
+        public virtual DataSetFinal.Device_statustypesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.Device_statustypesDataTable dataTable = new DataSet2.Device_statustypesDataTable();
+            DataSetFinal.Device_statustypesDataTable dataTable = new DataSetFinal.Device_statustypesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -11593,14 +11697,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.Device_statustypesDataTable dataTable) {
+        public virtual int Update(DataSetFinal.Device_statustypesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "Device_statustypes");
         }
         
@@ -11878,7 +11982,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.DeviceConfigDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.DeviceConfigDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -11891,9 +11995,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.DeviceConfigDataTable GetData() {
+        public virtual DataSetFinal.DeviceConfigDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.DeviceConfigDataTable dataTable = new DataSet2.DeviceConfigDataTable();
+            DataSetFinal.DeviceConfigDataTable dataTable = new DataSetFinal.DeviceConfigDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -11901,14 +12005,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.DeviceConfigDataTable dataTable) {
+        public virtual int Update(DataSetFinal.DeviceConfigDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "DeviceConfig");
         }
         
@@ -12214,7 +12318,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.DeviceConfig_ExtraInfoDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.DeviceConfig_ExtraInfoDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -12227,9 +12331,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.DeviceConfig_ExtraInfoDataTable GetData() {
+        public virtual DataSetFinal.DeviceConfig_ExtraInfoDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.DeviceConfig_ExtraInfoDataTable dataTable = new DataSet2.DeviceConfig_ExtraInfoDataTable();
+            DataSetFinal.DeviceConfig_ExtraInfoDataTable dataTable = new DataSetFinal.DeviceConfig_ExtraInfoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -12237,14 +12341,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.DeviceConfig_ExtraInfoDataTable dataTable) {
+        public virtual int Update(DataSetFinal.DeviceConfig_ExtraInfoDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "DeviceConfig_ExtraInfo");
         }
         
@@ -12479,6 +12583,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("Device_statustypes_id", "Device_statustypes_id");
             tableMapping.ColumnMappings.Add("ConcremoteDevice_id", "ConcremoteDevice_id");
+            tableMapping.ColumnMappings.Add("DeviceConfig_id", "DeviceConfig_id");
             tableMapping.ColumnMappings.Add("Employee_1", "Employee_1");
             tableMapping.ColumnMappings.Add("Employee_2", "Employee_2");
             tableMapping.ColumnMappings.Add("Sign_Date", "Sign_Date");
@@ -12491,22 +12596,23 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Devicestatus] ([Device_statustypes_id], [ConcremoteDevice_id]," +
-                " [Employee_1], [Employee_2], [Sign_Date]) VALUES (@Device_statustypes_id, @Concr" +
-                "emoteDevice_id, @Employee_1, @Employee_2, @Sign_Date)";
+                " [DeviceConfig_id], [Employee_1], [Employee_2], [Sign_Date]) VALUES (@Device_sta" +
+                "tustypes_id, @ConcremoteDevice_id, @DeviceConfig_id, @Employee_1, @Employee_2, @" +
+                "Sign_Date)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Device_statustypes_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Device_statustypes_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConcremoteDevice_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConcremoteDevice_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConcremoteDevice_id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConcremoteDevice_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_1", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Devicestatus] SET [Device_statustypes_id] = @Device_statustypes_id," +
-                " [ConcremoteDevice_id] = @ConcremoteDevice_id, [Employee_1] = @Employee_1, [Empl" +
-                "oyee_2] = @Employee_2, [Sign_Date] = @Sign_Date WHERE (([id] = @Original_id))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Devicestatus] SET [Device_statustypes_id] = @Device_statustypes_id, [ConcremoteDevice_id] = @ConcremoteDevice_id, [DeviceConfig_id] = @DeviceConfig_id, [Employee_1] = @Employee_1, [Employee_2] = @Employee_2, [Sign_Date] = @Sign_Date WHERE (([id] = @Original_id))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Device_statustypes_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Device_statustypes_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConcremoteDevice_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConcremoteDevice_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConcremoteDevice_id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConcremoteDevice_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_1", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -12526,8 +12632,8 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, Device_statustypes_id, ConcremoteDevice_id, Employee_1, Employee_2, Si" +
-                "gn_Date FROM dbo.Devicestatus";
+            this._commandCollection[0].CommandText = "SELECT id, Device_statustypes_id, ConcremoteDevice_id, DeviceConfig_id, Employee_" +
+                "1, Employee_2, Sign_Date FROM dbo.Devicestatus";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -12535,7 +12641,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.DevicestatusDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.DevicestatusDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -12548,9 +12654,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.DevicestatusDataTable GetData() {
+        public virtual DataSetFinal.DevicestatusDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.DevicestatusDataTable dataTable = new DataSet2.DevicestatusDataTable();
+            DataSetFinal.DevicestatusDataTable dataTable = new DataSetFinal.DevicestatusDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -12558,14 +12664,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.DevicestatusDataTable dataTable) {
+        public virtual int Update(DataSetFinal.DevicestatusDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "Devicestatus");
         }
         
@@ -12610,26 +12716,37 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Device_statustypes_id, int ConcremoteDevice_id, string Employee_1, string Employee_2, global::System.Nullable<global::System.DateTime> Sign_Date) {
+        public virtual int Insert(int Device_statustypes_id, string ConcremoteDevice_id, global::System.Nullable<int> DeviceConfig_id, string Employee_1, string Employee_2, global::System.Nullable<global::System.DateTime> Sign_Date) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Device_statustypes_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ConcremoteDevice_id));
-            if ((Employee_1 == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            if ((ConcremoteDevice_id == null)) {
+                throw new global::System.ArgumentNullException("ConcremoteDevice_id");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Employee_1));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(ConcremoteDevice_id));
             }
-            if ((Employee_2 == null)) {
+            if ((DeviceConfig_id.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(DeviceConfig_id.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Employee_1 == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Employee_2));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Employee_1));
             }
-            if ((Sign_Date.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(Sign_Date.Value));
+            if ((Employee_2 == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Employee_2));
+            }
+            if ((Sign_Date.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(Sign_Date.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12651,28 +12768,39 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Device_statustypes_id, int ConcremoteDevice_id, string Employee_1, string Employee_2, global::System.Nullable<global::System.DateTime> Sign_Date, int Original_id) {
+        public virtual int Update(int Device_statustypes_id, string ConcremoteDevice_id, global::System.Nullable<int> DeviceConfig_id, string Employee_1, string Employee_2, global::System.Nullable<global::System.DateTime> Sign_Date, int Original_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Device_statustypes_id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ConcremoteDevice_id));
-            if ((Employee_1 == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            if ((ConcremoteDevice_id == null)) {
+                throw new global::System.ArgumentNullException("ConcremoteDevice_id");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Employee_1));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(ConcremoteDevice_id));
             }
-            if ((Employee_2 == null)) {
+            if ((DeviceConfig_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DeviceConfig_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Employee_1 == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Employee_2));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Employee_1));
             }
-            if ((Sign_Date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(Sign_Date.Value));
-            }
-            else {
+            if ((Employee_2 == null)) {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_id));
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Employee_2));
+            }
+            if ((Sign_Date.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Sign_Date.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -12867,7 +12995,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.DeviceStatus_ExtraInfoDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.DeviceStatus_ExtraInfoDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -12880,9 +13008,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.DeviceStatus_ExtraInfoDataTable GetData() {
+        public virtual DataSetFinal.DeviceStatus_ExtraInfoDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.DeviceStatus_ExtraInfoDataTable dataTable = new DataSet2.DeviceStatus_ExtraInfoDataTable();
+            DataSetFinal.DeviceStatus_ExtraInfoDataTable dataTable = new DataSetFinal.DeviceStatus_ExtraInfoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -12890,14 +13018,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.DeviceStatus_ExtraInfoDataTable dataTable) {
+        public virtual int Update(DataSetFinal.DeviceStatus_ExtraInfoDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "DeviceStatus_ExtraInfo");
         }
         
@@ -13179,7 +13307,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.DeviceTypeDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.DeviceTypeDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -13192,9 +13320,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.DeviceTypeDataTable GetData() {
+        public virtual DataSetFinal.DeviceTypeDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.DeviceTypeDataTable dataTable = new DataSet2.DeviceTypeDataTable();
+            DataSetFinal.DeviceTypeDataTable dataTable = new DataSetFinal.DeviceTypeDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -13202,14 +13330,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.DeviceTypeDataTable dataTable) {
+        public virtual int Update(DataSetFinal.DeviceTypeDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "DeviceType");
         }
         
@@ -13577,7 +13705,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.pricelistDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.pricelistDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -13590,9 +13718,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.pricelistDataTable GetData() {
+        public virtual DataSetFinal.pricelistDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.pricelistDataTable dataTable = new DataSet2.pricelistDataTable();
+            DataSetFinal.pricelistDataTable dataTable = new DataSetFinal.pricelistDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -13600,14 +13728,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.pricelistDataTable dataTable) {
+        public virtual int Update(DataSetFinal.pricelistDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "pricelist");
         }
         
@@ -14330,7 +14458,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet2.StockDataTable dataTable) {
+        public virtual int Fill(DataSetFinal.StockDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -14343,9 +14471,9 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet2.StockDataTable GetData() {
+        public virtual DataSetFinal.StockDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet2.StockDataTable dataTable = new DataSet2.StockDataTable();
+            DataSetFinal.StockDataTable dataTable = new DataSetFinal.StockDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -14353,14 +14481,14 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2.StockDataTable dataTable) {
+        public virtual int Update(DataSetFinal.StockDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DataSet2 dataSet) {
+        public virtual int Update(DataSetFinal dataSet) {
             return this.Adapter.Update(dataSet, "Stock");
         }
         
@@ -14866,7 +14994,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateUpdatedRows(DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(DataSetFinal dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._deviceTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DeviceType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -15011,7 +15139,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateInsertedRows(DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(DataSetFinal dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._deviceTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DeviceType.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -15141,7 +15269,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateDeletedRows(DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(DataSetFinal dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._stockTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Stock.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -15295,7 +15423,7 @@ namespace ConcremoteDeviceManagment.DataSet2TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public virtual int UpdateAll(DataSet2 dataSet) {
+        public virtual int UpdateAll(DataSetFinal dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
