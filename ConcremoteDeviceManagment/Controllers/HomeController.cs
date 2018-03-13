@@ -21,13 +21,14 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Index()
         {
-            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
-            ViewBag.SelectedDevice = SelectedDevices;
+            //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
+            //ViewBag.SelectedDevice = SelectedDevices;
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
 
-            //var Device = from d in db.DeviceType
-            //             select d.name;
-            return View();
+            var Device = (from d in db.Device_Pricelist
+                          where d.Device_config_id == 130
+                          select d).Distinct();
+            return View(Device);
         }
 
         //[HttpGet]
@@ -39,8 +40,25 @@ namespace ConcremoteDeviceManagment.Controllers
 
         //    return PartialView(ci);
         //}
+     //   [Authorize(Roles = "Admin")]
+        // GET: Stock/Edit/5
+        public ActionResult Edit(int? id, string Device)
+        {
+          //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+             Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
+            if (device_Pricelist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(device_Pricelist);
+        }
         public ActionResult GetDevice()
         {
+
             var Device_Pricelist = new List<Device_Pricelist>();
             for (int i = 0; i < 4; i++)
             {

@@ -66,19 +66,25 @@
             }
         }
     </table>
-    <input type="submit" value="Save Device Data" class="btn btn-primary" />
+    @*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
 
 }
 
 @section Scripts{
     @*@Scripts.Render("~/bundles/jqueryval")*@
     <script language="javascript">
+
         $(document).ready(function () {
 
             //1. Add new row
             $("#addNew").click(function (e) {
                 e.preventDefault();
+
                 var $tableBody = $("#dataTable");
+
+        
+
+
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
@@ -101,19 +107,21 @@
                 });
                 $trLast.after($trNew);
 
-                // Re-assign Validation
+                // Re-assign Validation 
                 var form = $("form")
                     .removeData("validator")
                     .removeData("unobtrusiveValidation");
                 $.validator.unobtrusive.parse(form);
             });
 
-            // 2. Remove
-            $(document).on('click', 'a.remove', function (e) {
+            // 2. Remove 
+            //$('a.remove').live("click", function (e) {   --> this is for old jquery library
+            $('body').on("click", 'a.remove', function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
             });
 
         });
+
     </script>
 }
