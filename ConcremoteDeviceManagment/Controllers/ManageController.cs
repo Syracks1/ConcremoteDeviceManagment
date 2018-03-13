@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ConcremoteDeviceManagment.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -345,8 +347,37 @@ namespace ConcremoteDeviceManagment.Controllers
 
             base.Dispose(disposing);
         }
+        public ActionResult UserEdit(string Id)
+        {
 
-#region Helpers
+            var SelectedRoles = (from r in db.AspNetRoles
+                                 select r.Name).Distinct();
+            ViewBag.SelectedRoles = SelectedRoles;
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetUserRoles aspNetUser = db.AspNetUserRoles.Find(Id);
+            if (aspNetUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aspNetUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(aspNetUserRoles).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageAccounts");
+            }
+            return View(aspNetUserRoles);
+        }
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

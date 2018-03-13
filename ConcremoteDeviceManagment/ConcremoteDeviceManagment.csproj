@@ -430,6 +430,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Manage\ManageAccounts.cshtml" />
     <Content Include="Views\Concremote\ConfigPartial.cshtml" />
+    <Content Include="Views\Manage\UserEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

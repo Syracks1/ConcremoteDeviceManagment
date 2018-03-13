@@ -10,7 +10,7 @@ using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    [RequireHttps]
+
     [HandleError]
     public class ArticleController : Controller
     {
@@ -74,11 +74,11 @@ namespace ConcremoteDeviceManagment.Controllers
             // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
             {
-                //if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
-                //{
-                //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
-                //}
-                //if(!string.IsNullOrEmpty(ViewBag.SelectedLeverancier))
+                if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
+                {
+                    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
+                }
+                //if (!string.IsNullOrEmpty(ViewBag.SelectedLeverancier))
                 //{
                 //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
                 //}
