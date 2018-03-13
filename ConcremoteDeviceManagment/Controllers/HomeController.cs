@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using Microsoft.Ajax.Utilities;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -26,22 +27,12 @@ namespace ConcremoteDeviceManagment.Controllers
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
 
             var Device = (from d in db.Device_Pricelist
-                          where d.Device_config_id == 130
-                          select d).Distinct();
+                              //where d.Device_config_id == 
+                          select d).DistinctBy(p => p.Device_config_id);
             return View(Device);
         }
 
-        //[HttpGet]
-        //public PartialViewResult GetDevice(string Device)
-        //{
-        //    List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
 
-
-
-        //    return PartialView(ci);
-        //}
-     //   [Authorize(Roles = "Admin")]
-        // GET: Stock/Edit/5
         public ActionResult Edit(int? id, string Device)
         {
           //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));

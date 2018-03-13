@@ -90,8 +90,8 @@ namespace ConcremoteDeviceManagment.Models
             public int device_type_id { get; set; }
             public bool Active { get; set; }
             public int? VersionNr { get; set; }
-//        [DisplayFormat("dd-mm-yyy")]
-            public DateTime? Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? Date { get; set; }
             public virtual DeviceType DeviceType { get; set; }
         }
         [Table("ConcremoteDevice")]

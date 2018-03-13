@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.Device_Pricelist
+﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
 @*<p>
         @Html.ActionLink("Create New", "Create")
@@ -26,7 +26,7 @@
             </th>
             <th class="table-row"></th>
         </tr>
-        @*@if (Model != null && Model.Count > 0)
+        @if (Model != null && Model.Count > 0)
         {
             int j = 0;
             foreach (var i in Model)
@@ -64,7 +64,7 @@
                 </tr>
                 j++;
             }
-        }*@
+        }
     </table>
     @*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
 
