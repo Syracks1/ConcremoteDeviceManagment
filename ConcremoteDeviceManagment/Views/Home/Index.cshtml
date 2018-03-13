@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
 @{
     ViewBag.Title = "Change DeviceConfig";
@@ -6,56 +6,42 @@
 }
 
 <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-<h2>Index</h2>
+<h2>Overzicht configuraties</h2>
 <p>
 </p>
 
-@using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
-{
-    <fieldset>
-        <legend>Device Configs</legend>
-        <div>
-            
-            @Html.DropDownList("SelectedDevice", "---Select a device---")
-            @* @Html.DropDownList("SelectedDevice", ViewData.SelectedDevice as SelectList)*@
-            @*@Html.DropDownList("SelectedDevice", ViewData["SelectedDevice"] as List<SelectListItem>, "---Select Device---")*@
-            <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
-        </div>
-        @*@Html.RenderPartial("GetDevice");*@
-        <br />
-        <div id="target">
-        </div>
-        <div id="log">
-            @*<input type="submit" value="Save" class="btn btn-primary" />*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Device Naam")
+        </th>
+        <th>
+            @Html.DisplayName("Versie nummer")
+        </th>
+        <th>
+            @Html.DisplayName("Versie datum")
+        </th>
+        <th></th>
+    </tr>
 
-        </div>
-    </fieldset>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
+    </td>
+    <td>
+        <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
+        @*<button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>*@
+    </td>
+</tr>}
 
 
-}
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $("#SelectedDevice").change(function (e) {
-                var DeviceType = { "Device": $(this).val() };
-            $.ajax({
-                type: 'get',
-                url: '@Url.Action("GetDevice")',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'html',
-                data: { "Device": $(this).val() },
-                success: function (result) {
-
-                    $("#target").html(result);
-                },
-                error: function (ex) {
-                    alert("Something is wrong");
-                }
-            });
-
-        });
-
-    });
-    </script>
-}
+</table>
 

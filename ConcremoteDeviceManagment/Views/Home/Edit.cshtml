@@ -1,9 +1,9 @@
 ﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-@using (Html.BeginForm("GetDevice", "Home", FormMethod.Post))
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -26,42 +26,42 @@
             </th>
             <th class="table-row"></th>
         </tr>
-       @if (Model != null && Model.Count > 0)
-            {
-                int j = 0;
-                foreach (var i in Model)
-                {
-        <tr>
-            @Html.HiddenFor(a => a[j].id)
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
-            </td>
-
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].DeviceConfig.Active, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @if (j > 0)
+        @if (Model != null && Model.Count > 0)
         {
-            <a href="#" class="remove">Remove</a>
-}
-            </td>
-        </tr>
+            int j = 0;
+            foreach (var i in Model)
+            {
+                <tr>
+                    @Html.HiddenFor(a => a[j].id)
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
+                    </td>
+
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].DeviceConfig.Active, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @if (j > 0)
+                        {
+                            <a href="#" class="remove">Remove</a>
+                        }
+                    </td>
+                </tr>
                 j++;
             }
         }
@@ -82,7 +82,7 @@
 
                 var $tableBody = $("#dataTable");
 
-        
+
 
 
                 var $trLast = $tableBody.find("tr:last");
@@ -107,14 +107,14 @@
                 });
                 $trLast.after($trNew);
 
-                // Re-assign Validation 
+                // Re-assign Validation
                 var form = $("form")
                     .removeData("validator")
                     .removeData("unobtrusiveValidation");
                 $.validator.unobtrusive.parse(form);
             });
 
-            // 2. Remove 
+            // 2. Remove
             //$('a.remove').live("click", function (e) {   --> this is for old jquery library
             $('body').on("click", 'a.remove', function (e) {
                 e.preventDefault();

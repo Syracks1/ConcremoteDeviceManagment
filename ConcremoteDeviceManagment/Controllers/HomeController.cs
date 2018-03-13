@@ -12,73 +12,70 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using Microsoft.Ajax.Utilities;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-   
-   
     public class HomeController : Controller
     {
         private BasDbContext db = new BasDbContext();
 
         public ActionResult Index()
         {
-            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
-            ViewBag.SelectedDevice = SelectedDevices;
+            //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
+            //ViewBag.SelectedDevice = SelectedDevices;
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
 
-
-            return View();
+            var Device = (from d in db.Device_Pricelist
+                              //where d.Device_config_id == 
+                          select d).DistinctBy(p => p.Device_config_id);
+            return View(Device);
         }
 
-        [HttpGet]
-        public PartialViewResult GetDevice(string Device)
+
+        public ActionResult Edit(int? id, string Device)
         {
-            // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true));
-
-            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
-
-
-
-            return PartialView(ci);
+          //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+             Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
+            if (device_Pricelist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(device_Pricelist);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult GetDevice(List<Device_Pricelist> ci)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        foreach (var i in ci)
-        //        {
-        //            db.Device_Pricelist.Add(i);
-        //        }
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return PartialView(ci);
-        //}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult GetDevice()
         {
+
             var Device_Pricelist = new List<Device_Pricelist>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Device_Pricelist.Add(new Device_Pricelist());
             }
+
+            ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+
+            return View(Device_Pricelist);
+        }
+    
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetDevice(List<Device_Pricelist> questions_choices)
+        {
             if (ModelState.IsValid)
             {
-                foreach (var x in Device_Pricelist)
+                foreach (var x in questions_choices)
                 {
                     db.Device_Pricelist.Add(x);
                 }
                 db.SaveChanges();
-                return RedirectToAction("CreateTry");
+                return RedirectToAction("Index");
             }
-
-            //ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
-
-            return View(Device_Pricelist);
+            ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+            return View(questions_choices);
         }
         //}
         //[HttpPost]
@@ -86,18 +83,18 @@ namespace ConcremoteDeviceManagment.Controllers
         //public ActionResult GetDevice(List<Device_Pricelist> ci)
         //{
 
-            //    if (ModelState.IsValid)
-            //    {
-            //        foreach (var x in ci)
-            //        {
-            //            db.Device_Pricelist.Add(x);
-            //        }
-            //        db.SaveChanges();
-            //        return RedirectToAction("CreateTry");
-            //    }
-            //    ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
-            //    return View(ci);
-            //}
+        //    if (ModelState.IsValid)
+        //    {
+        //        foreach (var x in ci)
+        //        {
+        //            db.Device_Pricelist.Add(x);
+        //        }
+        //        db.SaveChanges();
+        //        return RedirectToAction("CreateTry");
+        //    }
+        //    ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+        //    return View(ci);
+        //}
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
