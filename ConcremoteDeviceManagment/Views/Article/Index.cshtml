@@ -64,7 +64,7 @@
             </td>
             <td>
                 <button onclick="location.href='@Url.Action("Edit", "Article", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
-                <button onclick="location.href='@Url.Action("Details", "Article", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>
+                @*<button onclick="location.href='@Url.Action("Details", "Article", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>*@
                 <button onclick="location.href='@Url.Action("Delete", "Article", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
             </td>
         </tr>

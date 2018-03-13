@@ -64,6 +64,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.UserUpdateSucces ?  "User has been succesfully updated"
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -110,8 +111,15 @@ namespace ConcremoteDeviceManagment.Controllers
             //              where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
             //               select new { st.Email, dt.Id }).ToList();
             var Account = from d in db.AspNetUserRoles
-             //             group d by d.AspNetRoles.Id.Max() into g
-                            select d;
+                              //             group d by d.AspNetRoles.Id.Max() into g
+                          select d;
+            //var Users = (from d in db.AspNetUserRoles
+            //             join st in db.AspNetUsers on d.UserId equals st.Id
+            //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
+            //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
+            //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
+
+
             return View(Account);
         }
 
@@ -366,8 +374,9 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
         {
+            //ManageMessageId? message;
 
             if (ModelState.IsValid)
             {
@@ -376,6 +385,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 return RedirectToAction("ManageAccounts");
             }
             return View(aspNetUserRoles);
+
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -425,6 +435,7 @@ namespace ConcremoteDeviceManagment.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            UserUpdateSucces,
             Error
         }
 

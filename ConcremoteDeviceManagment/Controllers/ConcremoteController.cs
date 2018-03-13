@@ -27,7 +27,10 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
-           
+           //var test = from d in db.DeviceStatus
+           //           from b in db.Device_Pricelist
+           //           where d.DeviceConfig_id = b.Device_config_id
+           //           select d
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
