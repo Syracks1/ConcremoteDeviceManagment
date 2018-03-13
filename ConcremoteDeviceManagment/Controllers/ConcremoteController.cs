@@ -85,6 +85,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //  Breaks for no reason: Invalid column name 'DeviceStatus_id'
             DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
             if (deviceStatus_ExtraInfo == null)
             {
@@ -98,15 +99,17 @@ namespace ConcremoteDeviceManagment.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id")] ConcremoteDevice concremoteDevice)
+        public ActionResult Edit([Bind(Include = "id,name,Employee_1,Employee_2,Sign_Date,Active")] ConcremoteDevice concremoteDevice, DeviceStatus deviceStatus, DeviceType deviceType)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(concremoteDevice).State = EntityState.Modified;
+                db.Entry(deviceStatus).State = EntityState.Modified;
+                db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-        //    ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
+            //  ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
             return View(concremoteDevice);
         }
 

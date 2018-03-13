@@ -30,7 +30,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model) {  // Breaks: Invalid column name 'DeviceStatus_id'
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.DeviceStatus.DeviceConfig.DeviceType.name)

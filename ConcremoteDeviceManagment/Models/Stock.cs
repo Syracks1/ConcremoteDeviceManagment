@@ -162,7 +162,7 @@ namespace ConcremoteDeviceManagment.Models
             public virtual DeviceConfig_ExtraInfo DeviceConfig_ExtraInfo { get; set; }
      //   public virtual ICollection<Enrollment> Enrollments { get; set; }
 
-        [ForeignKey("DeviceStatus_id")]
+            [ForeignKey("Devicestatus_id")]
             public virtual DeviceStatus DeviceStatus { get; set; }
     }
     [Table("Pricelist")]
