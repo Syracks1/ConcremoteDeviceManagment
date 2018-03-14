@@ -34,7 +34,6 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         public ActionResult Edit(int? Id)
         {
-          //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

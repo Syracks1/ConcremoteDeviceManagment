@@ -6,7 +6,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div>
         <a href="#" id="addNew">Add New</a>
     </div>
