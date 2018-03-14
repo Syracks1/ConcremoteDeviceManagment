@@ -30,17 +30,16 @@ namespace ConcremoteDeviceManagment.Controllers
                               //where d.Device_config_id == 
                           select d).DistinctBy(p => p.Device_config_id);
             return View(Device);
+
         }
-
-
-        public ActionResult Edit(int? id, string Device)
+        public ActionResult Edit(int? Id)
         {
           //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
-            if (id == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
+             Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(Id);
             if (device_Pricelist == null)
             {
                 return HttpNotFound();
