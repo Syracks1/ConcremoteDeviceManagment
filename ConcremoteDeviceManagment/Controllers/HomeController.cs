@@ -28,33 +28,33 @@ namespace ConcremoteDeviceManagment.Controllers
 
             var Device = (from d in db.Device_Pricelist
                               //where d.Device_config_id == 
-                          select d).DistinctBy(p => p.Device_config_id);
+                          select d).DistinctBy(p => p.Device_config_id).ToList();
             return View(Device);
 
         }
-        public ActionResult Edit(int? Id)
-        {
-            if (Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-             Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(Id);
-            if (device_Pricelist == null)
-            {
-                return HttpNotFound();
-            }
-            return View(device_Pricelist);
-        }
-        public ActionResult GetDevice()
+        //public ActionResult View(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
+        //    if (device_Pricelist == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(device_Pricelist);
+        //}
+
+        public ActionResult View(int? id)
         {
 
-            var Device_Pricelist = new List<Device_Pricelist>();
-            for (int i = 0; i < 4; i++)
+            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
+            for (int i = 0; i < 50; i++)
             {
                 Device_Pricelist.Add(new Device_Pricelist());
             }
 
-            ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
 
             return View(Device_Pricelist);
         }

@@ -3,7 +3,7 @@
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
-@using (Html.BeginForm("View", "Home", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -26,7 +26,7 @@
             </th>
             <th class="table-row"></th>
         </tr>
-        @if (Model != null && Model.Count >= 0)
+        @if (Model != null && Model.Count > 0)
         {
             int j = 0;
             foreach (var i in Model)

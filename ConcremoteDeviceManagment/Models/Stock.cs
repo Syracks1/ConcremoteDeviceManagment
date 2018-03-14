@@ -133,8 +133,9 @@ public class DeviceStatus
     [Table("Device_Pricelist")]
     public class Device_Pricelist
     {
-    [Key]
+      //  [Key]
         public int id { get; set; }
+        
         public int Device_config_id { get; set; }
         public int Price_id { get; set; }
         public decimal amount { get; set; }
@@ -151,6 +152,7 @@ public class DeviceStatus
         public int DeviceConfig_id { get; set; }
         public string Label { get; set; }
         public bool Label_req { get; set; }
+        [ForeignKey("DeviceConfig_id")]
         public virtual DeviceConfig DeviceConfig { get; set; }
     }
     [Table("DeviceStatus_ExtraInfo")]
