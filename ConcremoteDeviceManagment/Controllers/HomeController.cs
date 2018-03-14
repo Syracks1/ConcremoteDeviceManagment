@@ -50,7 +50,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
 
             var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
-            for (int i = 0; i < 50; i++)
+           // for (int i = 0; i < 50; i++)
             {
                 Device_Pricelist.Add(new Device_Pricelist());
             }
@@ -61,19 +61,19 @@ namespace ConcremoteDeviceManagment.Controllers
     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetDevice(List<Device_Pricelist> questions_choices)
+        public ActionResult GetDevice(List<Device_Pricelist> Device_Pricelist)
         {
             if (ModelState.IsValid)
             {
-                foreach (var x in questions_choices)
+                foreach (var x in Device_Pricelist)
                 {
                     db.Device_Pricelist.Add(x);
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
-            return View(questions_choices);
+          //  ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
+            return View(Device_Pricelist);
         }
         //}
         //[HttpPost]

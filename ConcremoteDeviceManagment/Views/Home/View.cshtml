@@ -1,10 +1,13 @@
 ﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+<p>
+    @*@Html.DisplayFor()*@
+</p>
+@using (Html.BeginForm("View", "Home", FormMethod.Post))
 {
+<h1>
+    Device
+</h1>  
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div>
@@ -33,12 +36,12 @@
             {
                 <tr>
                     @Html.HiddenFor(a => a[j].id)
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
-                    </td>
+                    @*<td class="table-row">
+                            @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
+                        </td>*@
 
                     <td class="table-row">
-                        @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                     <td class="table-row">
                         @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
@@ -66,12 +69,12 @@
             }
         }
     </table>
-    @*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
+    <input type="submit" value="Save Device Data" class="btn btn-primary" />
 
 }
 
 @section Scripts{
-    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/jqueryval")
     <script language="javascript">
 
         $(document).ready(function () {
@@ -81,10 +84,6 @@
                 e.preventDefault();
 
                 var $tableBody = $("#dataTable");
-
-
-
-
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
