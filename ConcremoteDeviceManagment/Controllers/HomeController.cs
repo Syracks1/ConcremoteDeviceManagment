@@ -19,7 +19,7 @@ namespace ConcremoteDeviceManagment.Controllers
     public class HomeController : Controller
     {
         private BasDbContext db = new BasDbContext();
-
+        [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
             //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
@@ -45,8 +45,8 @@ namespace ConcremoteDeviceManagment.Controllers
         //    }
         //    return View(device_Pricelist);
         //}
-
-        public ActionResult View(int? id)
+        [Authorize(Roles = "Assembly, Admin")]
+        public ActionResult Edit(int? id)
         {
 
             var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
@@ -61,13 +61,14 @@ namespace ConcremoteDeviceManagment.Controllers
     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetDevice(List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
         {
             if (ModelState.IsValid)
             {
-                foreach (var x in Device_Pricelist)
+                foreach (var item in Device_Pricelist)
                 {
-                    db.Device_Pricelist.Add(x);
+                    //db.Entry(Device_Pricelist).State = EntityState.Modified;
+                    db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
