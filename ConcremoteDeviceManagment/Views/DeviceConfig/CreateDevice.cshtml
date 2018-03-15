@@ -11,9 +11,9 @@
         <th>
             @Html.DisplayName("BAS artikelnummer")
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName("Prijs")
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName("Beschrijving")
         </th>
@@ -34,9 +34,9 @@
             <td>
                 <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
             </td>
@@ -58,4 +58,4 @@
         </tr>
     }
 </table>
-<button onclick="location.href='@Url.Action("Create", "Concremote")';return false;" class="btn btn-primary">Create Device</button>
+<button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create Device</button>

@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceStatus>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "DeviceLijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Devices</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayName("Serie Nummer")
+        </th>
         <th>
             @Html.DisplayName("Device Naam")
         </th>
@@ -32,6 +33,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConcremoteDevice.id)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
         </td>

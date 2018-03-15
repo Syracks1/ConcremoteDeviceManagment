@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ConcremoteDeviceManagment.Models;
 using System.Data.SqlClient;
+using Microsoft.Ajax.Utilities;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -30,7 +31,6 @@ namespace ConcremoteDeviceManagment.Controllers
         public PartialViewResult CreateDevice(string Device)
         {
             {
-                //  List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device).OrderBy(c => c.assembly_order));
                 List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
                 return PartialView("CreateDevice", ci);
             }

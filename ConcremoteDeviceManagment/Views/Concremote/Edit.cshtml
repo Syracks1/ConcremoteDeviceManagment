@@ -22,7 +22,7 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ConcremoteDevice_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Serie nummer", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.ConcremoteDevice_id, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ConcremoteDevice_id, "", new { @class = "text-danger" })
@@ -30,15 +30,20 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.DeviceConfig.DeviceType.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DisplayFor(model => model.DeviceConfig.DeviceType.name, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.DeviceConfig.DeviceType.name, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.Employee_1, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Config ID", htmlAttributes: new { @class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DeviceConfig.Device_config_id, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Medewerker 1", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Employee_1, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Employee_1, "", new { @class = "text-danger" })
@@ -46,7 +51,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Employee_2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Medewerker 2", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Employee_2, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Employee_2, "", new { @class = "text-danger" })
@@ -62,15 +67,21 @@
         </div>*@
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Sign_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Signeer datum", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Sign_Date, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Sign_Date, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.ConcremoteDevice.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Huidige status", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Device_Statustypes.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Device_Statustypes.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("In Gebruik", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="col-md-10 checkbox">
                 @Html.EditorFor(model => model.ConcremoteDevice.Active)
@@ -79,13 +90,7 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @*@Html.LabelFor(model => model.oldsystem_concremote, htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <div class="col-md-10">
-            @*@Html.EditorFor(model => model.oldsystem_concremote, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oldsystem_concremote, "", new { @class = "text-danger" })*@
-        </div>
-    </div>
+    
 
     <div class="form-group">
         @*@Html.LabelFor(model => model.Allowvalidation, htmlAttributes: new { @class = "control-label col-md-2" })*@

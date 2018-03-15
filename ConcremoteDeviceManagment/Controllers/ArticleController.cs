@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,6 +20,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI)
         {
+         //   Process.Start("cmd.exe");
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
             //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
