@@ -43,8 +43,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [Authorize]
         // POST: DeviceTypes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "device_type_id,name")] DeviceType deviceType)
@@ -75,7 +74,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [Authorize(Roles = "Admin")]
         // POST: DeviceTypes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

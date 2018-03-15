@@ -49,10 +49,10 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Edit(int? id)
         {
 
-            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
-           // for (int i = 0; i < 50; i++)
+            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
+        //    for (id = 0; id < dev.; id++)
             {
-                Device_Pricelist.Add(new Device_Pricelist());
+            //    Device_Pricelist.Add(new Device_Pricelist());
             }
 
 
@@ -69,6 +69,10 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
+                    db.Entry(item).State = EntityState.Added;
+
+
+                    //    db.Entry(item).State = EntityState.
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");

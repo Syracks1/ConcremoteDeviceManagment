@@ -34,37 +34,34 @@
             int j = 0;
             foreach (var i in Model)
             {
-                <tr>
-                    @Html.HiddenFor(a => a[j].id)
-                    @*<td class="table-row">
-                            @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
-                        </td>*@
+        <tr>
+            @Html.HiddenFor(a => a[j].id)
+            @Html.HiddenFor(a => a[j].Device_config_id)
 
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].DeviceConfig.Active, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    @*<td class="table-row">
-                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>*@
-                    <td>
-                        @if (j > 0)
-                        {
-                            <a href="#" class="remove">Remove</a>
-                        }
-                    </td>
-                </tr>
+
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+       
+            @*<td class="table-row">
+            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+        </td>*@
+            <td>
+                @if (j > 0)
+        {
+            <a href="#" class="remove">Remove</a>
+}
+            </td>
+        </tr>
                 j++;
             }
         }
@@ -83,10 +80,6 @@
                 e.preventDefault();
 
                 var $tableBody = $("#dataTable");
-
-
-
-
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
@@ -95,7 +88,7 @@
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
                     var oldN = $(this).attr('name');
-                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', );
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']' );
                     $(this).attr('name', newN);
                     //Replaced value
                     var type = $(this).attr('type');
@@ -110,10 +103,10 @@
                 $trLast.after($trNew);
 
                 // Re-assign Validation
-                var form = $("form")
-                    .removeData("validator")
-                    .removeData("unobtrusiveValidation");
-                $.validator.unobtrusive.parse(form);
+                //var form = $("form")
+                //    .removeData("validator")
+                //    .removeData("unobtrusiveValidation");
+                //$.validator.unobtrusive.parse(form);
             });
 
             // 2. Remove
