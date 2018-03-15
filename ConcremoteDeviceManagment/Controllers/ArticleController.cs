@@ -20,7 +20,6 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI)
         {
-         //   Process.Start("cmd.exe");
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
             //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
@@ -87,7 +86,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
+
                 }
+                
             }
             return View(pricelist);
         }

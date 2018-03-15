@@ -31,24 +31,14 @@ namespace ConcremoteDeviceManagment.Controllers
                           select d).DistinctBy(p => p.Device_config_id).ToList();
             return View(Device);
 
-        }
-        //public ActionResult View(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
-        //    if (device_Pricelist == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(device_Pricelist);
-        //}
+        }  
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string Device)
         {
-
+            var title = from d in db.Device_Pricelist
+                        
+                        select d;
+            ViewBag.Title = title;
             var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
         //    for (id = 0; id < dev.; id++)
             {
@@ -69,15 +59,10 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
-                    db.Entry(item).State = EntityState.Added;
-
-
-                    //    db.Entry(item).State = EntityState.
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-          //  ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
             return View(Device_Pricelist);
         }
         //}

@@ -75,7 +75,6 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Admin")]
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "device_type_id,name")] DeviceType deviceType)

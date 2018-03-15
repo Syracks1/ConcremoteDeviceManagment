@@ -137,9 +137,12 @@ public class DeviceStatus
         public int id { get; set; }
         
         public int Device_config_id { get; set; }
+        [Required(ErrorMessage = "Voer een onderdeel in")]
         public int Price_id { get; set; }
+        [Required(ErrorMessage = "Voer een aantal in")]
         public decimal amount { get; set; }
-        public int? assembly_order { get; set; }
+        [Required(ErrorMessage = "Voer een bouwvolgorde in")]
+        public int assembly_order { get; set; }
         [ForeignKey("Device_config_id")]
         public virtual DeviceConfig DeviceConfig { get; set; }
         [ForeignKey("Price_id")]

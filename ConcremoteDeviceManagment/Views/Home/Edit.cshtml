@@ -1,17 +1,19 @@
 ﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
-<p>
-    @*@Html.DisplayFor()*@
-</p>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
     <h1>
-        Device
+        @*@ViewBag.Title("title")*@
+
     </h1>
+    @Html.ValidationSummary(true) 
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
     <div>
-        <a href="#" id="addNew">Add New</a>
+        <a href="#" id="addNew" class="btn btn-default">Add New</a>
     </div>
     <table class="table" id="dataTable">
         <tr>
@@ -34,38 +36,40 @@
             int j = 0;
             foreach (var i in Model)
             {
-        <tr>
-            @Html.HiddenFor(a => a[j].id)
-            @Html.HiddenFor(a => a[j].Device_config_id)
-
-
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-       
-            @*<td class="table-row">
-            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-        </td>*@
-            <td>
-                @if (j > 0)
-        {
-            <a href="#" class="remove">Remove</a>
-}
-            </td>
-        </tr>
+                <tr>
+                    @Html.HiddenFor(a => a[j].id)
+                    @Html.HiddenFor(a => a[j].Device_config_id)
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
+                    </td>
+                    @*<td class="table-row">
+                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
+                    <td>
+                        @if (j > 0)
+                        {
+                            <a href="#" id="remove" class="btn btn-danger">Remove</a>
+                        }
+                    </td>
+                </tr>
                 j++;
             }
         }
     </table>
+
     <input type="submit" value="Save Device Data" class="btn btn-primary" />
 
 }
@@ -84,11 +88,11 @@
                 var $trNew = $trLast.clone();
 
                 var suffix = $trNew.find(':input:first').attr('name').match(/\j+/);
-                $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                $trNew.find("td:last").html('<a href="#" id="remove" class="btn btn-danger">Remove</a>');
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
                     var oldN = $(this).attr('name');
-                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']' );
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
                     $(this).attr('name', newN);
                     //Replaced value
                     var type = $(this).attr('type');
@@ -111,7 +115,7 @@
 
             // 2. Remove
             //$('a.remove').live("click", function (e) {   --> this is for old jquery library
-            $('body').on("click", 'a.remove', function (e) {
+            $('body').on("click", '#remove', function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
             });
