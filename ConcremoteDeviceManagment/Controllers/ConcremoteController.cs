@@ -161,7 +161,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,ConcremoteDevice_Active,Employee_1,Employee_2,Sign_Date")] DeviceStatus deviceStatus)
         {
             var Conn = (from d in db.DeviceStatus
-                        join s in db.ConcremoteDevice on d.Device_statustypes_id equals s.id
+                        join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
                         select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
 
             if (ModelState.IsValid)
