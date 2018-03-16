@@ -15,16 +15,14 @@ namespace ConcremoteDeviceManagment.Controllers
     [HandleError]
     public class ArticleController : Controller
     {
-        private Models.BasDbContext db = new Models.BasDbContext();
+        private BasDbContext db = new BasDbContext();
 
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI)
         {
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
-            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
             ViewBag.SelectedLeverancier = SelectedLeverancier;
-            //ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";

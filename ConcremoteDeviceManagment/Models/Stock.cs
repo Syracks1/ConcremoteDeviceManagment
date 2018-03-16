@@ -88,7 +88,7 @@ namespace ConcremoteDeviceManagment.Models
     public int Device_config_id { get; set; }
         public int device_type_id { get; set; }
         public bool Active { get; set; }
-        public int? VersionNr { get; set; }
+        public int VersionNr { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
         [ForeignKey("device_type_id")]

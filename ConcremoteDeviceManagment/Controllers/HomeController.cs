@@ -34,16 +34,8 @@ namespace ConcremoteDeviceManagment.Controllers
         }  
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Edit(int? id, string Device)
-        {
-            var title = from d in db.Device_Pricelist
-                        
-                        select d;
-            ViewBag.Title = title;
+        { 
             var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
-        //    for (id = 0; id < dev.; id++)
-            {
-            //    Device_Pricelist.Add(new Device_Pricelist());
-            }
 
 
             return View(Device_Pricelist);
@@ -59,6 +51,8 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
+                    
+                   // db.Entry(db.DeviceConfig) = EntityState.Added;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
