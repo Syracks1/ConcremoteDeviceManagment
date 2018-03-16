@@ -96,6 +96,12 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceStatus_ExtraInfo);
         }
 
+        //var Users = (from d in db.AspNetUserRoles
+        //             join st in db.AspNetUsers on d.UserId equals st.Id
+        //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
+        //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
+        //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
+
         // POST: Concremote/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -103,6 +109,10 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,ConcremoteDevice_Active,Employee_1,Employee_2,Sign_Date")] DeviceStatus deviceStatus)
         {
+            var Conn = (from d in db.DeviceStatus
+                        join s in db.ConcremoteDevice on d.Device_statustypes_id equals s.id
+                        select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
+
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
