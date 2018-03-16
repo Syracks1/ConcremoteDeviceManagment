@@ -37,6 +37,11 @@ namespace ConcremoteDeviceManagment.Controllers
         { 
             var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
 
+            var cqry = from d in db.Device_Pricelist
+                       where d.Pricelist.Price_id == d.Price_id
+                       orderby d.Pricelist.bas_art_nr
+                       select new { Id = d.Price_id, Value = d.Pricelist.bas_art_nr };
+            ViewBag.CMIList = new SelectList(cqry.Distinct(), "Id", "Value");
 
             return View(Device_Pricelist);
         }
@@ -45,6 +50,7 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
         {
+            
             if (ModelState.IsValid)
             {
                 foreach (var item in Device_Pricelist)
