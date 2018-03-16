@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>DeviceTypes</h2>
+<button onclick="location.href='@Url.Action("Create", "DeviceTypes")';return false;" class="btn btn-primary">Create New</button>
 
 
 <table class="table">
@@ -16,16 +17,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-primary">Edit</button>
+                <button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>

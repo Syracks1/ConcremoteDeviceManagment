@@ -31,29 +31,11 @@ namespace ConcremoteDeviceManagment.Controllers
                           select d).DistinctBy(p => p.Device_config_id).ToList();
             return View(Device);
 
-        }
-        //public ActionResult View(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
-        //    if (device_Pricelist == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(device_Pricelist);
-        //}
+        }  
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Edit(int? id)
-        {
-
-            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
-           // for (int i = 0; i < 50; i++)
-            {
-                Device_Pricelist.Add(new Device_Pricelist());
-            }
+        public ActionResult Edit(int? id, string Device)
+        { 
+            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
 
 
             return View(Device_Pricelist);
@@ -69,11 +51,12 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
+                    
+                   // db.Entry(db.DeviceConfig) = EntityState.Added;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-          //  ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
             return View(Device_Pricelist);
         }
         //}

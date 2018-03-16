@@ -62,8 +62,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         // POST: Concremote/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,device_id,imei,active,oldsystem_concremote,Allowvalidation,device_type_id")] ConcremoteDevice concremoteDevice)
@@ -103,8 +102,7 @@ namespace ConcremoteDeviceManagment.Controllers
         //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
 
         // POST: Concremote/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,ConcremoteDevice_Active,Employee_1,Employee_2,Sign_Date")] DeviceStatus deviceStatus)
