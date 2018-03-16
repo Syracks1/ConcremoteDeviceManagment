@@ -19,8 +19,6 @@
     @Html.HiddenFor(model => model.DeviceConfig_id)
     @Html.HiddenFor(model => model.Device_statustypes_id)
 
-
-
     <div class="form-group">
         @Html.Label("Serie nummer", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -57,15 +55,6 @@
             @Html.ValidationMessageFor(model => model.Employee_2, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
     <div class="form-group">
         @Html.Label("Signeer datum", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -76,7 +65,7 @@
     <div class="form-group">
         @Html.Label("Huidige status", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Device_Statustypes.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList("StatusList", null, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Device_Statustypes.name, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -89,35 +78,14 @@
             </div>
         </div>
     </div>
-
-    
-
-    <div class="form-group">
-        @*@Html.LabelFor(model => model.Allowvalidation, htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <div class="col-md-10">
-            <div class="col-md-10 checkbox">
-                @*@Html.EditorFor(model => model.Allowvalidation)
-                    @Html.ValidationMessageFor(model => model.Allowvalidation, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @*@Html.LabelFor(model => model.DeviceType.device_type_id, "device_type_id", htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <div class="col-md-10">
-            @*@Html.DropDownList("device_type_id", null, htmlAttributes: new { @class = "form-control" })*@
-            @*@Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })*@
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button onclick="location.href='@Url.Action("Index", "Concremote")';return false; " class="btn btn-primary">Back to list</button>
 </div>

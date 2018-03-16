@@ -10,7 +10,7 @@
 <p>
 </p>
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayName("Device Naam")
@@ -26,21 +26,21 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
-    </td>
-    <td>
-        <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
-        @*<button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>*@
-    </td>
-</tr>}
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
+                @*<button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>*@
+            </td>
+        </tr>}
 
 
 </table>
