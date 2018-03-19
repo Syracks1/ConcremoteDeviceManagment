@@ -91,8 +91,13 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Stock/Create
         public ActionResult Create()
         {
-            var SelectedCMI = new SelectList(db.pricelist.Select(r => r.bas_art_nr).Distinct().ToList());
-            ViewBag.SelectedCMI = SelectedCMI;
+            var SelectedCMI = from d in db.pricelist
+                              where d.Price_id == d.Price_id
+                              orderby d.Price_id
+                              select new { Id = d.Price_id, Value = d.bas_art_nr };
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
+          //  var SelectedCMI = new SelectList(db.pricelist.Select(r => r.Price_id, ).Distinct().ToList());
+          //  ViewBag.SelectedCMI = SelectedCMI;
             return View();
         }
         // POST: Stock/Create
@@ -101,12 +106,12 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
-          // stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
+           stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                //TempData["AlertMessage"] = "Medicine Type Added Sucessfully";
+                TempData["AlertMessage"] = "Medicine Type Added Sucessfully";
 
                 return RedirectToAction("Index");
             }
