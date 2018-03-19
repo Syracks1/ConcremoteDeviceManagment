@@ -93,6 +93,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
+            var StatusQuery = from d in db.DeviceStatus
+                              where d.Device_statustypes_id == d.Device_Statustypes.id
+                              orderby d.Device_Statustypes.id
+                              select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
+            ViewBag.StatusList = new SelectList(StatusQuery.Distinct(), "Id", "Value");
+                
             return View(deviceStatus_ExtraInfo);
         }
 
@@ -103,6 +109,11 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,ConcremoteDevice_Active,Employee_1,Employee_2,Sign_Date")] DeviceStatus deviceStatus)
         {
+            var Conn = (from d in db.DeviceStatus
+                        join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
+                        join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
+                        join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
+                        select new { s.id, Model = d.id });
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
