@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-
     public class ConcremoteController : Controller
     {
         private BasDbContext db = new BasDbContext();
-       //[Authorize(Roles = "BAS employee, Assembly, Admin")]
+
+        //[Authorize(Roles = "BAS employee, Assembly, Admin")]
         // GET: Concremote
         public ActionResult Index(string sortOrder, string searchString)
         {
@@ -31,36 +29,47 @@ namespace ConcremoteDeviceManagment.Controllers
                 case "ConcremoteDevice_desc":
                     query = query.OrderByDescending(s => s.ConcremoteDevice.id);
                     break;
+
                 case "DeviceType":
                     query = query.OrderBy(s => s.DeviceConfig.DeviceType.name);
                     break;
+
                 case "DeviceType_desc":
                     query = query.OrderByDescending(s => s.DeviceConfig.DeviceType.name);
                     break;
+
                 case "Active":
                     query = query.OrderBy(s => s.ConcremoteDevice.Active);
                     break;
+
                 case "Active_desc":
                     query = query.OrderByDescending(s => s.ConcremoteDevice.Active);
                     break;
+
                 case "ConfigVersion":
                     query = query.OrderBy(s => s.DeviceConfig.VersionNr);
                     break;
+
                 case "ConfigVersion_desc":
                     query = query.OrderBy(s => s.DeviceConfig.VersionNr);
                     break;
+
                 case "ConfigDate":
                     query = query.OrderBy(s => s.DeviceConfig.Date);
                     break;
+
                 case "ConfigDate_desc":
                     query = query.OrderByDescending(s => s.DeviceConfig.Date);
                     break;
+
                 case "Status":
                     query = query.OrderBy(s => s.Device_Statustypes.id);
                     break;
+
                 case "Status_desc":
                     query = query.OrderByDescending(s => s.Device_Statustypes.id);
                     break;
+
                 default:
                     query = query.OrderBy(s => s.ConcremoteDevice.id);
                     break;
@@ -73,8 +82,8 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
             }
             return View(query);
-
         }
+
         //[Authorize(Roles = "Assembly, Admin")]
         // GET: Concremote/Details/5
         public ActionResult Details(int? id)
@@ -83,13 +92,14 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
+            DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
             if (deviceStatus_ExtraInfo == null)
             {
                 return HttpNotFound();
             }
             return View(deviceStatus_ExtraInfo);
         }
+
         [HttpGet]
         public PartialViewResult ConfigPartial(string Device)
         {
@@ -125,12 +135,12 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
             return View(concremoteDevice);
         }
+
         [Authorize(Roles = "Admin")]
 
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -141,9 +151,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 return HttpNotFound();
             }
             var StatusQuery = from d in db.DeviceStatus
-                       where d.Device_statustypes_id == d.Device_Statustypes.id
-                       orderby d.Device_Statustypes.id
-                       select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
+                              where d.Device_statustypes_id == d.Device_Statustypes.id
+                              orderby d.Device_Statustypes.id
+                              select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
             ViewBag.StatusList = new SelectList(StatusQuery.Distinct(), "Id", "Value");
             return View(deviceStatus_ExtraInfo);
         }
@@ -169,11 +179,11 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
-                db.Entry(concremoteDevice).State = EntityState.Modified;
+                //db.Entry(concremoteDevice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-        //    ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
+            //    ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
             return View(deviceStatus);
         }
 
