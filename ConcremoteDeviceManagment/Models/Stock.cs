@@ -88,7 +88,7 @@ namespace ConcremoteDeviceManagment.Models
     public int Device_config_id { get; set; }
         public int device_type_id { get; set; }
         public bool Active { get; set; }
-        public int? VersionNr { get; set; }
+        public int VersionNr { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
         [ForeignKey("device_type_id")]
@@ -137,9 +137,12 @@ public class DeviceStatus
         public int id { get; set; }
         
         public int Device_config_id { get; set; }
+        [Required(ErrorMessage = "Voer een onderdeel in")]
         public int Price_id { get; set; }
+        [Required(ErrorMessage = "Voer een aantal in")]
         public decimal amount { get; set; }
-        public int? assembly_order { get; set; }
+        [Required(ErrorMessage = "Voer een bouwvolgorde in")]
+        public int assembly_order { get; set; }
         [ForeignKey("Device_config_id")]
         public virtual DeviceConfig DeviceConfig { get; set; }
         [ForeignKey("Price_id")]

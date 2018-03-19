@@ -15,17 +15,14 @@ namespace ConcremoteDeviceManagment.Controllers
     [HandleError]
     public class ArticleController : Controller
     {
-        private Models.BasDbContext db = new Models.BasDbContext();
+        private BasDbContext db = new BasDbContext();
 
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI)
         {
-         //   Process.Start("cmd.exe");
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
-            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
             ViewBag.SelectedLeverancier = SelectedLeverancier;
-            //ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
@@ -87,7 +84,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
+
                 }
+                
             }
             return View(pricelist);
         }
@@ -120,8 +119,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         
         // POST: Device/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
@@ -159,8 +157,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
 
         // POST: Device/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)

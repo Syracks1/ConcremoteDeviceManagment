@@ -1,16 +1,21 @@
 ﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-@using (Html.BeginForm("View", "Home", FormMethod.Post))
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
+    <h1>
+        @Html.DisplayName("Edit Configuration")
+
+    </h1>
     @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
     <div>
-        <a href="#" id="addNew">Add New</a>
+        <a href="#" id="addNew" class="btn btn-default">Add New</a>
     </div>
-    <table class="table" id="dataTable">
+    <table class="table table-hover" id="dataTable">
         <tr>
             <th class="table-row">
                 @Html.DisplayName("BAS artikelnummer")
@@ -26,39 +31,38 @@
             </th>
             <th class="table-row"></th>
         </tr>
-        @if (Model != null && Model.Count >= 0)
+        @if (Model != null && Model.Count > 0)
         {
             int j = 0;
             foreach (var i in Model)
             {
                 <tr>
                     @Html.HiddenFor(a => a[j].id)
+                    @Html.HiddenFor(a => a[j].Device_config_id)
                     <td class="table-row">
-                        @Html.DisplayFor(a => a[j].DeviceConfig.Device_config_id)
-                    </td>
-
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownList("CMIList", null, new { @class = "form-control" })
+ @*                       @Html.DropDownListFor( a => a[j].Price_id, new SelectList(CMIList.Distinct(), "Id", "Value", new { @class = "form-control" })),*@
+                        @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })
                     </td>
                     <td class="table-row">
                         @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
                     </td>
                     <td class="table-row">
                         @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
                     </td>
                     <td class="table-row">
                         @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
                     </td>
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].DeviceConfig.Active, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td class="table-row">
+                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                     <td>
                         @if (j > 0)
                         {
-                            <a href="#" class="remove">Remove</a>
+                            <a href="#" id="remove" class="btn btn-danger">Remove</a>
                         }
                     </td>
                 </tr>
@@ -66,10 +70,12 @@
             }
         }
     </table>
-    @*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
+
+    <input type="submit" value="Save Device Data" class="btn btn-primary" />
+    <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
+
 
 }
-
 @section Scripts{
     @*@Scripts.Render("~/bundles/jqueryval")*@
     <script language="javascript">
@@ -81,25 +87,21 @@
                 e.preventDefault();
 
                 var $tableBody = $("#dataTable");
-
-
-
-
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
-                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
-                $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                var suffix = $trNew.find(':input:first').attr('name').match(/\j+/);
+                $trNew.find("td:last").html('<a href="#" id="remove" class="btn btn-danger">Remove</a>');
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
                     var oldN = $(this).attr('name');
-                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
                     $(this).attr('name', newN);
                     //Replaced value
                     var type = $(this).attr('type');
-                    if (type.toLowerCase() == "text") {
-                        $(this).attr('value', '');
-                    }
+                    //if (type.toLowerCase() == "text") {
+                    //    $(this).attr('value', '');
+                    //}
 
                     // If you have another Type then replace with default value
                     $(this).removeClass("input-validation-error");
@@ -108,15 +110,15 @@
                 $trLast.after($trNew);
 
                 // Re-assign Validation
-                var form = $("form")
-                    .removeData("validator")
-                    .removeData("unobtrusiveValidation");
-                $.validator.unobtrusive.parse(form);
+                //var form = $("form")
+                //    .removeData("validator")
+                //    .removeData("unobtrusiveValidation");
+                //$.validator.unobtrusive.parse(form);
             });
 
             // 2. Remove
             //$('a.remove').live("click", function (e) {   --> this is for old jquery library
-            $('body').on("click", 'a.remove', function (e) {
+            $('body').on("click", '#remove', function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
             });
@@ -124,4 +126,5 @@
         });
 
     </script>
+
 }

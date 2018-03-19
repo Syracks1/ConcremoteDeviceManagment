@@ -19,7 +19,7 @@ namespace ConcremoteDeviceManagment.Controllers
     public class HomeController : Controller
     {
         private BasDbContext db = new BasDbContext();
-
+        [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
             //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
@@ -31,48 +31,38 @@ namespace ConcremoteDeviceManagment.Controllers
                           select d).DistinctBy(p => p.Device_config_id).ToList();
             return View(Device);
 
-        }
-        //public ActionResult View(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Device_Pricelist device_Pricelist = db.Device_Pricelist.Find(id);
-        //    if (device_Pricelist == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(device_Pricelist);
-        //}
+        }  
+        [Authorize(Roles = "Assembly, Admin")]
+        public ActionResult Edit(int? id, string Device)
+        { 
+            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
 
-        public ActionResult View(int? id)
-        {
-
-            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == id));
-           // for (int i = 0; i < 50; i++)
-            {
-                Device_Pricelist.Add(new Device_Pricelist());
-            }
-
+            var cqry = from d in db.Device_Pricelist
+                       where d.Pricelist.Price_id == d.Price_id
+                       orderby d.Pricelist.bas_art_nr
+                       select new { Id = d.Price_id, Value = d.Pricelist.bas_art_nr };
+            ViewBag.CMIList = new SelectList(cqry.Distinct(), "Id", "Value");
 
             return View(Device_Pricelist);
         }
     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetDevice(List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
         {
+            
             if (ModelState.IsValid)
             {
-                foreach (var x in Device_Pricelist)
+                foreach (var item in Device_Pricelist)
                 {
-                    db.Device_Pricelist.Add(x);
+                    //db.Entry(Device_Pricelist).State = EntityState.Modified;
+                    db.Entry(item).State = EntityState.Modified;
+                    
+                   // db.Entry(db.DeviceConfig) = EntityState.Added;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-          //  ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
             return View(Device_Pricelist);
         }
         //}

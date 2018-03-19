@@ -66,3 +66,75 @@
 
 </table>
 
+<script>
+
+    let timer;
+    let scrollOptions = {
+        axis: "y",
+        theme: "minimal-dark",
+        scrollInertia: 250
+    };
+
+    const languageOptions = {
+        noResults: function () {
+            return 'Geen resultaten gevonden.';
+        },
+        loadingMore: function () {
+            return 'Meer resultaten aan het laden...';
+        },
+        searching: function () {
+            return 'Aan het zoeken...';
+        },
+        errorLoading: function () {
+            return 'Er ging iets mis tijdens het laden';
+        }
+    }
+
+    $.fn.select2.defaults.set("language", languageOptions);
+
+    $(document).ready(function () {
+        $.ajaxSetup({ cache: false });
+        const selectOptions = {
+            url: 'Stock/Index',
+            method: 'GET',
+            cache: false,
+            placeholder: 'Maak uw keuze',
+            submitOnChange: { idElement: $('#SelectedUserOrganizationId'), submitOnChange: true, submitElement: $('#SelectOrganization') }
+        }
+
+        initAjaxDropdown($('#companySelector'), selectOptions, 25);
+    });
+
+    function startTimer() {
+        timer = setTimeout(function () {
+            $(".loader").fadeIn("slow");
+        }, 200);
+    };
+
+    function stopTimer() {
+        clearTimeout(timer);
+        $(".loader").hide();
+    };
+
+    $(document).ajaxStart(function () {
+        startTimer();
+    });
+
+    $(document).ajaxStop(function () {
+        stopTimer();
+    });
+
+    $(document).ajaxError(function (e, xhr) {
+        handleAjaxError(xhr);
+    });
+
+    $(window).load(function () {
+        if (!$('.main').find('.no-custom-scrollbar').length) {
+            $(".main").mCustomScrollbar(scrollOptions);
+        }
+        focusElements();
+    });
+
+    $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+
+</script>

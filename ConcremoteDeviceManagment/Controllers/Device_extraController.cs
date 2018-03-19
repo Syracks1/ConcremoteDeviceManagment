@@ -49,8 +49,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         // POST: Device_extra/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,ConcremoteDevice_id,Price_id,Datum,Active,Eigenschap_id")] DeviceConfig_ExtraInfo device_extra)
@@ -83,8 +82,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         // POST: Device_extra/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,ConcremoteDevice_id,Price_id,Datum,Active,Eigenschap_id")] DeviceConfig_ExtraInfo device_extra)

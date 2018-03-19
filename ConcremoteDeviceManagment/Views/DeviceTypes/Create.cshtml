@@ -31,6 +31,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <button onclick="location.href='@Url.Action("Index", "DeviceTypes")';return false; " class="btn btn-primary">Back to list</button>
+    </div>

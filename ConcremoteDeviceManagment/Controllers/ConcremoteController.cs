@@ -16,10 +16,62 @@ namespace ConcremoteDeviceManagment.Controllers
         private BasDbContext db = new BasDbContext();
        //[Authorize(Roles = "BAS employee, Assembly, Admin")]
         // GET: Concremote
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
+            ViewBag.DeviceParm = String.IsNullOrEmpty(sortOrder) ? "ConcremoteDevice_desc" : "";
+            ViewBag.DeviceTypeSortParm = sortOrder == "DeviceType" ? "DeviceType_desc" : "DeviceType";
+            ViewBag.ActiveSort = sortOrder == "Active" ? "Active_desc" : "Active";
+            ViewBag.VersionSort = sortOrder == "ConfigVersion" ? "ConfigVersion_desc" : "ConfigVersion";
+            ViewBag.ConfigDateSort = sortOrder == "ConfigDate" ? "ConfigDate_desc" : "ConfigDate";
+            ViewBag.StatusSort = sortOrder == "Status" ? "Status_desc" : "Status";
             var query = from d in db.DeviceStatus
                         select d;
+            switch (sortOrder)
+            {
+                case "ConcremoteDevice_desc":
+                    query = query.OrderByDescending(s => s.ConcremoteDevice.id);
+                    break;
+                case "DeviceType":
+                    query = query.OrderBy(s => s.DeviceConfig.DeviceType.name);
+                    break;
+                case "DeviceType_desc":
+                    query = query.OrderByDescending(s => s.DeviceConfig.DeviceType.name);
+                    break;
+                case "Active":
+                    query = query.OrderBy(s => s.ConcremoteDevice.Active);
+                    break;
+                case "Active_desc":
+                    query = query.OrderByDescending(s => s.ConcremoteDevice.Active);
+                    break;
+                case "ConfigVersion":
+                    query = query.OrderBy(s => s.DeviceConfig.VersionNr);
+                    break;
+                case "ConfigVersion_desc":
+                    query = query.OrderBy(s => s.DeviceConfig.VersionNr);
+                    break;
+                case "ConfigDate":
+                    query = query.OrderBy(s => s.DeviceConfig.Date);
+                    break;
+                case "ConfigDate_desc":
+                    query = query.OrderByDescending(s => s.DeviceConfig.Date);
+                    break;
+                case "Status":
+                    query = query.OrderBy(s => s.Device_Statustypes.id);
+                    break;
+                case "Status_desc":
+                    query = query.OrderByDescending(s => s.Device_Statustypes.id);
+                    break;
+                default:
+                    query = query.OrderBy(s => s.ConcremoteDevice.id);
+                    break;
+            }
+            foreach (var item in query)
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    query = query.Where(s => s.ConcremoteDevice.id.Contains(searchString));
+                }
+            }
             return View(query);
 
         }
@@ -27,10 +79,6 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
-           //var test = from d in db.DeviceStatus
-           //           from b in db.Device_Pricelist
-           //           where d.DeviceConfig_id = b.Device_config_id
-           //           select d
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,8 +110,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         // POST: Concremote/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,device_id,imei,active,oldsystem_concremote,Allowvalidation,device_type_id")] ConcremoteDevice concremoteDevice)
@@ -94,26 +141,29 @@ namespace ConcremoteDeviceManagment.Controllers
                 return HttpNotFound();
             }
             var StatusQuery = from d in db.DeviceStatus
-                              where d.Device_statustypes_id == d.Device_Statustypes.id
-                              orderby d.Device_Statustypes.id
-                              select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
+                       where d.Device_statustypes_id == d.Device_Statustypes.id
+                       orderby d.Device_Statustypes.id
+                       select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
             ViewBag.StatusList = new SelectList(StatusQuery.Distinct(), "Id", "Value");
-                
             return View(deviceStatus_ExtraInfo);
         }
 
+        //var Users = (from d in db.AspNetUserRoles
+        //             join st in db.AspNetUsers on d.UserId equals st.Id
+        //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
+        //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
+        //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
+
         // POST: Concremote/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,ConcremoteDevice_Active,Employee_1,Employee_2,Sign_Date")] DeviceStatus deviceStatus)
         {
             var Conn = (from d in db.DeviceStatus
                         join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
-                        join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
-                        join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
-                        select new { s.id, Model = d.id });
+                        select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
+
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
