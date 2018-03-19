@@ -92,12 +92,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceStatus_ExtraInfo deviceStatus_ExtraInfo = db.DeviceStatus_ExtraInfo.Find(id);
-            if (deviceStatus_ExtraInfo == null)
+            DeviceStatus deviceStatus = db.DeviceStatus.Find(id);
+            if (deviceStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(deviceStatus_ExtraInfo);
+            return View(deviceStatus);
         }
 
         [HttpGet]
@@ -179,7 +179,7 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
-                db.Entry(concremoteDevice).State = EntityState.Modified;
+         //       db.Entry(concremoteDevice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

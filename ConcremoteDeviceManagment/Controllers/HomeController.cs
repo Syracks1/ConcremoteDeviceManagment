@@ -33,9 +33,9 @@ namespace ConcremoteDeviceManagment.Controllers
             var SelectedCMI = from d in db.pricelist
                               where d.Price_id == d.Price_id
                               orderby d.Price_id
-                              select new { Id = d.Price_id, Value = d.bas_art_nr };
+                              select new { Id = d.Price_id, Value = d.bas_art_nr.ToString() };
 
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id");
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
 
             return View(Device_Pricelist);
         }
@@ -45,7 +45,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Edit(List<Device_Pricelist> Device_Pricelist, FormCollection formCollection)
         //   public ActionResult Edit([Bind(Include = "id, Device_config_id,Price_id,amount,assembly_order")] List<Device_Pricelist> device_Pricelist, FormCollection formCollection)
         {
-        //    var value = formCollection["SelectedCMI"];
+            var value = formCollection["SelectedCMI"];
            //.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
@@ -59,24 +59,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(Device_Pricelist);
         }
-
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult GetDevice(List<Device_Pricelist> ci)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        foreach (var x in ci)
-        //        {
-        //            db.Device_Pricelist.Add(x);
-        //        }
-        //        db.SaveChanges();
-        //        return RedirectToAction("CreateTry");
-        //    }
-        //    ViewBag.questions_id = new SelectList(db.Device_Pricelist, "questions_id", "questions_string");
-        //    return View(ci);
-        //}
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.DeviceStatus_ExtraInfo
+﻿@model ConcremoteDeviceManagment.Models.DeviceStatus
 
 @{
     ViewBag.Title = "Details";
@@ -8,20 +8,23 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ConcremoteDevice</h4>
+    <h4>
+        @Html.DisplayFor(model => model.DeviceConfig.DeviceType.name)<br />
+        @Html.DisplayFor(model => model.ConcremoteDevice.id)
+    </h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayName("Device Serie Nummer")
         </dt>
-        <dd>
-            @*@Html.DisplayFor(model => model.DeviceStatus.ConcremoteDevice.id)*@
+        <dd>          
+            @Html.DisplayFor(model => model.ConcremoteDevice.id)            
         </dd>
         <dt>
             @Html.DisplayName("Device Type")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DeviceConfig_ExtraInfo.DeviceConfig.DeviceType.name)
+            @Html.DisplayFor(model => model.DeviceConfig.DeviceType.name)
         </dd>
         <dt>
             @Html.DisplayName("SIM Nummer")
@@ -51,25 +54,25 @@
             @Html.DisplayName("Medewerker 1")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.DeviceStatus.Employee_1)*@
+            @Html.DisplayFor(model => model.Employee_1)
         </dd>
         <dt>
             @Html.DisplayName("Medewerker 2")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.DeviceStatus.Employee_2)*@
+            @Html.DisplayFor(model => model.Employee_2)
         </dd>
         <dt>
             @Html.DisplayName("SignDate")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.DeviceStatus.Sign_Date)*@
+            @Html.DisplayFor(model => model.Sign_Date)
         </dd>
         <dt>
             @Html.DisplayName("Status")
         </dt>
         <dd>
-            @*@Html.DisplayFor(model => model.DeviceStatus.Device_Statustypes.name)*@
+            @Html.DisplayFor(model => model.Device_Statustypes.name)
         </dd>
         <dt>
             @Html.DisplayName("Onderdeellijst")
