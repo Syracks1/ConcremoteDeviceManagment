@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ConcremoteDeviceManagment.Models;
@@ -14,8 +15,9 @@ namespace ConcremoteDeviceManagment.Controllers
     public class ConcremoteController : Controller
     {
         private BasDbContext db = new BasDbContext();
-       //[Authorize(Roles = "BAS employee, Assembly, Admin")]
+        //[Authorize(Roles = "BAS employee, Assembly, Admin")]
         // GET: Concremote
+
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.DeviceParm = String.IsNullOrEmpty(sortOrder) ? "ConcremoteDevice_desc" : "";

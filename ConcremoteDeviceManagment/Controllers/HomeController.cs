@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Microsoft.Ajax.Utilities;
 
+
 namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
@@ -25,7 +26,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
             //ViewBag.SelectedDevice = SelectedDevices;
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-
+          
             var Device = (from d in db.Device_Pricelist
                               //where d.Device_config_id == 
                           select d).DistinctBy(p => p.Device_config_id).ToList();
@@ -59,9 +60,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
-                    TempData["AlertMessage"] = "Medicine Type Added Sucessfully";
-
-                    // db.Entry(db.DeviceConfig) = EntityState.Added;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");

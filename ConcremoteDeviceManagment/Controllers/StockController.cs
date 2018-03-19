@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using ConcremoteDeviceManagment.Models;
 
+
 namespace ConcremoteDeviceManagment.Controllers
 {
     [HandleError]
@@ -16,11 +17,14 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Stock
         public ActionResult Index(string sortOrder, string StockCMI, string searchString)
         {
+            //sorteerparameters
             ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.DescriptionSortParm = sortOrder == "Description" ? "Desc_desc" : "Description";
             ViewBag.CurrentStockSort = sortOrder == "current" ? "current_desc" : "current";
             ViewBag.MinStockSort = sortOrder == "min_stock" ? "min_stock_desc" : "min_stock";
             ViewBag.MaxStockSort = sortOrder == "max_stock" ? "max_stock_desc" : "max_stock";
+            //messages voor meldingen?
+            
             var stock = from d in db.Stock
                             where d.Pricelist.Active == true
                         select d;
@@ -106,15 +110,18 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
-           stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
+           // ManageMessageId? message;
+            stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Medicine Type Added Sucessfully";
+                TempData["AlertMessage"] = "Article Added Sucessfully";
 
                 return RedirectToAction("Index");
             }
+             //message = ManageMessageId.RemoveLoginSuccess;
+
             return View(stock);
         }
         [Authorize(Roles = "Admin")]
@@ -143,7 +150,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
             }
+
             return View(stock);
         }
         [Authorize(Roles = "Admin")]
