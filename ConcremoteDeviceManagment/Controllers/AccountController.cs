@@ -1,17 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using ConcremoteDeviceManagment.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ConcremoteDeviceManagment.Models;
+using System;
+using System.Linq;
 using System.Security.Cryptography;
-
-
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -63,6 +59,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
         public static string HashPassword(string Password)
         {
             byte[] salt;
@@ -81,6 +78,7 @@ namespace ConcremoteDeviceManagment.Controllers
             Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
             return Convert.ToBase64String(dst);
         }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -100,6 +98,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 //case SignInStatus.RequiresVerification:
@@ -136,17 +135,19 @@ namespace ConcremoteDeviceManagment.Controllers
                 return View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
+            // The following code protects for brute force attacks against the two factor codes.
+            // If a user enters incorrect codes for a specified amount of time then the user account
+            // will be locked out for a specified amount of time.
             // You can configure the account lockout settings in IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid code.");
@@ -178,7 +179,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action(
                        "ConfirmEmail", "Account",
-                       new { userId = user.Id, code = code },
+                       new { userId = user.Id, code },
                        protocol: Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(user.Id,
@@ -215,6 +216,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
+
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -231,9 +233,8 @@ namespace ConcremoteDeviceManagment.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-              
-                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -335,7 +336,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
         //
@@ -355,10 +356,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
@@ -445,6 +449,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -501,6 +506,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
+
+        #endregion Helpers
     }
 }

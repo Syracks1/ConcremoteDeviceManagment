@@ -1,59 +1,52 @@
 ﻿using ConcremoteDeviceManagment.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using System.Data.SqlClient;
-using System.Data;
-using System.Diagnostics;
-using System.Globalization;
 using Microsoft.Ajax.Utilities;
-
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
     {
         private BasDbContext db = new BasDbContext();
+
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
             //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
             //ViewBag.SelectedDevice = SelectedDevices;
             // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-          
+
             var Device = (from d in db.Device_Pricelist
-                              //where d.Device_config_id == 
+                              //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id).ToList();
             return View(Device);
+        }
 
-        }  
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Edit(int? id, string Device)
-        { 
-            var Device_Pricelist  = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
+        {
+            var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == id));
 
             var SelectedCMI = from d in db.pricelist
                               where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
-            
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
+
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id");
 
             return View(Device_Pricelist);
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist , FormCollection formCollection)
-    //   public ActionResult Edit([Bind(Include = "id, Device_config_id,Price_id,amount,assembly_order")] List<Device_Pricelist> device_Pricelist, FormCollection formCollection)
+        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist, FormCollection formCollection)
+        //   public ActionResult Edit([Bind(Include = "id, Device_config_id,Price_id,amount,assembly_order")] List<Device_Pricelist> device_Pricelist, FormCollection formCollection)
         {
-            //.Price_id = int.Parse(formCollection["SelectedCMI"]);
+        //    var value = formCollection["SelectedCMI"];
+           //.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 foreach (var item in Device_Pricelist)
@@ -66,12 +59,12 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(Device_Pricelist);
         }
+
         //}
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult GetDevice(List<Device_Pricelist> ci)
         //{
-
         //    if (ModelState.IsValid)
         //    {
         //        foreach (var x in ci)

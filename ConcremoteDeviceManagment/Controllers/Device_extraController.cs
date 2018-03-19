@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ConcremoteDeviceManagment.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
     public class Device_extraController : Controller
     {
         private BasDbContext db = new BasDbContext();
@@ -61,7 +57,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 return RedirectToAction("Index");
             }
 
-        //    ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId", device_extra.Price_id);
+            //    ViewBag.Price_id = new SelectList(db.pricelist, "Price_id", "CategoryId", device_extra.Price_id);
             return View(device_extra);
         }
 

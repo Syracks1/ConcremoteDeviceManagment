@@ -14,7 +14,6 @@
         <dd>
             @if (Model.HasPassword)
              {
-        @*@Html.ActionLink("Change your password", "ChangePassword")*@
                 <button onclick="location.href='@Url.Action("ChangePassword", "Manage")';return false;" class="btn btn-primary">Change Password</button>
              }
             else

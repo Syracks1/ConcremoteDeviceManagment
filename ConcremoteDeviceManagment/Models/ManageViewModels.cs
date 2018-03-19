@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -55,7 +55,7 @@ namespace ConcremoteDeviceManagment.Models
         [DataType(DataType.Password)]
         [Display(Name = "Bevestig nieuw wachtwoord")]
         [Compare("NewPassword", ErrorMessage = "De ingevoerde wachtwoorden komen niet met elkaar overeen.")]
-   //     [Compare("OldPassword", ErrorMessage = "Het nieuwe wachtwoord mag niet overeenkomen met het vorige wachtwoord")]
+        //     [Compare("OldPassword", ErrorMessage = "Het nieuwe wachtwoord mag niet overeenkomen met het vorige wachtwoord")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -1,33 +1,29 @@
-﻿using System;
+﻿using ConcremoteDeviceManagment.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
-using System.Data.SqlClient;
-using Microsoft.Ajax.Utilities;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-     
     public class DeviceConfigController : Controller
     {
         private BasDbContext db = new BasDbContext();
+
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
-            
             var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
             //from d in db.DeviceType
             //join c in db.DeviceConfig.Distinct()
             //on d.device_type_id equals c.device_type_id
             //select d.name);
             ViewBag.SelectedDevice = SelectedDevices;
-               return View();
+            return View();
         }
+
         public PartialViewResult CreateDevice(string Device)
         {
             {
@@ -55,6 +51,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
+
         // POST: DeviceConfig2/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -69,6 +66,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
+
         // GET: DeviceConfig2/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -124,6 +122,7 @@ namespace ConcremoteDeviceManagment.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

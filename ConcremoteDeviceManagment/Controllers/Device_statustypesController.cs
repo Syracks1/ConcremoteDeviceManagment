@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ConcremoteDeviceManagment.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-
     public class Device_statustypesController : Controller
     {
         private BasDbContext db = new BasDbContext();
@@ -35,6 +30,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(device_statustypes);
         }
+
         [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Create
         public ActionResult Create()
@@ -57,6 +53,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(device_statustypes);
         }
+
         [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Edit/5
         public ActionResult Edit(int? id)
@@ -87,6 +84,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(device_statustypes);
         }
+
         [Authorize(Roles = "Admin")]
         // GET: Device_statustypes/Delete/5
         public ActionResult Delete(int? id)

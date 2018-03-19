@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ConcremoteDeviceManagment.Models;
 using System.Data;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-
     [HandleError]
     public class ArticleController : Controller
     {
@@ -23,7 +18,7 @@ namespace ConcremoteDeviceManagment.Controllers
             var SelectedLeverancier = (from r in db.pricelist
                                        select r.Leverancier).Distinct();
             ViewBag.SelectedLeverancier = SelectedLeverancier;
-            ViewBag.CMISortParm = String.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
+            ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
             ViewBag.LevSortParm = sortOrder == "Leverancier" ? "Lev_desc" : "Leverancier";
@@ -36,36 +31,47 @@ namespace ConcremoteDeviceManagment.Controllers
                 case "CMI_desc":
                     pricelist = pricelist.OrderByDescending(s => s.bas_art_nr);
                     break;
+
                 case "Active":
                     pricelist = pricelist.OrderBy(s => s.Active);
                     break;
+
                 case "Active_desc":
                     pricelist = pricelist.OrderByDescending(s => s.Active);
                     break;
+
                 case "Price":
                     pricelist = pricelist.OrderBy(s => s.Price);
                     break;
+
                 case "Price_desc":
                     pricelist = pricelist.OrderByDescending(s => s.Price);
                     break;
+
                 case "Leverancier":
                     pricelist = pricelist.OrderBy(s => s.Leverancier);
                     break;
+
                 case "Lev_desc":
                     pricelist = pricelist.OrderByDescending(s => s.Leverancier);
                     break;
+
                 case "lev_art":
                     pricelist = pricelist.OrderBy(s => s.art_lev_nr);
                     break;
+
                 case "lev_art_desc":
                     pricelist = pricelist.OrderByDescending(s => s.art_lev_nr);
                     break;
+
                 case "descripton":
                     pricelist = pricelist.OrderBy(s => s.description);
                     break;
+
                 case "descripton_desc":
                     pricelist = pricelist.OrderByDescending(s => s.description);
                     break;
+
                 default:
                     pricelist = pricelist.OrderBy(s => s.bas_art_nr);
                     break;
@@ -84,13 +90,11 @@ namespace ConcremoteDeviceManagment.Controllers
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     pricelist = pricelist.Where(s => s.bas_art_nr.Contains(PriceCMI));
-
                 }
-                
             }
             return View(pricelist);
         }
-       
+
         // GET: Device/Details/5
         public ActionResult Details(int? id)
         {
@@ -117,7 +121,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.SelectedLeverancier = SelectedLeverancier;
             return View();
         }
-        
+
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -136,8 +140,8 @@ namespace ConcremoteDeviceManagment.Controllers
             }
 
             return View(pricelist);
-
         }
+
         [Authorize(Roles = "Admin")]
 
         // GET: Device/Edit/5
@@ -155,7 +159,6 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(pricelist);
         }
 
-
         // POST: Device/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -170,6 +173,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
+
         [Authorize(Roles = "Admin")]
         // GET: Device/Delete/5
         public ActionResult Delete(int? id)

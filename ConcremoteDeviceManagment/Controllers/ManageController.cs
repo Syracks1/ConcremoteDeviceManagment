@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using ConcremoteDeviceManagment.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ConcremoteDeviceManagment.Models;
-using System.Net;
 using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
@@ -35,9 +34,9 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -64,7 +63,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : message == ManageMessageId.UserUpdateSucces ?  "User has been succesfully updated"
+                : message == ManageMessageId.UserUpdateSucces ? "User has been succesfully updated"
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -102,6 +101,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
+
         [Authorize(Roles = "Admin")]
         public ActionResult ManageAccounts()
         {
@@ -118,7 +118,6 @@ namespace ConcremoteDeviceManagment.Controllers
             //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
             //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
             //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
-
 
             return View(Account);
         }
@@ -355,9 +354,9 @@ namespace ConcremoteDeviceManagment.Controllers
 
             base.Dispose(disposing);
         }
+
         public ActionResult UserEdit(string Id)
         {
-
             var SelectedRoles = (from r in db.AspNetRoles
                                  select r.Name).Distinct();
             ViewBag.SelectedRoles = SelectedRoles;
@@ -372,6 +371,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(aspNetUser);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
@@ -385,9 +385,10 @@ namespace ConcremoteDeviceManagment.Controllers
                 return RedirectToAction("ManageAccounts");
             }
             return View(aspNetUserRoles);
-
         }
+
         #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -439,6 +440,6 @@ namespace ConcremoteDeviceManagment.Controllers
             Error
         }
 
-#endregion
+        #endregion Helpers
     }
 }
