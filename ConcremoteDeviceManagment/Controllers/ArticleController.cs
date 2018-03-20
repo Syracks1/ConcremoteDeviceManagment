@@ -13,11 +13,10 @@ namespace ConcremoteDeviceManagment.Controllers
         private BasDbContext db = new BasDbContext();
 
         // GET: Device
-        public ActionResult Index(string sortOrder, string PriceCMI)
+        public ActionResult Index(string sortOrder, string PriceCMI, FormCollection formCollection)
         {
-            var SelectedLeverancier = (from r in db.pricelist
-                                       select r.Leverancier).Distinct();
-            ViewBag.SelectedLeverancier = SelectedLeverancier;
+           
+    //        ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
@@ -75,12 +74,18 @@ namespace ConcremoteDeviceManagment.Controllers
                 default:
                     pricelist = pricelist.OrderBy(s => s.bas_art_nr);
                     break;
+
             }
+            var SelectedLeverancier = (from d in db.pricelist
+                                       select new { Id = d.Leverancier, Value = d.Leverancier }).Distinct();
+
+            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
             // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
             {
                 if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
                 {
+                   //(formCollection["SelectedLeverancier"]);
                     pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
                 }
                 //if (!string.IsNullOrEmpty(ViewBag.SelectedLeverancier))

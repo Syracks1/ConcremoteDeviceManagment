@@ -10,54 +10,44 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>AspNetUserRoles</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.UserId)
-    @Html.HiddenFor(model => model.RoleId)
 
-    <div class="form-group">
-        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AspNetUsers.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AspNetUsers.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.Label("Email bevestigd", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.CheckBoxFor(model => model.AspNetUsers.EmailConfirmed, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AspNetUsers.EmailConfirmed, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    @*<div class="form-group">
-        @Html.Label("LockOutDate", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AspNetUsers.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AspNetUsers.LockoutEndDateUtc, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-    <div class="form-group">
-        @Html.Label("Rechten", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @*       @Html.DropDownList("SelectedRoles", new SelectList(ViewBag.SelectedRoles), "Kies een rol", new { htmlAttributes = new { @class = "form-control" } })*@
-            @Html.DropDownList("SelectedRoles", null, new { @class = "form-control" })
+    <div class="form-horizontal">
+        <h4>AspNetUserRoles</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.RoleId)
 
-        @*    @Html.EditorFor(model => model.AspNetRoles.Name, new { htmlAttributes = new { @class = "form-control" } })*@
-            @Html.ValidationMessageFor(model => model.AspNetRoles.Name, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AspNetUsers.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AspNetUsers.Email, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.Label("Email bevestigd", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.AspNetUsers.EmailConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AspNetUsers.EmailConfirmed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Rechten", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SelectedRoles", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AspNetRoles.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-</div>
+    <div>
+        <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false; " class="btn btn-primary">Back to list</button>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "ManageAccounts")
-</div>

@@ -187,7 +187,7 @@ namespace ConcremoteDeviceManagment.Controllers
                        "Please confirm your account by clicking this link: <a href=\""
                                                        + callbackUrl + "\">link</a>");
                     // ViewBag.Link = callbackUrl;   // Used only for initial demo.
-                    return View("DisplayEmail");
+                    return View();
                 }
                 AddErrors(result);
             }
