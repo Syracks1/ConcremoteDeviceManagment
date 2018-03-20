@@ -80,11 +80,12 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     query = query.Where(s => s.ConcremoteDevice.id.Contains(searchString));
                 }
+             
             }
             return View(query);
         }
 
-        //[Authorize(Roles = "Assembly, Admin")]
+        [Authorize(Roles = "Assembly, Admin")]
         // GET: Concremote/Details/5
         public ActionResult Details(int? id)
         {
@@ -136,26 +137,33 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(concremoteDevice);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly, Admin")]
 
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
+            //var StatusList = from d in db.DeviceStatus
+            //                 where d.Device_statustypes_id == d.Device_Statustypes.id
+            //                 //   orderby d.Device_Statustypes.id
+            //                 //    select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
+            //                 select d.Device_Statustypes.name;
+            //ViewBag.StatusList = new SelectList(db.Device_statustypes, "Id", "name");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeviceStatus deviceStatus_ExtraInfo = db.DeviceStatus.Find(id);
-            if (deviceStatus_ExtraInfo == null)
+            DeviceStatus deviceStatus = db.DeviceStatus.Find(id);
+            if (deviceStatus == null)
             {
                 return HttpNotFound();
             }
             var StatusList = from d in db.DeviceStatus
-                              where d.Device_statustypes_id == d.Device_Statustypes.id
-                              orderby d.Device_Statustypes.id
-                              select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
-            ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
-            return View(deviceStatus_ExtraInfo);
+                             where d.Device_statustypes_id == d.Device_Statustypes.id
+                             //   orderby d.Device_Statustypes.id
+                             //    select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
+                             select d.Device_Statustypes.name;
+            ViewBag.StatusList = new SelectList(db.Device_statustypes, "Id", "name");
+            return View(deviceStatus);
         }
 
         //var Users = (from d in db.AspNetUserRoles
@@ -168,19 +176,18 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Sign_Date,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice, FormCollection formCollection)
+        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Device_statustypes_id,Sign_Date,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice, FormCollection formCollection)
         {
-            var Conn = (from d in db.DeviceStatus
-                        join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
-                        join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
-                        join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
-                        select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
+            //var Conn = (from d in db.DeviceStatus
+            //            join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
+            //            join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
+            //            join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
+            //            select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
             deviceStatus.Device_statustypes_id = int.Parse(formCollection["StatusList"]);
-
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
-         //       db.Entry(concremoteDevice).State = EntityState.Modified;
+                //       db.Entry(concremoteDevice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

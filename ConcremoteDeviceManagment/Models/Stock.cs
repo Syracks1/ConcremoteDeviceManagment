@@ -129,6 +129,8 @@ namespace ConcremoteDeviceManagment.Models
         public int DeviceConfig_id { get; set; }
         public string Employee_1 { get; set; }
         public string Employee_2 { get; set; }
+        [Required(ErrorMessage = "Selecteer een datum")]
+        [DataType(DataType.Date)]
         public DateTime Sign_Date { get; set; }
 
         [ForeignKey("DeviceConfig_id")]

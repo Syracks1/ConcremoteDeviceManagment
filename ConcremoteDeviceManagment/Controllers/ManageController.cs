@@ -1,4 +1,5 @@
 ﻿using ConcremoteDeviceManagment.Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -358,9 +359,8 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult UserEdit(string Id)
         {
             var SelectedRoles = (from r in db.AspNetRoles
-                                 select new { r.Id, Value = r.Name }).Distinct();
-           
-            ViewBag.SelectedRoles = new SelectList(SelectedRoles.Distinct(), "Id", "Value");
+                                 select new {  r.Id, Value = r.Name }).DistinctBy(r => r.Id);
+            ViewBag.SelectedRoles = new SelectList(SelectedRoles.DistinctBy(r => r.Id), "Id", "Value");
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -375,7 +375,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles,  FormCollection formCollection)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles,  FormCollection formCollection)
         {
             aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;
