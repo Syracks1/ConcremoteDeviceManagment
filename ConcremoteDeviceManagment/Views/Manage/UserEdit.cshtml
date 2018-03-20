@@ -42,8 +42,10 @@
     <div class="form-group">
         @Html.Label("Rechten", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-     @*       @Html.DropDownList("SelectedRoles", new SelectList(ViewBag.SelectedRoles), "Kies een rol", new { htmlAttributes = new { @class = "form-control" } })*@
-            @Html.EditorFor(model => model.AspNetRoles.Name, new { htmlAttributes = new { @class = "form-control"}})
+            @*       @Html.DropDownList("SelectedRoles", new SelectList(ViewBag.SelectedRoles), "Kies een rol", new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownList("SelectedRoles", null, new { @class = "form-control" })
+
+        @*    @Html.EditorFor(model => model.AspNetRoles.Name, new { htmlAttributes = new { @class = "form-control" } })*@
             @Html.ValidationMessageFor(model => model.AspNetRoles.Name, "", new { @class = "text-danger" })
         </div>
     </div>

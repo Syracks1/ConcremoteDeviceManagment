@@ -114,5 +114,5 @@
 </div>
 <p>
     @* @Html.ActionLink("Edit", "Edit", new { id = Mode }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    <button onclick="location.href='@Url.Action("Index", "Article")';return false; " class="btn btn-primary">Back to list</button>
 </p>

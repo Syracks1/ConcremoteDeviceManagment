@@ -358,8 +358,9 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult UserEdit(string Id)
         {
             var SelectedRoles = (from r in db.AspNetRoles
-                                 select r.Name).Distinct();
-            ViewBag.SelectedRoles = SelectedRoles;
+                                 select new { r.Id, Value = r.Name }).Distinct();
+           
+            ViewBag.SelectedRoles = new SelectList(SelectedRoles.Distinct(), "Id", "Value");
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -374,8 +375,9 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles, AspNetRoles aspNetRoles)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetRoles.name,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles,  FormCollection formCollection)
         {
+            aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;
 
             if (ModelState.IsValid)
