@@ -7,10 +7,13 @@
 
 <h2>DeviceTypes</h2>
 <p>
-<button onclick="location.href='@Url.Action("Create", "DeviceTypes")';return false;" class="btn btn-primary">Create New</button>
+    <button onclick="location.href='@Url.Action("Create", "DeviceTypes")';return false;" class="btn btn-primary">Create New</button>
 
-    </p>
-
+</p>
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-link" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <table class="table table-hover">
     <tr>
         <th>

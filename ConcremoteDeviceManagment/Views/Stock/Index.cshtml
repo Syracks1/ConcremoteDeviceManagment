@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Inventory</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 @using (Html.BeginForm("Index", "Stock", FormMethod.Get))
@@ -18,7 +17,10 @@
         <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
     </p>
 }
-
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <table class="table table-hover">
     <tr>
         <th>
@@ -65,7 +67,13 @@
 
     }
 </table>
-
+<script type="text/javascript">
+    $(function () {
+        $("#AlertMessage").change(function () {
+            alert("AlertMessage");
+        });
+    });
+</script>
 <script>
 
     let timer;

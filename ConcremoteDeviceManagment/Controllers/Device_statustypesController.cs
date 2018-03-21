@@ -31,7 +31,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(device_statustypes);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Device_statustypes/Create
         public ActionResult Create()
         {
@@ -48,13 +48,14 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Device_statustypes.Add(device_statustypes);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Device Status Added Successfully";
                 return RedirectToAction("Index");
             }
 
             return View(device_statustypes);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Device_statustypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -80,6 +81,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(device_statustypes).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Device Status Edited  Successfully";
                 return RedirectToAction("Index");
             }
             return View(device_statustypes);
@@ -109,6 +111,7 @@ namespace ConcremoteDeviceManagment.Controllers
             Device_statustypes device_statustypes = db.Device_statustypes.Find(id);
             db.Device_statustypes.Remove(device_statustypes);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Device Status Deleted Successfully";
             return RedirectToAction("Index");
         }
 

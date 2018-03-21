@@ -189,6 +189,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.Entry(deviceStatus).State = EntityState.Modified;
                 //       db.Entry(concremoteDevice).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Device Edited Successfully";
                 return RedirectToAction("Index");
             }
             //    ViewBag.device_type_id = new SelectList(db.DeviceType, "device_type_id", "device_type", concremoteDevice.id);
@@ -218,6 +219,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ConcremoteDevice concremoteDevice = db.ConcremoteDevice.Find(id);
             db.ConcremoteDevice.Remove(concremoteDevice);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Device Deleted Successfully";
             return RedirectToAction("Index");
         }
 

@@ -68,6 +68,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     stock = stock.OrderBy(s => s.Pricelist.bas_art_nr);
                     break;
             }
+           
             foreach (var item in stock)
             {
                 if (!string.IsNullOrEmpty(searchString))
@@ -82,7 +83,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-
+        
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
         {
@@ -98,7 +99,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(stock);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Stock/Create
         public ActionResult Create()
         {
@@ -124,7 +125,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article Added Sucessfully";
+                TempData["AlertMessage"] = "Article Added Successfully";
 
                 return RedirectToAction("Index");
             }
@@ -133,7 +134,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(stock);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -159,6 +160,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Article Edited Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -189,6 +191,7 @@ namespace ConcremoteDeviceManagment.Controllers
             Stock stock = db.Stock.Find(id);
             db.Stock.Remove(stock);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Article Deleted Successfully";
             return RedirectToAction("Index");
         }
 

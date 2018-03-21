@@ -12,6 +12,10 @@
     <button onclick="location.href='@Url.Action("Create", "Device_statustypes")';return false;" class="btn btn-primary">Maak nieuwe status</button>
 
 </p>
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <table class="table table-hover">
     <tr>
         <th>
@@ -20,16 +24,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            <button onclick="location.href='@Url.Action("Edit", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-            <button onclick="location.href='@Url.Action("Delete", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
+                <button onclick="location.href='@Url.Action("Delete", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>

@@ -13,6 +13,10 @@
         <input type="submit" value="Zoek serie nummer" class="btn btn-primary" />
     </p>
 }
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <table class="table table-hover">
     <tr>
         <th>

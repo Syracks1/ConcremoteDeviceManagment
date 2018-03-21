@@ -16,8 +16,9 @@ namespace ConcremoteDeviceManagment.Models
 
         [Required(ErrorMessage = "Voer een aantal in")]
         public int stock_amount { get; set; }
-
+       
         [Required(ErrorMessage = "Voer een aantal in, Het getal mag niet hoger zijn dan maximale hoeveelheid")]
+        [Range(1, 100 )]
         public int min_stock { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in")]
@@ -152,7 +153,9 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een Naam in")]
         [StringLength(255, MinimumLength = 1)]
         public string name { get; set; }
+     
     }
+  
 
     [Table("Device_Pricelist")]
     public class Device_Pricelist

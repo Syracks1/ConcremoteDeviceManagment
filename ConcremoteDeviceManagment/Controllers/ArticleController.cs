@@ -115,7 +115,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(pricelist);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
 
         // GET: Device/Create
         public ActionResult Create()
@@ -141,13 +141,14 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.pricelist.Add(pricelist);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Article Added Successfully";
                 return RedirectToAction("Index");
             }
 
             return View(pricelist);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
 
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
@@ -174,6 +175,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(pricelist).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Article Edited Successfully";
                 return RedirectToAction("Index");
             }
             return View(pricelist);
@@ -203,6 +205,7 @@ namespace ConcremoteDeviceManagment.Controllers
             Pricelist pricelist = db.pricelist.Find(id);
             db.pricelist.Remove(pricelist);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Article Deleted Successfully";
             return RedirectToAction("Index");
         }
 

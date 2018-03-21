@@ -384,6 +384,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "User Edited Successfully";
                 return RedirectToAction("ManageAccounts");
             }
             return View(aspNetUserRoles);

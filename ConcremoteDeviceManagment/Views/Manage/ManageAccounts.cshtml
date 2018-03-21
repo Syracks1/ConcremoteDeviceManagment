@@ -5,10 +5,14 @@
 }
 
 <h2>Accounts</h2>
-
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table table-hover">
     <tr>
         <th>

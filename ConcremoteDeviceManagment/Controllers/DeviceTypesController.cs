@@ -35,7 +35,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
@@ -52,12 +52,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.DeviceType.Add(deviceType);
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Device Type Added Successfully";
                 return RedirectToAction("Index");
             }
 
             return View(deviceType);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -83,6 +84,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Device Type Edited Successfully";
                 return RedirectToAction("Index");
             }
             return View(deviceType);
@@ -111,6 +113,7 @@ namespace ConcremoteDeviceManagment.Controllers
             DeviceType deviceType = db.DeviceType.Find(id);
             db.DeviceType.Remove(deviceType);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Device Type Deleted Successfully";
             return RedirectToAction("Index");
         }
 
