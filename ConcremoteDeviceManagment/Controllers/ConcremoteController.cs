@@ -142,12 +142,13 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
-            //var StatusList = from d in db.DeviceStatus
-            //                 where d.Device_statustypes_id == d.Device_Statustypes.id
-            //                 //   orderby d.Device_Statustypes.id
-            //                 //    select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
-            //                 select d.Device_Statustypes.name;
-            //ViewBag.StatusList = new SelectList(db.Device_statustypes, "Id", "name");
+            var StatusList = from d in db.DeviceStatus
+                             where d.Device_statustypes_id == d.Device_Statustypes.id
+                                orderby d.Device_Statustypes.id
+                                 select new { Id = d.Device_statustypes_id, Value = d.Device_Statustypes.name };
+                             //select d.Device_Statustypes.name;
+            ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,20 +158,9 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            var StatusList = from d in db.DeviceStatus
-                             where d.Device_statustypes_id == d.Device_Statustypes.id
-                             //   orderby d.Device_Statustypes.id
-                             //    select new { Id = d.Device_Statustypes.id, Value = d.Device_Statustypes.name };
-                             select d.Device_Statustypes.name;
-            ViewBag.StatusList = new SelectList(db.Device_statustypes, "Id", "name");
+           
             return View(deviceStatus);
         }
-
-        //var Users = (from d in db.AspNetUserRoles
-        //             join st in db.AspNetUsers on d.UserId equals st.Id
-        //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
-        //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
-        //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
 
         // POST: Concremote/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
@@ -183,7 +173,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //            join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
             //            join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
             //            select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
-            deviceStatus.Device_statustypes_id = int.Parse(formCollection["StatusList"]);
+            deviceStatus.Device_Statustypes.name = (formCollection["StatusList"]);
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;

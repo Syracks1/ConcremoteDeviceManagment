@@ -59,7 +59,8 @@
     <div class="form-group">
         @Html.Label("Huidige status", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("StatusList", null, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Device_statustypes_id, (IEnumerable<SelectListItem>)ViewBag.StatusList, null, new { @class = "form-control" })
+
             @Html.ValidationMessageFor(model => model.Device_Statustypes.name, "", new { @class = "text-danger" })
         </div>
     </div>

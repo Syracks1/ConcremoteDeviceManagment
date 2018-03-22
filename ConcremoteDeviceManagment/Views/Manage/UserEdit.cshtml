@@ -35,7 +35,8 @@
         <div class="form-group">
             @Html.Label("Rechten", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("SelectedRoles", null, new { @class = "form-control" })
+                @Html.DropDownListFor(m =>m.AspNetRoles.Id, (IEnumerable<SelectListItem>)ViewBag.SelectedRoles, new { @class = "form-control" })
+             @*   @Html.DropDownList("SelectedRoles", null, new { @class = "form-control" })*@
                 @Html.ValidationMessageFor(model => model.AspNetRoles.Name, "", new { @class = "text-danger" })
             </div>
         </div>

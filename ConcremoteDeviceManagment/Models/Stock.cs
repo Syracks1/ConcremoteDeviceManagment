@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -18,7 +19,6 @@ namespace ConcremoteDeviceManagment.Models
         public int stock_amount { get; set; }
        
         [Required(ErrorMessage = "Voer een aantal in, Het getal mag niet hoger zijn dan maximale hoeveelheid")]
-        [Range(1, 100 )]
         public int min_stock { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in")]
@@ -43,9 +43,9 @@ namespace ConcremoteDeviceManagment.Models
         public string Unit { get; set; }
         public decimal? Quantity { get; set; }
 
-        [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:C2}")]
-        public Decimal Price { get; set; }
+      //  [DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal Price { get; set; }
 
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }

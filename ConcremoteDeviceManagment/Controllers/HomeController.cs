@@ -26,7 +26,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Edit(int? Id, string Device)
+        public ActionResult Edit(int? Id )
         {
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 

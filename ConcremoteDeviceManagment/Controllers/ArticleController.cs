@@ -120,10 +120,11 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device/Create
         public ActionResult Create()
         {
-            var SelectedLeverancier = (from r in db.pricelist
-                                       select r.Leverancier).Distinct();
-            //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
-            ViewBag.SelectedLeverancier = SelectedLeverancier;
+            var SelectedLeverancier = from d in db.pricelist
+                          //    where d.Price_id == d.Price_id
+                              orderby d.Leverancier
+                              select new { Id = d.Leverancier, Value = d.Leverancier };
+            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
             return View();
         }
 
@@ -131,12 +132,11 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist, FormCollection formCollection)
         {
-            var SelectedLeverancier = (from r in db.pricelist
-                                       select r.Leverancier).Distinct();
+            pricelist.Leverancier = (formCollection["SelectedLeverancier"]);
             //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
-            ViewBag.SelectedLeverancier = SelectedLeverancier;
+          //  ViewBag.SelectedLeverancier = SelectedLeverancier;
             if (ModelState.IsValid)
             {
                 db.pricelist.Add(pricelist);
