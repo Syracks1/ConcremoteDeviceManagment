@@ -78,8 +78,6 @@ namespace ConcremoteDeviceManagment {
         
         private global::System.Data.DataRelation relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo;
         
-        private global::System.Data.DataRelation relationfk_DeviceStatus_ExtraInfo_DeviceStatus;
-        
         private global::System.Data.DataRelation relationfk_Stock_pricelist1;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
@@ -570,7 +568,6 @@ namespace ConcremoteDeviceManagment {
             this.relationfk_Devicestatus_Device_statustypes1 = this.Relations["fk_Devicestatus_Device_statustypes1"];
             this.relationfk_Devicestatus_DeviceConfig = this.Relations["fk_Devicestatus_DeviceConfig"];
             this.relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo = this.Relations["fk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo"];
-            this.relationfk_DeviceStatus_ExtraInfo_DeviceStatus = this.Relations["fk_DeviceStatus_ExtraInfo_DeviceStatus"];
             this.relationfk_Stock_pricelist1 = this.Relations["fk_Stock_pricelist1"];
         }
         
@@ -660,10 +657,6 @@ namespace ConcremoteDeviceManagment {
                         this.tableDeviceConfig_ExtraInfo.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableDeviceStatus_ExtraInfo.DeviceConfig_ExtraInfo_idColumn}, false);
             this.Relations.Add(this.relationfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo);
-            this.relationfk_DeviceStatus_ExtraInfo_DeviceStatus = new global::System.Data.DataRelation("fk_DeviceStatus_ExtraInfo_DeviceStatus", new global::System.Data.DataColumn[] {
-                        this.tableDevicestatus.idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDeviceStatus_ExtraInfo.DeviceStatus_idColumn}, false);
-            this.Relations.Add(this.relationfk_DeviceStatus_ExtraInfo_DeviceStatus);
             this.relationfk_Stock_pricelist1 = new global::System.Data.DataRelation("fk_Stock_pricelist1", new global::System.Data.DataColumn[] {
                         this.tablepricelist.Price_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableStock.Price_idColumn}, false);
@@ -4343,8 +4336,6 @@ namespace ConcremoteDeviceManagment {
             
             private global::System.Data.DataColumn columnid;
             
-            private global::System.Data.DataColumn columnDeviceStatus_id;
-            
             private global::System.Data.DataColumn columnDeviceConfig_ExtraInfo_id;
             
             private global::System.Data.DataColumn columnname;
@@ -4387,14 +4378,6 @@ namespace ConcremoteDeviceManagment {
             public global::System.Data.DataColumn idColumn {
                 get {
                     return this.columnid;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn DeviceStatus_idColumn {
-                get {
-                    return this.columnDeviceStatus_id;
                 }
             }
             
@@ -4451,18 +4434,14 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DeviceStatus_ExtraInfoRow AddDeviceStatus_ExtraInfoRow(DevicestatusRow parentDevicestatusRowByfk_DeviceStatus_ExtraInfo_DeviceStatus, DeviceConfig_ExtraInfoRow parentDeviceConfig_ExtraInfoRowByfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo, string name) {
+            public DeviceStatus_ExtraInfoRow AddDeviceStatus_ExtraInfoRow(DeviceConfig_ExtraInfoRow parentDeviceConfig_ExtraInfoRowByfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo, string name) {
                 DeviceStatus_ExtraInfoRow rowDeviceStatus_ExtraInfoRow = ((DeviceStatus_ExtraInfoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        null,
                         name};
-                if ((parentDevicestatusRowByfk_DeviceStatus_ExtraInfo_DeviceStatus != null)) {
-                    columnValuesArray[1] = parentDevicestatusRowByfk_DeviceStatus_ExtraInfo_DeviceStatus[0];
-                }
                 if ((parentDeviceConfig_ExtraInfoRowByfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo != null)) {
-                    columnValuesArray[2] = parentDeviceConfig_ExtraInfoRowByfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo[0];
+                    columnValuesArray[1] = parentDeviceConfig_ExtraInfoRowByfk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo[0];
                 }
                 rowDeviceStatus_ExtraInfoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDeviceStatus_ExtraInfoRow);
@@ -4471,10 +4450,9 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DeviceStatus_ExtraInfoRow FindByidDeviceStatus_idDeviceConfig_ExtraInfo_id(int id, int DeviceStatus_id, int DeviceConfig_ExtraInfo_id) {
+            public DeviceStatus_ExtraInfoRow FindByidDeviceConfig_ExtraInfo_id(int id, int DeviceConfig_ExtraInfo_id) {
                 return ((DeviceStatus_ExtraInfoRow)(this.Rows.Find(new object[] {
                             id,
-                            DeviceStatus_id,
                             DeviceConfig_ExtraInfo_id})));
             }
             
@@ -4496,7 +4474,6 @@ namespace ConcremoteDeviceManagment {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
-                this.columnDeviceStatus_id = base.Columns["DeviceStatus_id"];
                 this.columnDeviceConfig_ExtraInfo_id = base.Columns["DeviceConfig_ExtraInfo_id"];
                 this.columnname = base.Columns["name"];
             }
@@ -4506,22 +4483,18 @@ namespace ConcremoteDeviceManagment {
             private void InitClass() {
                 this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
-                this.columnDeviceStatus_id = new global::System.Data.DataColumn("DeviceStatus_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDeviceStatus_id);
                 this.columnDeviceConfig_ExtraInfo_id = new global::System.Data.DataColumn("DeviceConfig_ExtraInfo_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDeviceConfig_ExtraInfo_id);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid,
-                                this.columnDeviceStatus_id,
                                 this.columnDeviceConfig_ExtraInfo_id}, true));
                 this.columnid.AutoIncrement = true;
                 this.columnid.AutoIncrementSeed = -1;
                 this.columnid.AutoIncrementStep = -1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.ReadOnly = true;
-                this.columnDeviceStatus_id.AllowDBNull = false;
                 this.columnDeviceConfig_ExtraInfo_id.AllowDBNull = false;
                 this.columnname.MaxLength = 50;
             }
@@ -7335,17 +7308,6 @@ namespace ConcremoteDeviceManagment {
             public void SetSign_DateNull() {
                 this[this.tableDevicestatus.Sign_DateColumn] = global::System.Convert.DBNull;
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DeviceStatus_ExtraInfoRow[] GetDeviceStatus_ExtraInfoRows() {
-                if ((this.Table.ChildRelations["fk_DeviceStatus_ExtraInfo_DeviceStatus"] == null)) {
-                    return new DeviceStatus_ExtraInfoRow[0];
-                }
-                else {
-                    return ((DeviceStatus_ExtraInfoRow[])(base.GetChildRows(this.Table.ChildRelations["fk_DeviceStatus_ExtraInfo_DeviceStatus"])));
-                }
-            }
         }
         
         /// <summary>
@@ -7370,17 +7332,6 @@ namespace ConcremoteDeviceManagment {
                 }
                 set {
                     this[this.tableDeviceStatus_ExtraInfo.idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int DeviceStatus_id {
-                get {
-                    return ((int)(this[this.tableDeviceStatus_ExtraInfo.DeviceStatus_idColumn]));
-                }
-                set {
-                    this[this.tableDeviceStatus_ExtraInfo.DeviceStatus_idColumn] = value;
                 }
             }
             
@@ -7419,17 +7370,6 @@ namespace ConcremoteDeviceManagment {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["fk_DeviceStatus_ExtraInfo_DeviceConfig_ExtraInfo"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DevicestatusRow DevicestatusRow {
-                get {
-                    return ((DevicestatusRow)(this.GetParentRow(this.Table.ParentRelations["fk_DeviceStatus_ExtraInfo_DeviceStatus"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["fk_DeviceStatus_ExtraInfo_DeviceStatus"]);
                 }
             }
             
@@ -11318,7 +11258,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Device_config_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Device_config_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assembly_order", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assembly_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
@@ -11326,7 +11266,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Device_config_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Device_config_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assembly_order", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assembly_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Device_config_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Device_config_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -12605,7 +12545,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_1", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Devicestatus] SET [Device_statustypes_id] = @Device_statustypes_id, [ConcremoteDevice_id] = @ConcremoteDevice_id, [DeviceConfig_id] = @DeviceConfig_id, [Employee_1] = @Employee_1, [Employee_2] = @Employee_2, [Sign_Date] = @Sign_Date WHERE (([id] = @Original_id))";
@@ -12615,7 +12555,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_1", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Employee_2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employee_2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sign_Date", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sign_Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -12940,36 +12880,32 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "DeviceStatus_ExtraInfo";
             tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("DeviceStatus_id", "DeviceStatus_id");
             tableMapping.ColumnMappings.Add("DeviceConfig_ExtraInfo_id", "DeviceConfig_ExtraInfo_id");
             tableMapping.ColumnMappings.Add("name", "name");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DeviceStatus_ExtraInfo] WHERE (([id] = @Original_id) AND ([Dev" +
-                "iceStatus_id] = @Original_DeviceStatus_id) AND ([DeviceConfig_ExtraInfo_id] = @O" +
-                "riginal_DeviceConfig_ExtraInfo_id))";
+                "iceConfig_ExtraInfo_id] = @Original_DeviceConfig_ExtraInfo_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DeviceStatus_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceStatus_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DeviceConfig_ExtraInfo_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_ExtraInfo_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DeviceStatus_ExtraInfo] ([DeviceStatus_id], [DeviceConfig_Extr" +
-                "aInfo_id], [name]) VALUES (@DeviceStatus_id, @DeviceConfig_ExtraInfo_id, @name)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DeviceStatus_ExtraInfo] ([DeviceConfig_ExtraInfo_id], [name]) " +
+                "VALUES (@DeviceConfig_ExtraInfo_id, @name)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceStatus_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceStatus_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_ExtraInfo_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_ExtraInfo_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DeviceStatus_ExtraInfo] SET [DeviceStatus_id] = @DeviceStatus_id, [DeviceConfig_ExtraInfo_id] = @DeviceConfig_ExtraInfo_id, [name] = @name WHERE (([id] = @Original_id) AND ([DeviceStatus_id] = @Original_DeviceStatus_id) AND ([DeviceConfig_ExtraInfo_id] = @Original_DeviceConfig_ExtraInfo_id))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[DeviceStatus_ExtraInfo] SET [DeviceConfig_ExtraInfo_id] = @DeviceCo" +
+                "nfig_ExtraInfo_id, [name] = @name WHERE (([id] = @Original_id) AND ([DeviceConfi" +
+                "g_ExtraInfo_id] = @Original_DeviceConfig_ExtraInfo_id))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceStatus_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceStatus_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DeviceConfig_ExtraInfo_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_ExtraInfo_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DeviceStatus_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceStatus_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DeviceConfig_ExtraInfo_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DeviceConfig_ExtraInfo_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -12986,8 +12922,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, DeviceStatus_id, DeviceConfig_ExtraInfo_id, name FROM dbo.DeviceStatus" +
-                "_ExtraInfo";
+            this._commandCollection[0].CommandText = "SELECT id, DeviceConfig_ExtraInfo_id, name FROM dbo.DeviceStatus_ExtraInfo";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -13048,10 +12983,9 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, int Original_DeviceStatus_id, int Original_DeviceConfig_ExtraInfo_id) {
+        public virtual int Delete(int Original_id, int Original_DeviceConfig_ExtraInfo_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_DeviceStatus_id));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_DeviceConfig_ExtraInfo_id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_DeviceConfig_ExtraInfo_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13072,14 +13006,13 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int DeviceStatus_id, int DeviceConfig_ExtraInfo_id, string name) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(DeviceStatus_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(DeviceConfig_ExtraInfo_id));
+        public virtual int Insert(int DeviceConfig_ExtraInfo_id, string name) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(DeviceConfig_ExtraInfo_id));
             if ((name == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(name));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(name));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -13101,18 +13034,16 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int DeviceStatus_id, int DeviceConfig_ExtraInfo_id, string name, int Original_id, int Original_DeviceStatus_id, int Original_DeviceConfig_ExtraInfo_id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(DeviceStatus_id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DeviceConfig_ExtraInfo_id));
+        public virtual int Update(int DeviceConfig_ExtraInfo_id, string name, int Original_id, int Original_DeviceConfig_ExtraInfo_id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(DeviceConfig_ExtraInfo_id));
             if ((name == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(name));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(name));
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_DeviceStatus_id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_DeviceConfig_ExtraInfo_id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_DeviceConfig_ExtraInfo_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13133,8 +13064,8 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_id, int Original_DeviceStatus_id, int Original_DeviceConfig_ExtraInfo_id) {
-            return this.Update(Original_DeviceStatus_id, Original_DeviceConfig_ExtraInfo_id, name, Original_id, Original_DeviceStatus_id, Original_DeviceConfig_ExtraInfo_id);
+        public virtual int Update(string name, int Original_id, int Original_DeviceConfig_ExtraInfo_id) {
+            return this.Update(Original_DeviceConfig_ExtraInfo_id, name, Original_id, Original_DeviceConfig_ExtraInfo_id);
         }
     }
     
@@ -15005,24 +14936,6 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._concremoteDeviceTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._concremoteDeviceTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._device_statustypesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._device_statustypesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._deviceConfigTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DeviceConfig.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -15050,21 +14963,30 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._concremoteDeviceTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._concremoteDeviceTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._device_statustypesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._device_statustypesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._deviceConfig_ExtraInfoTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DeviceConfig_ExtraInfo.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._deviceConfig_ExtraInfoTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._devicestatusTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._devicestatusTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15113,6 +15035,15 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._devicestatusTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._devicestatusTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._deviceStatus_ExtraInfoTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DeviceStatus_ExtraInfo.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -15149,22 +15080,6 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._concremoteDeviceTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._concremoteDeviceTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._device_statustypesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._device_statustypesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._deviceConfigTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DeviceConfig.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -15189,19 +15104,27 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._concremoteDeviceTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._concremoteDeviceTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._device_statustypesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._device_statustypesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._deviceConfig_ExtraInfoTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DeviceConfig_ExtraInfo.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._deviceConfig_ExtraInfoTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._devicestatusTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._devicestatusTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15242,6 +15165,14 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._device_PricelistTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._devicestatusTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._devicestatusTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15287,6 +15218,14 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._devicestatusTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._devicestatusTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._device_PricelistTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Device_Pricelist.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -15327,19 +15266,27 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._devicestatusTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Devicestatus.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._devicestatusTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._deviceConfig_ExtraInfoTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.DeviceConfig_ExtraInfo.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._deviceConfig_ExtraInfoTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._device_statustypesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._device_statustypesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._concremoteDeviceTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._concremoteDeviceTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15364,22 +15311,6 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._deviceConfigTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._device_statustypesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Device_statustypes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._device_statustypesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._concremoteDeviceTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ConcremoteDevice.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._concremoteDeviceTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

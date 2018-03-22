@@ -17,7 +17,6 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
     @Html.HiddenFor(model => model.DeviceConfig_id)
-    @Html.HiddenFor(model => model.Device_statustypes_id)
     @Html.HiddenFor(model => model.ConcremoteDevice.id)
 
     <div class="form-group">
@@ -60,8 +59,7 @@
     <div class="form-group">
         @Html.Label("Huidige status", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Device_statustypes_id, (IEnumerable<SelectListItem>)ViewBag.StatusList, null, new { @class = "form-control" })
-
+            @Html.DropDownListFor(m => m.Device_statustypes_id, (IEnumerable<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Device_Statustypes.name, "", new { @class = "text-danger" })
         </div>
     </div>

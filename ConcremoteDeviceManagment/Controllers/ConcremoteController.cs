@@ -142,13 +142,19 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
-            var StatusList = from d in db.DeviceStatus
-                             where d.Device_statustypes_id == d.Device_Statustypes.id
-                                orderby d.Device_Statustypes.id
-                                 select new { Id = d.Device_statustypes_id, Value = d.Device_Statustypes.name };
+            //var StatusList = from d in db.DeviceStatus
+            //                 where d.Device_statustypes_id == d.Device_Statustypes.id
+            //                    orderby d.Device_Statustypes.id
+            //                     select new { Id = d.Device_statustypes_id, Value = d.Device_Statustypes.name };
                              //select d.Device_Statustypes.name;
+          //  ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
+            var StatusList = from d in db.Device_statustypes
+                         //    where d.Device_statustypes_id == d.Device_Statustypes.id
+                             orderby d.id
+                                select new { Id = d.id, Value = d.name };
+
             ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
