@@ -31,7 +31,8 @@ namespace ConcremoteDeviceManagment.Controllers
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
             var SelectedCMI = (from d in db.pricelist
-                           //   where d.Price_id == d.Price_id
+                               //join r in Device_Pricelist on
+                             where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr }).Distinct();
 
@@ -42,11 +43,8 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist, Pricelist pricelist, FormCollection formCollection)
-        //   public ActionResult Edit([Bind(Include = "id, Device_config_id,Price_id,amount,assembly_order")] List<Device_Pricelist> device_Pricelist, FormCollection formCollection)
+        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist, Pricelist pricelist)
         {
-            pricelist.Price_id = int.Parse(formCollection["SelectedCMI"]);
-            //.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 foreach (var item in Device_Pricelist)

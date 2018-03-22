@@ -50,7 +50,9 @@
     <div class="form-group">
         @Html.Label("Leverancier", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Leverancier, (IEnumerable<SelectListItem>)ViewBag.SelectedLeverancier, null, new { @class = "form-control" })
+  @*          @Html.DropDownListFor(m => m.Leverancier, (IEnumerable<SelectListItem>)ViewBag.SelectedLeverancier, null, new { @class = "form-control" })*@
+            @Html.DropDownListFor(m => m.Leverancier, (IEnumerable<SelectListItem>)ViewBag.SelectedLeverancier, new { @class = "form-control" })
+
             @Html.ValidationMessageFor(model => model.Leverancier, "", new { @class = "text-danger" })
         </div>
     </div>

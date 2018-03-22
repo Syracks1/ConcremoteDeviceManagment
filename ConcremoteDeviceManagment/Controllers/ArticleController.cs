@@ -15,8 +15,11 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI, FormCollection formCollection)
         {
-           
-    //        ViewBag.SelectedLeverancier = SelectedLeverancier;
+            var SelectedLeverancier = (from d in db.pricelist
+                                       select new { Id = d.Leverancier, Value = d.Leverancier }).Distinct();
+
+            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
+            //        ViewBag.SelectedLeverancier = SelectedLeverancier;
             ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
@@ -76,18 +79,15 @@ namespace ConcremoteDeviceManagment.Controllers
                     break;
 
             }
-            var SelectedLeverancier = (from d in db.pricelist
-                                       select new { Id = d.Leverancier, Value = d.Leverancier }).Distinct();
 
-            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
             // return View(db.pricelist.ToList());
             foreach (var item in pricelist)
             {
-                if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
-                {
-                   //(formCollection["SelectedLeverancier"]);
-                    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
-                }
+                //if (item.Leverancier.Equals(ViewBag.SelectedLeverancier))
+                //{
+                //   //(formCollection["SelectedLeverancier"]);
+                //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
+                //}
                 //if (!string.IsNullOrEmpty(ViewBag.SelectedLeverancier))
                 //{
                 //    pricelist = pricelist.Where(s => s.Leverancier.Equals(SelectedLeverancier));
@@ -132,9 +132,9 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist, FormCollection formCollection)
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist )
         {
-            pricelist.Leverancier = (formCollection["SelectedLeverancier"]);
+            //pricelist.Leverancier = (formCollection["SelectedLeverancier"]);
             //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
           //  ViewBag.SelectedLeverancier = SelectedLeverancier;
             if (ModelState.IsValid)
@@ -153,6 +153,11 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
+            var SelectedLeverancier = from d in db.pricelist
+                                          //    where d.Price_id == d.Price_id
+                                      orderby d.Leverancier
+                                      select new { Id = d.Leverancier, Value = d.Leverancier };
+            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

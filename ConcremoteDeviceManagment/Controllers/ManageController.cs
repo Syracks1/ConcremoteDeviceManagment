@@ -358,9 +358,12 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult UserEdit(string Id)
         {
-            var SelectedRoles = (from r in db.AspNetRoles
-                                 select new {  r.Id, Value = r.Name }).DistinctBy(r => r.Id);
-            ViewBag.SelectedRoles = new SelectList(SelectedRoles.DistinctBy(r => r.Id), "Id", "Value");
+            var SelectedRoles = from r in db.AspNetRoles
+                                where r.Id == r.Id
+                                orderby r.Id
+                                select new { r.Id, r.Name };
+
+            ViewBag.SelectedRoles = new SelectList(SelectedRoles, "Id", "Name");
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -375,15 +378,13 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,AspNetUsers.EmailConfirmed")] AspNetUserRoles aspNetUserRoles,  FormCollection formCollection)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
         {
-       //     aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
+       //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;
 
             if (ModelState.IsValid)
             {
-                aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
-
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "User Edited Successfully";
