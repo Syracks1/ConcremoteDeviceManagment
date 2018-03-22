@@ -1,5 +1,6 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -102,13 +103,13 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult ConfigPartial(string Device)
+        public PartialViewResult ConfigPartial()
         {
-            var query = from d in db.Device_Pricelist
-                        select d;
-            // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.Device_config_id == r.DeviceConfig.Device_config_id));
+            //var query = from d in db.Device_Pricelist
+            //            select d;
+            //var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            return PartialView("ConfigPartial", query);
+            return PartialView();
         }
 
         [Authorize(Roles = "Admin")]
@@ -142,14 +143,8 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
-            //var StatusList = from d in db.DeviceStatus
-            //                 where d.Device_statustypes_id == d.Device_Statustypes.id
-            //                    orderby d.Device_Statustypes.id
-            //                     select new { Id = d.Device_statustypes_id, Value = d.Device_Statustypes.name };
-                             //select d.Device_Statustypes.name;
-          //  ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
+
             var StatusList = from d in db.Device_statustypes
-                         //    where d.Device_statustypes_id == d.Device_Statustypes.id
                              orderby d.id
                                 select new { Id = d.id, Value = d.name };
 
@@ -172,7 +167,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Device_statustypes_id,Sign_Date,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
+        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Sign_Date,Device_statustypes_id,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
         {
      
             if (ModelState.IsValid)

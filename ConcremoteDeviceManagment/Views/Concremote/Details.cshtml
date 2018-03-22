@@ -79,7 +79,8 @@
         </dt>
         <dd>
         <dd>
-            <table class="table table-hover">
+            @Html.Partial("ConfigPartial")
+            @*<table class="table table-hover">
                 <tr>
                     <th class="table-row">
                         @Html.DisplayName("BAS artikelnummer")
@@ -95,20 +96,20 @@
                     </th>
                     <th class="table-row"></th>
                 </tr>
-                @*@foreach (var item in Model)
-                    {*@
-                <tr>
-                    <td>
-                        CMI100
-                    </td>
-                    <td>
-                        Schroef
-                    </td>
-                    <td>12</td>
-                    <td>1</td>
-                </tr>
-                @* }*@
-            </table>
+                foreach (var item in Model.)
+                {
+            <tr>
+                <td>
+                    CMI100
+                </td>
+                <td>
+                    Schroef
+                </td>
+                <td>12</td>
+                <td>1</td>
+            </tr>
+             }
+            </table>*@
         </dd>
     </dl>
 </div>

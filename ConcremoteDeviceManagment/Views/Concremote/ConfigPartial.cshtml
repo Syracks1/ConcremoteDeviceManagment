@@ -1,8 +1,6 @@
-﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
+﻿@model ConcremoteDeviceManagment.Models.DeviceStatus
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table table-hover">
     <tr>
         <th class="table-row">
@@ -20,21 +18,30 @@
         <th class="table-row"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeviceConfig.Device_config_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pricelist.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.assembly_order)
-        </td>       
-    </tr>
-}
+    @*@foreach (var item in Model) {*@
+    @{
+        int i = 1;
+        while (i < 20)
+        {
+            <tr>
+                <td>
+                    CMI100
+                </td>
+                <td>
+                    Test onderdeel
+                </td>
+                <td>
+                   2
+                </td>
+                <td>
+                    -
+                </td>
+            </tr>
+            i++;
+        }
+    }
+
+    @*}*@
 
 </table>
+

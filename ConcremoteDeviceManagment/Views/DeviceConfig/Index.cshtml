@@ -12,9 +12,10 @@
     <fieldset>
         <legend>Device Create</legend>
         <div>
-            @Html.DropDownList("SelectedDevice", null,  new { @class = "form-control" })
-        <br />
-            </div>
+            @Html.DropDownList("SelectedDevice", null, new { @class = "form-control" })
+          @*  @Html.DropDownListFor(model => model.Device_statustypes_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevices, new { @class = "form-control" })*@
+            <br />
+        </div>
         <div id="target">
 
         </div>
