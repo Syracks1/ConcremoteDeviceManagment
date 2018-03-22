@@ -168,15 +168,11 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Device_statustypes_id,Sign_Date,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
         {
-            //var Conn = (from d in db.DeviceStatus
-            //            join s in db.Device_statustypes on d.Device_statustypes_id equals s.id
-            //            join b in db.ConcremoteDevice on d.ConcremoteDevice_id equals b.id
-            //            join c in db.DeviceConfig on d.DeviceConfig_id equals c.Device_config_id
-            //            select new { s.id, /*d.Device_statustypes_id*/ Model = d.id });
-     //       deviceStatus.Device_Statustypes.name = (formCollection["StatusList"]);
+     
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
+                db.Entry(concremoteDevice).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device Edited Successfully";
                 return RedirectToAction("Index");
