@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
-
 @{
     ViewBag.Title = "Create Device";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,20 +16,17 @@
             <br />
         </div>
         <div id="target">
-
         </div>
         <div id="log">
-
         </div>
     </fieldset>
-
 
 }
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $("#SelectedDevice").change(function (e) {
-                var DeviceType = { "Device": $(this).val() };
+    $(document).ready(function () {
+        $("#SelectedDevice").change(function (e) {
+            var DeviceType = { "Device": $(this).val() };
             $.ajax({
                 type: 'get',
                 url: '@Url.Action("CreateDevice")',
@@ -51,4 +47,3 @@
     });
     </script>
 }
-

@@ -8,7 +8,6 @@
 {
     <h1>
         @Html.DisplayName("Edit Configuration")
-
     </h1>
     @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
@@ -41,9 +40,10 @@
                 //(IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
                 <tr>
                     @Html.HiddenFor(a => a[j].id)
-                    @Html.HiddenFor(a => a[j].Device_config_id)
+                    @*@Html.HiddenFor(a => a[j].Device_config_id)*@
+                    @Html.HiddenFor(a => a[j].Price_id)
                     <td class="table-row">
-                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, new { @class = "form-control", onchange = "SelectedIndexChanged()" })
+                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control", onchange = "SelectedIndexChanged()" })
                         @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })
                     </td>
                     <td class="table-row">
@@ -75,7 +75,6 @@
 
     <input type="submit" value="Save Device Data" class="btn btn-primary" />
     <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
-
 
 }
 @section Scripts{
@@ -126,7 +125,6 @@
             });
 
         });
-
     </script>
     <script type="text/javascript">
         function SelectedIndexChanged() {

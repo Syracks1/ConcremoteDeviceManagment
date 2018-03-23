@@ -1,6 +1,5 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -81,7 +80,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     query = query.Where(s => s.ConcremoteDevice.id.Contains(searchString));
                 }
-             
             }
             return View(query);
         }
@@ -143,10 +141,9 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Concremote/Edit/5
         public ActionResult Edit(int? id)
         {
-
             var StatusList = from d in db.Device_statustypes
                              orderby d.id
-                                select new { Id = d.id, Value = d.name };
+                             select new { Id = d.id, Value = d.name };
 
             ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
 
@@ -159,7 +156,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             return View(deviceStatus);
         }
 
@@ -169,7 +166,6 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Sign_Date,Device_statustypes_id,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
         {
-     
             if (ModelState.IsValid)
             {
                 db.Entry(deviceStatus).State = EntityState.Modified;
@@ -216,6 +212,5 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

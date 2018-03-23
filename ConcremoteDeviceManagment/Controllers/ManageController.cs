@@ -1,5 +1,4 @@
 ﻿using ConcremoteDeviceManagment.Models;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -380,7 +379,7 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UserEdit([Bind(Include = "UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
         {
-       //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
+            //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;
 
             if (ModelState.IsValid)

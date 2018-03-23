@@ -83,9 +83,6 @@
 
                 var $tableBody = $("#dataTable");
 
-        
-
-
                 var $trLast = $tableBody.find("tr:last");
                 var $trNew = $trLast.clone();
 
@@ -108,14 +105,14 @@
                 });
                 $trLast.after($trNew);
 
-                // Re-assign Validation 
+                // Re-assign Validation
                 var form = $("form")
                     .removeData("validator")
                     .removeData("unobtrusiveValidation");
                 $.validator.unobtrusive.parse(form);
             });
 
-            // 2. Remove 
+            // 2. Remove
             //$('a.remove').live("click", function (e) {   --> this is for old jquery library
             $('body').on("click", 'a.remove', function (e) {
                 e.preventDefault();
@@ -123,6 +120,5 @@
             });
 
         });
-
     </script>
 }

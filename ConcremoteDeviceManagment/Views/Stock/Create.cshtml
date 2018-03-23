@@ -8,7 +8,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Stock", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,36 +22,36 @@
                 @*@Html.DropDownList("CMI", 1,new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.DropDownList("SelectedCMI", null, new { @class = "form-control" })
 
-         @*       @Html.DropDownList("SelectedCMI", null, new { @class = "form-control" })*@
+                @*       @Html.DropDownList("SelectedCMI", null, new { @class = "form-control" })*@
                 @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         @*<div class="form-group">
-            @Html.Label("BAS artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.bas_art_nr, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.Label("BAS artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bas_art_nr, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.Label("Huidige voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.stock_amount , new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.stock_amount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.stock_amount, "", new { @class = "text-danger" })
             </div>
-    </div>
-
-    <div class="form-group">
-           @Html.Label("Minimale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.min_stock, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.min_stock, "", new { @class = "text-danger" })
-        </div>
         </div>
 
-    <div class="form-group">
+        <div class="form-group">
+            @Html.Label("Minimale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.min_stock, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.min_stock, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.Label("Maximale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.max_stock, new { htmlAttributes = new { @class = "form-control" } })
@@ -59,26 +59,26 @@
             </div>
         </div>
 
-    @*<div class="form-group">
-        @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-    @*<div class="form-group">
-        @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
+        @*<div class="form-group">
+                @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @*<div class="form-group">
+                @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
         </div>
     </div>
-        </div>
 }
 
 <div>
