@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -16,7 +17,7 @@ namespace ConcremoteDeviceManagment.Models
 
         [Required(ErrorMessage = "Voer een aantal in")]
         public int stock_amount { get; set; }
-
+       
         [Required(ErrorMessage = "Voer een aantal in, Het getal mag niet hoger zijn dan maximale hoeveelheid")]
         public int min_stock { get; set; }
 
@@ -42,10 +43,9 @@ namespace ConcremoteDeviceManagment.Models
         public string Unit { get; set; }
         public decimal? Quantity { get; set; }
 
-        //  [DataType(DataType.Currency)]
+      //  [DataType(DataType.Currency)]
         //[DisplayFormat(DataFormatString = "{0:C2}")]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
@@ -130,7 +130,6 @@ namespace ConcremoteDeviceManagment.Models
         public int DeviceConfig_id { get; set; }
         public string Employee_1 { get; set; }
         public string Employee_2 { get; set; }
-
         [Required(ErrorMessage = "Selecteer een datum")]
         [DataType(DataType.Date)]
         public DateTime Sign_Date { get; set; }
@@ -154,7 +153,9 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een Naam in")]
         [StringLength(255, MinimumLength = 1)]
         public string name { get; set; }
+     
     }
+  
 
     [Table("Device_Pricelist")]
     public class Device_Pricelist
