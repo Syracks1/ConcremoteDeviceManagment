@@ -45,7 +45,7 @@ namespace ConcremoteDeviceManagment.Models
 
       //  [DataType(DataType.Currency)]
         //[DisplayFormat(DataFormatString = "{0:C2}")]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
