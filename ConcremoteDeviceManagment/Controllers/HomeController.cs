@@ -15,10 +15,6 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
-            //var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
-            //ViewBag.SelectedDevice = SelectedDevices;
-            // ViewData["SelectedDevice"] = new SelectList(db.DeviceType.Select(r => r.name).Distinct().ToList());
-
             var Device = (from d in db.Device_Pricelist
                               //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id).ToList();
@@ -26,15 +22,15 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Edit(int? Id )
+        public ActionResult Edit(int? Id)
         {
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            var SelectedCMI = (from d in Device_Pricelist
-                               join r in db.pricelist on d.Price_id equals r.Price_id
-                             where d.Price_id == r.Price_id
-                              orderby d.Price_id
-                              select new { Id = d.Price_id, Value = r.bas_art_nr }).Distinct();
+            var SelectedCMI = (from d in db.pricelist
+                                   //     join r in db.Device_Pricelist on d.Price_id equals r.Price_id
+                                   // where d.Price_id == r.Price_id
+                               orderby d.Price_id
+                               select new { Id = d.Price_id, Value = d.bas_art_nr }).Distinct();
 
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
 
@@ -49,7 +45,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 foreach (var item in Device_Pricelist)
                 {
-                    //db.Entry(Device_Pricelist).State = EntityState.Modified;
+                    db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();
@@ -57,6 +53,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(Device_Pricelist);
         }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

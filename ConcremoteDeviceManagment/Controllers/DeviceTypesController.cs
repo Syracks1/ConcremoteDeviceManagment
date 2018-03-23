@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ConcremoteDeviceManagment.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ConcremoteDeviceManagment.Models;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    
     public class DeviceTypesController : Controller
     {
         private BasDbContext db = new BasDbContext();
-       
+
         // GET: DeviceTypes
         public ActionResult Index()
         {
@@ -35,12 +30,14 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
+
         [Authorize(Roles = "Assembly,Admin")]
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
             return View();
         }
+
         [Authorize]
         // POST: DeviceTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
@@ -58,6 +55,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(deviceType);
         }
+
         [Authorize(Roles = "Assembly,Admin")]
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
@@ -73,6 +71,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
+
         [Authorize(Roles = "Admin")]
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
@@ -89,6 +88,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceType);
         }
+
         [Authorize(Roles = "Admin")]
         // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)

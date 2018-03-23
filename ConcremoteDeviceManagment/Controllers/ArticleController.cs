@@ -77,7 +77,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 default:
                     pricelist = pricelist.OrderBy(s => s.bas_art_nr);
                     break;
-
             }
 
             // return View(db.pricelist.ToList());
@@ -121,9 +120,9 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
             var SelectedLeverancier = from d in db.pricelist
-                          //    where d.Price_id == d.Price_id
-                              orderby d.Leverancier
-                              select new { Id = d.Leverancier, Value = d.Leverancier };
+                                          //    where d.Price_id == d.Price_id
+                                      orderby d.Leverancier
+                                      select new { Id = d.Leverancier, Value = d.Leverancier };
             ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
             return View();
         }
@@ -132,16 +131,16 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist )
+        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
             //pricelist.Leverancier = (formCollection["SelectedLeverancier"]);
             //var SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier).Distinct().ToList());
-          //  ViewBag.SelectedLeverancier = SelectedLeverancier;
+            //  ViewBag.SelectedLeverancier = SelectedLeverancier;
             if (ModelState.IsValid)
             {
                 db.pricelist.Add(pricelist);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article Added Successfully";
+                TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Added Successfully.";
                 return RedirectToAction("Index");
             }
 
@@ -180,7 +179,8 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(pricelist).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article Edited Successfully";
+           //     TempData["AlertMessage"] = "Article Edited Successfully";
+                TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Successfully.";
                 return RedirectToAction("Index");
             }
             return View(pricelist);
@@ -210,7 +210,7 @@ namespace ConcremoteDeviceManagment.Controllers
             Pricelist pricelist = db.pricelist.Find(id);
             db.pricelist.Remove(pricelist);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Article Deleted Successfully";
+            TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Deleted Successfully.";
             return RedirectToAction("Index");
         }
 

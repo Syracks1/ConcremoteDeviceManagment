@@ -10,6 +10,7 @@ namespace ConcremoteDeviceManagment.Controllers
     [HandleError]
     public class StockController : Controller
     {
+
         private BasDbContext db = new BasDbContext();
 
         // GET: Stock
@@ -68,7 +69,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     stock = stock.OrderBy(s => s.Pricelist.bas_art_nr);
                     break;
             }
-           
+
             foreach (var item in stock)
             {
                 if (!string.IsNullOrEmpty(searchString))
@@ -83,7 +84,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(stock);
         }
-        
+
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
         {
@@ -104,7 +105,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
             var SelectedCMI = from d in db.pricelist
-                              where d.Price_id == d.Price_id
+                              //where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
@@ -120,7 +121,6 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
             // ManageMessageId? message;
-            stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
