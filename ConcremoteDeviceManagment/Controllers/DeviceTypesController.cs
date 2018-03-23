@@ -49,7 +49,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.DeviceType.Add(deviceType);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Device Type Added Successfully";
+                TempData["AlertMessage"] = "Article " + deviceType.name + " Added Successfully.";
                 return RedirectToAction("Index");
             }
 
@@ -83,7 +83,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Device Type Edited Successfully";
+                TempData["AlertMessage"] = "Article " + deviceType.name + " Edited Successfully.";
                 return RedirectToAction("Index");
             }
             return View(deviceType);
@@ -113,7 +113,7 @@ namespace ConcremoteDeviceManagment.Controllers
             DeviceType deviceType = db.DeviceType.Find(id);
             db.DeviceType.Remove(deviceType);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Device Type Deleted Successfully";
+            TempData["AlertMessage"] = "Article " + deviceType.name + " Deleted Successfully.";
             return RedirectToAction("Index");
         }
 

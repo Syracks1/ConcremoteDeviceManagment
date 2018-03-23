@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
+﻿@model ConcremoteDeviceManagment.Models.DeviceConfig
 
 @{
     ViewBag.Title = "Create Device";
@@ -11,8 +11,9 @@
     <fieldset>
         <legend>Device Create</legend>
         <div>
-            @Html.DropDownList("SelectedDevice", null, new { @class = "form-control" })
-          @*  @Html.DropDownListFor(model => model.Device_statustypes_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevices, new { @class = "form-control" })*@
+            @*@Html.DropDownList("SelectedDevice", null, new { @class = "form-control" })*@
+            @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })
+            @*@Html.DropDownListFor(model => model.DeviceType.name, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer een Artikel", new { @class = "form-control" })*@
             <br />
         </div>
         <div id="target">

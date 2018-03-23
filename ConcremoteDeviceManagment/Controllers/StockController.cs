@@ -120,12 +120,13 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
+         //   stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             // ManageMessageId? message;
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article Added Successfully";
+                TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Deleted Successfully.";
 
                 return RedirectToAction("Index");
             }
@@ -186,12 +187,12 @@ namespace ConcremoteDeviceManagment.Controllers
         // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, Pricelist pricelist)
         {
             Stock stock = db.Stock.Find(id);
             db.Stock.Remove(stock);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Article Deleted Successfully";
+            TempData["AlertMessage"] = "Article " + stock.Price_id.ToString() + " Deleted Successfully.";
             return RedirectToAction("Index");
         }
 
