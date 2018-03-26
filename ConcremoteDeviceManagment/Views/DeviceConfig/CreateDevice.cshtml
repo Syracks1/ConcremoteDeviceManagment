@@ -20,7 +20,7 @@
         <th class="btn-success">
             @Html.DisplayName("Totaal Bedrag")
         </th>
-        
+
     </tr>
     @foreach (var item in Model)
     {
@@ -40,8 +40,9 @@
             <td>
                 € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
             </td>
-            
         </tr>
     }
 </table>
+@ViewBag.Total
+
 <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create Device</button>

@@ -22,6 +22,8 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.VersionSort = sortOrder == "ConfigVersion" ? "ConfigVersion_desc" : "ConfigVersion";
             ViewBag.ConfigDateSort = sortOrder == "ConfigDate" ? "ConfigDate_desc" : "ConfigDate";
             ViewBag.StatusSort = sortOrder == "Status" ? "Status_desc" : "Status";
+            ViewBag.StatusDateSort = sortOrder == "StatusDate" ? "StatusDate_desc" : "StatusDate";
+
             var query = from d in db.DeviceStatus
                         select d;
             switch (sortOrder)
@@ -69,7 +71,12 @@ namespace ConcremoteDeviceManagment.Controllers
                 case "Status_desc":
                     query = query.OrderByDescending(s => s.Device_Statustypes.id);
                     break;
-
+                case "StatusDate":
+                    query = query.OrderBy(s => s.Sign_Date);
+                    break;
+                case "StatusDate_desc":
+                    query = query.OrderByDescending(s => s.Sign_Date);
+                    break;
                 default:
                     query = query.OrderBy(s => s.ConcremoteDevice.id);
                     break;

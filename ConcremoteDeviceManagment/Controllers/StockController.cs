@@ -126,7 +126,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Deleted Successfully.";
+                TempData["AlertMessage"] = "Article " + "" + " Deleted Successfully.";
 
                 return RedirectToAction("Index");
             }

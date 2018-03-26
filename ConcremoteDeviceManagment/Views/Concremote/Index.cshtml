@@ -37,6 +37,9 @@
         <th>
             @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSort })
         </th>
+        <th>
+            @Html.ActionLink("Status Datum", "Index" , new { sortOrder = ViewBag.StatusDateSort })
+        </th>
         <th></th>
     </tr>
 
@@ -61,6 +64,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Device_Statustypes.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sign_Date)
             </td>
             <td>
                 <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>

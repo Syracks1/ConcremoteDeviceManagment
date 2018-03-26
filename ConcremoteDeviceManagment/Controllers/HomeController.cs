@@ -18,6 +18,7 @@ namespace ConcremoteDeviceManagment.Controllers
             var Device = (from d in db.Device_Pricelist
                               //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id).ToList();
+
             return View(Device);
         }
 
@@ -27,8 +28,8 @@ namespace ConcremoteDeviceManagment.Controllers
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
             var SelectedCMI = (from d in db.pricelist
-                                   //     join r in db.Device_Pricelist on d.Price_id equals r.Price_id
-                                   // where d.Price_id == r.Price_id
+                                        join r in db.Device_Pricelist on d.Price_id equals r.Price_id
+                                 //   where d.Price_id == r.Price_id
                                orderby d.Price_id
                                select new { Id = d.Price_id, Value = d.bas_art_nr }).Distinct();
 
