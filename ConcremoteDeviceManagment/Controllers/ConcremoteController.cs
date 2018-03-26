@@ -1,5 +1,6 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -71,12 +72,15 @@ namespace ConcremoteDeviceManagment.Controllers
                 case "Status_desc":
                     query = query.OrderByDescending(s => s.Device_Statustypes.id);
                     break;
+
                 case "StatusDate":
                     query = query.OrderBy(s => s.Sign_Date);
                     break;
+
                 case "StatusDate_desc":
                     query = query.OrderByDescending(s => s.Sign_Date);
                     break;
+
                 default:
                     query = query.OrderBy(s => s.ConcremoteDevice.id);
                     break;
@@ -107,14 +111,14 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceStatus);
         }
 
-        [HttpGet]
-        public PartialViewResult ConfigPartial()
+        
+        public PartialViewResult ConfigPartial(int? id)
         {
-            //var query = from d in db.Device_Pricelist
-            //            select d;
-            //var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
+            // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+            List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.Device_config_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.assembly_order));
+           
 
-            return PartialView();
+            return PartialView("ConfigPartial", ci2);
         }
 
         [Authorize(Roles = "Admin")]

@@ -4,23 +4,22 @@
         @Html.ActionLink("Create New", "Create")
     </p>*@
 <table class="table table-hover">
-    <tr class="btn-success">
-        <th class="btn-success">
+    <tr class="btn-primary">
+        <th class="btn-primary">
             @Html.DisplayName("BAS artikelnummer")
         </th>
-        <th class="btn-success">
+        <th class="btn-primary">
             @Html.DisplayName("Beschrijving")
         </th>
-        <th class="btn-success">
+        <th class="btn-primary">
             @Html.DisplayName("Aantal")
         </th>
-        <th class="btn-success">
+        <th class="btn-primary">
             @Html.DisplayName("Bouw Volgorde")
         </th>
-        <th class="btn-success">
-            @Html.DisplayName("Totaal Bedrag")
+        <th class="btn-primary">
+            @Html.DisplayName("Onderdeel Bedrag")
         </th>
-
     </tr>
     @foreach (var item in Model)
     {
@@ -43,6 +42,18 @@
         </tr>
     }
 </table>
-@ViewBag.Total
-
-<button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create Device</button>
+<table>
+    <tr>
+        <th>
+            <h3>@Html.DisplayName("Totaal Bedrag: ")</h3>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            € @decimal.Round(ViewBag.Total, 2, MidpointRounding.AwayFromZero)
+        </td>
+    </tr>
+</table>
+<div>
+    <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-success">Create Device</button>
+</div>

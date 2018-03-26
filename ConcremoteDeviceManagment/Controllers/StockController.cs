@@ -10,7 +10,6 @@ namespace ConcremoteDeviceManagment.Controllers
     [HandleError]
     public class StockController : Controller
     {
-
         private BasDbContext db = new BasDbContext();
 
         // GET: Stock
@@ -105,7 +104,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
             var SelectedCMI = from d in db.pricelist
-                              //where d.Price_id == d.Price_id
+                                  //where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
@@ -120,7 +119,7 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
         {
-         //   stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
+            //   stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
             // ManageMessageId? message;
             if (ModelState.IsValid)
             {
@@ -187,7 +186,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, Pricelist pricelist)
+        public ActionResult DeleteConfirmed(int id)
         {
             Stock stock = db.Stock.Find(id);
             db.Stock.Remove(stock);

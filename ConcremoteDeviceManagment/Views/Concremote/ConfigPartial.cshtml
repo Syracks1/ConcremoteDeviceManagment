@@ -1,44 +1,43 @@
-﻿@model ConcremoteDeviceManagment.Models.DeviceStatus
+﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
 <table class="table table-hover">
-    <tr>
-        <th class="table-row">
+    <tr class="btn-primary">
+        <th class="btn-primary">
             @Html.DisplayName("BAS artikelnummer")
         </th>
-        <th class="table-row">
+        <th class="btn-primary">
             @Html.DisplayName("Beschrijving")
         </th>
-        <th class="table-row">
+        <th class="btn-primary">
             @Html.DisplayName("Aantal")
         </th>
-        <th class="table-row">
+        <th class="btn-primary">
             @Html.DisplayName("Bouw Volgorde")
         </th>
-        <th class="table-row"></th>
+        <th class="btn-primary">
+            @Html.DisplayName("Onderdeel Bedrag")
+        </th>
     </tr>
-
-    @*@foreach (var item in Model) {*@
-    @{
-        int i = 1;
-        while (i < 20)
-        {
-            <tr>
-                <td>
-                    CMI100
-                </td>
-                <td>
-                    Test onderdeel
-                </td>
-                <td>
-                   2
-                </td>
-                <td>
-                    -
-                </td>
-            </tr>
-            i++;
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
+            </td>
+        </tr>
     }
-
-    @*}*@
 </table>
+@*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
+

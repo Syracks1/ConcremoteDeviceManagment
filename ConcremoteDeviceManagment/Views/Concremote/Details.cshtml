@@ -79,37 +79,7 @@
         </dt>
         <dd>
         <dd>
-            @Html.Partial("ConfigPartial")
-            @*<table class="table table-hover">
-                <tr>
-                    <th class="table-row">
-                        @Html.DisplayName("BAS artikelnummer")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Beschrijving")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Aantal")
-                    </th>
-                    <th class="table-row">
-                        @Html.DisplayName("Bouw Volgorde")
-                    </th>
-                    <th class="table-row"></th>
-                </tr>
-                foreach (var item in Model.)
-                {
-            <tr>
-                <td>
-                    CMI100
-                </td>
-                <td>
-                    Schroef
-                </td>
-                <td>12</td>
-                <td>1</td>
-            </tr>
-             }
-            </table>*@
+            @Html.Action("ConfigPartial", "Concremote")
         </dd>
     </dl>
 </div>

@@ -179,10 +179,12 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(pricelist).State = EntityState.Modified;
                 db.SaveChanges();
-           //     TempData["AlertMessage"] = "Article Edited Successfully";
+                //     TempData["AlertMessage"] = "Article Edited Successfully";
                 TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Successfully.";
                 return RedirectToAction("Index");
             }
+            TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Failed.";
+
             return View(pricelist);
         }
 
@@ -208,7 +210,9 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Pricelist pricelist = db.pricelist.Find(id);
+         //   Stock stock = db.Stock.Find(pricelist.Price_id);
             db.pricelist.Remove(pricelist);
+         //   db.Stock.Remove(stock);
             db.SaveChanges();
             TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Deleted Successfully.";
             return RedirectToAction("Index");

@@ -23,8 +23,8 @@
 }
 <table class="table table-hover">
     <tr>
-       <th >
-            @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm })
+        <th>
+            @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm }, new { htmlAttributes = new { @class = "form-control" } })
         </th>
         <th>
             @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescriptionSortParm })

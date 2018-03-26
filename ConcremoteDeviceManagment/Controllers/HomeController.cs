@@ -28,8 +28,8 @@ namespace ConcremoteDeviceManagment.Controllers
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
             var SelectedCMI = (from d in db.pricelist
-                                        join r in db.Device_Pricelist on d.Price_id equals r.Price_id
-                                 //   where d.Price_id == r.Price_id
+                               join r in db.Device_Pricelist on d.Price_id equals r.Price_id
+                               //   where d.Price_id == r.Price_id
                                orderby d.Price_id
                                select new { Id = d.Price_id, Value = d.bas_art_nr }).Distinct();
 
@@ -40,18 +40,21 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist, Pricelist pricelist)
+        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
         {
             if (ModelState.IsValid)
             {
                 foreach (var item in Device_Pricelist)
                 {
-                    db.Entry(Device_Pricelist).State = EntityState.Modified;
+                    //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+               
                 return RedirectToAction("Index");
+
             }
+            TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
             return View(Device_Pricelist);
         }
 
