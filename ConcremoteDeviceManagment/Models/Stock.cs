@@ -8,6 +8,7 @@ namespace ConcremoteDeviceManagment.Models
     [Table("Stock")]
     public class Stock
     {
+        //test
         [Key]
         public int id { get; set; }
 
