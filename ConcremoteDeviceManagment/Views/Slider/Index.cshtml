@@ -1,12 +1,17 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.gallery>
 @{
     ViewBag.Title = "Index";
-}
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["AlertMessage"]</p>
+}
 <h2>Index</h2>
 <p>
-    @Html.ActionLink("Add Image", "AddImage", "Slider", new { id = "linkAddimage" }, null) |
-    @Html.ActionLink("Delete Image", "DeleteImages", "Slider", new { id = "linkDeleteImage" }, null)
+    <button onclick="location.href='@Url.Action("AddImage", "Slider")';return false; " class="btn btn-primary">Add Image</button>
+    <button onclick="location.href='@Url.Action("DeleteImages", "Slider")';return false; " class="btn btn-danger">Delete Image</button>
 </p>
 @Html.Partial("~/Views/Shared/SliderPartial.cshtml", Model)
 

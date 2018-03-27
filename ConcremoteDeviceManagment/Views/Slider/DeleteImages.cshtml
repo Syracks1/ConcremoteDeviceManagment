@@ -4,10 +4,18 @@
 }
 
 <h2>DeleteImages</h2>
+@if (TempData["AlertMessage"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["AlertMessage"]</p>
+}
+@if (TempData["SuccesMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
+}
 @using (Html.BeginForm("DeleteImages", "Slider", FormMethod.Post))
 {
-    <table style="background-color:azure" border="1">
-        <thead style="background-color:gray">
+    <table class="table table-hover">
+        <thead style="background-color: #337ab7">
             <tr>
                 <th>Select</th>
                 <th>Image</th>
@@ -17,7 +25,8 @@
             @Html.EditorForModel()
         </tbody>
     </table>
-    <input type="submit" value="Delete Selected Images" />
+    <input type="submit" value="Delete Selected Images" class="btn btn-danger" />
 }
-<p>@Html.ActionLink("Slider Home", "Index", "Slider")</p>
+<button onclick="location.href='@Url.Action("Index", "Slider")';return false; " class="btn btn-primary">Back to list</button>
+
 

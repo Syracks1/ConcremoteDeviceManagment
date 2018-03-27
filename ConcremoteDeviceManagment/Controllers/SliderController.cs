@@ -40,11 +40,11 @@ namespace ConcremoteDeviceManagment.Controllers
                 //}
                 // Upload your pic
                 string pic = System.IO.Path.GetFileName(ImagePath.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("~/Content/images"), pic);
+                string path = System.IO.Path.Combine((@"\\WEBSERVER03\WEBDEV$\cdm\Content\images\"), pic);
                 ImagePath.SaveAs(path);
                 using (BasDbContext db = new BasDbContext())
                 {
-                    gallery gallery = new gallery { ImagePath = "~/Content/images/" + pic };
+                    gallery gallery = new gallery { ImagePath = @"\\WEBSERVER03\WEBDEV$\cdm\Content\images\" + pic };
                     db.gallery.Add(gallery);
                     db.SaveChanges();
                 }
@@ -66,15 +66,22 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             using (BasDbContext db = new BasDbContext())
             {
-                foreach (var id in ImagesIDs)
-                {
-                    var image = db.gallery.Single(s => s.ID == id);
-                    string imgPath = Server.MapPath(image.ImagePath);
-                    db.gallery.Remove(image);
-                    if (System.IO.File.Exists(imgPath))
-                        System.IO.File.Delete(imgPath);
+                try { 
+                    foreach (var id in ImagesIDs)
+                    {
+                        var image = db.gallery.Single(s => s.ID == id);
+                        string imgPath = Server.MapPath(image.ImagePath);
+                        db.gallery.Remove(image);
+                        if (System.IO.File.Exists(imgPath))
+                            System.IO.File.Delete(imgPath);
+                    }
+                    db.SaveChanges();
+                    TempData["SuccesMessage"] = "Image Deleted Succesfully";
                 }
-                db.SaveChanges();
+                catch
+                {
+                    TempData["AlertMessage"] = "Select an image to delete";
+                }
             }
             return RedirectToAction("DeleteImages");
         }
