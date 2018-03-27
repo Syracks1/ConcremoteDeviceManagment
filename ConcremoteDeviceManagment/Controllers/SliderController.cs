@@ -10,11 +10,12 @@ namespace ConcremoteDeviceManagment.Controllers
     public class SliderController : Controller
     {
         // GET: Slider
+        [Authorize(Roles = "Assembly,Admin")]
         public ActionResult Index()
         {
             using (BasDbContext db = new BasDbContext())
             {
-                return View(db.Galleries.ToList());
+                return View(db.gallery.ToList());
             }
             //return View();
         }
@@ -31,22 +32,20 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ImagePath != null)
             {
-                // You can skip this block, because it is only to force the user to upload specific resolution pics
-                System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
-                if ((img.Width != 800) || (img.Height != 356))
-                {
-                    ModelState.AddModelError("", "Image resolution must be 800 x 356 pixels");
-                    return View();
-                }
-
+                //System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
+                //if ((img.Width != 800) || (img.Height != 356))
+                //{
+                //    ModelState.AddModelError("", "Image resolution must be 800 x 356 pixels");
+                //    return View();
+                //}
                 // Upload your pic
                 string pic = System.IO.Path.GetFileName(ImagePath.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("~/Shared/images"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/images"), pic);
                 ImagePath.SaveAs(path);
                 using (BasDbContext db = new BasDbContext())
                 {
-                    Gallery gallery = new Gallery { ImagePath = "~/Shared/images/" + pic };
-                    db.Galleries.Add(gallery);
+                    gallery gallery = new gallery { ImagePath = "~/Content/images/" + pic };
+                    db.gallery.Add(gallery);
                     db.SaveChanges();
                 }
             }
@@ -58,7 +57,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             using (BasDbContext db = new BasDbContext())
             {
-                return View(db.Galleries.ToList());
+                return View(db.gallery.ToList());
             }
         }
 
@@ -69,9 +68,9 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 foreach (var id in ImagesIDs)
                 {
-                    var image = db.Galleries.Single(s => s.ID == id);
+                    var image = db.gallery.Single(s => s.ID == id);
                     string imgPath = Server.MapPath(image.ImagePath);
-                    db.Galleries.Remove(image);
+                    db.gallery.Remove(image);
                     if (System.IO.File.Exists(imgPath))
                         System.IO.File.Delete(imgPath);
                 }

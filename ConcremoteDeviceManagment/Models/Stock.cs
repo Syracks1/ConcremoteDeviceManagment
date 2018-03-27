@@ -312,7 +312,7 @@ namespace ConcremoteDeviceManagment.Models
         public string Name { get; set; }
     }
     [Table("gallery")]
-    public class Gallery
+    public class gallery
     {
         public int ID { get; set; }
         public string ImagePath { get; set; }
@@ -335,7 +335,7 @@ namespace ConcremoteDeviceManagment.Models
         public DbSet<AspNetUsers> AspNetUsers { get; set; }
         public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<gallery> gallery { get; set; }
     }
 
     public class PO3DbContext : DbContext

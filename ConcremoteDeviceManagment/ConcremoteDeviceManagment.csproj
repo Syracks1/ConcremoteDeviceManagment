@@ -276,6 +276,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery.bxslider.css" />
     <Content Include="favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -336,11 +337,12 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.bxslider.js" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\LazyLoading.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -442,10 +444,13 @@
     <Content Include="Views\Slider\Index.cshtml" />
     <Content Include="Views\Slider\DeleteImages.cshtml" />
     <Content Include="Views\Shared\SliderPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Gallery.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\images\" />
+    <Folder Include="Content\images\" />
+    <Folder Include="Views\includes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

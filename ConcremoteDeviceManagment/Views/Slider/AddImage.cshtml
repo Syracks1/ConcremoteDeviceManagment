@@ -1,11 +1,10 @@
-﻿@model ConcremoteDeviceManagment.Models.Gallery
+﻿@model ConcremoteDeviceManagment.Models.gallery
 @{
     ViewBag.Title = "AddImage";
 }
 
 <h2>AddImage</h2>
-@using (Html.BeginForm("AddImage", "Slider", FormMethod.Post,
-                                        new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddImage", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
