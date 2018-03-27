@@ -3,6 +3,7 @@ using Microsoft.Ajax.Utilities;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -27,13 +28,12 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            var SelectedCMI = (from d in db.pricelist
-                               join r in db.Device_Pricelist on d.Price_id equals r.Price_id
-                               //   where d.Price_id == r.Price_id
+            var SelectedCMI = (from d in Device_Pricelist
+                               where d.Price_id == d.Price_id
                                orderby d.Price_id
-                               select new { Id = d.Price_id, Value = d.bas_art_nr }).Distinct();
+                               select new { d.Price_id, Value = d.assembly_order }).Distinct();
 
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Price_id", "Value");
 
             return View(Device_Pricelist);
         }
@@ -42,18 +42,17 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
         {
+            
             if (ModelState.IsValid)
-            {
+            {               
                 foreach (var item in Device_Pricelist)
                 {
-                    //db.Entry(Device_Pricelist).State = EntityState.Modified;
                     db.Entry(item).State = EntityState.Modified;
-                    db.SaveChanges();
                 }
-               
+                db.SaveChanges();
                 return RedirectToAction("Index");
-
             }
+            ViewBag.SelectedCMI = new SelectList(db.pricelist.Distinct(), "Price_id");
             TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
             return View(Device_Pricelist);
         }

@@ -5,6 +5,7 @@
 }
 
 @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+
 {
     <h1>
         @Html.DisplayName("Edit Configuration")
@@ -27,9 +28,9 @@
             <th class="table-row">
                 @Html.DisplayName("BAS artikelnummer")
             </th>
-            <th class="table-row">
-                @Html.DisplayName("Beschrijving")
-            </th>
+            @*<th class="table-row">
+                    @Html.DisplayName("Beschrijving")
+                </th>*@
             <th class="table-row">
                 @Html.DisplayName("Aantal")
             </th>
@@ -43,22 +44,24 @@
         @if (Model != null && Model.Count > 0)
         {
             int j = 0;
-            foreach (var i in Model)
+            foreach (var item in Model)
             {
                 //(IEnumerable<SelectListItem>)ViewBag.SelectedCMI,
                 //(IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
                 <tr>
                     @Html.HiddenFor(a => a[j].id)
                     @Html.HiddenFor(a => a[j].Device_config_id)
-                    @Html.HiddenFor(a => a[j].Price_id)
+                    
+                    @*         @Html.HiddenFor(a => a[j].Price_id)*@
+
                     <td class="table-row">
-                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
+                        @Html.EditorFor(a => a[j].Price_id, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })
                     </td>
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
-                    </td>
+                    @*<td class="table-row">
+                            @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
+                        </td>*@
                     <td class="table-row">
                         @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
@@ -141,5 +144,5 @@
             document.demoForm.submit();
         }
     </script>
-
+    <script src="~/Scripts/LazyLoading.js"></script>
 }

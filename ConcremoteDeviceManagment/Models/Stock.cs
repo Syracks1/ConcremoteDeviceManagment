@@ -161,9 +161,6 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         [Column(Order = 0)]
         public int id { get; set; }
-
-        [Key]
-        [Column(Order = 1)]
         public int Device_config_id { get; set; }
 
         [Key]
@@ -314,7 +311,13 @@ namespace ConcremoteDeviceManagment.Models
 
         public string Name { get; set; }
     }
+    [Table("gallery")]
+    public class Gallery
+    {
+        public int ID { get; set; }
+        public string ImagePath { get; set; }
 
+    }
     public class BasDbContext : DbContext
     {
         //[ForeignKey("Price_id")]
@@ -332,6 +335,7 @@ namespace ConcremoteDeviceManagment.Models
         public DbSet<AspNetUsers> AspNetUsers { get; set; }
         public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
     }
 
     public class PO3DbContext : DbContext

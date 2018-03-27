@@ -244,6 +244,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <!-- <Compile Include="Controllers\ManageController.cs" /> -->
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\SliderController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="DataSetFinal.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -339,6 +340,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LazyLoading.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -436,9 +438,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Slider\AddImage.cshtml" />
+    <Content Include="Views\Slider\Index.cshtml" />
+    <Content Include="Views\Slider\DeleteImages.cshtml" />
+    <Content Include="Views\Shared\SliderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

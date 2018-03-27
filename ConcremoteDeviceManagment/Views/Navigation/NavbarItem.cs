@@ -32,7 +32,7 @@ namespace ConcremoteDeviceManagment.Models
             topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "Create Device", controller = "DeviceConfig", isParent = false, parentId = -1 });
             
             //Change Device Configuration option
-            topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "Change Device Configuration", controller = "Home", isParent = false, parentId = -1 });
+            //topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "Change Device Configuration", controller = "Home", isParent = false, parentId = -1 });
             
             //Device option
             topNav.Add(new NavbarItem() { Id = 6, action= "Index", nameOption = "Devices", controller="Concremote" ,isParent = false, parentId = -1 });
@@ -43,7 +43,8 @@ namespace ConcremoteDeviceManagment.Models
             topNav.Add(new NavbarItem() { Id = 9, action = "Index", nameOption = "Status Types", controller = "Device_statustypes", isParent = false, parentId = 7 });
             //Link to webserver03
             //topNav.Add(new NavbarItem() { Id = 10, action = "http://webserver03/index.php/", nameOption = "Portal", isParent = false, parentId = -1 });         
-
+            //Link to ImageSlide menu
+            topNav.Add(new NavbarItem() { Id = 11, action = "Index", nameOption = "Slider", controller = "Slider", isParent = false, parentId = -1 });
 
             return topNav;
         }
