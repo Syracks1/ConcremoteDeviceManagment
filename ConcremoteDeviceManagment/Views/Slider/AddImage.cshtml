@@ -21,6 +21,8 @@
             <input type="submit" value="Save" />
         </p>
     </fieldset>
-    <p>@Html.ActionLink("Slider Home", "Index", "Slider")</p>
+    @*<p>@Html.ActionLink("Slider Home", "Index", "Slider")</p>*@
+    <button onclick="location.href='@Url.Action("Index", "Slider")';return false; " class="btn btn-primary">Slider Home</button>
+
 }
 

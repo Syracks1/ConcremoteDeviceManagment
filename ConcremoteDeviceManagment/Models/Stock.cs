@@ -8,7 +8,6 @@ namespace ConcremoteDeviceManagment.Models
     [Table("Stock")]
     public class Stock
     {
-        //test
         [Key]
         public int id { get; set; }
 
@@ -156,6 +155,16 @@ namespace ConcremoteDeviceManagment.Models
         public string name { get; set; }
     }
 
+    [Table("gallery")]
+    public class gallery
+    {
+        public int ID { get; set; }
+        public int device_type_id { get; set; }
+        public string ImagePath { get; set; }
+        [ForeignKey("device_type_id")]
+
+        public virtual DeviceType DeviceType { get; set; }
+    }
     [Table("Device_Pricelist")]
     public class Device_Pricelist
     {
@@ -312,13 +321,7 @@ namespace ConcremoteDeviceManagment.Models
 
         public string Name { get; set; }
     }
-    [Table("gallery")]
-    public class gallery
-    {
-        public int ID { get; set; }
-        public string ImagePath { get; set; }
-
-    }
+    
     public class BasDbContext : DbContext
     {
         //[ForeignKey("Price_id")]
