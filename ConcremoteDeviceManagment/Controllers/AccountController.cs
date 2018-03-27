@@ -96,14 +96,16 @@ namespace ConcremoteDeviceManagment.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
+                // case 1, login is success
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-
+                //case 2, account has reached max loginfailures, account is banned for +- 5 minutes
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                //case SignInStatus.RequiresVerification:
-                //    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                //case 3: something failed, return error page
                 case SignInStatus.Failure:
+                    return View("Error");
+                    //Default: incorrect account login, login failed
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);

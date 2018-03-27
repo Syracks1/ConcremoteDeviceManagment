@@ -17,9 +17,9 @@
         <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
     </p>
 }
-@if (TempData["AlertMessage"] != null)
+@if (TempData["SuccesMessage"] != null)
 {
-    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+    <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
 }
 <table class="table table-hover">
     <tr>
