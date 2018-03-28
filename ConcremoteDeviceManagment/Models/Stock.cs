@@ -159,18 +159,21 @@ namespace ConcremoteDeviceManagment.Models
     public class gallery
     {
         public int ID { get; set; }
-        public int device_type_id { get; set; }
+       // public int device_type_id { get; set; }
         public string ImagePath { get; set; }
-        [ForeignKey("device_type_id")]
+        //[ForeignKey("device_type_id")]
 
-        public virtual DeviceType DeviceType { get; set; }
+        //public virtual DeviceType DeviceType { get; set; }
     }
     [Table("Device_Pricelist")]
     public class Device_Pricelist
     {
         [Key]
         [Column(Order = 0)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int Device_config_id { get; set; }
 
         [Key]

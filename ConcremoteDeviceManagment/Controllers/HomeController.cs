@@ -28,10 +28,10 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            var SelectedCMI = (from d in Device_Pricelist
+            var SelectedCMI = (from d in db.pricelist
                                where d.Price_id == d.Price_id
                                orderby d.Price_id
-                               select new { d.Price_id, Value = d.assembly_order }).Distinct();
+                               select new { d.Price_id, Value = d.bas_art_nr }).Distinct();
 
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Price_id", "Value");
 
@@ -40,20 +40,26 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Pricelist)
         {
-            
             if (ModelState.IsValid)
-            {               
-                foreach (var item in Device_Pricelist)
-                {
-                    db.Entry(item).State = EntityState.Modified;
-                }
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            {
+                //try
+                //{
+                    foreach (var item in Device_Pricelist)
+                    {
+                        db.Entry(item).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                    TempData["SuccesMessage"] = "Data is Succesfully saved"
+;                    return RedirectToAction("Index");
+                //}
+                //catch
+                //{
+                //    TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+                //}
             }
-            ViewBag.SelectedCMI = new SelectList(db.pricelist.Distinct(), "Price_id");
-            TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+           // ViewBag.SelectedCMI = new SelectList(db.pricelist.Distinct(), "Price_id");
             return View(Device_Pricelist);
         }
 

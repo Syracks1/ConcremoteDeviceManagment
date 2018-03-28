@@ -8,11 +8,13 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class Device_statustypesController : Controller
     {
+        // call in database connection
         private BasDbContext db = new BasDbContext();
 
         // GET: Device_statustypes
         public ActionResult Index()
         {
+            //return view with given query
             return View(db.Device_statustypes.ToList());
         }
 
