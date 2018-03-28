@@ -132,7 +132,7 @@ namespace ConcremoteDeviceManagment.Models
 
         [Required(ErrorMessage = "Selecteer een datum")]
         [DataType(DataType.Date)]
-        public System.DateTime Sign_Date { get; set; }
+        public DateTime? Sign_Date { get; set; }
 
         [ForeignKey("DeviceConfig_id")]
         public virtual DeviceConfig DeviceConfig { get; set; }
