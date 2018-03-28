@@ -61,20 +61,24 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device_statustypes/Edit/5
         public ActionResult Edit(int? id)
         {
+            //if id is null, return BadRequest
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //Find id in Device_statustypes
             Device_statustypes device_statustypes = db.Device_statustypes.Find(id);
+            //if id is not found
             if (device_statustypes == null)
             {
+                //return this
                 return HttpNotFound();
             }
             return View(device_statustypes);
         }
 
         // POST: Device_statustypes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to
+        // To protect from overposting attacks, please enable the specific properties you want to bind to,
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name")] Device_statustypes device_statustypes)

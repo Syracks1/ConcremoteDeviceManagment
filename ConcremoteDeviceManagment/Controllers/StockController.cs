@@ -21,49 +21,49 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.CurrentStockSort = sortOrder == "current" ? "current_desc" : "current";
             ViewBag.MinStockSort = sortOrder == "min_stock" ? "min_stock_desc" : "min_stock";
             ViewBag.MaxStockSort = sortOrder == "max_stock" ? "max_stock_desc" : "max_stock";
-            //messages voor meldingen?
-
+            //stock query to call in all data
             var stock = from d in db.Stock
                         where d.Pricelist.Active == true
                         select d;
             switch (sortOrder)
             {
+                //order CMI descending
                 case "CMI_desc":
                     stock = stock.OrderByDescending(s => s.Pricelist.bas_art_nr);
                     break;
-
+                //order Description ascending
                 case "Description":
                     stock = stock.OrderBy(s => s.Pricelist.description);
                     break;
-
+                //order Description descending
                 case "Desc_desc":
                     stock = stock.OrderByDescending(s => s.Pricelist.description);
                     break;
-
+                //order current stock amount ascending
                 case "current":
                     stock = stock.OrderBy(s => s.stock_amount);
                     break;
-
+                //order current stock amount descneding
                 case "current_desc":
                     stock = stock.OrderByDescending(s => s.stock_amount);
                     break;
-
+                //order minimal stock amount ascending
                 case "min_stock":
                     stock = stock.OrderBy(s => s.min_stock);
                     break;
-
+                //order minimal stock amount descending
                 case "min_stock_desc":
                     stock = stock.OrderByDescending(s => s.min_stock);
                     break;
-
+                //order maximal stock amount ascending
                 case "max_stock":
                     stock = stock.OrderBy(s => s.max_stock);
                     break;
-
+                //order maximal stock amount descending
                 case "max_stock_desc":
                     stock = stock.OrderByDescending(s => s.max_stock);
                     break;
-
+                // default: order CMI ascending
                 default:
                     stock = stock.OrderBy(s => s.Pricelist.bas_art_nr);
                     break;
@@ -73,43 +73,50 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 if (!string.IsNullOrEmpty(searchString))
                 {
+                    //filter item in stock where textbox contains description
                     stock = stock.Where(s => s.Pricelist.description.Contains(searchString));
                 }
+                if (!string.IsNullOrEmpty(StockCMI))
+                {
+                    //filter item in stock where textbox contains CMI
+                    stock = stock.Where(x => x.Pricelist.bas_art_nr.Contains(StockCMI));
+                }
             }
-
-            if (!string.IsNullOrEmpty(StockCMI))
-            {
-                stock = stock.Where(x => x.Pricelist.bas_art_nr.Contains(StockCMI));
-            }
+            
             return View(stock);
         }
 
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
         {
+            // if id is null, return BadRequest
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //find selected ID in pricelist
             Stock stock = db.Stock.Find(id);
             if (stock == null)
             {
+                //if not found, return this
                 return HttpNotFound();
             }
             return View(stock);
         }
 
+        //Check if user is Assembly or Admin
+        //else redirect te login
         [Authorize(Roles = "Assembly,Admin")]
+
         // GET: Stock/Create
         public ActionResult Create()
         {
+            //dropdownlist for CMI
             var SelectedCMI = from d in db.pricelist
                                   //where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
-            //  var SelectedCMI = new SelectList(db.pricelist.Select(r => r.Price_id, ).Distinct().ToList());
-            //  ViewBag.SelectedCMI = SelectedCMI;
             return View();
         }
 
@@ -117,10 +124,8 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock, FormCollection formCollection)
+        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock)
         {
-            //   stock.Price_id = int.Parse(formCollection["SelectedCMI"]);
-            // ManageMessageId? message;
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
@@ -134,17 +139,23 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(stock);
         }
 
+        //Check if user is Assembly or Admin
+        //else redirect te login
         [Authorize(Roles = "Assembly,Admin")]
+
         // GET: Stock/Edit/5
         public ActionResult Edit(int? id)
         {
+            // if id is null, return BadRequest
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //find selected ID in pricelist
             Stock stock = db.Stock.Find(id);
             if (stock == null)
             {
+                //if not found, return this
                 return HttpNotFound();
             }
             return View(stock);

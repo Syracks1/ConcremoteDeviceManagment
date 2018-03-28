@@ -1,5 +1,6 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -29,7 +30,6 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //dropdownlist for Device
             var SelectedDevice = from d in db.DeviceType
-                                     //    where d.Price_id == d.Price_id
                                  orderby d.name
                                  select new { Id = d.device_type_id, Value = d.name };
             ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
@@ -48,7 +48,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //Add data to DeviceConfig table
                     db.DeviceConfig.Add(deviceConfig);
-                    db.Device_Pricelist.Add(device_Pricelist);
+                    db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
+                    db.Device_Pricelist.Add(device_Pricelist).amount = 1;
+                    db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
@@ -78,7 +80,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]DeviceConfig deviceConfig, List<Device_Pricelist> Device_Pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -86,8 +88,18 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     foreach (var item in Device_Pricelist)
                     {
+                        //db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
+                        //db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 1;
+                        //db.DeviceConfig.Add(deviceConfig).Active = true;
+                        //db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                        //db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                         db.Entry(item).State = EntityState.Added;
                     }
+                    db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
+                    db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 1;
+                    db.DeviceConfig.Add(deviceConfig).Active = true;
+                    db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                    db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                     db.SaveChanges();
                     TempData["SuccesMessage"] = "Data is Succesfully saved";
                     return RedirectToAction("Index");

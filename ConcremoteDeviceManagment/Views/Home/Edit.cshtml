@@ -38,16 +38,14 @@
                 <a href="#" id="addNew" class="btn btn-success">Add New Row</a>
             </th>
         </tr>
-        @if (Model != null && Model.Count >= 0)
+        @if (Model != null && Model.Count > 0)
         {
             int j = 0;
             foreach (var item in Model)
             {
-                //(IEnumerable<SelectListItem>)ViewBag.SelectedCMI,
-                //(IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
                 <tr>
                     @Html.HiddenFor(a => a[j].id)
-                        @Html.HiddenFor(a => a[j].Device_config_id)
+                    @Html.HiddenFor(a => a[j].Device_config_id)
 @*                    @Html.HiddenFor(a => a[j].Price_id)*@
                    
                     <td class="table-row">
