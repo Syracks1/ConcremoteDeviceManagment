@@ -85,7 +85,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temporarily message to inform user Image is deleted succesfully
-                    TempData["SuccesMessage"] = "Image Deleted Succesfully";
+                    TempData["SuccesMessage"] = "Image " + ImagesIDs +  " Deleted Succesfully";
                 }
                 //If try doesn't work, this code will be executed to prefent Error dropout
                 catch
