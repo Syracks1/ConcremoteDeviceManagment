@@ -105,7 +105,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //case 3: something failed, return error page
                 case SignInStatus.Failure:
                     return View("Error");
-                    //Default: incorrect account login, login failed
+                //Default: incorrect account login, login failed
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -210,10 +210,10 @@ namespace ConcremoteDeviceManagment.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-         
-//
-// GET: /Account/ForgotPassword
-[AllowAnonymous]
+
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();

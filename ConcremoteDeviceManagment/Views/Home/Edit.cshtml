@@ -38,7 +38,7 @@
                 <a href="#" id="addNew" class="btn btn-success">Add New Row</a>
             </th>
         </tr>
-        @if (Model != null && Model.Count > 0)
+        @if (Model != null && Model.Count >= 0)
         {
             int j = 0;
             foreach (var item in Model)

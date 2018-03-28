@@ -113,6 +113,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
+
         //Check if user is Assembly or Admin
         //else redirect te login
         [Authorize(Roles = "Assembly,Admin")]
@@ -153,6 +154,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(pricelist);
         }
+
         //Check if user is Assembly or Admin
         //else redirect to login
         [Authorize(Roles = "Assembly,Admin")]
@@ -190,7 +192,7 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 try
-                { 
+                {
                     //check if row is modified
                     db.Entry(pricelist).State = EntityState.Modified;
                     //save changes to database

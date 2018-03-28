@@ -1,5 +1,4 @@
 ﻿using ConcremoteDeviceManagment.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -72,7 +71,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 //try this. If it is not working, code goes to catch
                 try
-                { 
+                {
                     foreach (var id in ImagesIDs)
                     {
                         var image = db.gallery.Single(s => s.ID == id);

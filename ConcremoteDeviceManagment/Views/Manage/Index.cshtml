@@ -13,20 +13,18 @@
         <dt>Password:</dt>
         <dd>
             @if (Model.HasPassword)
-             {
+            {
                 <button onclick="location.href='@Url.Action("ChangePassword", "Manage")';return false;" class="btn btn-primary">Change Password</button>
-             }
+            }
             else
             {
                 <button onclick="location.href='@Url.Action("SetPassword", "Manage")';return false;" class="btn btn-primary">Create</button>
 
             }
         </dd>
-       <dt>
-             
-       </dt>
+        <dt>
+        </dt>
         <dd>
-              
         </dd>
         <dt>Manage Accounts</dt>
         <dd>
@@ -35,25 +33,25 @@
                 <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
             </p>
             @*@if (Model.TwoFactor)
-        {
-            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Enabled
-                <input type="submit" value="Disable" class="btn btn-link" />
-                </text>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Disabled
-                <input type="submit" value="Enable" class="btn btn-link" />
-                </text>
-            }
-        }*@
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Enabled
+                        <input type="submit" value="Disable" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Disabled
+                        <input type="submit" value="Enable" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
         </dd>
     </dl>
 </div>

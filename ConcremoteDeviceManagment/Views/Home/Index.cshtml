@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Device_Pricelist>
+﻿@model IEnumerable<ConcremoteDeviceManagment.Models.DeviceConfig>
 
 @{
     ViewBag.Title = "Change DeviceConfig";
@@ -8,8 +8,12 @@
 
 <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>Overzicht configuraties</h2>
-<p>
-</p>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
+    </p>
+}
 @{
     if (TempData["SuccesMessage"] != null)
     {
@@ -34,13 +38,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name)
+                @Html.DisplayFor(modelItem => item.DeviceType.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
+                @Html.DisplayFor(modelItem => item.VersionNr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeviceConfig.Date)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
