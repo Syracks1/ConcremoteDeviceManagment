@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.gallery
+﻿@model ConcremoteDeviceManagment.Models.Gallery
 @{
     ViewBag.Title = "AddImage";
 }
@@ -6,6 +6,15 @@
 <h2>AddImage</h2>
 @using (Html.BeginForm("AddImage", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    if (TempData["AlertMessage"] != null)
+    {
+        <p class="alert alert-danger" id="successMessage">@TempData["AlertMessage"]</p>
+    }
+    if (TempData["SuccesMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
+    }
+
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset>

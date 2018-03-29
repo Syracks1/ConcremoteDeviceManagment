@@ -10,7 +10,7 @@
     <h1>
         @Html.DisplayName("Edit Configuration")
     </h1>
-    
+
     if (TempData["AlertMessage"] != null)
     {
         <p class="alert alert-danger" id="FailMessage">@TempData["AlertMessage"]</p>
@@ -47,7 +47,7 @@
                     @Html.HiddenFor(a => a[j].id)
                     @Html.HiddenFor(a => a[j].Device_config_id)
 @*                    @Html.HiddenFor(a => a[j].Price_id)*@
-                   
+
                     <td class="table-row">
                         @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
                         @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })

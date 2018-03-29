@@ -31,14 +31,20 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Assembly,Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // POST: DeviceTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -56,7 +62,10 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Assembly,Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,7 +81,10 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -89,7 +101,10 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)
         {

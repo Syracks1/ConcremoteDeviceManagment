@@ -82,7 +82,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     stock = stock.Where(x => x.Pricelist.bas_art_nr.Contains(StockCMI));
                 }
             }
-            
+
             return View(stock);
         }
 

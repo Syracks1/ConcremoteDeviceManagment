@@ -10,8 +10,11 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class DeviceConfigController : Controller
     {
+        //call in databse connection
         private BasDbContext db = new BasDbContext();
 
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {

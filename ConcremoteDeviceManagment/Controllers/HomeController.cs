@@ -30,7 +30,6 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
-
         public ActionResult Create()
         {
             //dropdownlist for Device
@@ -76,6 +75,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
+
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
@@ -95,6 +95,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(Device_Pricelist);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]DeviceConfig deviceConfig, List<Device_Pricelist> Device_Pricelist)
@@ -105,11 +106,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     foreach (var item in Device_Pricelist)
                     {
-                        //db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
-                        //db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 1;
-                        //db.DeviceConfig.Add(deviceConfig).Active = true;
-                        //db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
-                        //db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                         db.Entry(item).State = EntityState.Added;
                     }
                     db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;

@@ -159,7 +159,7 @@ namespace ConcremoteDeviceManagment.Controllers
         //Check if user is Assembly or Admin
         //else redirect to login
         [Authorize(Roles = "Assembly,Admin")]
-        
+
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
