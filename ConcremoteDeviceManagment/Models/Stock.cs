@@ -184,6 +184,7 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een aantal in")]
         public decimal amount { get; set; }
 
+        //public int Device_amount_fck_it { get; set; }
         [Required(ErrorMessage = "Voer een bouwvolgorde in")]
         public int assembly_order { get; set; }
 
