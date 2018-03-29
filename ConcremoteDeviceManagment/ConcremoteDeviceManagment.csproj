@@ -19,7 +19,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>57358</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -449,6 +450,7 @@
     <Content Include="Views\Slider\Index.cshtml" />
     <Content Include="Views\Shared\SliderPartial.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\DeviceConfig\DeviceSteps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

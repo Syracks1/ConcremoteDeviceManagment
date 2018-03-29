@@ -61,12 +61,12 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Price_id,amount,Datum,Active")] DeviceConfig deviceConfig)
         {
-            if (ModelState.IsValid)
-            {
-                db.DeviceConfig.Add(deviceConfig);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.DeviceConfig.Add(deviceConfig);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
             return View(deviceConfig);
         }
 
