@@ -11,11 +11,15 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class HomeController : Controller
     {
+        //call in database connection
         private BasDbContext db = new BasDbContext();
 
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
+            //create list to display in View
             var Device = (from d in db.DeviceConfig
                               //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id).ToList();
@@ -23,7 +27,8 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(Device);
         }
 
-       
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
 
         public ActionResult Create()
@@ -42,8 +47,10 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Active,VersionNr,Date")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
         {
+            //check if modelstate is valid
             if (ModelState.IsValid)
             {
+                //if modelstate is valid, try this
                 try
                 {
                     //Add data to DeviceConfig table
@@ -57,23 +64,33 @@ namespace ConcremoteDeviceManagment.Controllers
                     TempData["SuccesMessage"] = "Config for " + deviceConfig.DeviceType.name + " Added Successfully.";
                     return RedirectToAction("Edit");
                 }
+                //if try failed, catch tempData
                 catch
                 {
                     TempData["AlertMessage"] = "Creating Config went wrong, " + "please try again";
                 }
             }
+            else
+            {
+                TempData["AlertMessage"] = "Something went wrong, " + "please try again";
+            }
             return View(deviceConfig);
         }
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Edit(int? Id)
         {
+            //create new list
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
+            //create new SelectList in Device_Pricelist
             var SelectedCMI = (from d in db.pricelist
                                where d.Price_id == d.Price_id
                                orderby d.Price_id
                                select new { d.Price_id, Value = d.bas_art_nr }).Distinct();
 
+            //call viewbag based on SelectedCMI query
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Price_id", "Value");
 
             return View(Device_Pricelist);
