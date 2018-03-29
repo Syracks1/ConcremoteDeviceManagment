@@ -40,11 +40,12 @@ namespace ConcremoteDeviceManagment.Controllers
 
                 // Upload your pic
                 string pic = System.IO.Path.GetFileName(ImagePath.FileName);
-                string path = System.IO.Path.Combine((@"\\WEBSERVER03\WEBDEV$\cdm\Content\images\"), pic);
+
+                string path = System.IO.Path.Combine(Server.MapPath(@"\cdm\Content\images\"), pic);
                 ImagePath.SaveAs(path);
                 using (BasDbContext db = new BasDbContext())
                 {
-                    Gallery gallery = new Gallery { ImagePath = @"\\WEBSERVER03\WEBDEV$\cdm\Content\images\" + pic };
+                    Gallery gallery = new Gallery { ImagePath = @"\cdm\Content\images\" + pic };
                     db.gallery.Add(gallery);
                     db.SaveChanges();
                 }
