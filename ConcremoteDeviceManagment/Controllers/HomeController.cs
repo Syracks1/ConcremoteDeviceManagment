@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
@@ -98,21 +99,26 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]DeviceConfig deviceConfig, List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit([Bind(Include = "id,Price_id,amount,assembly_order")]DeviceConfig deviceConfig, List<Device_Pricelist> Device_Pricelist)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
+                    db.DeviceConfig.Add(deviceConfig).device_type_id = 42;
+                    db.DeviceConfig.Add(deviceConfig).Active = true;
+                    db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                    db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                     foreach (var item in Device_Pricelist)
                     {
                         db.Entry(item).State = EntityState.Added;
                     }
-                    db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
-                    db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 1;
-                    db.DeviceConfig.Add(deviceConfig).Active = true;
-                    db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
-                    db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
+                    //db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
+                    //db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 1;
+                    //db.DeviceConfig.Add(deviceConfig).Active = true;
+                    //db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                    //db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                     db.SaveChanges();
                     TempData["SuccesMessage"] = "Data is Succesfully saved";
                     return RedirectToAction("Index");
@@ -125,7 +131,34 @@ namespace ConcremoteDeviceManagment.Controllers
             // ViewBag.SelectedCMI = new SelectList(db.pricelist.Distinct(), "Price_id");
             return View(Device_Pricelist);
         }
+        [Authorize(Roles = "Admin")]
+        // GET: Stock/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            if (deviceConfig == null)
+            {
+                return HttpNotFound();
+            }
+            return View(deviceConfig);
+        }
 
+        // POST: Stock/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
+            db.DeviceConfig.Remove(deviceConfig);
+         //   db.Device_Pricelist.Remove(Device_config_id);
+            db.SaveChanges();
+          //  TempData["AlertMessage"] = "Config " + deviceConfig.DeviceType.name.ToString() + " Version "+ deviceConfig.VersionNr + " Deleted Successfully.";
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

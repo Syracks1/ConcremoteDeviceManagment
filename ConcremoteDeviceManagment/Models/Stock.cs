@@ -15,7 +15,7 @@ namespace ConcremoteDeviceManagment.Models
         public int Price_id { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in")]
-        public int stock_amount { get; set; }
+        public int Stock_amount { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in, Het getal mag niet hoger zijn dan maximale hoeveelheid")]
         public int min_stock { get; set; }
