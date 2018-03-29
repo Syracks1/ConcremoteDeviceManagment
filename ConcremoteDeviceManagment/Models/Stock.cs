@@ -162,7 +162,7 @@ namespace ConcremoteDeviceManagment.Models
 
         // public int device_type_id { get; set; }
         public string ImagePath { get; set; }
-
+        public DateTime DateAdded { get; set; }
         //[ForeignKey("device_type_id")]
 
         //public virtual DeviceType DeviceType { get; set; }

@@ -1,4 +1,5 @@
 ﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -47,6 +48,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     Gallery gallery = new Gallery { ImagePath = @"\cdm\Content\images\" + pic };
                     db.gallery.Add(gallery);
+                    db.gallery.Add(gallery).DateAdded = gallery.DateAdded = DateTime.Now;
                     db.SaveChanges();
                 }
             }
