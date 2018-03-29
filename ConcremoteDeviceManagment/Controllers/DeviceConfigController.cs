@@ -54,6 +54,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: DeviceConfig2/Create
         public ActionResult Create()
         {
+            int Device_amount = 0;
             return View();
         }
 
