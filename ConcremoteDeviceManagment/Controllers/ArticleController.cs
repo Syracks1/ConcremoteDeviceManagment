@@ -100,6 +100,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device/Details/5
         public ActionResult Details(int? id)
         {
+            // if id is null, return BadRequest
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -158,7 +159,7 @@ namespace ConcremoteDeviceManagment.Controllers
         //Check if user is Assembly or Admin
         //else redirect to login
         [Authorize(Roles = "Assembly,Admin")]
-
+        
         // GET: Device/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -203,9 +204,10 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
                 catch
                 {
+                    //Temp message to inform user saving article failed
                     TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Failed.";
                 }
-            }
+            }//Temp message to inform user something went wrong
             TempData["AlertMessage"] = "Something went wrong, " + "contact support or try again later";
 
             return View(pricelist);

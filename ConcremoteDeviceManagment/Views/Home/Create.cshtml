@@ -7,7 +7,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Home"))
 {
     @Html.AntiForgeryToken()
 
@@ -31,7 +31,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             @Html.Label("Versie nummer", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

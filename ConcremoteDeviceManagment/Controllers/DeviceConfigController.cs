@@ -27,7 +27,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public PartialViewResult CreateDevice(string Device)
         {
             {
-                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
+                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true && c.DeviceConfig.VersionNr == 1).OrderBy(c => c.assembly_order));
                 ViewBag.Total = ci.Sum(x => x.amount * x.Pricelist.Price);
 
                 return PartialView("CreateDevice", ci);

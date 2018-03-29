@@ -121,14 +121,14 @@ namespace ConcremoteDeviceManagment.Controllers
 
         
         public PartialViewResult ConfigPartial(int? id)
-        {
-            // List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
-            
+        {            
             //create list "ci2" with query
             List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.Device_config_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.assembly_order));
+
             //return PartialView called "ConfigPartial" with query ci2
             return PartialView("ConfigPartial", ci2);
         }
+
         //Check if logged in user is Assembly or Admin
         //if false, return to Login page
         [Authorize(Roles = "Assembly,Admin")]
@@ -158,6 +158,8 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(concremoteDevice);
         }
 
+        //Check if logged in user is Assembly or Admin
+        //if false, return to Login page
         [Authorize(Roles = "Assembly, Admin")]
 
         // GET: Concremote/Edit/5
@@ -167,8 +169,10 @@ namespace ConcremoteDeviceManagment.Controllers
             var StatusList = from d in db.Device_statustypes
                              orderby d.id
                              select new { Id = d.id, Value = d.name };
+
             //pass list to Dropdownlist in Edit view
             ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
+
             //if ID is null, return BadRequest
             if (id == null)
             {
@@ -195,12 +199,16 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 //check if deviceStatus is modified
                 db.Entry(deviceStatus).State = EntityState.Modified;
+
                 //check if concremoteDevice is modified
                 db.Entry(concremoteDevice).State = EntityState.Modified;
+
                 //save modified changes to database
                 db.SaveChanges();
+
                 //Temp message when changes were succesfull
                 TempData["AlertMessage"] = "Device Edited Successfully";
+
                 //redirect to Index
                 return RedirectToAction("Index");
             }
