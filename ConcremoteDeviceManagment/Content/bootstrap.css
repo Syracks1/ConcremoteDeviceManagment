@@ -5,10 +5,9 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-    font-family: sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    color: #00FF00;
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
 }
 body {
   margin: 0;
@@ -2260,7 +2259,6 @@ caption {
 }
 th {
   text-align: left;
-
 }
 .table {
   width: 100%;
@@ -2320,11 +2318,10 @@ th {
   border-bottom-width: 2px;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #f9f9f9;color: #00FF00;
+  background-color: #f9f9f9;
 }
 .table-hover > tbody > tr:hover {
   background-color: #f5f5f5;
-
 }
 table col[class*="col-"] {
   position: static;
@@ -3011,7 +3008,7 @@ select[multiple].input-lg {
   font-weight: normal;
   line-height: 1.42857143;
   text-align: center;
-  /*white-space: nowrap;*/
+  white-space: nowrap;
   vertical-align: middle;
   -ms-touch-action: manipulation;
       touch-action: manipulation;

@@ -72,7 +72,10 @@ namespace ConcremoteDeviceManagment.Controllers
             //}
             return View(deviceConfig);
         }
-
+        public ActionResult DeviceSteps()
+        {
+            return View();
+        }
         // GET: DeviceConfig2/Edit/5
         public ActionResult Edit(int? id)
         {
