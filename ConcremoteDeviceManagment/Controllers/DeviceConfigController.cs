@@ -10,8 +10,11 @@ namespace ConcremoteDeviceManagment.Controllers
 {
     public class DeviceConfigController : Controller
     {
+        //call in databse connection
         private BasDbContext db = new BasDbContext();
 
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Index()
         {
@@ -100,31 +103,7 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceConfig);
         }
 
-        // GET: DeviceConfig2/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            if (deviceConfig == null)
-            {
-                return HttpNotFound();
-            }
-            return View(deviceConfig);
-        }
-
-        // POST: DeviceConfig2/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            db.DeviceConfig.Remove(deviceConfig);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+       
 
         protected override void Dispose(bool disposing)
         {

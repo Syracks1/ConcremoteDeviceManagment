@@ -15,7 +15,7 @@ namespace ConcremoteDeviceManagment.Models
         public int Price_id { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in")]
-        public int stock_amount { get; set; }
+        public int Stock_amount { get; set; }
 
         [Required(ErrorMessage = "Voer een aantal in, Het getal mag niet hoger zijn dan maximale hoeveelheid")]
         public int min_stock { get; set; }
@@ -156,15 +156,18 @@ namespace ConcremoteDeviceManagment.Models
     }
 
     [Table("gallery")]
-    public class gallery
+    public class Gallery
     {
         public int ID { get; set; }
-       // public int device_type_id { get; set; }
+
+        // public int device_type_id { get; set; }
         public string ImagePath { get; set; }
+        public DateTime DateAdded { get; set; }
         //[ForeignKey("device_type_id")]
 
         //public virtual DeviceType DeviceType { get; set; }
     }
+
     [Table("Device_Pricelist")]
     public class Device_Pricelist
     {
@@ -172,6 +175,7 @@ namespace ConcremoteDeviceManagment.Models
         [Column(Order = 0)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+
         [Key]
         [Column(Order = 1)]
         public int Device_config_id { get; set; }
@@ -325,7 +329,7 @@ namespace ConcremoteDeviceManagment.Models
 
         public string Name { get; set; }
     }
-    
+
     public class BasDbContext : DbContext
     {
         //[ForeignKey("Price_id")]
@@ -343,7 +347,7 @@ namespace ConcremoteDeviceManagment.Models
         public DbSet<AspNetUsers> AspNetUsers { get; set; }
         public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public DbSet<gallery> gallery { get; set; }
+        public DbSet<Gallery> gallery { get; set; }
     }
 
     public class PO3DbContext : DbContext

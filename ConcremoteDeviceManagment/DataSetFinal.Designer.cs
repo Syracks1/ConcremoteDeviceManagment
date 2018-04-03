@@ -5704,7 +5704,7 @@ namespace ConcremoteDeviceManagment {
             
             private global::System.Data.DataColumn columnPrice_id;
             
-            private global::System.Data.DataColumn columnstock_amount;
+            private global::System.Data.DataColumn columnStock_amount;
             
             private global::System.Data.DataColumn columnmin_stock;
             
@@ -5761,9 +5761,9 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn stock_amountColumn {
+            public global::System.Data.DataColumn Stock_amountColumn {
                 get {
-                    return this.columnstock_amount;
+                    return this.columnStock_amount;
                 }
             }
             
@@ -5820,12 +5820,12 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public StockRow AddStockRow(pricelistRow parentpricelistRowByfk_Stock_pricelist1, int stock_amount, int min_stock, int max_stock) {
+            public StockRow AddStockRow(pricelistRow parentpricelistRowByfk_Stock_pricelist1, int Stock_amount, int min_stock, int max_stock) {
                 StockRow rowStockRow = ((StockRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        stock_amount,
+                        Stock_amount,
                         min_stock,
                         max_stock};
                 if ((parentpricelistRowByfk_Stock_pricelist1 != null)) {
@@ -5862,7 +5862,7 @@ namespace ConcremoteDeviceManagment {
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
                 this.columnPrice_id = base.Columns["Price_id"];
-                this.columnstock_amount = base.Columns["stock_amount"];
+                this.columnStock_amount = base.Columns["Stock_amount"];
                 this.columnmin_stock = base.Columns["min_stock"];
                 this.columnmax_stock = base.Columns["max_stock"];
             }
@@ -5874,8 +5874,8 @@ namespace ConcremoteDeviceManagment {
                 base.Columns.Add(this.columnid);
                 this.columnPrice_id = new global::System.Data.DataColumn("Price_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPrice_id);
-                this.columnstock_amount = new global::System.Data.DataColumn("stock_amount", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstock_amount);
+                this.columnStock_amount = new global::System.Data.DataColumn("Stock_amount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStock_amount);
                 this.columnmin_stock = new global::System.Data.DataColumn("min_stock", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmin_stock);
                 this.columnmax_stock = new global::System.Data.DataColumn("max_stock", typeof(int), null, global::System.Data.MappingType.Element);
@@ -5889,7 +5889,7 @@ namespace ConcremoteDeviceManagment {
                 this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
                 this.columnPrice_id.AllowDBNull = false;
-                this.columnstock_amount.AllowDBNull = false;
+                this.columnStock_amount.AllowDBNull = false;
                 this.columnmin_stock.AllowDBNull = false;
                 this.columnmax_stock.AllowDBNull = false;
             }
@@ -8456,12 +8456,12 @@ namespace ConcremoteDeviceManagment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int stock_amount {
+            public int Stock_amount {
                 get {
-                    return ((int)(this[this.tableStock.stock_amountColumn]));
+                    return ((int)(this[this.tableStock.Stock_amountColumn]));
                 }
                 set {
-                    this[this.tableStock.stock_amountColumn] = value;
+                    this[this.tableStock.Stock_amountColumn] = value;
                 }
             }
             
@@ -14337,7 +14337,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             tableMapping.DataSetTable = "Stock";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("Price_id", "Price_id");
-            tableMapping.ColumnMappings.Add("stock_amount", "stock_amount");
+            tableMapping.ColumnMappings.Add("Stock_amount", "Stock_amount");
             tableMapping.ColumnMappings.Add("min_stock", "min_stock");
             tableMapping.ColumnMappings.Add("max_stock", "max_stock");
             this._adapter.TableMappings.Add(tableMapping);
@@ -14348,21 +14348,21 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Stock] ([Price_id], [stock_amount], [min_stock], [max_stock]) " +
-                "VALUES (@Price_id, @stock_amount, @min_stock, @max_stock)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Stock] ([Price_id], [\r\n                    ], [min_stock], [ma" +
+                "x_stock]) VALUES (@Price_id, @Stock_amount, @min_stock, @max_stock)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@stock_amount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "stock_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stock_amount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stock_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@min_stock", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "min_stock", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@max_stock", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "max_stock", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Stock] SET [Price_id] = @Price_id, [stock_amount] = @stock_amount, " +
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Stock] SET [Price_id] = @Price_id, [Stock_amount] = @Stock_amount, " +
                 "[min_stock] = @min_stock, [max_stock] = @max_stock WHERE (([id] = @Original_id))" +
                 "";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@stock_amount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "stock_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stock_amount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stock_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@min_stock", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "min_stock", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@max_stock", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "max_stock", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -14381,7 +14381,7 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, Price_id, stock_amount, min_stock, max_stock FROM dbo.Stock";
+            this._commandCollection[0].CommandText = "SELECT id, Price_id, Stock_amount, min_stock, max_stock FROM dbo.Stock";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -14464,9 +14464,9 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Price_id, int stock_amount, int min_stock, int max_stock) {
+        public virtual int Insert(int Price_id, int Stock_amount, int min_stock, int max_stock) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Price_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(stock_amount));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Stock_amount));
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(min_stock));
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(max_stock));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
@@ -14489,9 +14489,9 @@ namespace ConcremoteDeviceManagment.DataSetFinalTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Price_id, int stock_amount, int min_stock, int max_stock, int Original_id) {
+        public virtual int Update(int Price_id, int Stock_amount, int min_stock, int max_stock, int Original_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Price_id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(stock_amount));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Stock_amount));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(min_stock));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(max_stock));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_id));

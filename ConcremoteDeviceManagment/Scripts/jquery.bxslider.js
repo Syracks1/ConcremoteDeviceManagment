@@ -9,9 +9,11 @@
  */
 
 ; (function ($) {
+
     var plugin = {};
 
     var defaults = {
+
         // GENERAL
         mode: 'horizontal',
         slideSelector: '',
@@ -86,6 +88,7 @@
     }
 
     $.fn.bxSlider = function (options) {
+
         if (this.length == 0) return this;
 
         // support mutltiple elements
@@ -106,6 +109,8 @@
         // first get the original window dimens (thanks alot IE)
         var windowWidth = $(window).width();
         var windowHeight = $(window).height();
+
+
 
 		/**
 		 * ===================================================================================
@@ -1334,4 +1339,5 @@
         // returns the current jQuery object
         return this;
     }
+
 })(jQuery);

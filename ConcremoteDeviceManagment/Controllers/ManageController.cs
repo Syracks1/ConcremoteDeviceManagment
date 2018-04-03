@@ -57,6 +57,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            //creating costum messages
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -106,19 +107,9 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageAccounts()
         {
-            //var Account = (from d in db.AspNetUserRoles
-            //               join st in db.AspNetUsers on d.UserId equals st.Id
-            //               join dt in db.AspNetRoles on d.RoleId equals dt.Id
-            //              where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
-            //               select new { st.Email, dt.Id }).ToList();
+            //Account query for data on page
             var Account = from d in db.AspNetUserRoles
-                              //             group d by d.AspNetRoles.Id.Max() into g
                           select d;
-            //var Users = (from d in db.AspNetUserRoles
-            //             join st in db.AspNetUsers on d.UserId equals st.Id
-            //             join dt in db.AspNetRoles on d.RoleId equals dt.Id
-            //             where d.RoleId == d.AspNetRoles.Id && d.UserId == d.AspNetUsers.Id
-            //             select new { st.Email, st.LockoutEndDateUtc, dt.Name }).ToList();
 
             return View(Account);
         }

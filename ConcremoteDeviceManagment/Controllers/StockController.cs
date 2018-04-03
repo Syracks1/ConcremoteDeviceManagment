@@ -41,11 +41,11 @@ namespace ConcremoteDeviceManagment.Controllers
                     break;
                 //order current stock amount ascending
                 case "current":
-                    stock = stock.OrderBy(s => s.stock_amount);
+                    stock = stock.OrderBy(s => s.Stock_amount);
                     break;
                 //order current stock amount descneding
                 case "current_desc":
-                    stock = stock.OrderByDescending(s => s.stock_amount);
+                    stock = stock.OrderByDescending(s => s.Stock_amount);
                     break;
                 //order minimal stock amount ascending
                 case "min_stock":
@@ -82,7 +82,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     stock = stock.Where(x => x.Pricelist.bas_art_nr.Contains(StockCMI));
                 }
             }
-            
+
             return View(stock);
         }
 
@@ -124,7 +124,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock)
+        public ActionResult Create([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +165,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Price_id,stock_amount,min_stock,max_stock")] Stock stock)
+        public ActionResult Edit([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
         {
             if (ModelState.IsValid)
             {

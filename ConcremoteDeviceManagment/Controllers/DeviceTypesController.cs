@@ -13,6 +13,8 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: DeviceTypes
         public ActionResult Index()
         {
+            //return View with given query
+            //displays all DeviceTypes on page
             return View(db.DeviceType.ToList());
         }
 
@@ -31,14 +33,21 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Assembly,Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Create
         public ActionResult Create()
         {
+            //return Page
             return View();
         }
 
-        [Authorize]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // POST: DeviceTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -47,16 +56,19 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.DeviceType.Add(deviceType);
+                db.DeviceType.Add(deviceType);            
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + deviceType.name + " Added Successfully.";
+                TempData["AlertMessage"] = "Device " + deviceType.name + " Added Successfully.";
                 return RedirectToAction("Index");
             }
 
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Assembly,Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,7 +84,10 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // POST: DeviceTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
@@ -83,13 +98,16 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + deviceType.name + " Edited Successfully.";
+                TempData["AlertMessage"] = "Device " + deviceType.name + " Edited Successfully.";
                 return RedirectToAction("Index");
             }
             return View(deviceType);
         }
 
-        [Authorize(Roles = "Admin")]
+        //check if logged in user is Assembly or Admin
+        //if false, return to login
+        [Authorize(Roles = "Assembly, Admin")]
+
         // GET: DeviceTypes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -113,7 +131,7 @@ namespace ConcremoteDeviceManagment.Controllers
             DeviceType deviceType = db.DeviceType.Find(id);
             db.DeviceType.Remove(deviceType);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Article " + deviceType.name + " Deleted Successfully.";
+            TempData["AlertMessage"] = "Device " + deviceType.name + " Deleted Successfully.";
             return RedirectToAction("Index");
         }
 
