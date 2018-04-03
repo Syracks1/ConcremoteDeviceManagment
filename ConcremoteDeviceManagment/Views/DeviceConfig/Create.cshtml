@@ -8,32 +8,33 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>DeviceConfig</h4>
-    <hr />
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <form method="post" action="~/Views/DeviceConfig/DeviceSteps.cshtml">
-                <input type="text" name="ContactName" placeholder="Amount" class="form-control" /><br /><br />
-                <input type="submit" value="Submit" class="btn btn-default" />
-            </form>
-            @*<input type="submit" value="Create" class="btn btn-default" />*@
-        </div>
-        @Html.DisplayFor(model => model.DeviceType.name)<br />
-
+    <div class="form-horizontal">
+        <h4>DeviceConfig</h4>
+        <hr />
     </div>
-</div>
 }
 
-    <div>
-        @*@Html.ActionLink("Back to List", "Index")*@
-        <button onclick="location.href='@Url.Action("Index", "DeviceConfig")';return false; " class="btn btn-primary">Back to list</button>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <form method="post" action="~/Views/DeviceConfig/DeviceSteps.cshtml">
+            <input type="text" name="ContactName" placeholder="Amount" class="form-control" /><br /><br />
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </form>
+        @*<input type="submit" value="Create" class="btn btn-default" />*@
     </div>
+    @Html.DisplayFor(model => model.DeviceType.name)<br />
+
+</div>
+
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <button onclick="location.href='@Url.Action("Index", "DeviceConfig")';return false; " class="btn btn-primary">Back to list</button>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
