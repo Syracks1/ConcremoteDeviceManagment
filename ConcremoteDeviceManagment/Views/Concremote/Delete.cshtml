@@ -1,4 +1,4 @@
-﻿@model ConcremoteDeviceManagment.Models.ConcremoteDevice
+﻿@model ConcremoteDeviceManagment.Models.DeviceStatus
 
 @{
     ViewBag.Title = "Delete";
@@ -17,7 +17,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DeviceType.name)
+            @Html.DisplayFor(model => model.DeviceConfig.DeviceType.name)
         </dd>
         @*<dt>
             @Html.DisplayName("IMEI Nummer")
@@ -32,24 +32,24 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.active)
+            @Html.DisplayFor(model => model.ConcremoteDevice.Active)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayName("Concremote OldSystem")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.oldsystem_concremote)
-        </dd>
+        </dd>*@
 
-        <dt>
+        @*<dt>
             @Html.DisplayName("Validatie Toegestaan")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Allowvalidation)
-        </dd>
+        </dd>*@
 
     </dl>
 

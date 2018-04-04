@@ -25,18 +25,21 @@
         <dd>
             @Html.DisplayFor(model => model.VersionNr)
         </dd>
-
-
-
+        <dt>
+            @Html.DisplayName("Datum")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
+        @using (Html.BeginForm())
+        {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <button onclick="location.href='@Url.Action("Index", "Home")';return false; " class="btn btn-primary">Back to list</button>
+    </div>
+        }
 </div>

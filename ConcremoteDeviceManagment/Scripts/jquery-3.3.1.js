@@ -9471,9 +9471,9 @@
     jQuery.fn.load = function (url, params, callback) {
         var selector, type, response,
             self = this,
-            off = url.indexOf(" ");
+            off = url.indexOf("");
 
-        if (off > -1) {
+        if (off > 0) {
             selector = stripAndCollapse(url.slice(off));
             url = url.slice(0, off);
         }
