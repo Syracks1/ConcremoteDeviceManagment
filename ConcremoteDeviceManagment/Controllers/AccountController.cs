@@ -61,24 +61,24 @@ namespace ConcremoteDeviceManagment.Controllers
             return View();
         }
 
-        public static string HashPassword(string Password)
-        {
-            byte[] salt;
-            byte[] buffer2;
-            if (Password == null)
-            {
-                throw new ArgumentNullException("Password");
-            }
-            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(Password, 0x10, 0x3e8))
-            {
-                salt = bytes.Salt;
-                buffer2 = bytes.GetBytes(0x20);
-            }
-            byte[] dst = new byte[0x31];
-            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
-            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
-            return Convert.ToBase64String(dst);
-        }
+        //public static string HashPassword(string Password)
+        //{
+        //    byte[] salt;
+        //    byte[] buffer2;
+        //    if (Password == null)
+        //    {
+        //        throw new ArgumentNullException("Password");
+        //    }
+        //    using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(Password, 0x10, 0x3e8))
+        //    {
+        //        salt = bytes.Salt;
+        //        buffer2 = bytes.GetBytes(0x20);
+        //    }
+        //    byte[] dst = new byte[0x31];
+        //    Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+        //    Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+        //    return Convert.ToBase64String(dst);
+        //}
 
         //
         // POST: /Account/Login
@@ -92,21 +92,35 @@ namespace ConcremoteDeviceManagment.Controllers
                 return View(model);
             }
 
+            // Require the user to have a confirmed email before they can log on.
+            // var user = await UserManager.FindByNameAsync(model.Email);
+            var user = UserManager.Find(model.Email, model.Password);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
+
+                    // Uncomment to debug locally  
+                    // ViewBag.Link = callbackUrl;
+                    ViewBag.errorMessage = "You must have a confirmed email to log on. "
+                                         + "The confirmation token has been resent to your email account.";
+                    return View("Error");
+                }
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
-                // case 1, login is success
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-                //case 2, account has reached max loginfailures, account is banned for +- 5 minutes
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                //case 3: something failed, return error page
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
-                    return View("Error");
-                //Default: incorrect account login, login failed
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -165,7 +179,16 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject,
+               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+            return callbackUrl;
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -179,18 +202,16 @@ namespace ConcremoteDeviceManagment.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action(
-                       "ConfirmEmail", "Account",
-                       new { userId = user.Id, code },
-                       protocol: Request.Url.Scheme);
+                    //  Comment the following line to prevent log in until the user is confirmed.
+                    //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account",
-                       "Please confirm your account by clicking this link: <a href=\""
-                                                       + callbackUrl + "\">link</a>");
-                    // ViewBag.Link = callbackUrl;   // Used only for initial demo.
-                    return View();
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                    + "before you can log in.";
+
+                    return View("Info");
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -198,6 +219,7 @@ namespace ConcremoteDeviceManagment.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+    
 
         //
         // GET: /Account/ConfirmEmail
@@ -237,7 +259,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

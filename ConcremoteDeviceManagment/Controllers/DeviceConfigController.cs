@@ -105,10 +105,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
-        public ActionResult DeviceSteps()
-        {
-            return View();
-        }
+       
 
 
 
