@@ -102,8 +102,12 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
+        public ActionResult DeviceSteps()
+        {
+            return View();
+        }
 
-       
+
 
         protected override void Dispose(bool disposing)
         {
