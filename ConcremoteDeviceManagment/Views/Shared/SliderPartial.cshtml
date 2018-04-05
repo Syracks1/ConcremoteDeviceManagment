@@ -1,34 +1,14 @@
 ﻿<div>
-    <ul id="slider">
+    <ul class="bxslider" data-call="bxslider" data-options="slideMargin:5, autoReload:true">
         @foreach (var image in Model)
         {
-            <li><img src="@Url.Content(image.ImagePath)" title="Funky roots"/></li>
+            <li><img src="@Url.Content(image.ImagePath)" /></li>
         }
     </ul>
 </div>
 <script>
     $(document).ready(function () {
         $('#slider').bxSlider();
-        $('.bx-wrapper').width('100%');
+        $('.bx-wrapper').width('auto');
     });
 </script>
-@*<div class="bxslider">
-            @foreach (var image in Model)
-            {
-                <div><img src="@Url.Content(image.ImagePath)" /></div>
-            }
-    </div>*@
-@*<div class="bxslider">
-    <div><img src="/assets/images/coffee1.jpg" title="Funky roots"></div>
-    <div><img src="/assets/images/coffee2.jpg" title="The long and winding road"></div>
-    <div><img src="/assets/images/coffee3.jpg" title="Happy trees"></div>
-</div>
-<script>
-    $(function () {
-        $('.bxslider').bxSlider({
-            mode: 'fade',
-            captions: false,
-            slideWidth: 600
-        });
-    });
-</script>*@
