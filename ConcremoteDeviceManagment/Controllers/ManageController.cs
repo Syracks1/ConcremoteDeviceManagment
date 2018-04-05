@@ -109,6 +109,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //Account query for data on page
             var Account = from d in db.AspNetUserRoles
+                          orderby d.RoleId
                           select d;
 
             return View(Account);
@@ -350,7 +351,6 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult UserEdit(string Id)
         {
             var SelectedRoles = from r in db.AspNetRoles
-                                where r.Id == r.Id
                                 orderby r.Id
                                 select new { r.Id, r.Name };
 
@@ -369,7 +369,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit(string Id, [Bind(Include = "UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
         {
             //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;

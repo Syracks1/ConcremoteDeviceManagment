@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -84,6 +86,7 @@ namespace ConcremoteDeviceManagment.Models
     public class DeviceType
     {
         [Key]
+        [Required]
         public int device_type_id { get; set; }
 
         [Required(ErrorMessage = "Voer een Naam in")]
@@ -95,9 +98,11 @@ namespace ConcremoteDeviceManagment.Models
     public class DeviceConfig
     {
         [Key]
+        [Required]
         public int Device_config_id { get; set; }
-
+        [Required]
         public int device_type_id { get; set; }
+        public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
 

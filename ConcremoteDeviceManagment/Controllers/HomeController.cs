@@ -24,7 +24,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //create list to display in View
             var Device = (from d in db.DeviceConfig
                               //where d.Device_config_id ==
-                          select d).DistinctBy(p => p.Device_config_id).ToList();
+                          select d).DistinctBy(p => p.Device_config_id);
 
             return View(Device);
         }
@@ -35,10 +35,10 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
             //dropdownlist for Device
-            var SelectedDevice = from d in db.DeviceType
-                                 orderby d.name
-                                 select new { Id = d.device_type_id, Value = d.name };
-            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
+            var SelectedDevice = from c in db.DeviceType
+                                 orderby c.device_type_id
+                                 select new {  c.device_type_id, c.name };
+            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "device_type_id", "name");
             return View();
         }
 
@@ -46,19 +46,24 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id,Active,VersionNr,Date")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig)
         {
             //check if modelstate is valid
             if (ModelState.IsValid)
             {
+
                 //if modelstate is valid, try this
                 try
                 {
+                    db.DeviceConfig.Add(deviceConfig).Date = DateTime.Now;
+                    db.DeviceConfig.Add(deviceConfig).VersionNr = 1;
+                    db.DeviceConfig.Add(deviceConfig).Active = true;
+
                     //Add data to DeviceConfig table
-                    db.DeviceConfig.Add(deviceConfig);
-                    db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
-                    db.Device_Pricelist.Add(device_Pricelist).amount = 1;
-                    db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
+                    //db.DeviceConfig.Add(deviceConfig);
+                    //db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
+                    //db.Device_Pricelist.Add(device_Pricelist).amount = 1;
+                    //db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
@@ -109,22 +114,23 @@ namespace ConcremoteDeviceManagment.Controllers
           //      if(Edit(Device_Pricelist))
                 try
                 {
-                    db.DeviceConfig.Add(deviceConfig).Device_config_id++;
-                    db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id  = 42;
-                    db.DeviceConfig.Add(deviceConfig).Active = true;
-                    db.DeviceConfig.Add(deviceConfig).VersionNr++;
-                    db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
-                    foreach (var item in Device_Pricelist)
+                    try
                     {
-                        db.Entry(item).State = EntityState.Modified;
-                        db.Device_Pricelist.Add(item);
-                        db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
-                        db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 42;
+                        db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id++;
+                        db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 13;
                         db.DeviceConfig.Add(deviceConfig).Active = true;
-                        db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                        db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr++;
                         db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
-
                     }
+                    finally
+                    {
+                        foreach (var item in Device_Pricelist)
+                        {
+                            
+                            db.Entry(item).State = EntityState.Added;
+                        }
+                    }
+                    
                     db.SaveChanges();
                     TempData["SuccesMessage"] = "Data is Succesfully saved";
                     return RedirectToAction("Index");

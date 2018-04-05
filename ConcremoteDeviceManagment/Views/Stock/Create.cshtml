@@ -18,12 +18,7 @@
         <div class="form-group">
             @Html.Label("Prijs ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("CMI", 1,new { htmlAttributes = new { @class = "form-control" } })*@
-             @*   @Html.DropDownListFor("SelectedCMI", null, new { @class = "form-control" })*@
                 @Html.DropDownListFor(m => m.Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, "Selecteer een Artikel", new { @class = "form-control" })
-
-                @*       @Html.DropDownList("SelectedCMI", null, new { @class = "form-control" })*@
-                @Html.ValidationMessageFor(model => model.Price_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -50,21 +45,6 @@
                 @Html.ValidationMessageFor(model => model.max_stock, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-                @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @*<div class="form-group">
-                @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-success" />

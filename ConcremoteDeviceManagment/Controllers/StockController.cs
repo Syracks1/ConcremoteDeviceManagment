@@ -105,7 +105,7 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         //Check if user is Assembly or Admin
-        //else redirect te login
+        //else redirect t0 login
         [Authorize(Roles = "Assembly,Admin")]
 
         // GET: Stock/Create

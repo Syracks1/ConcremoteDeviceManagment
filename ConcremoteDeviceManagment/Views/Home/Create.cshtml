@@ -7,7 +7,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create", "Home"))
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -18,34 +18,35 @@
         <div class="form-group">
             @Html.Label("Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.device_type_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer een Device", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.device_type_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Actief", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Active)
-                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Versie nummer", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VersionNr, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VersionNr, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.DropDownListFor(model => model.device_type_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer iets", new { @class = "form-control" })
+                @*@Html.DropDownListFor(m => m.Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, "Selecteer een Artikel", new { @class = "form-control" })*@
 
-        <div class="form-group">
-            @Html.Label("Datum", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*<div class="form-group">
+                @Html.Label("Actief", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Active)
+                        @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+        @*<div class="form-group">
+                @Html.Label("Versie nummer", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VersionNr, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VersionNr, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.Label("Datum", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -58,3 +59,6 @@
 <div>
     <button onclick="location.href='@Url.Action("Index", "Home")';return false;" class="btn btn-primary">Back to List</button>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

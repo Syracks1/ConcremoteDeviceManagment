@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     [HandleError]
     [Authorize]
     public class AccountController : Controller
