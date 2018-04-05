@@ -54,7 +54,6 @@
 
                     <td class="table-row">
                         @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(a => a[j].Price_id, "", new { @class = "text-danger" })
                     </td>
                     <td class="table-row">
                             @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
