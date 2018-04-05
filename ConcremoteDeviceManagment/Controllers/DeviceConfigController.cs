@@ -52,9 +52,11 @@ namespace ConcremoteDeviceManagment.Controllers
         //    return View(deviceConfig);
         //}
         // GET: DeviceConfig2/Create
+
         public ActionResult Create()
         {
             int Device_amount = 0;
+           // return RedirectToAction("DeviceSteps");
             return View();
         }
 
@@ -72,10 +74,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //}
             return View(deviceConfig);
         }
-        public ActionResult DeviceSteps()
-        {
-            return View();
-        }
+
         // GET: DeviceConfig2/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,11 +104,17 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(deviceConfig);
         }
+
         public ActionResult DeviceSteps()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Index(string createAmount)
+        {
+            return Content($"Hello {createAmount}");
+        }
 
 
         protected override void Dispose(bool disposing)
