@@ -43,31 +43,31 @@ namespace ConcremoteDeviceManagment.Controllers
         }
 
         [HttpPost]
-            public ActionResult CreateComment(CommentViewModel model)
+        public ActionResult CreateComment(CommentViewModel model)
+        {
+            //model not valid, do not save, but return current Umbraco page
+            if (!ModelState.IsValid)
             {
-                //model not valid, do not save, but return current Umbraco page
-                if (!ModelState.IsValid)
-                {
-                    //Perhaps you might want to add a custom message to the ViewBag
-                    //which will be available on the View when it renders (since we're not 
-                    //redirecting)	    	
-                    return View("DeviceSteps");
-                }
-
-                //if validation passes perform whatever logic
-                //In this sample we keep it empty, but try setting a breakpoint to see what is posted here
-
-                //Perhaps you might want to store some data in TempData which will be available 
-                //in the View after the redirect below. An example might be to show a custom 'submit
-                //successful' message on the View, for example:
-                TempData.Add("CustomMessage", "Your form was successfully submitted at " + DateTime.Now);
-
-                //redirect to current page to clear the form
-                return View("Create");
-
-                //Or redirect to specific page
-                //return RedirectToUmbracoPage(12345)
+                //Perhaps you might want to add a custom message to the ViewBag
+                //which will be available on the View when it renders (since we're not 
+                //redirecting)	    	
+                return View("DeviceSteps");
             }
+
+            //if validation passes perform whatever logic
+            //In this sample we keep it empty, but try setting a breakpoint to see what is posted here
+
+            //Perhaps you might want to store some data in TempData which will be available 
+            //in the View after the redirect below. An example might be to show a custom 'submit
+            //successful' message on the View, for example:
+            TempData.Add("CustomMessage", "Your form was successfully submitted at " + DateTime.Now);
+
+            //redirect to current page to clear the form
+            return View("Create");
+
+            //Or redirect to specific page
+            //return RedirectToUmbracoPage(12345)
+        }
 
         public PartialViewResult CreateDevice(string Device)
         {
