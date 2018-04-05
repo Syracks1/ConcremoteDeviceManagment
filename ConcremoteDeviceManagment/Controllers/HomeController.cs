@@ -103,21 +103,26 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]DeviceConfig deviceConfig, List<Device_Pricelist> Device_Pricelist)
         {
+
             if (ModelState.IsValid)
             {
           //      if(Edit(Device_Pricelist))
                 try
                 {
-                    db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
-                    db.DeviceConfig.Add(deviceConfig).device_type_id = 42;
+                    db.DeviceConfig.Add(deviceConfig).Device_config_id++;
+                    db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id  = 42;
                     db.DeviceConfig.Add(deviceConfig).Active = true;
-                    db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                    db.DeviceConfig.Add(deviceConfig).VersionNr++;
                     db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
                     foreach (var item in Device_Pricelist)
                     {
                         db.Entry(item).State = EntityState.Modified;
-                     //   db.Device_Pricelist.Remove(it.)
                         db.Device_Pricelist.Add(item);
+                        db.DeviceConfig.Add(deviceConfig).Device_config_id = deviceConfig.Device_config_id + 1;
+                        db.DeviceConfig.Add(deviceConfig).device_type_id = deviceConfig.device_type_id = 42;
+                        db.DeviceConfig.Add(deviceConfig).Active = true;
+                        db.DeviceConfig.Add(deviceConfig).VersionNr = deviceConfig.VersionNr + 1;
+                        db.DeviceConfig.Add(deviceConfig).Date = deviceConfig.Date = DateTime.Now;
 
                     }
                     db.SaveChanges();
@@ -132,7 +137,7 @@ namespace ConcremoteDeviceManagment.Controllers
             // ViewBag.SelectedCMI = new SelectList(db.pricelist.Distinct(), "Price_id");
             return View(Device_Pricelist);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly, Admin")]
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -157,7 +162,6 @@ namespace ConcremoteDeviceManagment.Controllers
             db.DeviceConfig.Remove(deviceConfig);
          //   db.Device_Pricelist.Remove(Device_config_id);
             db.SaveChanges();
-          //  TempData["AlertMessage"] = "Config " + deviceConfig.DeviceType.name.ToString() + " Version "+ deviceConfig.VersionNr + " Deleted Successfully.";
             return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)

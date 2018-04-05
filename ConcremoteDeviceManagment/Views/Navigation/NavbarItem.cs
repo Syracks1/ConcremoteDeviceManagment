@@ -41,8 +41,7 @@ namespace ConcremoteDeviceManagment.Models
             //Link to ImageSlide menu
             topNav.Add(new NavbarItem() { Id = 10, action = "Index", nameOption = "Slider Images", controller = "Slider", isParent = false, parentId = 7 });
 
-            //Link to webserver03
-            //topNav.Add(new NavbarItem() { Id = 10, action = "http://webserver03/index.php/", nameOption = "Portal", isParent = false, parentId = -1 });
+          
 
             return topNav;
         }

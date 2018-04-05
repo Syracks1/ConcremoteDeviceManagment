@@ -19,6 +19,7 @@ using System.Diagnostics;
 
 namespace ConcremoteDeviceManagment
 {
+    
     //Sendgrid account is under view, Email might delay
    public class EmailService : IIdentityMessageService
    {
@@ -26,7 +27,7 @@ namespace ConcremoteDeviceManagment
       {
          await configSendGridasync(message);
       }
-
+        
       // Use NuGet to install SendGrid (Basic C# client lib) 
       private async Task configSendGridasync(IdentityMessage message)
       {
