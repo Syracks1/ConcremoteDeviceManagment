@@ -110,11 +110,11 @@ namespace ConcremoteDeviceManagment.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Index(string createAmount)
-        {
-            return Content($"Hello {createAmount}");
-        }
+        //[HttpGet]
+        //public ActionResult Index(string createAmount)
+        //{
+        //    return Content("Hello {createAmount}");
+        //}
 
 
         protected override void Dispose(bool disposing)
