@@ -19,6 +19,7 @@ using System.Diagnostics;
 
 namespace ConcremoteDeviceManagment
 {
+    //Sendgrid account is under view, Email might delay
    public class EmailService : IIdentityMessageService
    {
       public async Task SendAsync(IdentityMessage message)
