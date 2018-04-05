@@ -37,8 +37,8 @@ namespace ConcremoteDeviceManagment.Controllers
             //dropdownlist for Device
             var SelectedDevice = from c in db.DeviceType
                                  orderby c.device_type_id
-                                 select new {  c.device_type_id, c.name };
-            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "device_type_id", "name");
+                                 select new {  Id = c.device_type_id, Value = c.name };
+            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
             return View();
         }
 

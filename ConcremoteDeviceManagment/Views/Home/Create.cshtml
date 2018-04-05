@@ -18,8 +18,8 @@
         <div class="form-group">
             @Html.Label("Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.device_type_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer iets", new { @class = "form-control" })
-                @*@Html.DropDownListFor(m => m.Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, "Selecteer een Artikel", new { @class = "form-control" })*@
+                @*@Html.DropDownListFor(model => model.device_type_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer iets", new { @class = "form-control" })*@
+                @Html.DropDownListFor(m => m.device_type_id, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer een Artikel", new { @class = "form-control" })
 
             </div>
         </div>
