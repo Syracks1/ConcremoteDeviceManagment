@@ -18,18 +18,26 @@
     </div>
 }
 
-<div class="form-group">
+@*<div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <form method="get" action="DeviceSteps">
             <input type="text" name="createAmount" placeholder="Amount" class="form-control" /><br /><br />
-            <input type="submit" value="Submit" class="btn btn-default"/>
+            <input type="submit" value="Submit" class="btn btn-default"/>*@
             @*<button type="submit" value="Submit" onclick="location.href='@Url.Action("DeviceSteps", "DeviceConfig")';return false; " class="btn btn-primary">Submit</button>*@
-        </form>
+        @**</form>*@
         @*<button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>*@
         @*<input type="submit" value="Create" class="btn btn-default" />*@
-    </div>
+    @*</div>
     @Html.DisplayFor(model => model.DeviceType.name)<br />
-</div>
+</div>*@
+
+@model CommentViewModel
+
+@using(Html.BeginUmbracoForm("CreateComment", "BlogPostSurface"))
+{
+	@Html.EditorFor(x => Model)
+	<input type="submit"/>
+}
 
 
 <div>
