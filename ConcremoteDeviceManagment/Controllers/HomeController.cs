@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    [RequireHttps]
+    [HandleError]
     public class HomeController : Controller
     {
         //call in database connection
