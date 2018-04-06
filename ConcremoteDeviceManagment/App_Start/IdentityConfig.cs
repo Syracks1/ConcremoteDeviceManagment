@@ -21,51 +21,51 @@ namespace ConcremoteDeviceManagment
 {
     
     //Sendgrid account is under view, Email might delay
-   public class EmailService : IIdentityMessageService
-   {
-      public async Task SendAsync(IdentityMessage message)
-      {
-         await configSendGridasync(message);
-      }
+   //public class EmailService : IIdentityMessageService
+   //{
+   //   public async Task SendAsync(IdentityMessage message)
+   //   {
+   //      await configSendGridasync(message);
+   //   }
         
-      // Use NuGet to install SendGrid (Basic C# client lib) 
-      private async Task configSendGridasync(IdentityMessage message)
-      {
-         var myMessage = new SendGridMessage();
-         myMessage.AddTo(message.Destination);
-         myMessage.From = new System.Net.Mail.MailAddress(
-                             "roland.huijskes@planet.nl", "Roland H.");
-         myMessage.Subject = message.Subject;
-         myMessage.Text = message.Body;
-         myMessage.Html = message.Body;
+   //   // Use NuGet to install SendGrid (Basic C# client lib) 
+   //   private async Task configSendGridasync(IdentityMessage message)
+   //   {
+   //      var myMessage = new SendGridMessage();
+   //      myMessage.AddTo(message.Destination);
+   //      myMessage.From = new System.Net.Mail.MailAddress(
+   //                          "roland.huijskes@planet.nl", "Roland H.");
+   //      myMessage.Subject = message.Subject;
+   //      myMessage.Text = message.Body;
+   //      myMessage.Html = message.Body;
 
-         var credentials = new NetworkCredential(
-                    ConfigurationManager.AppSettings["mailAccount"],
-                    ConfigurationManager.AppSettings["mailPassword"]
-                    );
+   //      var credentials = new NetworkCredential(
+   //                 ConfigurationManager.AppSettings["mailAccount"],
+   //                 ConfigurationManager.AppSettings["mailPassword"]
+   //                 );
 
-         // Create a Web transport for sending email.
-         var transportWeb = new Web(credentials);
+   //      // Create a Web transport for sending email.
+   //      var transportWeb = new Web(credentials);
 
-         try
-         {
-            // Send the email.
-            if (transportWeb != null)
-            {
-               await transportWeb.DeliverAsync(myMessage);
-            }
-            else
-            {
-               Trace.TraceError("Failed to create Web transport.");
-               await Task.FromResult(0);
-            }
-         }
-         catch (Exception ex)
-         {
-            Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
-         }
-      }
-   }
+   //      try
+   //      {
+   //         // Send the email.
+   //         if (transportWeb != null)
+   //         {
+   //            await transportWeb.DeliverAsync(myMessage);
+   //         }
+   //         else
+   //         {
+   //            Trace.TraceError("Failed to create Web transport.");
+   //            await Task.FromResult(0);
+   //         }
+   //      }
+   //      catch (Exception ex)
+   //      {
+   //         Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+   //      }
+   //   }
+   //}
 
 
    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
@@ -112,7 +112,7 @@ namespace ConcremoteDeviceManagment
             Subject = "Security Code",
             BodyFormat = "Your security code is {0}"
          });
-         manager.EmailService = new EmailService();
+        // manager.EmailService = new EmailService();
         // manager.SmsService = new SmsService();
          var dataProtectionProvider = options.DataProtectionProvider;
          if (dataProtectionProvider != null)
