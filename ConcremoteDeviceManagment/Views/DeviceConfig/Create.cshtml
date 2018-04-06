@@ -31,9 +31,9 @@
     @Html.DisplayFor(model => model.DeviceType.name)<br />
 </div>*@
 
-@using(Html.BeginForm("CreateComment", "BlogPostSurface"))
+@using(Html.BeginForm("DeviceSteps", "DeviceConfig"))
 {
-	@Html.EditorFor(model => Model.Active)
+	@Html.EditorFor(model => model.Amount)
 	<input type="submit"/>
 }
 
