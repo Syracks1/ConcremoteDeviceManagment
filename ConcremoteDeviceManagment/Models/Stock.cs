@@ -105,6 +105,7 @@ namespace ConcremoteDeviceManagment.Models
         public bool Active { get; set; }
         public int VersionNr { get; set; }
         public IEnumerable<SelectListItem> DeviceList { get; set; }
+        public int Amount { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
