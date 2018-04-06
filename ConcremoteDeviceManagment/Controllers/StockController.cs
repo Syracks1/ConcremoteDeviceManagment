@@ -130,7 +130,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + "" + " Deleted Successfully.";
+                TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
 
                 return RedirectToAction("Index");
             }
@@ -171,7 +171,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article Edited Successfully";
+                TempData["AlertMessage"] = "Article " + stock.Price_id + " Edited Successfully";
                 return RedirectToAction("Index");
             }
 

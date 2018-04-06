@@ -100,16 +100,15 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         [Required]
         public int Device_config_id { get; set; }
-        [Required]
         public int device_type_id { get; set; }
         public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
-
+        public IEnumerable<SelectListItem> DeviceList { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
-        [ForeignKey("device_type_id")]
+        //[ForeignKey("device_type_id")]
         public virtual DeviceType DeviceType { get; set; }
     }
 
@@ -178,7 +177,7 @@ namespace ConcremoteDeviceManagment.Models
     {
         [Key]
         [Column(Order = 0)]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [Key]
@@ -193,7 +192,6 @@ namespace ConcremoteDeviceManagment.Models
         [Required(ErrorMessage = "Voer een aantal in")]
         public decimal amount { get; set; }
 
-        //public int Device_amount_fck_it { get; set; }
         [Required(ErrorMessage = "Voer een bouwvolgorde in")]
         public int assembly_order { get; set; }
 

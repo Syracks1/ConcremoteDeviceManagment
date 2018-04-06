@@ -369,16 +369,18 @@ namespace ConcremoteDeviceManagment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
+        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,Id,Email,Username,Name")] AspNetUserRoles aspNetUserRoles, AspNetUsers aspNetUsers)
         {
             //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
             //ManageMessageId? message;
 
             if (ModelState.IsValid)
             {
+                db.Entry(aspNetUsers).State = EntityState.Modified;
+             //   db.Entry(aspNetRoles).State = EntityState.Unchanged;
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "User " + aspNetUserRoles.UserId + " has Role " + aspNetUserRoles.RoleId;
+                TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully " ;
                 return RedirectToAction("ManageAccounts");
             }
             return View(aspNetUserRoles);
