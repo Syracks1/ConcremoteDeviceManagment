@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Error";
 }
-
+@if (TempData["SuccesMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
+}
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 <h2 class="text-danger">Try again</h2>

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-    //[RequireHttps]
+  //  [RequireHttps]
     [HandleError]
     [Authorize]
     public class AccountController : Controller
@@ -104,8 +104,11 @@ namespace ConcremoteDeviceManagment.Controllers
 
                     // Uncomment to debug locally  
                     // ViewBag.Link = callbackUrl;
-                    ViewBag.errorMessage = "You must have a confirmed email to log on. "
+                    //ViewBag.errorMessage = "You must have a confirmed email to log on. "
+                    //                     + "The confirmation token has been resent to your email account.";
+                    TempData["errorMessage"] = "You must have a confirmed email to log on. "
                                          + "The confirmation token has been resent to your email account.";
+
                     return View("Error");
                 }
             }
@@ -202,6 +205,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
+                    result = UserManager.AddToRole(user.Id, "StandardUser");
                 {
                     //  Comment the following line to prevent log in until the user is confirmed.
                     //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -220,7 +224,7 @@ namespace ConcremoteDeviceManagment.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-    
+
 
         //
         // GET: /Account/ConfirmEmail
