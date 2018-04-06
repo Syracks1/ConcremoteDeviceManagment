@@ -31,11 +31,9 @@
     @Html.DisplayFor(model => model.DeviceType.name)<br />
 </div>*@
 
-@model CommentViewModel
-
-@using(Html.BeginUmbracoForm("CreateComment", "BlogPostSurface"))
+@using(Html.BeginForm("CreateComment", "BlogPostSurface"))
 {
-	@Html.EditorFor(x => Model)
+	@Html.EditorFor(model => Model.Active)
 	<input type="submit"/>
 }
 
