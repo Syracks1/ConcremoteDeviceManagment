@@ -32,26 +32,33 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Create()
+        public ActionResult Create( )
         {
+            DeviceConfig model = new DeviceConfig
+            {
+                DeviceList = new SelectList(db.DeviceType, "device_type_id", "name")
+            };
             //dropdownlist for Device
-            var SelectedDevice = from c in db.DeviceType
-                                 orderby c.device_type_id
-                                 select new {  Id = c.device_type_id, Value = c.name };
-            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
-            return View();
+            //var SelectedDevice = from c in db.DeviceType
+            //                     orderby c.device_type_id
+            //                     select new { Id = c.device_type_id, Value = c.name };
+            //ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
+            model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
+            return View(model);
         }
 
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig)
+        public ActionResult Create(DeviceConfig model,[Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
         {
-            //check if modelstate is valid
-            if (ModelState.IsValid)
+            model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
+            
+                //check if modelstate is valid
+                if (ModelState.IsValid)
+                //model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
             {
-
                 //if modelstate is valid, try this
                 try
                 {
@@ -60,10 +67,11 @@ namespace ConcremoteDeviceManagment.Controllers
                     db.DeviceConfig.Add(deviceConfig).Active = true;
 
                     //Add data to DeviceConfig table
-                    //db.DeviceConfig.Add(deviceConfig);
-                    //db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
-                    //db.Device_Pricelist.Add(device_Pricelist).amount = 1;
-                    //db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
+                    //dummy data to get Edit working
+                    db.DeviceConfig.Add(deviceConfig);
+                    db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
+                    db.Device_Pricelist.Add(device_Pricelist).amount = 1;
+                    db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
@@ -127,7 +135,7 @@ namespace ConcremoteDeviceManagment.Controllers
                         foreach (var item in Device_Pricelist)
                         {
                             
-                            db.Entry(item).State = EntityState.Added;
+                            db.Entry(item).State = EntityState.Detached;
                         }
                     }
                     
