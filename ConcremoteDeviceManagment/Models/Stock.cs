@@ -104,12 +104,10 @@ namespace ConcremoteDeviceManagment.Models
         public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
-        public IEnumerable<SelectListItem> DeviceList { get; set; }
-        public int Amount { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
-        //[ForeignKey("device_type_id")]
+        [ForeignKey("device_type_id")]
         public virtual DeviceType DeviceType { get; set; }
     }
 
@@ -302,11 +300,11 @@ namespace ConcremoteDeviceManagment.Models
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        [DataType(DataType.Date)]
+ //       [DataType(DataType.Date)]
         public DateTime? LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
-        public string Username { get; set; }
+        //public string Username { get; set; }
     }
 
     [Table("AspNetUserRoles")]

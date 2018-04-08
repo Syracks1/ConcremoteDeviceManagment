@@ -20,7 +20,7 @@ using System.Diagnostics;
 namespace ConcremoteDeviceManagment
 {
 
-    //Sendgrid account is under view, Email might delay
+    //Sendgrid is operational, don't store password data in web.config
     public class EmailService : IIdentityMessageService
     {
         public async Task SendAsync(IdentityMessage message)
@@ -86,20 +86,23 @@ namespace ConcremoteDeviceManagment
                 RequireUniqueEmail = true
             };
 
-            // Configure validation logic for passwords
-            //manager.PasswordValidator = new PasswordValidator
-            //{
-            //    RequiredLength = 6,
-            //    RequireNonLetterOrDigit = true,
-            //    RequireDigit = true,
-            //    RequireLowercase = true,
-            //    RequireUppercase = true,
-            //};
+            //Configure validation logic for passwords
 
-            // Configure user lockout defaults
+           manager.PasswordValidator = new PasswordValidator
+           {
+               RequiredLength = 6,
+               RequireNonLetterOrDigit = true,
+               RequireDigit = true,
+               RequireLowercase = true,
+               RequireUppercase = true,
+           };
+
+           // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            //Time user is locked out
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            //Max failed attempts before lockout
+            manager.MaxFailedAccessAttemptsBeforeLockout = 3;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.

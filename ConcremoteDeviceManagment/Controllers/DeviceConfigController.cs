@@ -98,7 +98,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Create()
         {
-            //int Device_amount = 0;
+            int Device_amount = 0;
            // return RedirectToAction("DeviceSteps");
             return View();
         }
