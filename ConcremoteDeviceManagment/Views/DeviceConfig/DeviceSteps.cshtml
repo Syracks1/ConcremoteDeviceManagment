@@ -13,31 +13,7 @@
 
     @ViewBag.value1
 
-    @section Scripts {
-        <script>
-    $(document).ready(function () {
-        $("#SelectedDevice").change(function (e) {
-            var DeviceType = { "Device": $(this).val() };
-            $.ajax({
-                type: 'get',
-                url: '@Url.Action("CreateDevice")',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'html',
-                data: { "Device": $(this).val() },
-                success: function (result) {
 
-                    $("#target").html(result);
-                },
-                error: function (ex) {
-                    alert("Something is wrong");
-                }
-            });
-
-        });
-
-    });
-        </script>
-    }
 
     @*<dl class="dl-horizontal">
             <dt>
