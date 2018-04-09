@@ -98,8 +98,9 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult Create()
         {
-            int Device_amount = 0;
-           // return RedirectToAction("DeviceSteps");
+            // int Amount = 0;
+            // return RedirectToAction("DeviceSteps");
+            //ViewBag.Amount = 0;
             return View();
         }
 
@@ -150,10 +151,21 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceConfig);
         }
 
+        [HttpPost]
         public ActionResult DeviceSteps()
         {
+            //var value1 = Request["createAmount"];
+            ViewBag.value1 = Request["createAmount"];
             return View();
         }
+
+        //[HttpPost]
+        //public ActionResult DeviceSteps()
+        //{
+        //    var value1 = Request["SimpleProp1"];
+        //    var value2 = Request["SimpleProp2"];
+        //    var value3 = Request["ComplexProp1.SimpleProp1"];
+        //}
 
         //[HttpGet]
         //public ActionResult Index(string createAmount)

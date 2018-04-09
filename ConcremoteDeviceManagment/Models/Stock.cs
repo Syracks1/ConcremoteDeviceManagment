@@ -365,7 +365,7 @@ namespace ConcremoteDeviceManagment.Models
     //    [Display(Name = "Enter a comment")]
     //    public string Comment { get; set; }
     //}
-
+    
     public class PO3DbContext : DbContext
     {
         public DbSet<Pricelist2> Pricelist { get; set; }
