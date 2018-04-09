@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -202,23 +203,33 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                    result = UserManager.AddToRole(user.Id, "StandardUser");
+                try
                 {
-                    //  Comment the following line to prevent log in until the user is confirmed.
-                    //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                       result = UserManager.AddToRole(user.Id, "StandardUser");
+                    {
+                        //  Comment the following line to prevent log in until the user is confirmed.
+                        //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                        string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                    + "before you can log in.";
+                        ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                        + "before you can log in.";
 
-                    return View("Info");
-                    //return RedirectToAction("Index", "Home");
+                        return View("Info");
+                        //return RedirectToAction("Index", "Home");
+                    }
                 }
-               // AddErrors(result);
+                catch (Exception ex)
+                {
+                    //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+
+                }
+
+                // AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
