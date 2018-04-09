@@ -36,17 +36,17 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
 
-            var SelectedDevice = from d in db.DeviceType
-                                          //    where d.Price_id == d.Price_id
-                                      orderby d.device_type_id
-                                      select new { Id = d.device_type_id, Value = d.name };
+            //var DeviceType = from d in db.DeviceType
+            //                              //    where d.Price_id == d.Price_id
+            //                          orderby d.device_type_id
+            //                          select new { Id = d.device_type_id, Value = d.name };
 
             //dropdownlist for Device
             //var SelectedDevice = from c in db.DeviceType
             //                     orderby c.device_type_id
             //                     select new { Id = c.device_type_id, Value = c.name };
             //ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
-            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
+            ViewBag.SelectedDevice = new SelectList(db.DeviceType.Distinct(), "device_type_id", "name");
             return View();
         }
 
@@ -54,10 +54,8 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DeviceConfig model,[Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
-        {
-       //     model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
-            
+        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
+        {            
                 //check if modelstate is valid
                 if (ModelState.IsValid)
                 //model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
@@ -103,7 +101,7 @@ namespace ConcremoteDeviceManagment.Controllers
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
             //create new SelectList in Device_Pricelist
-            var SelectedCMI = (from d in db.pricelist
+            var SelectedCMI = (from d in db.pricelist 
                                select new { d.Price_id, Value = d.bas_art_nr }).Distinct();
 
             //call viewbag based on SelectedCMI query

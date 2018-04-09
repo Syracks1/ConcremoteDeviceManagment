@@ -39,20 +39,23 @@
             <td>
                 € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr)
+            </td>
         </tr>
     }
 </table>
 <table>
     <tr>
         <th>
-            <h3>@Html.DisplayName("Totaal Bedrag: ")</h3>
+            <h3>@Html.DisplayName("Totaal Bedrag: ")€ @decimal.Round(ViewBag.Total, 2, MidpointRounding.AwayFromZero)</h3> 
         </th>
+        <td>
+           
+        </td>
     </tr>
     <tr>
-        <td>
-            € @decimal.Round(ViewBag.Total, 2, MidpointRounding.AwayFromZero)
-            @decimal.Round(ViewBag.Max)
-        </td>
+       
     </tr>
 </table>
 <div>

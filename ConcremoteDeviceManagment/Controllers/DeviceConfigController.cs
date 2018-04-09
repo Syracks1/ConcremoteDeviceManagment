@@ -49,15 +49,15 @@ namespace ConcremoteDeviceManagment.Controllers
             if (!ModelState.IsValid)
             {
                 //Perhaps you might want to add a custom message to the ViewBag
-                //which will be available on the View when it renders (since we're not 
-                //redirecting)	    	
+                //which will be available on the View when it renders (since we're not
+                //redirecting)
                 return View("DeviceSteps");
             }
 
             //if validation passes perform whatever logic
             //In this sample we keep it empty, but try setting a breakpoint to see what is posted here
 
-            //Perhaps you might want to store some data in TempData which will be available 
+            //Perhaps you might want to store some data in TempData which will be available
             //in the View after the redirect below. An example might be to show a custom 'submit
             //successful' message on the View, for example:
             TempData.Add("CustomMessage", "Your form was successfully submitted at " + DateTime.Now);
@@ -72,10 +72,9 @@ namespace ConcremoteDeviceManagment.Controllers
         public PartialViewResult CreateDevice(string Device)
         {
             {
-                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.DeviceConfig.DeviceType.name == Device && c.DeviceConfig.Active == true).OrderBy(c => c.assembly_order));
-            //    ViewBag.Max = ci.Max(c => c.DeviceConfig.VersionNr);
+                
+                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.DeviceType.name == Device).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
                 ViewBag.Total = ci.Sum(x => x.amount * x.Pricelist.Price);
-
                 return PartialView("CreateDevice", ci);
             }
         }
@@ -94,16 +93,14 @@ namespace ConcremoteDeviceManagment.Controllers
         //    }
         //    return View(deviceConfig);
         //}
-        // GET: DeviceConfig2/Create
+        // GET: DeviceConfig/Create
 
         public ActionResult Create()
         {
             int Device_amount = 0;
-           // return RedirectToAction("DeviceSteps");
+            // return RedirectToAction("DeviceSteps");
             return View();
         }
-
-
 
         // POST: DeviceConfig2/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
@@ -160,7 +157,6 @@ namespace ConcremoteDeviceManagment.Controllers
         //{
         //    return Content("Hello {createAmount}");
         //}
-
 
         protected override void Dispose(bool disposing)
         {

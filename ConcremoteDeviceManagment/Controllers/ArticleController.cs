@@ -1,4 +1,5 @@
 ﻿using ConcremoteDeviceManagment.Models;
+using Microsoft.Ajax.Utilities;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -14,14 +15,20 @@ namespace ConcremoteDeviceManagment.Controllers
         private BasDbContext db = new BasDbContext();
 
         // GET: Device
-        public ActionResult Index(string sortOrder, string PriceCMI, FormCollection formCollection)
+        public ActionResult Index(string sortOrder, string PriceCMI, string SelectedLeverancier)
         {
             //dropdown for "Leverancier"
-            var SelectedLeverancier = (from d in db.pricelist
-                                       select new { Id = d.Leverancier, Value = d.Leverancier }).Distinct();
-
-            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
-
+            //var SelectedLeverancier = (from r in db.pricelist
+            //                           select r.Leverancier).Distinct();
+            //var SelectedLeverancier = from r in db.pricelist
+            //                          orderby r.Leverancier
+            //                          select r.Leverancier;
+            // ViewBag.SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier));
+            //var SelectedLeverancier = (from d in db.pricelist
+            //                               //where d.Price_id == d.Price_id
+            //                           orderby d.Price_id
+            //                           select new { Id = d.Price_id, Value = d.Leverancier });
+            ViewBag.SelectedLeverancier = new SelectList(db.pricelist.Select(d => d.Leverancier).Distinct());
             //sort order different parameters
             ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
@@ -87,7 +94,12 @@ namespace ConcremoteDeviceManagment.Controllers
 
             foreach (var item in pricelist)
             {
-                //TODO: add filter for leverancier, use dropdownlist
+                if (!string.IsNullOrEmpty(SelectedLeverancier))
+                {
+                    //filter item in pricelist where Dropdown contains Leverancier
+
+                    pricelist = pricelist.Where(s => s.Leverancier.Contains(SelectedLeverancier));
+                }
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     //filter item in pricelist where textbox contains CMI

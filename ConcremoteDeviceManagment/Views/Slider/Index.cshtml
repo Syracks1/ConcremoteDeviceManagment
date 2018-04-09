@@ -24,7 +24,7 @@
         <ul class="bxslider" data-call="bxslider" data-options="slideMargin:0, autoReload:true">
             @foreach (var image in Model)
             {
-            <li><img src="@Url.Content(image.ImagePath)" />ImagePath</li>
+            <li><img src="@Url.Content(image.ImagePath)" />@image.ImagePath</li>
             }
         </ul>
     </div>

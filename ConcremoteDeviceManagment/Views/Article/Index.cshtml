@@ -8,14 +8,12 @@
 <h2>Prijslijst</h2>
 @using (Html.BeginForm("Index", "Article", FormMethod.Get))
 {
-    <p>
-        <b>CMI: </b>@Html.TextBox("PriceCMI")
-        <input type="submit" value="Zoek CMI" class="btn" />
-        @*<b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", new SelectList(ViewBag.SelectedLeverancier), "Selecteer iets")*@
-        @*<b>Leverancier: </b>@Html.DropDownList("SelectedLeverancier1")*@
-        @*  <input type="submit" value="Zoek" class="btn" />*@
-        <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
-    </p>
+<p>
+    <b>CMI: </b>@Html.TextBox("PriceCMI")
+    <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", null, "Kies Leverancier")
+    <input type="submit" value="Zoek CMI" class="btn" />
+    <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
+</p>
 }
 @if (TempData["SuccesMessage"] != null)
 {
@@ -47,9 +45,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Price_id)
-                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.bas_art_nr)
             </td>
