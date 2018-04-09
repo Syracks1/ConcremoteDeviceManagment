@@ -29,45 +29,6 @@ namespace ConcremoteDeviceManagment.Controllers
             return View();
         }
 
-        public class CommentViewModel
-        {
-            [Required]
-            public string Name { get; set; }
-
-            [Required]
-            public string Email { get; set; }
-
-            [Required]
-            [Display(Name = "Enter a comment")]
-            public string Comment { get; set; }
-        }
-
-        [HttpPost]
-        public ActionResult CreateComment(CommentViewModel model)
-        {
-            //model not valid, do not save, but return current Umbraco page
-            if (!ModelState.IsValid)
-            {
-                //Perhaps you might want to add a custom message to the ViewBag
-                //which will be available on the View when it renders (since we're not 
-                //redirecting)	    	
-                return View("DeviceSteps");
-            }
-
-            //if validation passes perform whatever logic
-            //In this sample we keep it empty, but try setting a breakpoint to see what is posted here
-
-            //Perhaps you might want to store some data in TempData which will be available 
-            //in the View after the redirect below. An example might be to show a custom 'submit
-            //successful' message on the View, for example:
-            TempData.Add("CustomMessage", "Your form was successfully submitted at " + DateTime.Now);
-
-            //redirect to current page to clear the form
-            return View("Create");
-
-            //Or redirect to specific page
-            //return RedirectToUmbracoPage(12345)
-        }
 
         public PartialViewResult CreateDevice(string Device)
         {
@@ -158,22 +119,7 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.value1 = Request["createAmount"];
             return View();
         }
-
-        //[HttpPost]
-        //public ActionResult DeviceSteps()
-        //{
-        //    var value1 = Request["SimpleProp1"];
-        //    var value2 = Request["SimpleProp2"];
-        //    var value3 = Request["ComplexProp1.SimpleProp1"];
-        //}
-
-        //[HttpGet]
-        //public ActionResult Index(string createAmount)
-        //{
-        //    return Content("Hello {createAmount}");
-        //}
-
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
