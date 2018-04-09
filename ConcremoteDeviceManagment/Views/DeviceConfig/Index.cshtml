@@ -11,9 +11,7 @@
     <fieldset>
         <legend>Device Create</legend>
         <div>
-            @*@Html.DropDownList("SelectedDevice", null, new { @class = "form-control" })*@
             @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })
-            @*@Html.DropDownListFor(model => model.DeviceType.name, (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Selecteer een Artikel", new { @class = "form-control" })*@
             <br />
         </div>
         <div id="target">

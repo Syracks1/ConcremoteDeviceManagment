@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -100,10 +98,12 @@ namespace ConcremoteDeviceManagment.Models
         [Key]
         [Required]
         public int Device_config_id { get; set; }
+
         public int device_type_id { get; set; }
         public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
@@ -165,6 +165,7 @@ namespace ConcremoteDeviceManagment.Models
 
         // public int device_type_id { get; set; }
         public string ImagePath { get; set; }
+
         public DateTime DateAdded { get; set; }
         //[ForeignKey("device_type_id")]
 
@@ -300,8 +301,10 @@ namespace ConcremoteDeviceManagment.Models
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
- //       [DataType(DataType.Date)]
+
+        //       [DataType(DataType.Date)]
         public DateTime? LockoutEndDateUtc { get; set; }
+
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         //public string Username { get; set; }
@@ -353,19 +356,6 @@ namespace ConcremoteDeviceManagment.Models
         public DbSet<Gallery> gallery { get; set; }
     }
 
-    //public class CommentViewModel
-    //{
-    //    [Required]
-    //    public string Name { get; set; }
-
-    //    [Required]
-    //    public string Email { get; set; }
-
-    //    [Required]
-    //    [Display(Name = "Enter a comment")]
-    //    public string Comment { get; set; }
-    //}
-    
     public class PO3DbContext : DbContext
     {
         public DbSet<Pricelist2> Pricelist { get; set; }
