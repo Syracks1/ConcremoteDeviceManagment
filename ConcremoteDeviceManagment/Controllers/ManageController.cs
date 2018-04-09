@@ -109,6 +109,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //Account query for data on page
             var Account = from d in db.AspNetUserRoles
+                         // join c in db.AspNetUserRoles on d.Id equals c.UserId
                           orderby d.RoleId
                           select d;
 

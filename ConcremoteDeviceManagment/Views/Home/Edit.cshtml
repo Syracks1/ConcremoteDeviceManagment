@@ -47,36 +47,38 @@
             int j = 0;
             foreach (var item in Model)
             {
-                <tr>
-                    @Html.HiddenFor(a => a[j].id)
-                    @Html.HiddenFor(a => a[j].Device_config_id)
-@*                    @Html.HiddenFor(a => a[j].Price_id)*@
+        <tr>
+            @*       @Html.HiddenFor(a => a[j].id)*@
+            @Html.HiddenFor(a => a[j].Device_config_id)
+            @Html.HiddenFor(a => a[j].DeviceConfig.device_type_id)
 
-                    <td class="table-row">
-                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
-                    </td>
-                    <td class="table-row">
-                            @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
-                        </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
-                    </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
-                    </td>
-                    @*<td class="table-row">
-                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>*@
-                    <td>
-                        @if (j > 0)
-                        {
-                            <a href="#" id="remove" class="btn btn-danger">Remove</a>
-                        }
-                    </td>
-                </tr>
+            @*                    @Html.HiddenFor(a => a[j].Price_id)*@
+
+            <td class="table-row">
+                @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
+            </td>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
+            </td>
+            @*<td class="table-row">
+            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+        </td>*@
+            <td>
+                @if (j > 0)
+        {
+            <a href="#" id="remove" class="btn btn-danger">Remove</a>
+}
+            </td>
+        </tr>
                 j++;
             }
         }
@@ -105,7 +107,8 @@
                 $.each($trNew.find(':input'), function (i, val) {
                     // Replaced Name
                     var oldN = $(this).attr('name');
-                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']', '[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    var idx = parseInt(oldN.substr(1, oldN.indexOf(']')));
+                    var newN = oldN.replace('[' + idx + ']', '[' + (idx + 1) + ']');
                     $(this).attr('name', newN);
                     //Replaced value
                     var type = $(this).attr('type');
@@ -141,5 +144,4 @@
             document.demoForm.submit();
         }
     </script>
-    <script src="~/Scripts/LazyLoading.js"></script>
 }
