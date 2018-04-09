@@ -7,7 +7,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,36 +17,17 @@
     </div>
 }
 
-
-
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <form method="POST" action="DeviceSteps">
             <input type="text" name="createAmount" placeholder="Amount" class="form-control" /><br /><br />
-            <input type="submit" value="Submit" class="btn btn-default"/>
-            @*<button type="submit" value="Submit" onclick="location.href='@Url.Action("DeviceSteps", "DeviceConfig")';return false; " class="btn btn-primary">Submit</button>*@
-            </form>
-        <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
-        @*<input type="submit" value="Create" class="btn btn-default" />*@
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </form>
     </div>
-        @Html.DisplayFor(model => model.DeviceType.name)<br />
+    @Html.DisplayFor(model => model.DeviceType.name)<br />
 </div>
 
-
-
-@*@using (Html.BeginForm("DeviceSteps", "DeviceConfig"))
-{
-    @Html.EditorFor(@ViewBag.Amount, new { htmlAttributes = new { @class = "form-control" } })
-    <br />
-    <br />
-    <input type="submit" value="Continue" class="btn btn-primary" />
-    <br />
-    <br />
-}*@
-
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
     <button onclick="location.href='@Url.Action("Index", "DeviceConfig")';return false; " class="btn btn-primary">Back to list</button>
 </div>
 
