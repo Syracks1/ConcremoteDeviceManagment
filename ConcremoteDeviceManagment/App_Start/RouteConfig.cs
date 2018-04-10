@@ -18,8 +18,8 @@ namespace ConcremoteDeviceManagment
             url: "{controller}/{action}/{id}",
             defaults: new
             {
-                controller = "Account",
-                action = "Login",
+                controller = "Stock",
+                action = "Index",
                 id = UrlParameter.Optional
             }
             );
