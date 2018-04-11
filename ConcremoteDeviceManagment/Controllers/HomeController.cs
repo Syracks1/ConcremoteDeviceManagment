@@ -3,7 +3,6 @@ using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -35,18 +34,13 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Assembly, Admin")]
         public ActionResult Create()
         {
-
-            //var DeviceType = from d in db.DeviceType
-            //                              //    where d.Price_id == d.Price_id
-            //                          orderby d.device_type_id
-            //                          select new { Id = d.device_type_id, Value = d.name };
-
             //dropdownlist for Device
-            //var SelectedDevice = from c in db.DeviceType
-            //                     orderby c.device_type_id
-            //                     select new { Id = c.device_type_id, Value = c.name };
-            //ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
-            ViewBag.SelectedDevice = new SelectList(db.DeviceType.Distinct(), "device_type_id", "name");
+
+            var SelectedDevice = from d in db.DeviceType
+                                     //where d.Price_id == d.Price_id
+                                 orderby d.device_type_id
+                                 select new { Id = d.device_type_id, Value = d.name };
+            ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
             return View();
         }
 
@@ -55,14 +49,14 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
-        {            
-                //check if modelstate is valid
-                if (ModelState.IsValid)
-                //model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
+        {
+            //check if modelstate is valid
+            if (ModelState.IsValid)
             {
                 //if modelstate is valid, try this
                 try
                 {
+                    db.DeviceConfig.Add(deviceConfig).device_type = null;
                     db.DeviceConfig.Add(deviceConfig).Date = DateTime.Now;
                     db.DeviceConfig.Add(deviceConfig).VersionNr = 0;
                     db.DeviceConfig.Add(deviceConfig).Active = true;
@@ -76,13 +70,14 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
-                    TempData["SuccesMessage"] = "Config for " + deviceConfig.DeviceType.name + " Added Successfully.";
-                    return RedirectToAction("Edit");
+                    TempData["SuccesMessage"] = "Config Added Successfully.";
+                    return RedirectToAction("Index");
                 }
                 //if try failed, catch tempData
-                catch
+                catch (Exception ex)
                 {
                     TempData["AlertMessage"] = "Creating Config went wrong, " + "please try again";
+                    Trace.TraceError(ex.Message + " Something went wrong.");
                 }
             }
             else
@@ -100,13 +95,22 @@ namespace ConcremoteDeviceManagment.Controllers
             //create new list
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            //create new SelectList in Device_Pricelist
-            var SelectedCMI = (from d in db.pricelist 
-                               select new { d.Price_id, Value = d.bas_art_nr }).Distinct();
+            //create new SelectList in pricelist
+            //based on Price_id on values in List<Device_Pricelist>
+            //I know this is wrong and not working
 
+            foreach (var item in (db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id))) 
+            {
+                var SelectedCMI = from pl in db.pricelist
+                                 where pl.Price_id == pl.Price_id     //join dl in Device_Pricelist o
+                                  orderby pl.Price_id
+                                  select new SelectListItem { Value = pl.Price_id.ToString(), Text = pl.bas_art_nr };
+                ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
+            }
             //call viewbag based on SelectedCMI query
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Price_id", "Value");
-
+            //  ViewBag.SelectedCMI = new SelectList(SelectedCMI);
+           // ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
+            
             return View(Device_Pricelist);
         }
 
@@ -114,13 +118,12 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Pricelist)
         {
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     var deviceConfig = db.DeviceConfig.Find(Device_Pricelist.First().Device_config_id);
-                //    deviceConfig.Device_config_id++;
+                    //    deviceConfig.Device_config_id++;
                     //deviceConfig.device_type_id = 13;
                     deviceConfig.Active = true;
                     deviceConfig.VersionNr++;
@@ -144,12 +147,11 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
                     Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
-
                 }
-
             }
             return View();
         }
+
         [Authorize(Roles = "Assembly, Admin")]
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
@@ -171,12 +173,26 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            db.DeviceConfig.Remove(deviceConfig);
-         //   db.Device_Pricelist.Remove(Device_config_id);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                int q = Convert.ToInt32(id);
+                var deviceConfig = from dc in db.DeviceConfig
+                                   join pl in db.Device_Pricelist
+                                   on dc.Device_config_id equals pl.Device_config_id
+                                   where q == dc.Device_config_id
+                                   select dc;
+                //db.SaveChanges();
+                // db.DeviceConfig.Remove();
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+            }
+            return View("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

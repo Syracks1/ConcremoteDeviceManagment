@@ -109,7 +109,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //Account query for data on page
             var Account = from d in db.AspNetUserRoles
-                         // join c in db.AspNetUserRoles on d.Id equals c.UserId
+                              // join c in db.AspNetUserRoles on d.Id equals c.UserId
                           orderby d.RoleId
                           select d;
 
@@ -378,10 +378,10 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(aspNetUsers).State = EntityState.Modified;
-             //   db.Entry(aspNetRoles).State = EntityState.Unchanged;
+                //   db.Entry(aspNetRoles).State = EntityState.Unchanged;
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully " ;
+                TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully ";
                 return RedirectToAction("ManageAccounts");
             }
             return View(aspNetUserRoles);

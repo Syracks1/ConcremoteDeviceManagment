@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using ConcremoteDeviceManagment.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ConcremoteDeviceManagment.Models;
 using SendGrid;
-using System.Net;
+using System;
 using System.Configuration;
 using System.Diagnostics;
-
+using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ConcremoteDeviceManagment
 {
-
     //Sendgrid is operational, don't store password data in web.config
     public class EmailService : IIdentityMessageService
     {
@@ -28,7 +22,7 @@ namespace ConcremoteDeviceManagment
             await configSendGridasync(message);
         }
 
-        // Use NuGet to install SendGrid (Basic C# client lib) 
+        // Use NuGet to install SendGrid (Basic C# client lib)
         private async Task configSendGridasync(IdentityMessage message)
         {
             var myMessage = new SendGridMessage();
@@ -67,7 +61,6 @@ namespace ConcremoteDeviceManagment
         }
     }
 
-
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -88,16 +81,16 @@ namespace ConcremoteDeviceManagment
 
             //Configure validation logic for passwords
 
-           manager.PasswordValidator = new PasswordValidator
-           {
-               RequiredLength = 6,
-               RequireNonLetterOrDigit = false,
-               RequireDigit = true,
-               RequireLowercase = true,
-               RequireUppercase = true,
-           };
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
+            };
 
-           // Configure user lockout defaults
+            // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             //Time user is locked out
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(10);

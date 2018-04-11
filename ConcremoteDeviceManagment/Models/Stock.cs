@@ -99,7 +99,9 @@ namespace ConcremoteDeviceManagment.Models
         [Required]
         public int Device_config_id { get; set; }
 
+        [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int device_type_id { get; set; }
+
         public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
@@ -176,16 +178,16 @@ namespace ConcremoteDeviceManagment.Models
     public class Device_Pricelist
     {
         [Key]
-        [Column(Order = 0)]
+       // [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+      //  [Key]
+     //   [Column(Order = 1)]
         public int Device_config_id { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+       // [Key]
+       // [Column(Order = 2)]
         [Required(ErrorMessage = "Voer een onderdeel in")]
         public int Price_id { get; set; }
 

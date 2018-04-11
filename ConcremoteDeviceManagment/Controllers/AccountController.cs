@@ -5,14 +5,13 @@ using Microsoft.Owin.Security;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-  //  [RequireHttps]
+    //  [RequireHttps]
     [HandleError]
     [Authorize]
     public class AccountController : Controller
@@ -103,7 +102,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
 
-                    // Uncomment to debug locally  
+                    // Uncomment to debug locally
                     // ViewBag.Link = callbackUrl;
                     //ViewBag.errorMessage = "You must have a confirmed email to log on. "
                     //                     + "The confirmation token has been resent to your email account.";
@@ -121,10 +120,13 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -184,6 +186,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
+
         private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
         {
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
@@ -194,6 +197,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return callbackUrl;
         }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -208,7 +212,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
-                       result = UserManager.AddToRole(user.Id, "StandardUser");
+                        result = UserManager.AddToRole(user.Id, "StandardUser");
                     {
                         //  Comment the following line to prevent log in until the user is confirmed.
                         //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -226,7 +230,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
                     Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
-
                 }
 
                 // AddErrors(result);
@@ -235,7 +238,6 @@ namespace ConcremoteDeviceManagment.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         //
         // GET: /Account/ConfirmEmail

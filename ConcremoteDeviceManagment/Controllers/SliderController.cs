@@ -32,11 +32,10 @@ namespace ConcremoteDeviceManagment.Controllers
         [HttpPost]
         public ActionResult AddImage(HttpPostedFileBase ImagePath)
         {
-     
             if (ImagePath != null)
             {
                 // You can skip this block, because it is only to force the user to upload specific resolution pics
-              //  System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
+                //  System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
                 //if ((img.Width != 800) || (img.Height != 356))
                 //{
                 //    ModelState.AddModelError("", "Image resolution must be 800 x 356 pixels");

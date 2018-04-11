@@ -113,7 +113,6 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //dropdownlist for CMI
             var SelectedCMI = from d in db.pricelist
-                                  //where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
@@ -130,7 +129,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
+             //   TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
 
                 return RedirectToAction("Index");
             }
