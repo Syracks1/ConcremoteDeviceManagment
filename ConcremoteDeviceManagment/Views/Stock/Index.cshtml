@@ -80,20 +80,8 @@
 }
 else
 {
-    //RedirectResult("Login", "Account")
-
-    ViewBag.Title = "Error";
-
-    if (TempData["SuccesMessage"] != null)
-    {
-        <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
-    }
-    <h1 class="text-danger">Home.</h1>
-    <h2 class="text-danger">Apparently, you are not logged in</h2>
-    <h2 class="text-danger">
-        Click here to Login:  <button onclick="location.href='@Url.Action("Login", "Account")';return false;" class="btn btn-primary">Login</button>
-    </h2>
-
+    //Html.Action("Login", "Account");
+    Response.Redirect("~/Account/Login");
 }
 <script type="text/javascript">
     $(function () {
