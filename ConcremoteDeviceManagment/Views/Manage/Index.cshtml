@@ -6,6 +6,7 @@
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
+
 <div>
     <h4>Change your account settings</h4>
     <hr />
@@ -22,15 +23,23 @@
 
             }
         </dd>
-        <dt><br />  
+        <dt>
+            <br />
         </dt>
         <dd>
         </dd>
-        <dt>Manage Accounts</dt>
-        <dd>
-            <p>
-                <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
-            </p>
-        </dd>
+        @if (User.IsInRole("Admin"))
+        {
+            <dt>Manage Accounts</dt>
+            <dd>
+                <p>
+                    <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
+                </p>
+            </dd>
+        }
+        else
+        {
+
+        }
     </dl>
 </div>

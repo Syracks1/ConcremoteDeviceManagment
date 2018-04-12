@@ -56,7 +56,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.DeviceType.Add(deviceType);            
+                db.DeviceType.Add(deviceType);
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device " + deviceType.name + " Added Successfully.";
                 return RedirectToAction("Index");

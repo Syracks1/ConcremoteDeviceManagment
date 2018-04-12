@@ -17,27 +17,38 @@
         <th class="btn-primary">
             @Html.DisplayName("Onderdeel Bedrag")
         </th>
+        <th class="btn-primary">
+            @Html.DisplayName("device")
+        </th>
+        <th class="btn-primary">
+            @Html.DisplayName("versie ")
+        </th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceConfig.DeviceType.name, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceConfig.VersionNr, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+    </tr>
     }
 </table>
 @*<input type="submit" value="Save Device Data" class="btn btn-primary" />*@
-

@@ -129,7 +129,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-             //   TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
+                //   TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
 
                 return RedirectToAction("Index");
             }

@@ -4,69 +4,97 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Inventory</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-@using (Html.BeginForm("Index", "Stock", FormMethod.Get))
+@if (User.IsInRole("Assembly") || User.IsInRole("Admin") || User.IsInRole("StandardUser") || User.IsInRole("BAS employee"))
 {
-    <p>
-        <b>CMI: </b>@Html.Editor("StockCMI")
-        <input type="submit" value="Zoek CMI" class="btn" />
-        <b>Onderdeel:</b> @Html.Editor("searchString")
-        <input type="submit" value="Zoek onderdeel" class="btn" /> |
-
-        <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
-    </p>
-}
-@if (TempData["AlertMessage"] != null)
-{
-    <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
-}
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm }, new { htmlAttributes = new { @class = "form-control" } })
-        </th>
-        <th>
-            @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescriptionSortParm })
-        </th>
-        <th>
-            @Html.ActionLink("Huidige voorraad", "Index", new { sortOrder = ViewBag.CurrentStockSort })
-        </th>
-        <th>
-            @Html.ActionLink("Minimale voorraad", "Index", new { sortOrder = ViewBag.MinStockSort })
-        </th>
-        <th>
-            @Html.ActionLink("Maximale voorraad", "Index", new { sortOrder = ViewBag.MaxStockSort })
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
+    <h2>Inventory</h2>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    using (Html.BeginForm("Index", "Stock", FormMethod.Get))
     {
-        <tr>
-            <td>
-                <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)</i>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pricelist.description)
-            </td>
-            <td>
-                @Convert.ToDecimal(item.Stock_amount).ToString("#,##")
-            </td>
-            <td>
-                @Convert.ToDecimal(item.min_stock).ToString("#,##")
-            </td>
-            <td>
-                @Convert.ToDecimal(item.max_stock).ToString("#,##")
-            </td>
-            <td>
-                <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-                <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>
-                <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
+        <p>
+            <b>CMI: </b>@Html.Editor("StockCMI")
+            <input type="submit" value="Zoek CMI" class="btn" />
+            <b>Onderdeel:</b> @Html.Editor("searchString")
+            <input type="submit" value="Zoek onderdeel" class="btn" /> |
 
+            <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
+        </p>
     }
-</table>
+    if (TempData["AlertMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
+    }
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm }, new { htmlAttributes = new { @class = "form-control" } })
+            </th>
+            <th>
+                @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescriptionSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Huidige voorraad", "Index", new { sortOrder = ViewBag.CurrentStockSort })
+            </th>
+            <th>
+                @Html.ActionLink("Minimale voorraad", "Index", new { sortOrder = ViewBag.MinStockSort })
+            </th>
+            <th>
+                @Html.ActionLink("Maximale voorraad", "Index", new { sortOrder = ViewBag.MaxStockSort })
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr)</i>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pricelist.description)
+                </td>
+                <td>
+                    @Convert.ToDecimal(item.Stock_amount).ToString("#,##")
+                </td>
+                <td>
+                    @Convert.ToDecimal(item.min_stock).ToString("#,##")
+                </td>
+                <td>
+                    @Convert.ToDecimal(item.max_stock).ToString("#,##")
+                </td>
+                @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+                {
+                    <td>
+                        <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
+                        <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>
+                        <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
+                    </td>
+                }
+                else
+                {
+                    <td> </td>
+                }
+            </tr>
+
+        }
+    </table>
+
+}
+else
+{
+    //RedirectResult("Login", "Account")
+
+    ViewBag.Title = "Error";
+
+    if (TempData["SuccesMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["SuccesMessage"]</p>
+    }
+    <h1 class="text-danger">Home.</h1>
+    <h2 class="text-danger">Apparently, you are not logged in</h2>
+    <h2 class="text-danger">
+        Click here to Login:  <button onclick="location.href='@Url.Action("Login", "Account")';return false;" class="btn btn-primary">Login</button>
+    </h2>
+
+}
 <script type="text/javascript">
     $(function () {
         $("#AlertMessage").change(function () {

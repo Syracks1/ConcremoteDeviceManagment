@@ -43,14 +43,14 @@
             int j = 0;
             foreach (var item in Model)
             {
-                <tr>
-                    @Html.HiddenFor(a => a[j].id)
-                    @Html.HiddenFor(a => a[j].Device_config_id)
-                    @Html.HiddenFor(a => a[j].DeviceConfig.device_type_id)
+        <tr>
+            @Html.HiddenFor(a => a[j].id)
+            @Html.HiddenFor(a => a[j].Device_config_id)
+            @Html.HiddenFor(a => a[j].DeviceConfig.device_type_id)
 
-                    <td class="table-row">
-                        @*@{
-            var ItemList = new SelectList(ViewBag.SelectedCMI, "Value", "Text");
+            <td class="table-row">
+                @*@{
+            var ItemList = new SelectList((SelectList)ViewBag.SelectedCMI, "Value", "Text");
             foreach (var Item in ItemList)
             {
                 if (Item.Value == item.Price_id.ToString())
@@ -58,32 +58,34 @@
                     Item.Selected = true;
                 }
             }
-        }*@
-                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })                  @*      @Html.DropDownListFor(a => a[j].Price_id, ItemList, new { @class = "form-control" })*@
-                    </td>
+                }
+                @Html.DropDownListFor(a => a[j].Price_id, ItemList, new { @class = "form-control" })*@
+             @*   @Html.DropDownListFor(a => a[j].Price_id, ViewBag.SelectedCMI,  new { @class = "form-control" })*@
+                @Html.DisplayFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
 
-                    <td class="table-row">
-                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
-                    </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
-                    </td>
-                    <td class="table-row">
-                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
-                    </td>
-                    @*<td class="table-row">
-                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-                        </td>*@
-                    <td>
-                        @if (j > 0)
-                        {
-                            <a href="#" id="remove" class="btn btn-danger">Remove</a>
-                        }
-                    </td>
-                </tr>
+            <td class="table-row">
+                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
+            </td>
+            <td class="table-row">
+                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
+            </td>
+            @*<td class="table-row">
+            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+        </td>*@
+            <td>
+                @if (j >= 0)
+        {
+            <a href="#" id="remove" class="btn btn-danger">Remove</a>
+}   @*refresh counter when item is deleted*@
+            </td>
+        </tr>
                 j++;
             }
         }

@@ -10,7 +10,6 @@
 <p>
     @*@Html.ActionLink("Maak nieuw status", "Create")*@
     <button onclick="location.href='@Url.Action("Create", "Device_statustypes")';return false;" class="btn btn-primary">Maak nieuwe status</button>
-
 </p>
 @if (TempData["AlertMessage"] != null)
 {
@@ -36,5 +35,4 @@
             </td>
         </tr>
     }
-
 </table>

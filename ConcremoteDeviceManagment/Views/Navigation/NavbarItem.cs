@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -13,7 +14,6 @@ namespace ConcremoteDeviceManagment.Models
         public int parentId { get; set; }
         public bool isParent { get; set; }
     }
-
     public class Navbar
     {
         public IEnumerable<NavbarItem> NavbarTop()
@@ -27,11 +27,12 @@ namespace ConcremoteDeviceManagment.Models
 
             //Create Device option
             topNav.Add(new NavbarItem() { Id = 4, action = "Index", nameOption = "Create Device", controller = "DeviceConfig", isParent = false, parentId = -1 });
-
+            
             //Change Device Configuration option
             topNav.Add(new NavbarItem() { Id = 5, action = "Index", nameOption = "Change Device Configuration", controller = "Home", isParent = false, parentId = -1 });
 
             //Device option
+            
             topNav.Add(new NavbarItem() { Id = 6, action = "Index", nameOption = "Devices", controller = "Concremote", isParent = false, parentId = -1 });
 
             //Beheer menu, subclasses : Device Type, Status Types, Slider
@@ -40,8 +41,6 @@ namespace ConcremoteDeviceManagment.Models
             topNav.Add(new NavbarItem() { Id = 9, action = "Index", nameOption = "Status Types", controller = "Device_statustypes", isParent = false, parentId = 7 });
             //Link to ImageSlide menu
             topNav.Add(new NavbarItem() { Id = 10, action = "Index", nameOption = "Slider Images", controller = "Slider", isParent = false, parentId = 7 });
-
-          
 
             return topNav;
         }

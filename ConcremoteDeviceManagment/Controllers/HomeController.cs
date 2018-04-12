@@ -19,12 +19,24 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            //create list to display in View
+            ViewBag.MaxStockSort = sortOrder == "Active" ? "Not Active" : "Active";
             var Device = (from d in db.DeviceConfig
                               //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id);
+            switch (sortOrder)
+            {
+                //order CMI descending
+                case "Not Active":
+                    Device = Device.OrderByDescending(s => s.Active);
+                    break;
+
+                default:
+                    Device = Device.OrderBy(s => s.Active);
+                    break;
+            }
+            //create list to display in View
 
             return View(Device);
         }
@@ -99,18 +111,16 @@ namespace ConcremoteDeviceManagment.Controllers
             //based on Price_id on values in List<Device_Pricelist>
             //I know this is wrong and not working
 
-            foreach (var item in (db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id))) 
-            {
-                var SelectedCMI = from pl in db.pricelist
-                                 where pl.Price_id == pl.Price_id     //join dl in Device_Pricelist o
-                                  orderby pl.Price_id
-                                  select new SelectListItem { Value = pl.Price_id.ToString(), Text = pl.bas_art_nr };
-                ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
-            }
+            var SelectedCMI = from pl in db.pricelist
+                              where pl.Price_id == pl.Price_id     //join dl in Device_Pricelist o
+                              orderby pl.Price_id
+                              select new SelectListItem { Value = pl.Price_id.ToString(), Text = pl.bas_art_nr };
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
+
             //call viewbag based on SelectedCMI query
             //  ViewBag.SelectedCMI = new SelectList(SelectedCMI);
-           // ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
-            
+            // ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
+
             return View(Device_Pricelist);
         }
 

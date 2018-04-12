@@ -135,8 +135,9 @@ namespace ConcremoteDeviceManagment.Models
         public string Employee_1 { get; set; }
         public string Employee_2 { get; set; }
 
-        [Required(ErrorMessage = "Selecteer een datum")]
+        //[Required(ErrorMessage = "Selecteer een datum")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Sign_Date { get; set; }
 
         [ForeignKey("DeviceConfig_id")]
@@ -178,16 +179,16 @@ namespace ConcremoteDeviceManagment.Models
     public class Device_Pricelist
     {
         [Key]
-       // [Column(Order = 0)]
+        // [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-      //  [Key]
-     //   [Column(Order = 1)]
+        //  [Key]
+        //   [Column(Order = 1)]
         public int Device_config_id { get; set; }
 
-       // [Key]
-       // [Column(Order = 2)]
+        // [Key]
+        // [Column(Order = 2)]
         [Required(ErrorMessage = "Voer een onderdeel in")]
         public int Price_id { get; set; }
 

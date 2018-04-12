@@ -119,7 +119,7 @@ namespace ConcremoteDeviceManagment.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Stock");
 
                 case SignInStatus.LockedOut:
                     return View("Lockout");

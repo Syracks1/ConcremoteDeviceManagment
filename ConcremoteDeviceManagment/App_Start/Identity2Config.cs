@@ -25,7 +25,7 @@
 //            await configSendGridasync(message);
 //        }
 
-//        // Use NuGet to install SendGrid (Basic C# client lib) 
+//        // Use NuGet to install SendGrid (Basic C# client lib)
 //        private async Task configSendGridasync(IdentityMessage message)
 //        {
 //            var myMessage = new SendGridMessage();
