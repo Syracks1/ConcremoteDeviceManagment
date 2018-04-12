@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (User.IsInRole("Assembly") || User.IsInRole("Admin") || User.IsInRole("StandardUser") || User.IsInRole("BAS employee"))
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+
 {
     <h2>Inventory</h2>
     <p class="text-success">@ViewBag.StatusMessage</p>
@@ -14,9 +15,11 @@
             <b>CMI: </b>@Html.Editor("StockCMI")
             <input type="submit" value="Zoek CMI" class="btn" />
             <b>Onderdeel:</b> @Html.Editor("searchString")
-            <input type="submit" value="Zoek onderdeel" class="btn" /> |
-
-            <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
+            <input type="submit" value="Zoek onderdeel" class="btn" /> 
+            @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+            {
+                <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
+            }
         </p>
     }
     if (TempData["AlertMessage"] != null)
