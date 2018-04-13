@@ -18,7 +18,8 @@
             <input type="submit" value="Zoek onderdeel" class="btn" />
             @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
             {
-                <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
+                <input type="button" value="Create" class="buttonCreate btn btn-primary" />
+
             }
         </p>
     }
@@ -79,17 +80,51 @@
 
         }
     </table>
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
 
+    </div>
 }
 else
 {
     //Html.Action("Login", "Account");
     Response.Redirect("~/Account/Login");
 }
-<script type="text/javascript">
+
+<script>
+    var TeamDetailPostBackURL = '/Stock/CreatePartial';
     $(function () {
-        $("#AlertMessage").change(function () {
-            alert("AlertMessage");
+        $(".buttonCreate").click(function () {
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+        //$("#closebtn").on('click',function(){
+        //    $('#myModal').modal('hide');
+
+        $("#closbtn").click(function () {
+            $('#myModal').modal('hide');
         });
     });
-</script>
+
+</script>  

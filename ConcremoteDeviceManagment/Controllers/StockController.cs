@@ -1,6 +1,7 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -86,6 +87,38 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(stock);
         }
 
+        [HttpGet]
+        public ActionResult CreatePartial()
+        {
+            //dropdownlist for CMI
+            var SelectedCMI = from d in db.pricelist
+                              orderby d.Price_id
+                              select new { Id = d.Price_id, Value = d.bas_art_nr };
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
+            return PartialView("CreatePartial");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePartial([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Stock.Add(stock);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch(Exception ex)
+            {
+                Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+            }
+            return View(stock);
+        }
+
         // GET: Stock/Details/5
         public ActionResult Details(int? id)
         {
@@ -109,34 +142,34 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Assembly,Admin")]
 
         // GET: Stock/Create
-        public ActionResult Create()
-        {
-            //dropdownlist for CMI
-            var SelectedCMI = from d in db.pricelist
-                              orderby d.Price_id
-                              select new { Id = d.Price_id, Value = d.bas_art_nr };
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    //dropdownlist for CMI
+        //    var SelectedCMI = from d in db.pricelist
+        //                      orderby d.Price_id
+        //                      select new { Id = d.Price_id, Value = d.bas_art_nr };
+        //    ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
+        //    return View();
+        //}
 
-        // POST: Stock/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Stock.Add(stock);
-                db.SaveChanges();
-                //   TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
+        //// POST: Stock/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Stock.Add(stock);
+        //        db.SaveChanges();
+        //        //   TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
 
-                return RedirectToAction("Index");
-            }
-            //message = ManageMessageId.RemoveLoginSuccess;
+        //        return RedirectToAction("Index");
+        //    }
+        //    //message = ManageMessageId.RemoveLoginSuccess;
 
-            return View(stock);
-        }
+        //    return View(stock);
+        //}
 
         //Check if user is Assembly or Admin
         //else redirect te login

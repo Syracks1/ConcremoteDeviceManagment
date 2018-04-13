@@ -124,11 +124,13 @@ namespace ConcremoteDeviceManagment.Controllers
         public PartialViewResult ConfigPartial(int? id)
         {
             //create list "ci2" with query
-            List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.Device_config_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.assembly_order));
+            //List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.DeviceStatus.Where(c => c.DeviceConfig_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.DeviceConfig_id));
+            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.Device_config_id == id).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
+
             //   var Device_Pricelist = new List<Device_Pricelist>(db.DeviceStatus.Where(r => r.DeviceConfig_id == db.Device_Pr));
 
             //return PartialView called "ConfigPartial" with query ci2
-            return PartialView("ConfigPartial", ci2);
+            return PartialView("ConfigPartial", ci);
         }
 
         //Check if logged in user is Assembly or Admin
@@ -205,6 +207,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 try
                 {
+                    //set new Sign_Date
                     deviceStatus.Sign_Date = DateTime.Now;
 
                     //check if deviceStatus is modified
@@ -212,17 +215,16 @@ namespace ConcremoteDeviceManagment.Controllers
 
                     //check if concremoteDevice is modified
                     db.Entry(concremoteDevice).State = EntityState.Modified;
-                    //  db.DeviceStatus.Add(deviceStatus).Sign_Date = deviceStatus.Sign_Date = DateTime.Now;
 
                     //save modified changes to database
                     db.SaveChanges();
-
+                    
                     //Temp message when changes were succesfull
                     TempData["AlertMessage"] = deviceStatus.ConcremoteDevice.id + " Edited Successfully";
-
                     //redirect to Index
                     return RedirectToAction("Index");
                 }
+
                 catch (Exception ex)
                 {
                     //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";

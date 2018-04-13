@@ -278,7 +278,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a> <br /><br /> If you did not ask for this request, just ignore this email");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
