@@ -6,40 +6,47 @@
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div>
+        <h4>Change your account settings</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Password:</dt>
+            <dd>
+                @if (Model.HasPassword)
+                {
+                    <button onclick="location.href='@Url.Action("ChangePassword", "Manage")';return false;" class="btn btn-primary">Change Password</button>
+                }
+                else
+                {
+                    <button onclick="location.href='@Url.Action("SetPassword", "Manage")';return false;" class="btn btn-primary">Create</button>
 
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            @if (Model.HasPassword)
+                }
+            </dd>
+            <dt>
+                <br />
+            </dt>
+            <dd>
+            </dd>
+            @if (User.IsInRole("Admin"))
             {
-                <button onclick="location.href='@Url.Action("ChangePassword", "Manage")';return false;" class="btn btn-primary">Change Password</button>
+                <dt>Manage Accounts</dt>
+                <dd>
+                    <p>
+                        <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
+                    </p>
+                </dd>
             }
             else
             {
-                <button onclick="location.href='@Url.Action("SetPassword", "Manage")';return false;" class="btn btn-primary">Create</button>
 
             }
-        </dd>
-        <dt>
-            <br />
-        </dt>
-        <dd>
-        </dd>
-        @if (User.IsInRole("Admin"))
-        {
-            <dt>Manage Accounts</dt>
-            <dd>
-                <p>
-                    <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false;" class="btn btn-primary">Manage Accounts</button>
-                </p>
-            </dd>
-        }
-        else
-        {
-
-        }
-    </dl>
-</div>
+        </dl>
+    </div>
+}
+else
+{
+    //Html.Action("Login", "Account");
+    Response.Redirect("~/Account/Login");
+}

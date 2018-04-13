@@ -1,43 +1,51 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Gallery>
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
 
-<html>
-<head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.bxslider.js"></script>
-    <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
-</head>
-<body>
-    @{
-        ViewBag.Title = "Index";
-    }
-    @if (TempData["AlertMessage"] != null)
-    {
-        <p class="alert alert-danger" id="successMessage">@TempData["AlertMessage"]</p>
-    }
-    <h2>Index</h2>
-    <p>
-        <button onclick="location.href='@Url.Action("AddImage", "Slider")';return false; " class="btn btn-primary">Add Image</button>
-        <button onclick="location.href='@Url.Action("DeleteImages", "Slider")';return false; " class="btn btn-danger">Delete Image</button>
-    </p>
+    <html>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.bxslider.js"></script>
+        <link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
+    </head>
+    <body>
+        @{
+            ViewBag.Title = "Index";
+        }
+        @if (TempData["AlertMessage"] != null)
+        {
+            <p class="alert alert-danger" id="successMessage">@TempData["AlertMessage"]</p>
+        }
+        <h2>Index</h2>
+        <p>
+            <button onclick="location.href='@Url.Action("AddImage", "Slider")';return false; " class="btn btn-primary">Add Image</button>
+            <button onclick="location.href='@Url.Action("DeleteImages", "Slider")';return false; " class="btn btn-danger">Delete Image</button>
+        </p>
 
-    <div>
-        <ul class="bxslider" data-call="bxslider" data-options="slideMargin:0, autoReload:true">
-            @foreach (var image in Model)
-            {
-            <li><img src="@Url.Content(image.ImagePath)" />@image.ImagePath</li>
-            }
-        </ul>
-    </div>
+        <div>
+            <ul class="bxslider" data-call="bxslider" data-options="slideMargin:0, autoReload:true">
+                @foreach (var image in Model)
+                {
+                    <li><img src="@Url.Content(image.ImagePath)" />@image.ImagePath</li>
+                }
+            </ul>
+        </div>
 
-    <script>
-        $(document).ready(function () {
-            $('.bxslider').bxSlider({
-                mode: 'fade',
-                captions: true,
-                slideWidth: 600,
-                adaptiveHeight: true,
+        <script>
+            $(document).ready(function () {
+                $('.bxslider').bxSlider({
+                    mode: 'fade',
+                    captions: true,
+                    slideWidth: 600,
+                    adaptiveHeight: true,
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
+}
+else
+{
+//Html.Action("Login", "Account");
+Response.Redirect("~/Account/Login");
+}

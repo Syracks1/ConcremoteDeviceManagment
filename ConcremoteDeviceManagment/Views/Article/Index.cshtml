@@ -4,21 +4,25 @@
     ViewBag.Title = "Prijslijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (User.IsInRole("Assembly") || User.IsInRole("Admin") || User.IsInRole("StandardUser") || User.IsInRole("BAS employee"))
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
 
     <h2>Prijslijst</h2>
     using (Html.BeginForm("Index", "Article", FormMethod.Get))
     {
-    <p>
-        <b>CMI: </b>@Html.TextBox("PriceCMI")
-        <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", null, "Kies Leverancier")
-        <input type="submit" value="Zoek CMI" class="btn" />
-        @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
-    {
-        <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
-}
-    </p>
+        <p>
+            <b>CMI: </b>@Html.TextBox("PriceCMI")
+            <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", null, "Kies Leverancier")
+            <input type="submit" value="Zoek CMI" class="btn" />
+            @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+            {
+                <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
+            }
+            else
+            {
+
+            }
+        </p>
     }
     if (TempData["SuccesMessage"] != null)
     {
@@ -41,9 +45,16 @@
             <th>
                 @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescrSortParm })
             </th>
-            <th>
-                @Html.ActionLink("Actief", "Index", new { sortOrder = ViewBag.ActiveSortParm })
-            </th>
+            @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+            {
+                <th>
+                    @Html.ActionLink("Actief", "Index", new { sortOrder = ViewBag.ActiveSortParm })
+                </th>
+            }
+            else
+            {
+                <th></th>
+            }
             <th></th>
         </tr>
 
@@ -65,11 +76,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Active)
-                </td>
                 @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
                 {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+
                     <td>
                         <button onclick="location.href='@Url.Action("Edit", "Article", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
                         @*<button onclick="location.href='@Url.Action("Details", "Article", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>*@
@@ -78,7 +90,7 @@
                 }
                 else
                 {
-                    <td> </td>
+
                 }
             </tr>
         }

@@ -4,7 +4,7 @@
     ViewBag.Title = "DeviceLijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (User.IsInRole("Assembly") || User.IsInRole("Admin") || User.IsInRole("StandardUser") || User.IsInRole("BAS employee"))
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     <h2>Devices</h2>
     using (Html.BeginForm("Index", "Concremote", FormMethod.Get))

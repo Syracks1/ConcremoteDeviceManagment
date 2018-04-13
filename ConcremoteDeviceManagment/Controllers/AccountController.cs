@@ -103,7 +103,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
 
                     // Uncomment to debug locally
-                    // ViewBag.Link = callbackUrl;
+                    ViewBag.Link = callbackUrl;
                     //ViewBag.errorMessage = "You must have a confirmed email to log on. "
                     //                     + "The confirmation token has been resent to your email account.";
                     TempData["errorMessage"] = "You must have a confirmed email to log on. "
@@ -415,7 +415,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
