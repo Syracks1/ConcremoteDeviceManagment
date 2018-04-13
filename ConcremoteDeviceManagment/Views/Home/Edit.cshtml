@@ -60,8 +60,8 @@
             }
                 }
                 @Html.DropDownListFor(a => a[j].Price_id, ItemList, new { @class = "form-control" })*@
-             @*   @Html.DropDownListFor(a => a[j].Price_id, ViewBag.SelectedCMI,  new { @class = "form-control" })*@
-                @Html.DisplayFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI,  new { @class = "form-control" })
+                @*@Html.DisplayFor(a => a[j].Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })*@
             </td>
 
             <td class="table-row">
