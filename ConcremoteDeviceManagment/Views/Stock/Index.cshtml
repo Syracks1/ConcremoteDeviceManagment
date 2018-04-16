@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Stock>
 
 @{
+    /**/
+
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,7 +20,8 @@
             <input type="submit" value="Zoek onderdeel" class="btn" />
             @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
             {
-                <input type="button" value="Create" class="buttonCreate btn btn-primary" />
+                @*<input type="button" value="Create" class="buttonCreate btn btn-primary" />*@
+                <a class="btn btn-success" data-modal="" href="/Stock/CreatePartial" id="btnCreate">Create</a>
 
             }
         </p>
@@ -66,11 +69,14 @@
                 </td>
                 @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
                 {
-                    <td>
-                        <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-                        <button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>
-                        <button onclick="location.href='@Url.Action("Delete", "Stock", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
-                    </td>
+                <td>
+                    @Html.Raw("<a data-modal='' href='/Stock/DetailPartial/" + item.id + "' id='" + item.id + "' title='Detail'> <span class='btn btn-primary'>Details</span> </a>")
+                    @*<button onclick="location.href='@Url.Action("DetailPartial", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Detail</button>*@
+                    <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
+                    @*<button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>*@
+
+                    <input type="button" value="Delete" class="buttonDelete btn btn-danger" data-id=@item.id />
+                </td>
                 }
                 else
                 {
@@ -80,14 +86,16 @@
 
         }
     </table>
-    <div id='myModal' class='modal'>
+    <div id='myModal' class='modal fade in'>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div id='myModalContent'></div>
             </div>
         </div>
-
     </div>
+    @section scripts{
+        @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+    }
 }
 else
 {
@@ -96,35 +104,59 @@ else
 }
 
 <script>
-    var TeamDetailPostBackURL = '/Stock/CreatePartial';
-    $(function () {
-        $(".buttonCreate").click(function () {
-            var $buttonClicked = $(this);
-            var id = $buttonClicked.attr('data-id');
-            var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: TeamDetailPostBackURL,
-                contentType: "application/json; charset=utf-8",
-                data: { "Id": id },
-                datatype: "json",
-                success: function (data) {
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(options);
-                    $('#myModal').modal('show');
+                //var StockCreate = '/Stock/CreatePartial';
+                //$(function () {
+                //    $(".buttonCreate").click(function () {
+                //        var $buttonClicked = $(this);
+                //        var id = $buttonClicked.attr('data-id');
+                //        var options = { "backdrop": "static", keyboard: true };
+                //        $.ajax({
+                //            type: "GET",
+                //            url: StockCreate,
+                //            contentType: "application/json; charset=utf-8",
+                //            data: { "Id": id },
+                //            datatype: "json",
+                //            success: function (data) {
+                //                $('#myModalContent').html(data);
+                //                $('#myModal').modal(options);
+                //                $('#myModal').modal('show');
 
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-        });
-        //$("#closebtn").on('click',function(){
-        //    $('#myModal').modal('hide');
+                //            },
+                //            error: function () {
+                //                alert("Dynamic content load failed.");
+                //            }
+                //        });
+                //    });
+                //});
 
-        $("#closbtn").click(function () {
-            $('#myModal').modal('hide');
-        });
-    });
+                //    var StockDelete = '/Stock/DeletePartial';
+                //    $(function () {
+                //        $(".buttonDelete").click(function () {
+                //            var $buttonClicked = $(this);
+                //            var id = $buttonClicked.attr('data-id');
+                //            var options = { "backdrop": "static", keyboard: true };
+                //            $.ajax({
+                //                type: "GET",
+                //                url: StockDelete,
+                //                contentType: "application/json; charset=utf-8",
+                //                data: { "Id": id },
+                //                datatype: "json",
+                //                success: function (data) {
+                //                    $('#myModalContent').html(data);
+                //                    $('#myModal').modal(options);
+                //                    $('#myModal').modal('show');
 
+                //                },
+                //                error: function () {
+                //                    alert("Dynamic content load failed.");
+                //                }
+                //            });
+                //        });
+                //    //$("#closebtn").on('click',function(){
+                //    //    $('#myModal').modal('hide');
+
+                //    $("#closbtn").click(function () {
+                //        $('#myModal').modal('hide');
+                //    });
+                //});
 </script>  
