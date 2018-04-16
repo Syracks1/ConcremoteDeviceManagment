@@ -21,7 +21,7 @@
             @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
             {
                 @*<input type="button" value="Create" class="buttonCreate btn btn-primary" />*@
-                <a class="btn btn-success" data-modal="" href="/Stock/CreatePartial" id="btnCreate">Create</a>
+                <a class="btn btn-success" data-modal="" href="~/Stock/CreatePartial" id="btnCreate">Create</a>
 
             }
         </p>
@@ -69,14 +69,11 @@
                 </td>
                 @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
                 {
-                <td>
-                    @Html.Raw("<a data-modal='' href='/Stock/DetailPartial/" + item.id + "' id='" + item.id + "' title='Detail'> <span class='btn btn-primary'>Details</span> </a>")
-                    @*<button onclick="location.href='@Url.Action("DetailPartial", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Detail</button>*@
-                    <button onclick="location.href='@Url.Action("Edit", "Stock", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-                    @*<button onclick="location.href='@Url.Action("Details", "Stock", new { id=item.id})';return false;" class="btn btn-info">Details</button>*@
-
-                    <input type="button" value="Delete" class="buttonDelete btn btn-danger" data-id=@item.id />
-                </td>
+                    <td>
+                        <a href="@Url.Action("EditPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                        <a href="@Url.Action("DetailPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-info">Details</span></a>
+                        <a href="@Url.Action("DeletePartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+                    </td>
                 }
                 else
                 {
@@ -102,61 +99,3 @@ else
     //Html.Action("Login", "Account");
     Response.Redirect("~/Account/Login");
 }
-
-<script>
-                //var StockCreate = '/Stock/CreatePartial';
-                //$(function () {
-                //    $(".buttonCreate").click(function () {
-                //        var $buttonClicked = $(this);
-                //        var id = $buttonClicked.attr('data-id');
-                //        var options = { "backdrop": "static", keyboard: true };
-                //        $.ajax({
-                //            type: "GET",
-                //            url: StockCreate,
-                //            contentType: "application/json; charset=utf-8",
-                //            data: { "Id": id },
-                //            datatype: "json",
-                //            success: function (data) {
-                //                $('#myModalContent').html(data);
-                //                $('#myModal').modal(options);
-                //                $('#myModal').modal('show');
-
-                //            },
-                //            error: function () {
-                //                alert("Dynamic content load failed.");
-                //            }
-                //        });
-                //    });
-                //});
-
-                //    var StockDelete = '/Stock/DeletePartial';
-                //    $(function () {
-                //        $(".buttonDelete").click(function () {
-                //            var $buttonClicked = $(this);
-                //            var id = $buttonClicked.attr('data-id');
-                //            var options = { "backdrop": "static", keyboard: true };
-                //            $.ajax({
-                //                type: "GET",
-                //                url: StockDelete,
-                //                contentType: "application/json; charset=utf-8",
-                //                data: { "Id": id },
-                //                datatype: "json",
-                //                success: function (data) {
-                //                    $('#myModalContent').html(data);
-                //                    $('#myModal').modal(options);
-                //                    $('#myModal').modal('show');
-
-                //                },
-                //                error: function () {
-                //                    alert("Dynamic content load failed.");
-                //                }
-                //            });
-                //        });
-                //    //$("#closebtn").on('click',function(){
-                //    //    $('#myModal').modal('hide');
-
-                //    $("#closbtn").click(function () {
-                //        $('#myModal').modal('hide');
-                //    });
-                //});
-</script>  
