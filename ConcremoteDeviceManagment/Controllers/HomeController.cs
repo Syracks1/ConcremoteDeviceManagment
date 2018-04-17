@@ -83,7 +83,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     db.SaveChanges();
                     //Temp message when article is added succesfully
                     TempData["SuccesMessage"] = "Config Added Successfully.";
-                    return RedirectToAction("Index");
+                    //return RedirectToAction("Index");
                 }
                 //if try failed, catch tempData
                 catch (Exception ex)
@@ -96,7 +96,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 TempData["AlertMessage"] = "Something went wrong, " + "please try again";
             }
-            return View(deviceConfig);
+            return View("Edit", device_Pricelist);
         }
 
         //check if logged in user is Assembly or Admin
@@ -110,12 +110,11 @@ namespace ConcremoteDeviceManagment.Controllers
             //create new SelectList in pricelist
             //based on Price_id on values in List<Device_Pricelist>
             //I know this is wrong and not working
-
-            var SelectedCMI = from pl in db.pricelist
-                              where pl.Price_id == pl.Price_id     //join dl in Device_Pricelist o
-                              orderby pl.Price_id
-                              select new SelectListItem { Value = pl.Price_id.ToString(), Text = pl.bas_art_nr };
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
+            var SelectedCMI = from Item in db.pricelist
+                              where Item.Price_id == Item.Price_id
+                              orderby Item.Price_id
+                              select new { Id = Item.Price_id, Name = Item.bas_art_nr };
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Name");
 
             //call viewbag based on SelectedCMI query
             //  ViewBag.SelectedCMI = new SelectList(SelectedCMI);
@@ -181,26 +180,34 @@ namespace ConcremoteDeviceManagment.Controllers
         // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                int q = Convert.ToInt32(id);
-                var deviceConfig = from dc in db.DeviceConfig
-                                   join pl in db.Device_Pricelist
-                                   on dc.Device_config_id equals pl.Device_config_id
-                                   where q == dc.Device_config_id
-                                   select dc;
-                //db.SaveChanges();
-                // db.DeviceConfig.Remove();
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                BasDbContext dc = new BasDbContext();
+            //    int q = Convert.ToInt32(id);
+                var Config = from emps in dc.DeviceConfig
+                                join depts in dc.Device_Pricelist
+                                on emps.Device_config_id equals depts.Device_config_id
+                                where id == emps.Device_config_id
+                                select emps;
+
+
+
+                // if (company == null)
+                //  return "Company cannot be found";
+                dc.DeviceConfig.RemoveRange(Config);
+               // dc.Device_Pricelist.Remove();
+                dc.SaveChanges();
+                //return "ok";
+
+            
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+                Trace.TraceError(ex.Message);
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

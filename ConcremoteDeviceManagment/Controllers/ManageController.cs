@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -349,32 +348,27 @@ namespace ConcremoteDeviceManagment.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserEdit(string Id)
+        [HttpGet]
+        public ActionResult UserEditPartial(string Id)
         {
             var SelectedRoles = from r in db.AspNetRoles
                                 orderby r.Id
                                 select new { r.Id, r.Name };
-
             ViewBag.SelectedRoles = new SelectList(SelectedRoles, "Id", "Name");
-            if (Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUserRoles aspNetUser = db.AspNetUserRoles.Find(Id);
-            if (aspNetUser == null)
+            var User = db.AspNetUserRoles.Find(Id);
+            if (User == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUser);
+
+            return PartialView("UserEditPartial", User);
         }
 
+        // POST: /Stock/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,Id,Email,Username,Name")] AspNetUserRoles aspNetUserRoles, AspNetUsers aspNetUsers)
+        public ActionResult UserEditPartial([Bind(Include = "UserId,RoleId,Id,Email,Username,Name")] AspNetUserRoles aspNetUserRoles, AspNetUsers aspNetUsers)
         {
-            //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
-            //ManageMessageId? message;
-
             if (ModelState.IsValid)
             {
                 db.Entry(aspNetUsers).State = EntityState.Modified;
@@ -382,9 +376,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully ";
-                return RedirectToAction("ManageAccounts");
+                return Json(new { success = true });
             }
-            return View(aspNetUserRoles);
+            return PartialView("UserEditPartial", aspNetUserRoles);
         }
 
         #region Helpers

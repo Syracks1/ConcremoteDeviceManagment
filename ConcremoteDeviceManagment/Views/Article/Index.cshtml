@@ -82,9 +82,9 @@
                     </td>
 
                     <td>
-                        <button onclick="location.href='@Url.Action("Edit", "Article", new { id=item.Price_id})';return false;" class="btn btn-primary">Edit</button>
-                        @*<button onclick="location.href='@Url.Action("Details", "Article", new { id=item.Price_id})';return false;" class="btn btn-info">Details</button>*@
-                        <button onclick="location.href='@Url.Action("Delete", "Article", new { id=item.Price_id})';return false;" class="btn btn-danger">Delete</button>
+                        <a href="@Url.Action("Edit", "Article", new { id = item.Price_id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                        <a href="@Url.Action("Delete", "Article", new { id = item.Price_id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+
                     </td>
                 }
                 else
@@ -93,7 +93,16 @@
                 }
             </tr>
         }
-    </table>
+    </table> <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+    }
 }
 else
 {

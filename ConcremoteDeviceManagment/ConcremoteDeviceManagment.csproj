@@ -427,6 +427,7 @@
     <Content Include="Views\Stock\DeletePartial.cshtml" />
     <Content Include="Views\Stock\DetailPartial.cshtml" />
     <Content Include="Views\Stock\EditPartial.cshtml" />
+    <Content Include="Views\Manage\UserEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

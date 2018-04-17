@@ -11,7 +11,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.bas_art_nr)
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.bas_art_nr, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
         </dd>
 
         <dt>
@@ -19,43 +21,56 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.Price)
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.Price, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
         </dd>
         <dt>
-                @Html.DisplayName("Huidige voorraad")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Stock_amount)
-            </dd>
-            <dt>
-                @Html.DisplayName("Minimale voorraad")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.min_stock)
-            </dd>
-            <dt>
-               @Html.DisplayName("Maximale voorraad")
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.max_stock)
-            </dd>
+            @Html.DisplayName("Huidige voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Stock_amount, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Minimale voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.min_stock, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Maximale voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.max_stock, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
         <dt>
             @Html.DisplayName("Beschrijving")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.description)
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.description, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
         </dd>
         <dt>
             @Html.DisplayName("Leverancier")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.Leverancier)
-        </dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.Leverancier, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
         <dt>
             @Html.DisplayName("Artikelnummer Leverancier")
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pricelist.art_lev_nr)
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.art_lev_nr, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
         </dd>
     </dl>
 </div>

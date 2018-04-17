@@ -43,9 +43,22 @@
                 @Html.DisplayFor(modelItem => item.AspNetUsers.AccessFailedCount)
             </td>
             <td>
-                <button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>
+                @*<button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>*@
+                <a href="@Url.Action("UserEditPartial", "Manage", new { id = item.UserId })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+
             </td>
         </tr>
     }
 </table>
 <button onclick="location.href='@Url.Action("Index", "Manage")';return false; " class="btn btn-primary">Back to user menu</button>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+}

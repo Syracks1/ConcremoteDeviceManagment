@@ -1,18 +1,13 @@
 ﻿@model ConcremoteDeviceManagment.Models.AspNetUserRoles
-
-@{
-    ViewBag.Title = "UserEdit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>UserEdit</h2>
-
-@using (Html.BeginForm("UserEdit", "Manage"))
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Edit User</h3>
+</div>
+@using (Html.BeginForm("UserEditPartial", "Manage"))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>AspNetUserRoles</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserId)
@@ -56,9 +51,6 @@
 
             </div>
         </div>
-    </div>
-    <div>
-        <button onclick="location.href='@Url.Action("ManageAccounts", "Manage")';return false; " class="btn btn-primary">Back to list</button>
     </div>
 }
 @section Scripts {

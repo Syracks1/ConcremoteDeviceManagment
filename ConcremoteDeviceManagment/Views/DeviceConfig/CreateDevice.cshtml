@@ -1,52 +1,56 @@
-﻿@model ConcremoteDeviceManagment.Models.Stock
+﻿@model List<ConcremoteDeviceManagment.Models.Device_Pricelist>
 
-@using (Html.BeginForm("Create", "Stock", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Stock</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("Prijs ID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, "Selecteer een Artikel", new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Huidige voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Stock_amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Stock_amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Minimale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.min_stock, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.min_stock, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Maximale voorraad", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.max_stock, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.max_stock, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
-        </div>
-    </div>
-}
-
+<table class="table table-hover">
+    <tr class="btn-primary">
+        <th class="btn-primary">
+            @Html.DisplayName("BAS artikelnummer")
+        </th>
+        <th class="btn-primary">
+            @Html.DisplayName("Beschrijving")
+        </th>
+        <th class="btn-primary">
+            @Html.DisplayName("Aantal")
+        </th>
+        <th class="btn-primary">
+            @Html.DisplayName("Bouw Volgorde")
+        </th>
+        <th class="btn-primary">
+            @Html.DisplayName("Onderdeel Bedrag")
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <i>@Html.DisplayFor(modelItem => item.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })</i>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td>
+                € @decimal.Round(item.amount * item.Pricelist.Price, 2, MidpointRounding.AwayFromZero)
+            </td>
+        </tr>
+    }
+</table>
+<table>
+    <tr>
+        <th>
+            <h3>@Html.DisplayName("Totaal Bedrag: ")</h3>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            € @decimal.Round(ViewBag.Total, 2, MidpointRounding.AwayFromZero)
+        </td>
+    </tr>
+</table>
 <div>
-    <button onclick="location.href='@Url.Action("Index", "Stock")';return false; " class="btn btn-primary">Back to list</button>
+    <button onclick="location.href='@Url.Action("Create", "DeviceConfig")';return false;" class="btn btn-success">Create Device</button>
 </div>
-<script src="~/Scripts/create.partialview.js"></script>

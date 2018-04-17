@@ -192,7 +192,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if Data is not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Edit",pricelist);
         }
 
         // POST: Device/Edit/5
@@ -211,7 +211,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     db.SaveChanges();
                     //Temp message when Article is succesfully edited
                     TempData["SuccesMessage"] = "Article " + pricelist.bas_art_nr + " Edited Successfully.";
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
                 }
                 catch
                 {
@@ -221,7 +221,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }//Temp message to inform user something went wrong
             TempData["AlertMessage"] = "Something went wrong, " + "contact support or try again later";
 
-            return View(pricelist);
+            return PartialView("Edit", pricelist);
         }
 
         //Check if user is Assembly or Admin
