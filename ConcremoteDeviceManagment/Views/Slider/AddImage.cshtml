@@ -17,19 +17,20 @@
 
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Gallery</legend>
+        <fieldset>
+            <legend>Gallery</legend>
+            @Html.DropDownList("device_type_id", (IEnumerable<SelectListItem>)ViewBag.SelectedDevice, "Select a Device", new { @class = "form-control" })
 
-        <div class="editor-label">
-            Upload Image
-        </div>
-        <div class="editor-field">
-            <input type="file" id="ImagePath" name="ImagePath" />
-        </div>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+            <div class="editor-label">
+                Upload Image
+            </div>
+            <div class="editor-field">
+                <input type="file" id="ImagePath" name="ImagePath" />
+            </div>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
     @*<p>@Html.ActionLink("Slider Home", "Index", "Slider")</p>*@
     <button onclick="location.href='@Url.Action("Index", "Slider")';return false; " class="btn btn-primary">Slider Home</button>
 

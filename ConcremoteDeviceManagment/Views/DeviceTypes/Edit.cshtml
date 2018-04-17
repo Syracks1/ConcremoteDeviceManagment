@@ -1,38 +1,34 @@
 ﻿@model ConcremoteDeviceManagment.Models.DeviceType
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>DeviceType</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.device_type_id)
+    using (Html.BeginForm("Edit", "DeviceTypes", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title">Device Type Edit</h3>
+        </div>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.device_type_id)
 
-        <div class="form-group">
-            @Html.Label("Device Naam", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Device Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <button class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
+    }
 }
-
-    <div>
-        <button onclick="location.href='@Url.Action("Index", "DeviceTypes")';return false; " class="btn btn-primary">Back to list</button>
-    </div>

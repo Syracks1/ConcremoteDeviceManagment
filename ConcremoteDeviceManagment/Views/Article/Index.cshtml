@@ -16,7 +16,7 @@
             <input type="submit" value="Zoek CMI" class="btn" />
             @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
             {
-                <button onclick="location.href='@Url.Action("Create", "Article")';return false;" class="btn btn-primary">Create New</button>
+                <a class="btn btn-success" data-modal="" href="~/Article/Create" id="btnCreate">Create</a>
             }
             else
             {
@@ -84,7 +84,6 @@
                     <td>
                         <a href="@Url.Action("Edit", "Article", new { id = item.Price_id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
                         <a href="@Url.Action("Delete", "Article", new { id = item.Price_id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
-
                     </td>
                 }
                 else

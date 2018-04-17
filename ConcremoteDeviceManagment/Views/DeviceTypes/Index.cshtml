@@ -7,7 +7,7 @@
 
 <h2>DeviceTypes</h2>
 <p>
-    <button onclick="location.href='@Url.Action("Create", "DeviceTypes")';return false;" class="btn btn-primary">Create New</button>
+    <a class="btn btn-success" data-modal="" href="~/DeviceTypes/Create" id="btnCreate">Create Device Type</a>
 </p>
 @if (TempData["AlertMessage"] != null)
 {
@@ -28,9 +28,19 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                <button onclick="location.href='@Url.Action("Edit", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-primary">Edit</button>
-                <button onclick="location.href='@Url.Action("Delete", "DeviceTypes", new { id=item.device_type_id})';return false;" class="btn btn-danger">Delete</button>
+                <a href="@Url.Action("Edit", "DeviceTypes", new { id = item.device_type_id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                <a href="@Url.Action("Delete", "DeviceTypes", new { id = item.device_type_id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
             </td>
         </tr>
     }
 </table>
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+}

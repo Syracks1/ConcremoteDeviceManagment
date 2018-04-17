@@ -1,4 +1,5 @@
 ﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -17,16 +18,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Index(string sortOrder, string PriceCMI, string SelectedLeverancier)
         {
             //dropdown for "Leverancier"
-            //var SelectedLeverancier = (from r in db.pricelist
-            //                           select r.Leverancier).Distinct();
-            //var SelectedLeverancier = from r in db.pricelist
-            //                          orderby r.Leverancier
-            //                          select r.Leverancier;
-            // ViewBag.SelectedLeverancier = new SelectList(db.pricelist.Select(r => r.Leverancier));
-            //var SelectedLeverancier = (from d in db.pricelist
-            //                               //where d.Price_id == d.Price_id
-            //                           orderby d.Price_id
-            //                           select new { Id = d.Price_id, Value = d.Leverancier });
+
             ViewBag.SelectedLeverancier = new SelectList(db.pricelist.Select(d => d.Leverancier).Distinct());
             //sort order different parameters
             ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
@@ -123,7 +115,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Details", pricelist);
         }
 
         //Check if user is Assembly or Admin
@@ -138,14 +130,14 @@ namespace ConcremoteDeviceManagment.Controllers
                                       orderby d.Leverancier
                                       select new { Id = d.Leverancier, Value = d.Leverancier };
             ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
-            return View();
+            return PartialView("Create");
         }
 
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public JsonResult Create(Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -156,15 +148,14 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
-                    TempData["SuccesMessage"] = "Article " + pricelist.bas_art_nr + " Added Successfully.";
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
                 }
-                catch
+                catch (Exception ex)
                 {
-                    TempData["AlertMessage"] = "Creating Article went wrong, " + "please try again";
+                    //TempData["AlertMessage"] = "Creating Article went wrong, " + "please try again";
                 }
             }
-            return View(pricelist);
+            return Json(pricelist, JsonRequestBehavior.AllowGet);
         }
 
         //Check if user is Assembly or Admin
@@ -192,14 +183,14 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if Data is not found, return this
                 return HttpNotFound();
             }
-            return PartialView("Edit",pricelist);
+            return PartialView("Edit", pricelist);
         }
 
         // POST: Device/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public ActionResult Edit([Bind(Include = "Price_id,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -242,7 +233,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if ID is not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Delete", pricelist);
         }
 
         // POST: Device/Delete/5
@@ -258,7 +249,7 @@ namespace ConcremoteDeviceManagment.Controllers
             db.SaveChanges();
             //Temp message when Article is deleted succesfully
             TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Deleted Successfully.";
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

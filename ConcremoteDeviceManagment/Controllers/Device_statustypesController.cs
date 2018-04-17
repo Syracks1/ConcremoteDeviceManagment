@@ -37,63 +37,55 @@ namespace ConcremoteDeviceManagment.Controllers
         // GET: Device_statustypes/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView("Create");
         }
 
         // POST: Device_statustypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name")] Device_statustypes device_statustypes)
+        public JsonResult Create([Bind(Include = "id,name")] Device_statustypes device_statustypes)
         {
             if (ModelState.IsValid)
             {
                 db.Device_statustypes.Add(device_statustypes);
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device Status Added Successfully";
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
-            return View(device_statustypes);
+            return Json(device_statustypes, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Assembly,Admin")]
         // GET: Device_statustypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            //if id is null, return BadRequest
-            if (id == null)
+            var device_statustypes = db.Device_statustypes.Find(id);
+            if(device_statustypes == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //Find id in Device_statustypes
-            Device_statustypes device_statustypes = db.Device_statustypes.Find(id);
-            //if id is not found
-            if (device_statustypes == null)
-            {
-                //return this
                 return HttpNotFound();
             }
-            return View(device_statustypes);
+            return PartialView("Edit", device_statustypes);
         }
 
         // POST: Device_statustypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to,
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name")] Device_statustypes device_statustypes)
+        public ActionResult Edit(Device_statustypes device_statustypes)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(device_statustypes).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device Status Edited  Successfully";
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-            return View(device_statustypes);
+            return PartialView("Edit", device_statustypes);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Device_statustypes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -106,7 +98,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(device_statustypes);
+            return PartialView("Delete", device_statustypes);
         }
 
         // POST: Device_statustypes/Delete/5
@@ -118,7 +110,7 @@ namespace ConcremoteDeviceManagment.Controllers
             db.Device_statustypes.Remove(device_statustypes);
             db.SaveChanges();
             TempData["AlertMessage"] = "Device Status Deleted Successfully";
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

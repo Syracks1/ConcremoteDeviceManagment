@@ -1,9 +1,7 @@
 ﻿using ConcremoteDeviceManagment.Models;
 using System;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
@@ -86,8 +84,8 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return View(stock);
         }
-        [Authorize(Roles = "Assembly,Admin")]
 
+        [Authorize(Roles = "Assembly,Admin")]
         [HttpGet]
         public ActionResult CreatePartial()
         {
@@ -122,6 +120,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return PartialView("DetailPartial", stock);
         }
+
         //Check if user is Assembly or Admin
         //else redirect te login
         [Authorize(Roles = "Assembly,Admin")]
@@ -138,7 +137,6 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return PartialView("EditPartial", Stock);
         }
-
 
         // POST: /Stock/Edit/5
         [HttpPost]
@@ -165,7 +163,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return PartialView("Delete", stock);
         }
-
 
         //
         // POST: /Phone/Delete/5
