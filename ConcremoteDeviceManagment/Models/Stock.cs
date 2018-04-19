@@ -42,8 +42,8 @@ namespace ConcremoteDeviceManagment.Models
         public string Unit { get; set; }
         public decimal? Quantity { get; set; }
 
-        //  [DataType(DataType.Currency)]
-        //[DisplayFormat(DataFormatString = "{0:C2}")]
+          [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
 
         [StringLength(255, MinimumLength = 1)]

@@ -22,11 +22,11 @@ namespace ConcremoteDeviceManagment.Models
             var topNav = new List<NavbarItem>();
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                //Onderdelen menu, subclasses : Voorraad, prijslijst
+                //Articles menu, subclasses : Stock, Pricelist
 
-                topNav.Add(new NavbarItem() { Id = 1, action = "", nameOption = "Onderdelen", controller = "", isParent = true, parentId = -1 });
-                topNav.Add(new NavbarItem() { Id = 2, action = "Index", nameOption = "Voorraad", controller = "Stock", isParent = false, parentId = 1 });
-                topNav.Add(new NavbarItem() { Id = 3, action = "Index", nameOption = "Prijslijst", controller = "Article", isParent = false, parentId = 1 });
+                topNav.Add(new NavbarItem() { Id = 1, action = "", nameOption = "Articles", controller = "", isParent = true, parentId = -1 });
+                topNav.Add(new NavbarItem() { Id = 2, action = "Index", nameOption = "Stock", controller = "Stock", isParent = false, parentId = 1 });
+                topNav.Add(new NavbarItem() { Id = 3, action = "Index", nameOption = "Pricelist", controller = "Article", isParent = false, parentId = 1 });
 
                 if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Assembly"))
                 {
@@ -40,9 +40,9 @@ namespace ConcremoteDeviceManagment.Models
 
                     topNav.Add(new NavbarItem() { Id = 6, action = "Index", nameOption = "Devices", controller = "Concremote", isParent = false, parentId = -1 });
 
-                    //Beheer menu, subclasses : Device Type, Status Types, Slider
+                    //Manage menu, subclasses : Device Type, Status Types, Slider
 
-                    topNav.Add(new NavbarItem() { Id = 7, action = "", nameOption = "Beheer", controller = "", isParent = true, parentId = -1 });
+                    topNav.Add(new NavbarItem() { Id = 7, action = "", nameOption = "Manage Stuff", controller = "", isParent = true, parentId = -1 });
                     topNav.Add(new NavbarItem() { Id = 8, action = "Index", nameOption = "Device Type", controller = "DeviceTypes", isParent = true, parentId = 7 });
                     topNav.Add(new NavbarItem() { Id = 9, action = "Index", nameOption = "Status Types", controller = "Device_statustypes", isParent = false, parentId = 7 });
                     //Link to ImageSlide menu

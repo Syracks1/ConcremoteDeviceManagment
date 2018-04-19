@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -142,7 +143,7 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                { 
                     //Add data to pricelist table
                     db.pricelist.Add(pricelist);
                     //save changes to database
@@ -152,7 +153,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //TempData["AlertMessage"] = "Creating Article went wrong, " + "please try again";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
                 }
             }
             return Json(pricelist, JsonRequestBehavior.AllowGet);

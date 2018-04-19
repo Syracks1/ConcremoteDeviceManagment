@@ -9,6 +9,7 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -25,34 +26,17 @@ namespace ConcremoteDeviceManagment
         // Use NuGet to install SendGrid (Basic C# client lib)
         private async Task configSendGridasync(IdentityMessage message)
         {
-            var myMessage = new SendGridMessage();
-            myMessage.AddTo(message.Destination);
-            myMessage.From = new System.Net.Mail.MailAddress(
-                                "support@concremote.com", "CDM Support");
+            var myMessage = new MailMessage();
+            myMessage.To.Add(new MailAddress(message.Destination));
+            myMessage.From = new MailAddress("alarm@concremote.com", "CMD Support");
             myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
+            myMessage.IsBodyHtml = true;
+            myMessage.Body = message.Body;
 
-            var credentials = new NetworkCredential(
-                       ConfigurationManager.AppSettings["mailAccount"],
-                       ConfigurationManager.AppSettings["mailPassword"]
-                       );
-
-            // Create a Web transport for sending email.
-            var transportWeb = new Web(credentials);
-
+            var smtpClient = new SmtpClient();
             try
             {
-                // Send the email.
-                if (transportWeb != null)
-                {
-                    await transportWeb.DeliverAsync(myMessage);
-                }
-                else
-                {
-                    Trace.TraceError("Failed to create Web transport.");
-                    await Task.FromResult(0);
-                }
+                await smtpClient.SendMailAsync(myMessage);
             }
             catch (Exception ex)
             {
