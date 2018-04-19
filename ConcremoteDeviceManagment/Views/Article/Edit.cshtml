@@ -7,7 +7,7 @@
     <h3 class="modal-title">Stock Detail</h3>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Article", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     if (TempData["AlertMessage"] != null)
     {
@@ -94,4 +94,5 @@
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }

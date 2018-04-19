@@ -40,11 +40,11 @@ namespace ConcremoteDeviceManagment.Controllers
                     break;
                 //order Active ascending
                 case "Active":
-                    pricelist = pricelist.OrderBy(s => s.Active);
+                    pricelist = pricelist.Where(s => s.Active == true);
                     break;
                 //order Active descending
                 case "Active_desc":
-                    pricelist = pricelist.OrderByDescending(s => s.Active);
+                    pricelist = pricelist.Where(s => s.Active == false);
                     break;
                 //order Price ascending
                 case "Price":
@@ -202,8 +202,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when Article is succesfully edited
-                    TempData["SuccesMessage"] = "Article " + pricelist.bas_art_nr + " Edited Successfully.";
-                    return Json(new { success = true });
+                    return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
                 }
                 catch
                 {
@@ -249,8 +248,7 @@ namespace ConcremoteDeviceManagment.Controllers
             //save changes
             db.SaveChanges();
             //Temp message when Article is deleted succesfully
-            TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Deleted Successfully.";
-            return Json(new { success = true });
+            return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -29,11 +29,11 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 //order CMI descending
                 case "Not Active":
-                    Device = Device.OrderByDescending(s => s.Active);
+                    Device = Device.Where(s => s.Active == false);
                     break;
 
                 default:
-                    Device = Device.OrderBy(s => s.Active);
+                    Device = Device.Where(s => s.Active == true);
                     break;
             }
             //create list to display in View
@@ -44,6 +44,7 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
+        [HttpGet]
         public ActionResult Create()
         {
             //dropdownlist for Device
@@ -53,14 +54,14 @@ namespace ConcremoteDeviceManagment.Controllers
                                  orderby d.device_type_id
                                  select new { Id = d.device_type_id, Value = d.name };
             ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
-            return View();
+            return PartialView("Create");
         }
 
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
+        public JsonResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
         {
             //check if modelstate is valid
             if (ModelState.IsValid)
@@ -82,21 +83,18 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
-                    TempData["SuccesMessage"] = "Config Added Successfully.";
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
                 }
                 //if try failed, catch tempData
                 catch (Exception ex)
                 {
-                    TempData["AlertMessage"] = "Creating Config went wrong, " + "please try again";
                     Trace.TraceError(ex.Message + " Something went wrong.");
                 }
             }
             else
             {
-                TempData["AlertMessage"] = "Something went wrong, " + "please try again";
             }
-            return View(deviceConfig);
+            return Json(deviceConfig, JsonRequestBehavior.AllowGet);
         }
 
         //check if logged in user is Assembly or Admin
@@ -175,7 +173,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(deviceConfig);
+            return PartialView("Delete", deviceConfig);
         }
 
         // POST: Stock/Delete/5
@@ -193,8 +191,6 @@ namespace ConcremoteDeviceManagment.Controllers
                              where id == emps.Device_config_id
                              select emps;
 
-                // if (company == null)
-                //  return "Company cannot be found";
                 dc.DeviceConfig.RemoveRange(Config);
                 // dc.Device_Pricelist.Remove();
                 dc.SaveChanges();
@@ -204,7 +200,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 Trace.TraceError(ex.Message);
             }
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

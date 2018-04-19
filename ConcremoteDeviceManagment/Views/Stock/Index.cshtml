@@ -13,18 +13,17 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     using (Html.BeginForm("Index", "Stock", FormMethod.Get))
     {
-        <p>
-            <b>CMI: </b>@Html.Editor("StockCMI")
-            <input type="submit" value="Zoek CMI" class="btn" />
-            <b>Onderdeel:</b> @Html.Editor("searchString")
-            <input type="submit" value="Zoek onderdeel" class="btn" />
-            @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
-            {
-                @*<input type="button" value="Create" class="buttonCreate btn btn-primary" />*@
-                <a class="btn btn-success" data-modal="" href="~/Stock/CreatePartial" id="btnCreate">Create</a>
+    <p>
+        <b>CMI: </b>@Html.Editor("StockCMI")
+        <b>Article:</b> @Html.Editor("searchString")
+        <input type="submit" value="Search CMI" class="btn" />
 
-            }
-        </p>
+        @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+    {
+        <a class="btn btn-success" data-modal="" href="~/Stock/CreatePartial" id="btnCreate">Create Stock Item</a>
+
+}
+    </p>
     }
     if (TempData["AlertMessage"] != null)
     {
@@ -36,16 +35,16 @@
                 @Html.ActionLink("BAS CMI", "Index", new { sortOrder = ViewBag.CMISortParm }, new { htmlAttributes = new { @class = "form-control" } })
             </th>
             <th>
-                @Html.ActionLink("Beschrijving", "Index", new { sortOrder = ViewBag.DescriptionSortParm })
+                @Html.ActionLink("Description", "Index", new { sortOrder = ViewBag.DescriptionSortParm })
             </th>
             <th>
-                @Html.ActionLink("Huidige voorraad", "Index", new { sortOrder = ViewBag.CurrentStockSort })
+                @Html.ActionLink("In Stock", "Index", new { sortOrder = ViewBag.CurrentStockSort })
             </th>
             <th>
-                @Html.ActionLink("Minimale voorraad", "Index", new { sortOrder = ViewBag.MinStockSort })
+                @Html.ActionLink("Min. Stock", "Index", new { sortOrder = ViewBag.MinStockSort })
             </th>
             <th>
-                @Html.ActionLink("Maximale voorraad", "Index", new { sortOrder = ViewBag.MaxStockSort })
+                @Html.ActionLink("Max. Stock", "Index", new { sortOrder = ViewBag.MaxStockSort })
             </th>
             <th></th>
         </tr>
@@ -96,6 +95,5 @@
 }
 else
 {
-    //Html.Action("Login", "Account");
     Response.Redirect("~/Account/Login");
 }

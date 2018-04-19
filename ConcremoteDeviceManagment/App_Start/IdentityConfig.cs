@@ -32,7 +32,7 @@ namespace ConcremoteDeviceManagment
             myMessage.Subject = message.Subject;
             myMessage.IsBodyHtml = true;
             myMessage.Body = message.Body;
-
+            NetworkCredential basicauthenticationinfo = new NetworkCredential("alarm@concremote.com", "");
             var smtpClient = new SmtpClient();
             try
             {

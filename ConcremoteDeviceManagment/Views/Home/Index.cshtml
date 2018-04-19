@@ -7,12 +7,11 @@
 }
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <h2>Overzicht configuraties</h2>
     using (Html.BeginForm("Index", "Home", FormMethod.Get))
     {
         <p>
-            <button onclick="location.href='@Url.Action("Create", "Home")';return false;" class="btn btn-primary">Create New</button>
+            <a class="btn btn-success" data-modal="" href="~/Home/Create" id="btnCreate">Create Config</a>
         </p>
     }
     {
@@ -56,11 +55,22 @@
                 </td>
                 <td>
                     <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
-                    <button onclick="location.href='@Url.Action("Delete", "Home", new { id=item.Device_config_id})';return false;" class="btn btn-danger">Delete</button>
+                    <a href="@Url.Action("Delete", "Home", new { id = item.Device_config_id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+
                 </td>
             </tr>
         }
     </table>
+    <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+    }
 }
 else
 {
