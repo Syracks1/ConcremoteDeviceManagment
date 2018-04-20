@@ -1,10 +1,5 @@
 ﻿@model ConcremoteDeviceManagment.Models.Pricelist
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 <h2>Details</h2>
 
 <div>
@@ -45,7 +40,7 @@
     </dl>
 </div>
 <p>
-  @*  @Html.ActionLink("Edit", "Edit", new { id = Model.Price_id }) |*@
+    @*  @Html.ActionLink("Edit", "Edit", new { id = Model.Price_id }) |*@
     <button onclick="location.href='@Url.Action("Edit", "Article",  new { id = Model.Price_id })';return false; " class="btn btn-primary">Edit</button>
     <button onclick="location.href='@Url.Action("Index", "Article")';return false; " class="btn btn-primary">Back to list</button>
 </p>

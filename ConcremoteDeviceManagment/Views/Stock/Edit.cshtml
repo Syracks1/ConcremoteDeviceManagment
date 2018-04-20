@@ -1,8 +1,7 @@
-﻿@model ConcremoteDeviceManagment.Models.Stock
+﻿@*@model ConcremoteDeviceManagment.Models.Stock
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Edit</h2>
@@ -21,7 +20,6 @@
             @Html.Label("BAS artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Pricelist.bas_art_nr, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Pricelist.bas_art_nr, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
@@ -29,21 +27,18 @@
             @Html.Label("Prijs", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Pricelist.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Pricelist.Price, "", new { @class = "text-danger" })*@
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Beschrijving", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                @*           @Html.ValidationMessageFor(model => model.Pricelist.description, "", new { @class = "text-danger" })*@
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Leverancier artikelnummer", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Pricelist.art_lev_nr, new { htmlAttributes = new { @class = "form-control" } })
-                @*          @Html.ValidationMessageFor(model => model.Pricelist.art_lev_nr, "", new { @class = "text-danger" })*@
             </div>
         </div>
         <div class="form-group">
@@ -71,7 +66,7 @@
             @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Pricelist.Active, new { htmlAttributes = new { @class = "form-control" } })
-                @*                  @Html.ValidationMessageFor(model => model.Pricelist.Active, "", new { @class = "text-danger" })*@
+                @*                  @Html.ValidationMessageFor(model => model.Pricelist.Active, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -89,4 +84,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

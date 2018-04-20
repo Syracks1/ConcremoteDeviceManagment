@@ -2,7 +2,6 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
@@ -86,57 +85,40 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(stock);
         }
 
-        // GET: Stock/Details/5
-        public ActionResult Details(int? id)
-        {
-            // if id is null, return BadRequest
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //find selected ID in pricelist
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
-            {
-                //if not found, return this
-                return HttpNotFound();
-            }
-            return View(stock);
-        }
-
-        //Check if user is Assembly or Admin
-        //else redirect t0 login
         [Authorize(Roles = "Assembly,Admin")]
-
-        // GET: Stock/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult CreatePartial()
         {
             //dropdownlist for CMI
             var SelectedCMI = from d in db.pricelist
-                                  //where d.Price_id == d.Price_id
                               orderby d.Price_id
                               select new { Id = d.Price_id, Value = d.bas_art_nr };
             ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Value");
-            return View();
+            return PartialView("CreatePartial");
         }
 
-        // POST: Stock/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to
+        // POST: /Phone/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
+        public JsonResult CreatePartial(Stock stock)
         {
             if (ModelState.IsValid)
             {
                 db.Stock.Add(stock);
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + stock.Pricelist.bas_art_nr + " Created Successfully.";
-
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-            //message = ManageMessageId.RemoveLoginSuccess;
+            return Json(stock, JsonRequestBehavior.AllowGet);
+        }
 
-            return View(stock);
+        // GET: Stock/Details/5
+        public ActionResult DetailPartial(int id)
+        {
+            Stock stock = db.Stock.Find(id);
+            if (stock == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("DetailPartial", stock);
         }
 
         //Check if user is Assembly or Admin
@@ -144,66 +126,54 @@ namespace ConcremoteDeviceManagment.Controllers
         [Authorize(Roles = "Assembly,Admin")]
 
         // GET: Stock/Edit/5
-        public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult EditPartial(int? id)
         {
-            // if id is null, return BadRequest
-            if (id == null)
+            var Stock = db.Stock.Find(id);
+            if (Stock == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //find selected ID in pricelist
-            Stock stock = db.Stock.Find(id);
-            if (stock == null)
-            {
-                //if not found, return this
                 return HttpNotFound();
             }
-            return View(stock);
+
+            return PartialView("EditPartial", Stock);
         }
 
-        // POST: Stock/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to
+        // POST: /Stock/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Price_id,Stock_amount,min_stock,max_stock")] Stock stock)
+        public ActionResult EditPartial(Stock stock)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Article " + stock.Price_id + " Edited Successfully";
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-
-            return View(stock);
+            return PartialView("EditPartial", stock);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Assembly,Admin")]
         // GET: Stock/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult DeletePartial(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Stock stock = db.Stock.Find(id);
             if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(stock);
+            return PartialView("Delete", stock);
         }
 
-        // POST: Stock/Delete/5
-        [HttpPost, ActionName("Delete")]
+        //
+        // POST: /Phone/Delete/5
+        [HttpPost, ActionName("DeletePartial")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stock stock = db.Stock.Find(id);
-            db.Stock.Remove(stock);
+            var phone = db.Stock.Find(id);
+            db.Stock.Remove(phone);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Article " + stock.Price_id.ToString() + " Deleted Successfully.";
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

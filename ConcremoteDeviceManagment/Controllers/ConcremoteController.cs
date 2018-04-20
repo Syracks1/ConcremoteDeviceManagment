@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -98,6 +99,7 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             return View(query);
         }
+
         //check if user is Assembly or Admin
         //if false, user is redirected to Login page
         [Authorize(Roles = "Assembly, Admin")]
@@ -119,14 +121,16 @@ namespace ConcremoteDeviceManagment.Controllers
             return View(deviceStatus);
         }
 
-        
         public PartialViewResult ConfigPartial(int? id)
-        {            
+        {
             //create list "ci2" with query
-            List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.Device_Pricelist.Where(c => c.Device_config_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.assembly_order));
+            //List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.DeviceStatus.Where(c => c.DeviceConfig_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.DeviceConfig_id));
+            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.Device_config_id == id).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
+
+            //   var Device_Pricelist = new List<Device_Pricelist>(db.DeviceStatus.Where(r => r.DeviceConfig_id == db.Device_Pr));
 
             //return PartialView called "ConfigPartial" with query ci2
-            return PartialView("ConfigPartial", ci2);
+            return PartialView("ConfigPartial", ci);
         }
 
         //Check if logged in user is Assembly or Admin
@@ -170,8 +174,12 @@ namespace ConcremoteDeviceManagment.Controllers
                              orderby d.id
                              select new { Id = d.id, Value = d.name };
 
+            var PersonList = from d in db.AspNetUsers
+                             orderby d.Id
+                             select new { Id = d.Email, Value = d.Email };
             //pass list to Dropdownlist in Edit view
             ViewBag.StatusList = new SelectList(StatusList.Distinct(), "Id", "Value");
+            ViewBag.PersonList = new SelectList(PersonList.Distinct(), "Id", "Value");
 
             //if ID is null, return BadRequest
             if (id == null)
@@ -193,25 +201,35 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Sign_Date,Device_statustypes_id,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
+        public ActionResult Edit([Bind(Include = "id,DeviceConfig_id,Device_statustypes_id,ConcremoteDevice_id,Employee_1,Employee_2,Device_statustypes_id,Sign_Date,Active")] DeviceStatus deviceStatus, ConcremoteDevice concremoteDevice)
         {
             if (ModelState.IsValid)
             {
-                //check if deviceStatus is modified
-                db.Entry(deviceStatus).State = EntityState.Modified;
+                try
+                {
+                    //set new Sign_Date
+                    deviceStatus.Sign_Date = DateTime.Now;
 
-                //check if concremoteDevice is modified
-                db.Entry(concremoteDevice).State = EntityState.Modified;
-              //  db.DeviceStatus.Add(deviceStatus).Sign_Date = deviceStatus.Sign_Date = DateTime.Now;
+                    //check if deviceStatus is modified
+                    db.Entry(deviceStatus).State = EntityState.Modified;
 
-                //save modified changes to database
-                db.SaveChanges();
+                    //check if concremoteDevice is modified
+                    db.Entry(concremoteDevice).State = EntityState.Modified;
 
-                //Temp message when changes were succesfull
-                TempData["AlertMessage"] = "Device Edited Successfully";
+                    //save modified changes to database
+                    db.SaveChanges();
+                    
+                    //Temp message when changes were succesfull
+                    TempData["AlertMessage"] = deviceStatus.ConcremoteDevice.id + " Edited Successfully";
+                    //redirect to Index
+                    return RedirectToAction("Index");
+                }
 
-                //redirect to Index
-                return RedirectToAction("Index");
+                catch (Exception ex)
+                {
+                    //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+                }
             }
             return View(deviceStatus);
         }

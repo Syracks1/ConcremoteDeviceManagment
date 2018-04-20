@@ -11,7 +11,9 @@ namespace ConcremoteDeviceManagment.Controllers
     [HandleError]
     public class SliderController : Controller
     {
-        [Authorize(Roles = "Assembly,Admin")]
+        private BasDbContext db = new BasDbContext();
+
+        //    [Authorize(Roles = "Assembly,Admin")]
         // GET: Slider
         public ActionResult Index()
         {
@@ -26,21 +28,25 @@ namespace ConcremoteDeviceManagment.Controllers
 
         public ActionResult AddImage()
         {
+            var SliderDevice = from d in db.DeviceType
+                                   //where d.Price_id == d.Price_id
+                               orderby d.device_type_id
+                               select new { Id = d.device_type_id, Value = d.name };
+            ViewBag.SliderDevice = new SelectList(SliderDevice.Distinct(), "Id", "Value");
             return View();
         }
 
         [HttpPost]
         public ActionResult AddImage(HttpPostedFileBase ImagePath)
         {
-     
             if (ImagePath != null)
             {
                 // You can skip this block, because it is only to force the user to upload specific resolution pics
-              //  System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
+                System.Drawing.Image img = System.Drawing.Image.FromStream(ImagePath.InputStream);
                 //if ((img.Width != 800) || (img.Height != 356))
                 //{
                 //    ModelState.AddModelError("", "Image resolution must be 800 x 356 pixels");
-                //    return View();
+                //   return View();
                 //}
 
                 // Upload your pic
@@ -48,13 +54,13 @@ namespace ConcremoteDeviceManagment.Controllers
 
                 string path = System.IO.Path.Combine(Server.MapPath(@"\cdm\Content\images\"), pic);
                 ImagePath.SaveAs(path);
-                using (BasDbContext db = new BasDbContext())
-                {
-                    Gallery gallery = new Gallery { ImagePath = @"\cdm\Content\images\" + pic };
-                    db.gallery.Add(gallery);
-                    db.gallery.Add(gallery).DateAdded = gallery.DateAdded = DateTime.Now;
-                    db.SaveChanges();
-                }
+                //using (BasDbContext db = new BasDbContext())
+                //       {
+                Gallery gallery = new Gallery { ImagePath = @"\cdm\Content\images\" + pic };
+                db.gallery.Add(gallery);
+                db.gallery.Add(gallery).DateAdded = gallery.DateAdded = DateTime.Now;
+                db.SaveChanges();
+                //}
             }
             return RedirectToAction("Index");
         }

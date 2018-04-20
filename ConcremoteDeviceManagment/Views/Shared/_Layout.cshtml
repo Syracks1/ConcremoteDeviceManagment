@@ -7,6 +7,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <title>@ViewBag.Title - DeviceManagment</title>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/slider")
     @Styles.Render("~/Content/css")
@@ -22,6 +24,16 @@
     </div>
 
     <div class="container body-content">
+        @using Microsoft.AspNet.Identity
+
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <a class=text-right>
+            You are logged in as @User.Identity.GetUserName().
+
+            <span class="glyphicon glyphicon-ok-sign"></span>
+        </a>
+}
         @RenderBody()
         <hr />
         <footer>

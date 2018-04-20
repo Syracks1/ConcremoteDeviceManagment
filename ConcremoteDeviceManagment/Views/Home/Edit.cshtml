@@ -4,16 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Home"))
 
 {
     <h1>
         @Html.DisplayName("Edit Configuration")
-
     </h1>
-    <h2>
-      @*  @Html.DisplayFor(model => model.DeviceType.name)<br />*@dammit
-    </h2>
 
     if (TempData["AlertMessage"] != null)
     {
@@ -27,16 +23,16 @@
     <table class="table table-hover" id="dataTable">
         <tr>
             <th class="table-row">
-                @Html.DisplayName("BAS artikelnummer")
+                @Html.DisplayName("BAS ArtNumber")
             </th>
             <th class="table-row">
-                @Html.DisplayName("Beschrijving")
+                @Html.DisplayName("Description")
             </th>
             <th class="table-row">
-                @Html.DisplayName("Aantal")
+                @Html.DisplayName("Amount")
             </th>
             <th class="table-row">
-                @Html.DisplayName("Bouw Volgorde")
+                @Html.DisplayName("Assembly order")
             </th>
             <th class="table-row">
                 <a href="#" id="addNew" class="btn btn-success">Add New Row</a>
@@ -47,38 +43,37 @@
             int j = 0;
             foreach (var item in Model)
             {
-        <tr>
-            @*       @Html.HiddenFor(a => a[j].id)*@
-            @Html.HiddenFor(a => a[j].Device_config_id)
-            @Html.HiddenFor(a => a[j].DeviceConfig.device_type_id)
+                <tr>
+                    @Html.HiddenFor(a => a[j].id)
+                    @Html.HiddenFor(a => a[j].Device_config_id)
+                    @Html.HiddenFor(a => a[j].DeviceConfig.device_type_id)
 
-            @*                    @Html.HiddenFor(a => a[j].Price_id)*@
+                    <td class="table-row">
+                        @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, new { @class = "form-control" })
+                    </td>
 
-            <td class="table-row">
-                @Html.DropDownListFor(a => a[j].Price_id, (IEnumerable<SelectListItem>)ViewBag.SelectedCMI, null, new { @class = "form-control" })
-            </td>
-            <td class="table-row">
-                @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
-            </td>
-            <td class="table-row">
-                @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
-            </td>
-            @*<td class="table-row">
-            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
-        </td>*@
-            <td>
-                @if (j > 0)
-        {
-            <a href="#" id="remove" class="btn btn-danger">Remove</a>
-}
-            </td>
-        </tr>
+                    <td class="table-row">
+                        @Html.DisplayFor(a => a[j].Pricelist.description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].Pricelist.description, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].amount, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="table-row">
+                        @Html.EditorFor(a => a[j].assembly_order, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a[j].assembly_order, "", new { @class = "text-danger" })
+                    </td>
+                    @*<td class="table-row">
+                            @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
+                    <td>
+                        @if (j > 0)
+                        {
+                            <a href="#" id="remove" class="btn btn-danger">Remove</a>
+                        } @*refresh counter when item is deleted*@
+                    </td>
+                </tr>
                 j++;
             }
         }

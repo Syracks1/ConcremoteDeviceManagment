@@ -4,21 +4,29 @@
     ViewBag.Title = "Create Device";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create Device</h2>
-@using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    <fieldset>
-        <legend>Device Create</legend>
-        <div>
-            @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })
-            <br />
-        </div>
-        <div id="target">
-        </div>
-        <div id="log">
-        </div>
-    </fieldset>
+
+    <h2>Create Device</h2>
+    using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+    {
+        <fieldset>
+            <legend>Device Create</legend>
+            <div>
+                @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })
+                <br />
+            </div>
+            <div id="target">
+            </div>
+            <div id="log">
+            </div>
+        </fieldset>
+
+    }
+}
+else
+{
+    Response.Redirect("~/Account/Login");
 
 }
 @section Scripts {

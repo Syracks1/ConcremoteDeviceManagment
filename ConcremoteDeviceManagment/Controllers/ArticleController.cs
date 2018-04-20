@@ -1,6 +1,8 @@
 ﻿using ConcremoteDeviceManagment.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,15 +15,14 @@ namespace ConcremoteDeviceManagment.Controllers
         //call in database connection
         private BasDbContext db = new BasDbContext();
 
+        public object[] Price_id { get; private set; }
+
         // GET: Device
-        public ActionResult Index(string sortOrder, string PriceCMI, FormCollection formCollection)
+        public ActionResult Index(string sortOrder, string PriceCMI, string SelectedLeverancier)
         {
             //dropdown for "Leverancier"
-            var SelectedLeverancier = (from d in db.pricelist
-                                       select new { Id = d.Leverancier, Value = d.Leverancier }).Distinct();
 
-            ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
-
+            ViewBag.SelectedLeverancier = new SelectList(db.pricelist.Select(d => d.Leverancier).Distinct());
             //sort order different parameters
             ViewBag.CMISortParm = string.IsNullOrEmpty(sortOrder) ? "CMI_desc" : "";
             ViewBag.ActiveSortParm = sortOrder == "Active" ? "Active_desc" : "Active";
@@ -41,11 +42,11 @@ namespace ConcremoteDeviceManagment.Controllers
                     break;
                 //order Active ascending
                 case "Active":
-                    pricelist = pricelist.OrderBy(s => s.Active);
+                    pricelist = pricelist.Where(s => s.Active == true);
                     break;
                 //order Active descending
                 case "Active_desc":
-                    pricelist = pricelist.OrderByDescending(s => s.Active);
+                    pricelist = pricelist.Where(s => s.Active == false);
                     break;
                 //order Price ascending
                 case "Price":
@@ -87,7 +88,12 @@ namespace ConcremoteDeviceManagment.Controllers
 
             foreach (var item in pricelist)
             {
-                //TODO: add filter for leverancier, use dropdownlist
+                if (!string.IsNullOrEmpty(SelectedLeverancier))
+                {
+                    //filter item in pricelist where Dropdown contains Leverancier
+
+                    pricelist = pricelist.Where(s => s.Leverancier.Contains(SelectedLeverancier));
+                }
                 if (!string.IsNullOrEmpty(PriceCMI))
                 {
                     //filter item in pricelist where textbox contains CMI
@@ -112,7 +118,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Details", pricelist);
         }
 
         //Check if user is Assembly or Admin
@@ -127,14 +133,14 @@ namespace ConcremoteDeviceManagment.Controllers
                                       orderby d.Leverancier
                                       select new { Id = d.Leverancier, Value = d.Leverancier };
             ViewBag.SelectedLeverancier = new SelectList(SelectedLeverancier.Distinct(), "Id", "Value");
-            return View();
+            return PartialView("Create");
         }
 
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public JsonResult Create(Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -145,15 +151,14 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
-                    TempData["SuccesMessage"] = "Article " + pricelist.bas_art_nr + " Added Successfully.";
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
                 }
-                catch
+                catch (Exception ex)
                 {
-                    TempData["AlertMessage"] = "Creating Article went wrong, " + "please try again";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
                 }
             }
-            return View(pricelist);
+            return Json(pricelist, JsonRequestBehavior.AllowGet);
         }
 
         //Check if user is Assembly or Admin
@@ -181,14 +186,14 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if Data is not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Edit", pricelist);
         }
 
         // POST: Device/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Price_id,CategoryId,SubCategoryId,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
+        public ActionResult Edit([Bind(Include = "Price_id,price,art_lev_nr,bas_art_nr,Leverancier,description,active")] Pricelist pricelist)
         {
             if (ModelState.IsValid)
             {
@@ -199,18 +204,17 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when Article is succesfully edited
-                    TempData["SuccesMessage"] = "Article " + pricelist.bas_art_nr + " Edited Successfully.";
-                    return RedirectToAction("Index");
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch (Exception ex)
                 {
                     //Temp message to inform user saving article failed
-                    TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Failed.";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
                 }
             }//Temp message to inform user something went wrong
             TempData["AlertMessage"] = "Something went wrong, " + "contact support or try again later";
 
-            return View(pricelist);
+            return PartialView("Edit", pricelist);
         }
 
         //Check if user is Assembly or Admin
@@ -231,7 +235,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 //if ID is not found, return this
                 return HttpNotFound();
             }
-            return View(pricelist);
+            return PartialView("Delete", pricelist);
         }
 
         // POST: Device/Delete/5
@@ -239,15 +243,34 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            // find id in pricelist
-            Pricelist pricelist = db.pricelist.Find(id);
-            //delete id from pricelist
-            db.pricelist.Remove(pricelist);
-            //save changes
-            db.SaveChanges();
-            //Temp message when Article is deleted succesfully
-            TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Deleted Successfully.";
-            return RedirectToAction("Index");
+            try
+            {
+                // find id in pricelist
+                Pricelist pricelist = db.pricelist.Find(id);
+                Stock stock = db.Stock.Find(pricelist);
+                if ( id == pricelist.Price_id && id == stock.Price_id)
+                {
+                    //delete id from pricelist
+                    db.pricelist.Remove(pricelist);
+                    db.Stock.Remove(stock);
+                    //save changes
+                    db.SaveChanges();
+                    //Temp message when Article is deleted succesfully
+                }
+                else
+                {
+                    // find id in pricelist
+                    //Pricelist pricelist = db.pricelist.Find(id);
+                    //delete id from pricelist
+                    db.pricelist.Remove(pricelist);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

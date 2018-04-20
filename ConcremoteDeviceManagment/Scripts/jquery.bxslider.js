@@ -6,9 +6,7 @@
  */
 
 ; (function ($) {
-
     var defaults = {
-
         // GENERAL
         mode: 'horizontal',
         slideSelector: '',
@@ -93,7 +91,6 @@
     };
 
     $.fn.bxSlider = function (options) {
-
         if (this.length === 0) {
             return this;
         }
@@ -1611,5 +1608,4 @@
         // returns the current jQuery object
         return this;
     };
-
 })(jQuery);

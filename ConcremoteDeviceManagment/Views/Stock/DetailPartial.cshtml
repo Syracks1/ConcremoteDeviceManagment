@@ -1,0 +1,79 @@
+﻿@model ConcremoteDeviceManagment.Models.Stock
+
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Stock Detail</h3>
+    </div>    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("BAS artikelnummer")
+        </dt>
+
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.bas_art_nr, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Prijs")
+        </dt>
+
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.Price, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Huidige voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Stock_amount, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Minimale voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.min_stock, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Maximale voorraad")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.max_stock, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Beschrijving")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.description, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayName("Leverancier")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.Leverancier, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        <dt>
+            @Html.DisplayName("Artikelnummer Leverancier")
+        </dt>
+        <dd>
+            <div>
+                @Html.TextBoxFor(model => model.Pricelist.art_lev_nr, new { @class = "form-control required", @disabled = "disabled" })
+            </div>
+        </dd>
+    </dl>
+</div>
+<p>
+    <button class="btn btn-warning" data-dismiss="modal">Close</button>
+</p>

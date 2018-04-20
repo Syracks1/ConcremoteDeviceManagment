@@ -3,7 +3,6 @@ using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -20,12 +19,24 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            //create list to display in View
+            ViewBag.MaxStockSort = sortOrder == "Active" ? "Not Active" : "Active";
             var Device = (from d in db.DeviceConfig
                               //where d.Device_config_id ==
                           select d).DistinctBy(p => p.Device_config_id);
+            switch (sortOrder)
+            {
+                //order CMI descending
+                case "Not Active":
+                    Device = Device.Where(s => s.Active == false);
+                    break;
+
+                default:
+                    Device = Device.Where(s => s.Active == true);
+                    break;
+            }
+            //create list to display in View
 
             return View(Device);
         }
@@ -33,38 +44,32 @@ namespace ConcremoteDeviceManagment.Controllers
         //check if logged in user is Assembly or Admin
         //if false, return to login
         [Authorize(Roles = "Assembly, Admin")]
+        [HttpGet]
         public ActionResult Create()
         {
+            //dropdownlist for Device
 
             var SelectedDevice = from d in db.DeviceType
-                                          //    where d.Price_id == d.Price_id
-                                      orderby d.device_type_id
-                                      select new { Id = d.device_type_id, Value = d.name };
-
-            //dropdownlist for Device
-            //var SelectedDevice = from c in db.DeviceType
-            //                     orderby c.device_type_id
-            //                     select new { Id = c.device_type_id, Value = c.name };
-            //ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
+                                     //where d.Price_id == d.Price_id
+                                 orderby d.device_type_id
+                                 select new { Id = d.device_type_id, Value = d.name };
             ViewBag.SelectedDevice = new SelectList(SelectedDevice.Distinct(), "Id", "Value");
-            return View();
+            return PartialView("Create");
         }
 
         // POST: Device/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DeviceConfig model,[Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
+        public JsonResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
         {
-       //     model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
-            
-                //check if modelstate is valid
-                if (ModelState.IsValid)
-                //model.DeviceList = new SelectList(db.DeviceType, "device_type_id", "name");
+            //check if modelstate is valid
+            if (ModelState.IsValid)
             {
                 //if modelstate is valid, try this
                 try
                 {
+                    db.DeviceConfig.Add(deviceConfig).device_type = null;
                     db.DeviceConfig.Add(deviceConfig).Date = DateTime.Now;
                     db.DeviceConfig.Add(deviceConfig).VersionNr = 0;
                     db.DeviceConfig.Add(deviceConfig).Active = true;
@@ -78,20 +83,18 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
-                    TempData["SuccesMessage"] = "Config for " + deviceConfig.DeviceType.name + " Added Successfully.";
-                    return RedirectToAction("Edit");
+                    return Json(new { success = true });
                 }
                 //if try failed, catch tempData
-                catch
+                catch (Exception ex)
                 {
-                    TempData["AlertMessage"] = "Creating Config went wrong, " + "please try again";
+                    Trace.TraceError(ex.Message + " Something went wrong.");
                 }
             }
             else
             {
-                TempData["AlertMessage"] = "Something went wrong, " + "please try again";
             }
-            return View(deviceConfig);
+            return Json(deviceConfig, JsonRequestBehavior.AllowGet);
         }
 
         //check if logged in user is Assembly or Admin
@@ -102,12 +105,19 @@ namespace ConcremoteDeviceManagment.Controllers
             //create new list
             var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
 
-            //create new SelectList in Device_Pricelist
-            var SelectedCMI = (from d in db.pricelist
-                               select new { d.Price_id, Value = d.bas_art_nr }).Distinct();
+            //create new SelectList in pricelist
+            //based on Price_id on values in List<Device_Pricelist>
+            //I know this is wrong and not working
+
+            var SelectedCMI = from Item in db.pricelist
+                              where Item.Price_id == Item.Price_id
+                              orderby Item.Price_id
+                              select new { Id = Item.Price_id, Name = Item.bas_art_nr };
+            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Id", "Name");
 
             //call viewbag based on SelectedCMI query
-            ViewBag.SelectedCMI = new SelectList(SelectedCMI.Distinct(), "Price_id", "Value");
+            //  ViewBag.SelectedCMI = new SelectList(SelectedCMI);
+            // ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
 
             return View(Device_Pricelist);
         }
@@ -116,13 +126,12 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Pricelist)
         {
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     var deviceConfig = db.DeviceConfig.Find(Device_Pricelist.First().Device_config_id);
-                //    deviceConfig.Device_config_id++;
+                    //    deviceConfig.Device_config_id++;
                     //deviceConfig.device_type_id = 13;
                     deviceConfig.Active = true;
                     deviceConfig.VersionNr++;
@@ -144,14 +153,13 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+                      TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
                     Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
-
                 }
-
             }
             return View();
         }
+
         [Authorize(Roles = "Assembly, Admin")]
         // GET: Stock/Delete/5
         public ActionResult Delete(int? id)
@@ -165,20 +173,36 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(deviceConfig);
+            return PartialView("Delete", deviceConfig);
         }
 
         // POST: Stock/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            DeviceConfig deviceConfig = db.DeviceConfig.Find(id);
-            db.DeviceConfig.Remove(deviceConfig);
-         //   db.Device_Pricelist.Remove(Device_config_id);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                BasDbContext dc = new BasDbContext();
+                //    int q = Convert.ToInt32(id);
+                var Config = from emps in dc.DeviceConfig
+                             join depts in dc.Device_Pricelist
+                             on emps.Device_config_id equals depts.Device_config_id
+                             where id == emps.Device_config_id
+                             select emps;
+
+                dc.DeviceConfig.RemoveRange(Config);
+                // dc.Device_Pricelist.Remove();
+                dc.SaveChanges();
+                //return "ok";
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+            }
+            return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
         }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

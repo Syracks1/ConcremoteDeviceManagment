@@ -41,20 +41,20 @@ namespace ConcremoteDeviceManagment.Models
         public string Standard { get; set; }
         public string Unit { get; set; }
         public decimal? Quantity { get; set; }
-
-        //  [DataType(DataType.Currency)]
-        //[DisplayFormat(DataFormatString = "{0:C2}")]
+        [Required(ErrorMessage = "Fill in Price")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
-
+        [Required(ErrorMessage = "Fill in")]
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
 
-        [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
+        [Required(ErrorMessage = "Insert BAS CMI")]
         public string bas_art_nr { get; set; }
-
+        [Required(ErrorMessage = "Insert Something")]
         [StringLength(255, MinimumLength = 1)]
         public string Leverancier { get; set; }
-
+        [Required(ErrorMessage = "Insert Description")]
         public string description { get; set; }
         public int? PreId { get; set; }
         public decimal? PriceProcurement { get; set; }
@@ -99,7 +99,9 @@ namespace ConcremoteDeviceManagment.Models
         [Required]
         public int Device_config_id { get; set; }
 
+        [Required(ErrorMessage = "Voer een Prijs ID in")]
         public int device_type_id { get; set; }
+
         public string device_type { get; set; }
         public bool Active { get; set; }
         public int VersionNr { get; set; }
@@ -133,8 +135,9 @@ namespace ConcremoteDeviceManagment.Models
         public string Employee_1 { get; set; }
         public string Employee_2 { get; set; }
 
-        [Required(ErrorMessage = "Selecteer een datum")]
+        //[Required(ErrorMessage = "Selecteer een datum")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Sign_Date { get; set; }
 
         [ForeignKey("DeviceConfig_id")]
@@ -166,26 +169,27 @@ namespace ConcremoteDeviceManagment.Models
         // public int device_type_id { get; set; }
         public string ImagePath { get; set; }
 
-        public DateTime DateAdded { get; set; }
-        //[ForeignKey("device_type_id")]
+        public DateTime? DateAdded { get; set; }
+        public int? device_type_id { get; set; }
 
-        //public virtual DeviceType DeviceType { get; set; }
+        [ForeignKey("device_type_id")]
+        public virtual DeviceType DeviceType { get; set; }
     }
 
     [Table("Device_Pricelist")]
     public class Device_Pricelist
     {
         [Key]
-        [Column(Order = 0)]
+        // [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        //  [Key]
+        //   [Column(Order = 1)]
         public int Device_config_id { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        // [Key]
+        // [Column(Order = 2)]
         [Required(ErrorMessage = "Voer een onderdeel in")]
         public int Price_id { get; set; }
 

@@ -10,7 +10,6 @@
     <p class="alert alert-success" id="successMessage">@TempData["AlertMessage"]</p>
 }
 
-
 <table class="table table-hover">
     <tr>
         <th>
@@ -44,10 +43,23 @@
                 @Html.DisplayFor(modelItem => item.AspNetUsers.AccessFailedCount)
             </td>
             <td>
-                <button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>
-                @*@Html.ActionLink("UserEdit", "UserEdit")*@
+                @*<button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>*@
+                <a href="@Url.Action("UserEditPartial", "Manage", new { id = item.UserId })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                <a href="@Url.Action("UserDelete", "Manage", new { id = item.UserId })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+
             </td>
         </tr>
     }
 </table>
 <button onclick="location.href='@Url.Action("Index", "Manage")';return false; " class="btn btn-primary">Back to user menu</button>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+}

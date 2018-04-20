@@ -5,14 +5,13 @@ using Microsoft.Owin.Security;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Controllers
 {
-  //  [RequireHttps]
+    //  [RequireHttps]
     [HandleError]
     [Authorize]
     public class AccountController : Controller
@@ -62,26 +61,6 @@ namespace ConcremoteDeviceManagment.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //public static string HashPassword(string Password)
-        //{
-        //    byte[] salt;
-        //    byte[] buffer2;
-        //    if (Password == null)
-        //    {
-        //        throw new ArgumentNullException("Password");
-        //    }
-        //    using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(Password, 0x10, 0x3e8))
-        //    {
-        //        salt = bytes.Salt;
-        //        buffer2 = bytes.GetBytes(0x20);
-        //    }
-        //    byte[] dst = new byte[0x31];
-        //    Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
-        //    Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
-        //    return Convert.ToBase64String(dst);
-        //}
-
         //
         // POST: /Account/Login
         [HttpPost]
@@ -103,8 +82,8 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
 
-                    // Uncomment to debug locally  
-                    // ViewBag.Link = callbackUrl;
+                    // Uncomment to debug locally
+                    ViewBag.Link = callbackUrl;
                     //ViewBag.errorMessage = "You must have a confirmed email to log on. "
                     //                     + "The confirmation token has been resent to your email account.";
                     TempData["errorMessage"] = "You must have a confirmed email to log on. "
@@ -120,11 +99,14 @@ namespace ConcremoteDeviceManagment.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Stock");
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -184,6 +166,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             return View();
         }
+
         private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
         {
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
@@ -194,6 +177,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
             return callbackUrl;
         }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -208,7 +192,7 @@ namespace ConcremoteDeviceManagment.Controllers
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
-                       result = UserManager.AddToRole(user.Id, "StandardUser");
+                        result = UserManager.AddToRole(user.Id, "StandardUser");
                     {
                         //  Comment the following line to prevent log in until the user is confirmed.
                         //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -226,7 +210,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 {
                     //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
                     Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
-
                 }
 
                 // AddErrors(result);
@@ -235,7 +218,6 @@ namespace ConcremoteDeviceManagment.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         //
         // GET: /Account/ConfirmEmail
@@ -276,7 +258,7 @@ namespace ConcremoteDeviceManagment.Controllers
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a> <br /><br /> If you did not ask for this request, just ignore this email");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -413,7 +395,6 @@ namespace ConcremoteDeviceManagment.Controllers
             }
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]

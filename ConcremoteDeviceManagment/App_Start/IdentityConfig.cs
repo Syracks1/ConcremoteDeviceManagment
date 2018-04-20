@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using ConcremoteDeviceManagment.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ConcremoteDeviceManagment.Models;
 using SendGrid;
-using System.Net;
+using System;
 using System.Configuration;
 using System.Diagnostics;
-
+using System.Net;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ConcremoteDeviceManagment
 {
-
     //Sendgrid is operational, don't store password data in web.config
     public class EmailService : IIdentityMessageService
     {
@@ -28,37 +23,20 @@ namespace ConcremoteDeviceManagment
             await configSendGridasync(message);
         }
 
-        // Use NuGet to install SendGrid (Basic C# client lib) 
+        // Use NuGet to install SendGrid (Basic C# client lib)
         private async Task configSendGridasync(IdentityMessage message)
         {
-            var myMessage = new SendGridMessage();
-            myMessage.AddTo(message.Destination);
-            myMessage.From = new System.Net.Mail.MailAddress(
-                                "roland.huijskes@planet.nl", "Roland H.");
+            var myMessage = new MailMessage();
+            myMessage.To.Add(new MailAddress(message.Destination));
+            myMessage.From = new MailAddress("alarm@concremote.com", "CMD Support");
             myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
-
-            var credentials = new NetworkCredential(
-                       ConfigurationManager.AppSettings["mailAccount"],
-                       ConfigurationManager.AppSettings["mailPassword"]
-                       );
-
-            // Create a Web transport for sending email.
-            var transportWeb = new Web(credentials);
-
+            myMessage.IsBodyHtml = true;
+            myMessage.Body = message.Body;
+            NetworkCredential basicauthenticationinfo = new NetworkCredential("alarm@concremote.com", "");
+            var smtpClient = new SmtpClient();
             try
             {
-                // Send the email.
-                if (transportWeb != null)
-                {
-                    await transportWeb.DeliverAsync(myMessage);
-                }
-                else
-                {
-                    Trace.TraceError("Failed to create Web transport.");
-                    await Task.FromResult(0);
-                }
+                await smtpClient.SendMailAsync(myMessage);
             }
             catch (Exception ex)
             {
@@ -66,7 +44,6 @@ namespace ConcremoteDeviceManagment
             }
         }
     }
-
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -88,16 +65,16 @@ namespace ConcremoteDeviceManagment
 
             //Configure validation logic for passwords
 
-           manager.PasswordValidator = new PasswordValidator
-           {
-               RequiredLength = 6,
-               RequireNonLetterOrDigit = false,
-               RequireDigit = true,
-               RequireLowercase = true,
-               RequireUppercase = true,
-           };
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
+            };
 
-           // Configure user lockout defaults
+            // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             //Time user is locked out
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(10);

@@ -2,7 +2,9 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -102,18 +104,6 @@ namespace ConcremoteDeviceManagment.Controllers
                 message = ManageMessageId.Error;
             }
             return RedirectToAction("ManageLogins", new { Message = message });
-        }
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult ManageAccounts()
-        {
-            //Account query for data on page
-            var Account = from d in db.AspNetUserRoles
-                         // join c in db.AspNetUserRoles on d.Id equals c.UserId
-                          orderby d.RoleId
-                          select d;
-
-            return View(Account);
         }
 
         // GET: /Manage/AddPhoneNumber
@@ -349,42 +339,81 @@ namespace ConcremoteDeviceManagment.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserEdit(string Id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageAccounts()
         {
-            var SelectedRoles = from r in db.AspNetRoles
-                                orderby r.Id
-                                select new { r.Id, r.Name };
+            //Account query for data on page
+            var Account = from d in db.AspNetUserRoles
+                              // join c in db.AspNetUserRoles on d.Id equals c.UserId
+                          orderby d.RoleId
+                          select d;
 
-            ViewBag.SelectedRoles = new SelectList(SelectedRoles, "Id", "Name");
+            return View(Account);
+        }
+
+        public ActionResult UserDelete(string Id)
+        {
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUserRoles aspNetUser = db.AspNetUserRoles.Find(Id);
-            if (aspNetUser == null)
+            AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(Id);
+            if (aspNetUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUser);
+            return PartialView("UserDelete", aspNetUserRoles);
         }
 
+        [HttpPost, ActionName("UserDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            try
+            {
+                AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(id);
+                AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+                db.AspNetUserRoles.Remove(aspNetUserRoles);
+                db.AspNetUsers.Remove(aspNetUsers);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult UserEditPartial(string Id)
+        {
+            var SelectedRoles = from r in db.AspNetRoles
+                                orderby r.Id
+                                select new { r.Id, r.Name };
+            ViewBag.SelectedRoles = new SelectList(SelectedRoles, "Id", "Name");
+            var User = db.AspNetUserRoles.Find(Id);
+            if (User == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("UserEditPartial", User);
+        }
+
+        // POST: /Stock/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "UserId,RoleId,Id,Email,Username,Name")] AspNetUserRoles aspNetUserRoles, AspNetUsers aspNetUsers)
+        public ActionResult UserEditPartial([Bind(Include = "UserId,RoleId,Id,Email,Username,Name")] AspNetUserRoles aspNetUserRoles, AspNetUsers aspNetUsers)
         {
-            //    aspNetUserRoles.RoleId = (formCollection["SelectedRoles"]);
-            //ManageMessageId? message;
-
             if (ModelState.IsValid)
             {
                 db.Entry(aspNetUsers).State = EntityState.Modified;
-             //   db.Entry(aspNetRoles).State = EntityState.Unchanged;
                 db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully " ;
-                return RedirectToAction("ManageAccounts");
+                TempData["AlertMessage"] = "User " + aspNetUserRoles.AspNetUsers.Email + " has Changed Succesfully ";
+                return Json(new { success = true });
             }
-            return View(aspNetUserRoles);
+            return PartialView("UserEditPartial", aspNetUserRoles);
         }
 
         #region Helpers

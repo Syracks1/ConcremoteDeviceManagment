@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace ConcremoteDeviceManagment.Models
 {
@@ -32,6 +31,7 @@ namespace ConcremoteDeviceManagment.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -67,9 +67,11 @@ namespace ConcremoteDeviceManagment.Models
     {
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+(@basrt\.eu|@concremote\.com)$", ErrorMessage = "Registration limited to BASBV and Concremote")]
+        //https://stackoverflow.com/questions/5554524/only-allow-registrations-from-specific-email-domains
         [Display(Name = "Email")]
         public string Email { get; set; }
-        
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -90,7 +92,7 @@ namespace ConcremoteDeviceManagment.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be a    t least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

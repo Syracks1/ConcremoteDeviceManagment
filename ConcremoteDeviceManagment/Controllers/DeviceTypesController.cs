@@ -41,7 +41,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Create()
         {
             //return Page
-            return View();
+            return PartialView("Create");
         }
 
         //check if logged in user is Assembly or Admin
@@ -56,13 +56,12 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.DeviceType.Add(deviceType);            
+                db.DeviceType.Add(deviceType);
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device " + deviceType.name + " Added Successfully.";
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-
-            return View(deviceType);
+            return Json(deviceType, JsonRequestBehavior.AllowGet);
         }
 
         //check if logged in user is Assembly or Admin
@@ -81,7 +80,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(deviceType);
+            return PartialView("Edit", deviceType);
         }
 
         //check if logged in user is Assembly or Admin
@@ -99,9 +98,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device " + deviceType.name + " Edited Successfully.";
-                return RedirectToAction("Index");
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
-            return View(deviceType);
+            return PartialView("Edit", deviceType);
         }
 
         //check if logged in user is Assembly or Admin
@@ -120,7 +119,7 @@ namespace ConcremoteDeviceManagment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(deviceType);
+            return PartialView("Delete", deviceType);
         }
 
         // POST: DeviceTypes/Delete/5
@@ -132,7 +131,7 @@ namespace ConcremoteDeviceManagment.Controllers
             db.DeviceType.Remove(deviceType);
             db.SaveChanges();
             TempData["AlertMessage"] = "Device " + deviceType.name + " Deleted Successfully.";
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

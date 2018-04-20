@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<ConcremoteDeviceManagment.Models.Device_statustypes>
 
 @{
-    ViewBag.Title = "Device status soorten";
+    ViewBag.Title = "Device status Types";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Device status soorten</h2>
+<h2>Device Status Types</h2>
 
 <p>
     @*@Html.ActionLink("Maak nieuw status", "Create")*@
-    <button onclick="location.href='@Url.Action("Create", "Device_statustypes")';return false;" class="btn btn-primary">Maak nieuwe status</button>
+    <a class="btn btn-success" data-modal="" href="~/Device_statustypes/Create" id="btnCreate">Create Device Status</a>
 
 </p>
 @if (TempData["AlertMessage"] != null)
@@ -31,10 +31,19 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                <button onclick="location.href='@Url.Action("Edit", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-                <button onclick="location.href='@Url.Action("Delete", "Device_statustypes", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
+                <a href="@Url.Action("Edit", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                <a href="@Url.Action("Delete", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
             </td>
         </tr>
     }
-
 </table>
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/PopUpScripts/Stock.js")
+}
