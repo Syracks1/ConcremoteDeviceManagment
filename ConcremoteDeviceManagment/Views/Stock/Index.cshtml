@@ -10,9 +10,9 @@
 {
     <p>
         <b>CMI: </b>@Html.Editor("StockCMI")
-        <input type="submit" value="Zoek CMI" class="btn" />
+        @*<input type="submit" value="Zoek CMI" class="btn" />*@
         <b>Onderdeel:</b> @Html.Editor("searchString")
-        <input type="submit" value="Zoek onderdeel" class="btn" /> |
+        <input type="submit" value="Zoek" class="btn" /> |
 
         <button onclick="location.href='@Url.Action("Create", "Stock")';return false;" class="btn btn-primary">Create New</button>
     </p>
