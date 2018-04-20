@@ -16,7 +16,7 @@
     <p>
         <b>CMI: </b>@Html.Editor("StockCMI")
         <b>Article:</b> @Html.Editor("searchString")
-        <input type="submit" value="Search CMI" class="btn" />
+        <input type="submit" value="Search CMI" class="btn btn-group-vertical" />
 
         @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
     {

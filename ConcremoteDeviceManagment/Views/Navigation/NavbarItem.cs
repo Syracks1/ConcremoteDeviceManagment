@@ -24,7 +24,7 @@ namespace ConcremoteDeviceManagment.Models
             {
                 //Articles menu, subclasses : Stock, Pricelist
 
-                topNav.Add(new NavbarItem() { Id = 1, action = "", nameOption = "Articles", controller = "", isParent = true, parentId = -1 });
+                topNav.Add(new NavbarItem() { Id = 1, action = "", nameOption = "Articles", controller = "", isParent = true, parentId = -1});
                 topNav.Add(new NavbarItem() { Id = 2, action = "Index", nameOption = "Stock", controller = "Stock", isParent = false, parentId = 1 });
                 topNav.Add(new NavbarItem() { Id = 3, action = "Index", nameOption = "Pricelist", controller = "Article", isParent = false, parentId = 1 });
 

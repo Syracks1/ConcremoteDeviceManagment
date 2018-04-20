@@ -27,13 +27,13 @@
         @using Microsoft.AspNet.Identity
 
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
-    {
-        <a class=text-right>
-            You are logged in as @User.Identity.GetUserName().
+        {
+            <a class=text-right>
+                You are logged in as @User.Identity.GetUserName().
 
-            <span class="glyphicon glyphicon-ok-sign"></span>
-        </a>
-}
+                <span class="glyphicon glyphicon-ok-sign"></span>
+            </a>
+        }
         @RenderBody()
         <hr />
         <footer>
