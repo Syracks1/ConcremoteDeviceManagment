@@ -45,6 +45,7 @@
             <td>
                 @*<button onclick="location.href='@Url.Action("UserEdit","Manage", new { id=item.UserId})';return false;" class="btn btn-primary">Edit</button>*@
                 <a href="@Url.Action("UserEditPartial", "Manage", new { id = item.UserId })" data-modal=""><span class="btn btn-primary">Edit</span></a>
+                <a href="@Url.Action("UserDelete", "Manage", new { id = item.UserId })" data-modal=""><span class="btn btn-danger">Delete</span></a>
 
             </td>
         </tr>

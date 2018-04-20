@@ -429,6 +429,7 @@
     <Content Include="Views\Stock\EditPartial.cshtml" />
     <Content Include="Views\Manage\UserEditPartial.cshtml" />
     <Content Include="Views\Shared\Form_layout.cshtml" />
+    <Content Include="Views\Manage\UserDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
