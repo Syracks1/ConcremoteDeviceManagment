@@ -67,6 +67,8 @@ namespace ConcremoteDeviceManagment.Models
     {
         [Required]
         [EmailAddress]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+(@basrt\.eu|@concremote\.com)$", ErrorMessage = "Registration limited to BASBV and Concremote")]
+        //https://stackoverflow.com/questions/5554524/only-allow-registrations-from-specific-email-domains
         [Display(Name = "Email")]
         public string Email { get; set; }
 

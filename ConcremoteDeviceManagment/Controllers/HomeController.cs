@@ -153,7 +153,7 @@ namespace ConcremoteDeviceManagment.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //  TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
+                      TempData["AlertMessage"] = "Saving Data Failed, " + "Try Again";
                     Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
                 }
             }

@@ -98,9 +98,9 @@ namespace ConcremoteDeviceManagment.Controllers
                 db.Entry(deviceType).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["AlertMessage"] = "Device " + deviceType.name + " Edited Successfully.";
-                return RedirectToAction("Index");
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
-            return View(deviceType);
+            return PartialView("Edit", deviceType);
         }
 
         //check if logged in user is Assembly or Admin

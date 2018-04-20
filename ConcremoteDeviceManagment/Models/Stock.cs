@@ -41,20 +41,20 @@ namespace ConcremoteDeviceManagment.Models
         public string Standard { get; set; }
         public string Unit { get; set; }
         public decimal? Quantity { get; set; }
-
-          [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Fill in Price")]
+        [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
-
+        [Required(ErrorMessage = "Fill in")]
         [StringLength(255, MinimumLength = 1)]
         public string art_lev_nr { get; set; }
 
-        [Required(ErrorMessage = "Voer een BAS artikelnummer in")]
+        [Required(ErrorMessage = "Insert BAS CMI")]
         public string bas_art_nr { get; set; }
-
+        [Required(ErrorMessage = "Insert Something")]
         [StringLength(255, MinimumLength = 1)]
         public string Leverancier { get; set; }
-
+        [Required(ErrorMessage = "Insert Description")]
         public string description { get; set; }
         public int? PreId { get; set; }
         public decimal? PriceProcurement { get; set; }

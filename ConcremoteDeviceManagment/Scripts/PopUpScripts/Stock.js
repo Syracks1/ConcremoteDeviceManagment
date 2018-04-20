@@ -15,19 +15,14 @@ function bindForm(dialog) {
     $('form', dialog).submit(function () {
         $('#progress').show();
         $.ajax({
-            url: form.action,
+            url: this.action,
             type: this.method,
-            data: $(form).serialize(),
+            data: $(this).serialize(),
             success: function (result) {
                 if (result.success) {
                     $('#myModal').modal('hide');
                     $('#progress').hide();
                     location.reload();
-
-                    $.notify(data.message, {
-                        globalPosition: "top center",
-                        className: "success"
-                    });
                 } else {
                     $('#progress').hide();
                     $('#myModalContent').html(result);

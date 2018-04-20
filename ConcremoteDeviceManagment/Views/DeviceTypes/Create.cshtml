@@ -1,9 +1,15 @@
 ﻿@model ConcremoteDeviceManagment.Models.DeviceType
 
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Form_layout.cshtml";
+}
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 
 {
-    using (Html.BeginForm("Create", "DeviceType", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    using (Html.BeginForm("Create", "DeviceTypes", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         <div class="modal-header">

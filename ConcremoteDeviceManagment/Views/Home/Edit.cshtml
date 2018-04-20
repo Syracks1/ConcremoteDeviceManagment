@@ -68,7 +68,7 @@
                             @Html.DisplayFor(a => a[j].DeviceConfig.Date, new { htmlAttributes = new { @class = "form-control" } })
                         </td>*@
                     <td>
-                        @if (j >= 0)
+                        @if (j > 0)
                         {
                             <a href="#" id="remove" class="btn btn-danger">Remove</a>
                         } @*refresh counter when item is deleted*@

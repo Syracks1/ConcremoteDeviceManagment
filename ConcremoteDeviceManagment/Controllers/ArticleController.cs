@@ -15,6 +15,8 @@ namespace ConcremoteDeviceManagment.Controllers
         //call in database connection
         private BasDbContext db = new BasDbContext();
 
+        public object[] Price_id { get; private set; }
+
         // GET: Device
         public ActionResult Index(string sortOrder, string PriceCMI, string SelectedLeverancier)
         {
@@ -143,7 +145,7 @@ namespace ConcremoteDeviceManagment.Controllers
             if (ModelState.IsValid)
             {
                 try
-                { 
+                {
                     //Add data to pricelist table
                     db.pricelist.Add(pricelist);
                     //save changes to database
@@ -202,12 +204,12 @@ namespace ConcremoteDeviceManagment.Controllers
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when Article is succesfully edited
-                    return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch (Exception ex)
                 {
                     //Temp message to inform user saving article failed
-                    TempData["AlertMessage"] = "Article " + pricelist.bas_art_nr + " Edited Failed.";
+                    Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
                 }
             }//Temp message to inform user something went wrong
             TempData["AlertMessage"] = "Something went wrong, " + "contact support or try again later";
@@ -241,14 +243,34 @@ namespace ConcremoteDeviceManagment.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            // find id in pricelist
-            Pricelist pricelist = db.pricelist.Find(id);
-            //delete id from pricelist
-            db.pricelist.Remove(pricelist);
-            //save changes
-            db.SaveChanges();
-            //Temp message when Article is deleted succesfully
-            return Json(new { success = true, message = "test" }, JsonRequestBehavior.AllowGet);
+            try
+            {
+                // find id in pricelist
+                Pricelist pricelist = db.pricelist.Find(id);
+                Stock stock = db.Stock.Find(pricelist);
+                if ( id == pricelist.Price_id && id == stock.Price_id)
+                {
+                    //delete id from pricelist
+                    db.pricelist.Remove(pricelist);
+                    db.Stock.Remove(stock);
+                    //save changes
+                    db.SaveChanges();
+                    //Temp message when Article is deleted succesfully
+                }
+                else
+                {
+                    // find id in pricelist
+                    //Pricelist pricelist = db.pricelist.Find(id);
+                    //delete id from pricelist
+                    db.pricelist.Remove(pricelist);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message + " SendGrid probably not configured correctly.");
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
