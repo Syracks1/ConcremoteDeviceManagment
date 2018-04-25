@@ -42,7 +42,7 @@ namespace ConcremoteDeviceManagment.Models
 
                     //Manage menu, subclasses : Device Type, Status Types, Slider
 
-                    topNav.Add(new NavbarItem() { Id = 7, action = "", nameOption = "Manage Stuff", controller = "", isParent = true, parentId = -1 });
+                    topNav.Add(new NavbarItem() { Id = 7, action = "", nameOption = "Manage Content", controller = "", isParent = true, parentId = -1 });
                     topNav.Add(new NavbarItem() { Id = 8, action = "Index", nameOption = "Device Type", controller = "DeviceTypes", isParent = true, parentId = 7 });
                     topNav.Add(new NavbarItem() { Id = 9, action = "Index", nameOption = "Status Types", controller = "Device_statustypes", isParent = false, parentId = 7 });
                     //Link to ImageSlide menu
