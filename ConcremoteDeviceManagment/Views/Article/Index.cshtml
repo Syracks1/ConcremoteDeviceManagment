@@ -13,7 +13,7 @@
         <p>
             <b>CMI: </b>@Html.TextBox("PriceCMI")
             <b>Leverancier:</b> @Html.DropDownList("SelectedLeverancier", null, "Kies Leverancier")
-            <input type="submit" value="Zoek CMI" class="btn" />
+            <input type="submit" value="Zoek" class="btn" />
             @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
             {
                 <a class="btn btn-success" data-modal="" href="~/Article/Create" id="btnCreate">Create</a>

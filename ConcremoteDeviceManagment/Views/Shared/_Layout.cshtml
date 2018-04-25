@@ -28,11 +28,11 @@
 
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            <a class=text-right>
+            <p class=text-left>
                 You are logged in as @User.Identity.GetUserName().
 
                 <span class="glyphicon glyphicon-ok-sign"></span>
-            </a>
+            </p>
         }
         @RenderBody()
         <hr />
