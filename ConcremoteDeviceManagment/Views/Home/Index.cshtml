@@ -54,7 +54,8 @@
                     @Html.DisplayFor(modelItem => item.Active)
                 </td>
                 <td>
-                    <button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>
+                    @*<button onclick="location.href='@Url.Action("Edit", "Home", new { id = item.Device_config_id })';return false;" class="btn btn-primary">Edit</button>*@
+                    <a href="@Url.Action("Edit", "Home", new { id = item.Device_config_id })"><span class="btn btn-primary">Edit</span></a>
                     <a href="@Url.Action("Delete", "Home", new { id = item.Device_config_id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
 
                 </td>
