@@ -85,10 +85,11 @@ namespace ConcremoteDeviceManagment.Controllers
 
             var z = Request["createAmount"];
 
-            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.OrderBy(c => c.assembly_order));
-            ViewBag.Total = ci.Sum(x => x.amount * x.Pricelist.Price);
+            //List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.OrderBy(c => c.assembly_order));
+            //ViewBag.Total = ci.Sum(x => x.amount * x.Pricelist.Price);
 
-            return PartialView("CreateDevice", ci);
+            //return PartialView("CreateDevice", ci);
+            return View();
         }
 
         protected override void Dispose(bool disposing)
