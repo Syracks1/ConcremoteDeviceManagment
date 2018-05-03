@@ -16,7 +16,7 @@
     <p>
         <b>CMI: </b>@Html.Editor("StockCMI")
         <b>Article:</b> @Html.Editor("searchString")
-        <input type="submit" value="Zoek" class="btn btn-info" />
+        <input type="submit" value="Zoek" class="btn btn-primary" />
 
         @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
     {
@@ -69,9 +69,9 @@
                 @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
                 {
                     <td>
-                        <a href="@Url.Action("EditPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
-                        <a href="@Url.Action("DetailPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-info">Details</span></a>
-                        <a href="@Url.Action("DeletePartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+                        <a href="@Url.Action("EditPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-outline-primary">Edit</span></a>
+                        <a href="@Url.Action("DetailPartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-outline-info">Details</span></a>
+                        <a href="@Url.Action("DeletePartial", "Stock", new { id = item.id })" data-modal=""><span class="btn btn-outline-danger">Delete</span></a>
                     </td>
                 }
                 else

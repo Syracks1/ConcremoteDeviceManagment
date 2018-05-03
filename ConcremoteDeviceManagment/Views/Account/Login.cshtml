@@ -37,16 +37,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-success" />
-                    </div>
+                    @*<div class="col-md-offset-2 col-md-10">*@
+                    <input type="submit" value="Log in" class="btn btn-success" />
+                    @*</div>*@
                 </div>
+
                 <p>
                     @*@Html.ActionLink("Register as a new user", "Register")*@
-                    <a href="@Url.Action("Register", "Account")"><span class="btn btn-primary">Register as a new user</span></a>
+                    <a href="@Url.Action("Register", "Account")"><span class="btn btn-outline-primary">Register as a new user</span></a>
                 </p>
                 <p>
-                    <a href="@Url.Action("ForgotPassword", "Account")"><span class="btn btn-warning">Forgot your password?</span></a>
+                    <a href="@Url.Action("ForgotPassword", "Account")"><span class="btn btn-outline-warning">Forgot your password</span></a>
                 </p>
             }
         </section>
