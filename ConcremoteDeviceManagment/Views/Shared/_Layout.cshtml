@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="container align-baseline">
         @using Microsoft.AspNet.Identity
 
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -35,8 +35,9 @@
             </p>
         }
         @RenderBody()
-        <hr />
-        <footer>
+
+
+        <footer class="card-footer">
             <strong>&copy;<strong> B|A|S</strong> - @DateTime.Now.Year - CDM</strong>
         </footer>
     </div>
