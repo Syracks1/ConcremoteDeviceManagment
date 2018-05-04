@@ -72,9 +72,9 @@
                 @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
                 {
                     <td>
-                        <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-primary">Edit</button>
-                        <button onclick="location.href='@Url.Action("Details", "Concremote", new { id=item.id})';return false;" class="btn btn-info">Details</button>
-                        <button onclick="location.href='@Url.Action("Delete", "Concremote", new { id=item.id})';return false;" class="btn btn-danger">Delete</button>
+                        <button onclick="location.href='@Url.Action("Edit", "Concremote", new { id=item.id})';return false;" class="btn btn-outline-primary">Edit</button>
+                        <button onclick="location.href='@Url.Action("Details", "Concremote", new { id=item.id})';return false;" class="btn btn-outline-info">Details</button>
+                        <button onclick="location.href='@Url.Action("Delete", "Concremote", new { id=item.id})';return false;" class="btn btn-outline-danger">Delete</button>
                     </td>
                 }
                 else

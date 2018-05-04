@@ -31,8 +31,8 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                <a href="@Url.Action("Edit", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-primary">Edit</span></a>
-                <a href="@Url.Action("Delete", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-danger">Delete</span></a>
+                <a href="@Url.Action("Edit", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-outline-primary">Edit</span></a>
+                <a href="@Url.Action("Delete", "Device_statustypes", new { id = item.id })" data-modal=""><span class="btn btn-outline-danger">Delete</span></a>
             </td>
         </tr>
     }
