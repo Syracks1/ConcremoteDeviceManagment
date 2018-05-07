@@ -109,6 +109,7 @@ ul,
 dl {
   margin-top: 0;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 ol ol,
@@ -1869,6 +1870,7 @@ pre code {
 .form-control:disabled, .form-control[readonly] {
   background-color: #e9ecef;
   opacity: 1;
+  text-align: center;
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -2273,12 +2275,12 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     margin-bottom: 0;
   }
   .form-inline .form-control {
-    display: inline-block;
+    /*display: inline-block;*/
     width: auto;
     vertical-align: middle;
   }
   .form-inline .form-control-plaintext {
-    display: inline-block;
+    /*display: inline-block;*/
   }
   .form-inline .input-group,
   .form-inline .custom-select {
@@ -5389,8 +5391,8 @@ button.close {
 }
 
 .modal-header {
-  display: -ms-flexbox;
-  display: flex;
+  /*display: -ms-flexbox;*/
+  /*display: flex;*/
   -ms-flex-align: start;
   align-items: flex-start;
   -ms-flex-pack: justify;
