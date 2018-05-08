@@ -83,6 +83,9 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             ViewBag.value1 = Request["createAmount"];
             ViewBag.value2 = Request["SelectedDevice"];
+
+            var SelectedDevices = new SelectList(db.DeviceType.Select(r => r.name).ToList());
+
             return View();
         }
 

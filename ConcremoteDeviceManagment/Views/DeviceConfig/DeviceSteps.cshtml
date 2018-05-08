@@ -13,7 +13,41 @@
 
     Device: @ViewBag.value2 <br />
     Amount: @ViewBag.value1 <br />
+
+    <fieldset>
+        <div id="target">
+        </div>
+        <div id="log">
+        </div>
+    </fieldset>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('@ViewBag.value2').change(function (e) {
+                var DeviceType = { "Device": $(this).val() };
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Action("CreateDevice")',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'html',
+                    data: { "Device": $(this).val() },
+                    success: function (result) {
+
+                        $("#target").html(result);
+                    },
+                    error: function (ex) {
+                        alert("Something is wrong");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
