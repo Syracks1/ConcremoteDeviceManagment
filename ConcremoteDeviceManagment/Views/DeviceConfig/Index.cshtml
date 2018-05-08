@@ -8,7 +8,7 @@
 {
 
     <h2>Create Device</h2>
-    using (Html.BeginForm("GetDevice", "Home", FormMethod.Get))
+    using (Html.BeginForm("DeviceSteps", "DeviceConfig", FormMethod.Get))
     {
         <fieldset>
             <legend>Device Create</legend>
@@ -23,15 +23,15 @@
         </fieldset>
 
         <div class="form-group">
-                <form method="POST" action="DeviceSteps.cshtml">
+                <form method="POST" action="#">
                     <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br /><br />
                     <input type="submit" value="Submit" class="btn btn-success" />
                 </form>
             </div>
 
-        <div>
+        @*<div>
             <button onclick="location.href='@Url.Action("Index", "DeviceConfig")';return false; " class="btn btn-outline-primary">Back to list</button>
-        </div>
+        </div>*@
 
 
     }
