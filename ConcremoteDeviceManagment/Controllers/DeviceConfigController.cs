@@ -82,6 +82,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult DeviceSteps()
         {
             ViewBag.value1 = Request["createAmount"];
+            ViewBag.value2 = Request["SelectedDevice"];
             return View();
         }
 

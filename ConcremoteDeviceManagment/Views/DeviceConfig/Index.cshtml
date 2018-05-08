@@ -8,7 +8,7 @@
 {
 
     <h2>Create Device</h2>
-    using (Html.BeginForm("DeviceSteps", "DeviceConfig", FormMethod.Get))
+    @*using (Html.BeginForm("Create", "DeviceConfig", FormMethod.Get))
     {
         <fieldset>
             <legend>Device Create</legend>
@@ -20,13 +20,14 @@
             </div>
             <div id="log">
             </div>
-        </fieldset>
+        </fieldset>*@
 
         <div class="form-group">
-                <form method="POST" action="#">
-                    <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br /><br />
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                </form>
+            <form method="POST" action="DeviceConfig/DeviceSteps">
+                @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })<br />
+                <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br />
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </form>
             </div>
 
         @*<div>
@@ -34,7 +35,7 @@
         </div>*@
 
 
-    }
+    @*}*@
 }
 else
 {
