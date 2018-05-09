@@ -25,7 +25,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('@ViewBag.value2').change(function (e) {
+            $(@ViewBag.value2).change(function (e) {
                 var DeviceType = { "Device": $(this).val() };
                 $.ajax({
                     type: 'get',

@@ -24,11 +24,13 @@
 
         <div class="form-group">
             <form method="POST" action="DeviceConfig/DeviceSteps">
-                @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })<br />
-                <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br />
-                <input type="submit" value="Submit" class="btn btn-success" />
+                <fieldset>
+                    @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })<br />
+                    <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br />
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                </fieldset>
             </form>
-            </div>
+        </div>
 
         @*<div>
             <button onclick="location.href='@Url.Action("Index", "DeviceConfig")';return false; " class="btn btn-outline-primary">Back to list</button>
