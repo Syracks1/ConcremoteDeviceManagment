@@ -97,5 +97,10 @@ namespace ConcremoteDeviceManagment.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult DeviceParts()
+        {
+            return View();
+        }
     }
 }
