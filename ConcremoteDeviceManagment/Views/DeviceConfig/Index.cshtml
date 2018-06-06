@@ -23,7 +23,7 @@
         </fieldset>*@
 
         <div class="form-group">
-            <form method="POST" action="DeviceConfig/DeviceSteps">
+            <form method="POST" action="DeviceConfig/DeviceParts">
                 <fieldset>
                     @Html.DropDownList("SelectedDevice", (SelectList)ViewBag.SelectedDevice, "Selecteer een device", new { @class = "form-control" })<br />
                     <input type="number" name="createAmount" placeholder="Amount" class="form-control" /><br />

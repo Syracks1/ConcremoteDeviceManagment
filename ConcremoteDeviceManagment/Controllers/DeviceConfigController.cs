@@ -89,6 +89,15 @@ namespace ConcremoteDeviceManagment.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult DeviceParts()
+        {
+            ViewBag.value1 = Request["createAmount"];
+            ViewBag.value2 = Request["SelectedDevice"];
+
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -98,9 +107,6 @@ namespace ConcremoteDeviceManagment.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult DeviceParts()
-        {
-            return View();
-        }
+
     }
 }
