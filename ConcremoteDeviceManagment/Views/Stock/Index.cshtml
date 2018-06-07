@@ -5,7 +5,11 @@
 
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+
+
+
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 
 {
@@ -13,17 +17,17 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     using (Html.BeginForm("Index", "Stock", FormMethod.Get))
     {
-    <p>
-        <b>CMI: </b>@Html.Editor("StockCMI")
-        <b>Article:</b> @Html.Editor("searchString")
-        <input type="submit" value="Zoek" class="btn btn-primary" />
+        <p>
+            <b>CMI: </b>@Html.Editor("StockCMI")
+            <b>Article:</b> @Html.Editor("searchString")
+            <input type="submit" value="Zoek" class="btn btn-primary" />
 
-        @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
-    {
-        <a class="btn btn-success" data-modal="" href="~/Stock/CreatePartial" id="btnCreate">Create Stock Item</a>
+            @if (User.IsInRole("Assembly") || User.IsInRole("Admin"))
+            {
+                <a class="btn btn-success" data-modal="" href="~/Stock/CreatePartial" id="btnCreate">Create Stock Item</a>
 
-}
-    </p>
+            }
+        </p>
     }
     if (TempData["AlertMessage"] != null)
     {
