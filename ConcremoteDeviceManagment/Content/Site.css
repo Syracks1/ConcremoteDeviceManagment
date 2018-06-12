@@ -30,9 +30,9 @@ input.input-validation-error{
     border: 1px solid #e80c4d;
 }
 
-/* Paste this css to your style sheet file or under head tag */
-/* This only works with JavaScript, 
-if it's not present, don't show loader */
+/*  This once was CSS I wrote to make a Loading Spinner while the page was loading...*/
+/*  But it only works when the page is already loaded... so yeah! I hate coding*/
+/*  Also this code does not do anything anymore, untill you Ctrl+K -> Ctrl+U the code in _Layout.cshtml*/
 .no-js #loader {
     display: none;
 }
