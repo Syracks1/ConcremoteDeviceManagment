@@ -61,7 +61,7 @@ namespace ConcremoteDeviceManagment.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist device_Pricelist)
+        public JsonResult Create([Bind(Include = "Device_config_id,device_type_id")] DeviceConfig deviceConfig, Device_Pricelist Device_Parts)
         {
             //check if modelstate is valid
             if (ModelState.IsValid)
@@ -77,9 +77,9 @@ namespace ConcremoteDeviceManagment.Controllers
                     //Add data to DeviceConfig table
                     //dummy data to get Edit working
                     db.DeviceConfig.Add(deviceConfig);
-                    db.Device_Pricelist.Add(device_Pricelist).Price_id = 1;
-                    db.Device_Pricelist.Add(device_Pricelist).amount = 1;
-                    db.Device_Pricelist.Add(device_Pricelist).assembly_order = 1;
+                    db.Device_Parts.Add(Device_Parts).Price_id = 1;
+                    db.Device_Parts.Add(Device_Parts).amount = 1;
+                    db.Device_Parts.Add(Device_Parts).assembly_order = 1;
                     //save changes to database
                     db.SaveChanges();
                     //Temp message when article is added succesfully
@@ -103,10 +103,10 @@ namespace ConcremoteDeviceManagment.Controllers
         public ActionResult Edit(int? Id)
         {
             //create new list
-            var Device_Pricelist = new List<Device_Pricelist>(db.Device_Pricelist.Where(r => r.DeviceConfig.Device_config_id == Id));
+            var Device_Parts = new List<Device_Pricelist>(db.Device_Parts.Where(r => r.DeviceConfig.Device_config_id == Id));
 
             //create new SelectList in pricelist
-            //based on Price_id on values in List<Device_Pricelist>
+            //based on Price_id on values in List<Device_Parts>
             //I know this is wrong and not working
 
             var SelectedCMI = from Item in db.pricelist
@@ -119,18 +119,18 @@ namespace ConcremoteDeviceManagment.Controllers
             //  ViewBag.SelectedCMI = new SelectList(SelectedCMI);
             // ViewBag.SelectedCMI = new SelectList(SelectedCMI, "Value", "Text");
 
-            return View(Device_Pricelist);
+            return View(Device_Parts);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Pricelist)
+        public ActionResult Edit([Bind(Include = "id,Device_config_id,Price_id,amount,assembly_order")]List<Device_Pricelist> Device_Parts)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var deviceConfig = db.DeviceConfig.Find(Device_Pricelist.First().Device_config_id);
+                    var deviceConfig = db.DeviceConfig.Find(Device_Parts.First().Device_config_id);
                     //    deviceConfig.Device_config_id++;
                     //deviceConfig.device_type_id = 13;
                     deviceConfig.Active = true;
@@ -139,12 +139,12 @@ namespace ConcremoteDeviceManagment.Controllers
 
                     db.DeviceConfig.Add(deviceConfig);
 
-                    foreach (var item in Device_Pricelist)
+                    foreach (var item in Device_Parts)
                     {
                         item.Device_config_id = deviceConfig.Device_config_id;
                     }
 
-                    db.Device_Pricelist.AddRange(Device_Pricelist);
+                    db.Device_Parts.AddRange(Device_Parts);
 
                     db.SaveChanges();
                     TempData["SuccesMessage"] = "Data is Succesfully saved";
@@ -186,13 +186,13 @@ namespace ConcremoteDeviceManagment.Controllers
                 BasDbContext dc = new BasDbContext();
                 //    int q = Convert.ToInt32(id);
                 var Config = from emps in dc.DeviceConfig
-                             join depts in dc.Device_Pricelist
+                             join depts in dc.Device_Parts
                              on emps.Device_config_id equals depts.Device_config_id
                              where id == emps.Device_config_id
                              select emps;
 
                 dc.DeviceConfig.RemoveRange(Config);
-                // dc.Device_Pricelist.Remove();
+                // dc.Device_Parts.Remove();
                 dc.SaveChanges();
                 //return "ok";
             }

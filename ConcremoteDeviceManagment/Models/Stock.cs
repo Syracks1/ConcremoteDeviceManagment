@@ -176,7 +176,7 @@ namespace ConcremoteDeviceManagment.Models
         public virtual DeviceType DeviceType { get; set; }
     }
 
-    [Table("Device_Pricelist")]
+    [Table("Device_Parts")]
     public class Device_Pricelist
     {
         [Key]
@@ -351,7 +351,7 @@ namespace ConcremoteDeviceManagment.Models
         public DbSet<ConcremoteDevice> ConcremoteDevice { get; set; }
         public DbSet<DeviceStatus> DeviceStatus { get; set; }
         public DbSet<Device_statustypes> Device_statustypes { get; set; }
-        public DbSet<Device_Pricelist> Device_Pricelist { get; set; }
+        public DbSet<Device_Pricelist> Device_Parts { get; set; }
         public DbSet<DeviceConfig_ExtraInfo> DeviceConfig_ExtraInfo { get; set; }
         public DbSet<DeviceStatus_ExtraInfo> DeviceStatus_ExtraInfo { get; set; }
         public DbSet<AspNetUsers> AspNetUsers { get; set; }

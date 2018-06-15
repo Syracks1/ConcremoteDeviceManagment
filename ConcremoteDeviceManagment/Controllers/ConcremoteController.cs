@@ -125,7 +125,7 @@ namespace ConcremoteDeviceManagment.Controllers
         {
             //create list "ci2" with query
             //List<Device_Pricelist> ci2 = new List<Device_Pricelist>(db.DeviceStatus.Where(c => c.DeviceConfig_id == c.DeviceConfig.Device_config_id).OrderBy(c => c.DeviceConfig_id));
-            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.Device_config_id == id).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
+            List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Parts.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.Device_config_id == id).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
 
             //   var Device_Pricelist = new List<Device_Pricelist>(db.DeviceStatus.Where(r => r.DeviceConfig_id == db.Device_Pr));
 

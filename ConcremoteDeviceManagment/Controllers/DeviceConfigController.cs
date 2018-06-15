@@ -26,7 +26,7 @@ namespace ConcremoteDeviceManagment.Controllers
         public PartialViewResult CreateDevice(string Device)
         {
             {
-                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Pricelist.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.DeviceType.name == Device).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
+                List<Device_Pricelist> ci = new List<Device_Pricelist>(db.Device_Parts.Where(pl => pl.Device_config_id == db.DeviceConfig.Where(dc => dc.DeviceType.name == Device).OrderByDescending(dc => dc.VersionNr).FirstOrDefault().Device_config_id));
                 //    ViewBag.Max = ci.Max(c => c.DeviceConfig.VersionNr);
                 ViewBag.Total = ci.Sum(x => x.amount * x.Pricelist.Price);
 
